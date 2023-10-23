@@ -6,14 +6,12 @@
 </template>
 <script setup lang="ts">
 import { computed } from 'vue'
+import { staticPath } from '../utils/PathUtil'
 const props = defineProps({
   mediaSrc: String,
   mediaType: String
 })
-console.log('reload')
 const getMediaSrc = computed(() => {
-  console.log(props.mediaSrc)
-  return `../src/assets/${props.mediaSrc}`
-  // return new URL(`../src/assets/${props.mediaSrc}`, import.meta.url).href
+  return staticPath(props.mediaSrc as string)
 })
 </script>

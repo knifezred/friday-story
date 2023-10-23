@@ -3,6 +3,12 @@ import RoomList from './components/RoomList.vue'
 import PanelMedia from './components/PanelMedia.vue'
 import PanelStory from './components/PanelStory.vue'
 import { ref } from 'vue'
+const snackbar = ref(false)
+const snackMessage = ref('')
+function showMessage(message: string) {
+  snackbar.value = true
+  snackMessage.value = message
+}
 let dateKey = Date.now()
 let currentRoomName = ''
 currentRoomName = 'Application Bar'
@@ -12,12 +18,12 @@ let story = 'hello Electron'
 function executeAction(src: string) {
   mediaSrc.value = src
   dateKey = Date.now()
-  console.log(src + dateKey)
   story = 'clicked action ' + src
   if (src === null || src === undefined) {
     mediaType.value = 'img'
   } else if (src.endsWith('mp4')) {
     mediaType.value = 'video'
+    showMessage('video load ok')
   } else {
     mediaType.value = 'img'
   }
@@ -89,6 +95,15 @@ function executeAction(src: string) {
     <v-footer app name="footer">
       <PanelStory :story="story"></PanelStory>
     </v-footer>
+    <v-snackbar
+      v-model="snackbar"
+      color="deep-purple-accent-4"
+      :timeout="2000"
+      multi-line
+      location="top"
+    >
+      {{ snackMessage }}
+    </v-snackbar>
   </v-layout>
 </template>
 <style lang="less">
