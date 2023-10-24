@@ -46,7 +46,7 @@ function executeAction(src: string) {
         <v-list-item prepend-icon="mdi-all-inclusive" title="loop" value="loop"></v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar title="title">
+    <v-app-bar :title="uiStore.getScene.title">
       <v-chip prepend-icon="mdi-timer" text="2023-10-19"></v-chip>
       <v-btn color="blue-darken-1"> +1h </v-btn>
       <v-btn color="blue-darken-1"> +3h </v-btn>
@@ -56,7 +56,7 @@ function executeAction(src: string) {
     <v-main class="align-center justify-center" style="min-height: 500px">
       <PanelScene></PanelScene>
     </v-main>
-    <v-navigation-drawer location="right" :width="585">
+    <v-navigation-drawer class="right-drawer" location="right">
       <RoomList></RoomList>
       <v-divider></v-divider>
       <v-container>
@@ -64,17 +64,17 @@ function executeAction(src: string) {
           <v-list-item
             title="Show video"
             value="1"
-            @click="executeAction('imgs/video.mp4')"
+            @click="executeAction('imgs/test3.jpg')"
           ></v-list-item>
           <v-list-item
             title="Show img"
             value="2"
-            @click="executeAction('imgs/th.jpg')"
+            @click="executeAction('imgs/test1.jpg')"
           ></v-list-item>
         </v-list>
       </v-container>
     </v-navigation-drawer>
-    <v-footer app name="footer">
+    <v-footer app name="footer" class="footer-panel">
       <PanelStory></PanelStory>
     </v-footer>
     <v-snackbar

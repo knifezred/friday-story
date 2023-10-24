@@ -52,6 +52,7 @@ export const AllRooms: Room[] = [
     pid: '1,2,3,4,5,6,7,',
     bg: '/imgs/room001.jpg',
     name: '客厅',
+    media: '/imgs/video.mp4',
     empty: true
   },
   {

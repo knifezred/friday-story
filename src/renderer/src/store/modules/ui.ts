@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia'
 import { store } from '../index'
 import { Ref, ref } from 'vue'
+import { AllRooms, Room } from '@renderer/data/roomData'
 
 interface UiState {
   darkMode?: boolean
   story?: Ref<string>
   scene: Ref<SceneMedia>
-  appBar?: string
+  sceneRooms: Ref<Room[]>
 }
 export interface SceneMedia {
   src: string
@@ -18,7 +19,8 @@ export const useUIStore = defineStore({
   state: (): UiState => ({
     darkMode: true,
     scene: ref({ src: '', type: 'img', title: '' }),
-    story: ref('hello world')
+    story: ref('hello world'),
+    sceneRooms: ref([])
   }),
   getters: {
     getStory(): string {
@@ -26,6 +28,9 @@ export const useUIStore = defineStore({
     },
     getScene(): SceneMedia {
       return this.scene
+    },
+    getSceneRooms(): Room[] {
+      return this.sceneRooms
     }
   },
   actions: {
@@ -39,6 +44,19 @@ export const useUIStore = defineStore({
       } else {
         this.scene.type = 'img'
       }
+    },
+    setSceneRooms(room: Room): void {
+      this.sceneRooms = AllRooms.filter((x) => x.pid.split(',').indexOf(room.id.toString()) > -1)
+    },
+    setRoom(room: Room): void {
+      if (room.media == undefined || room.media == '') {
+        this.setScene(room.bg)
+      } else {
+        this.setScene(room.media)
+      }
+      this.scene.title = room.name as string
+      this.setStory(room.description)
+      this.setSceneRooms(room)
     }
   }
 })

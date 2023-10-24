@@ -18,16 +18,16 @@ import { staticPath } from '@renderer/utils/PathUtil'
 import { useUIStore } from '@renderer/store/modules/ui'
 import { AllRooms, Room } from '@renderer/data/roomData'
 import { ref } from 'vue'
+import { useAppStore } from '@renderer/store/modules/app'
 const uiStore = useUIStore()
+const appStore = useAppStore()
 const roomWidth = 120
 const rooms = ref([] as Room[])
 rooms.value = AllRooms
 function roomTransfer(room: Room) {
   // 更新room列表
   rooms.value = AllRooms.filter((x) => x.pid.split(',').indexOf(room.id.toString()) > -1)
-  uiStore.setScene(room.bg)
-  // 显示房间描述
-  uiStore.setStory(room.description)
+  uiStore.setRoom(room)
   // 加载房间人员
   // 加载房间操作
   // 加载图片
