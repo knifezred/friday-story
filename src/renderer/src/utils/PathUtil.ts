@@ -1,3 +1,3 @@
-export function staticPath(path: string) {
+export function staticPath(path: string | undefined) {
   return '../../static/' + path
 }

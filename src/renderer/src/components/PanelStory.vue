@@ -1,7 +1,10 @@
 <template>
   <div class="text-panel">
-    <p>hello world. Electron&Vue</p>
+    {{ uiStore.getStory }}
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useUIStore } from '@renderer/store/modules/ui'
+const uiStore = useUIStore()
+</script>

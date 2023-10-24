@@ -1,32 +1,19 @@
 <script setup lang="ts">
 import RoomList from './components/RoomList.vue'
-import PanelMedia from './components/PanelMedia.vue'
+import PanelScene from './components/PanelScene.vue'
 import PanelStory from './components/PanelStory.vue'
+import { SnackbarModel, infoBar } from './utils/MessageTips.ts'
 import { ref } from 'vue'
-const snackbar = ref(false)
-const snackMessage = ref('')
+import { useUIStore } from './store/modules/ui'
+const snackbar = ref({} as SnackbarModel)
 function showMessage(message: string) {
-  snackbar.value = true
-  snackMessage.value = message
+  snackbar.value = infoBar(message)
+  snackbar.value.show = true
 }
-let dateKey = Date.now()
-let currentRoomName = ''
-currentRoomName = 'Application Bar'
-const mediaSrc = ref('imgs/th.jpg')
-const mediaType = ref('img')
-let story = 'hello Electron'
+const uiStore = useUIStore()
 function executeAction(src: string) {
-  mediaSrc.value = src
-  dateKey = Date.now()
-  story = 'clicked action ' + src
-  if (src === null || src === undefined) {
-    mediaType.value = 'img'
-  } else if (src.endsWith('mp4')) {
-    mediaType.value = 'video'
-    showMessage('video load ok')
-  } else {
-    mediaType.value = 'img'
-  }
+  uiStore.setScene(src)
+  uiStore.setStory('clicked action ' + src)
 }
 </script>
 
@@ -59,7 +46,7 @@ function executeAction(src: string) {
         <v-list-item prepend-icon="mdi-all-inclusive" title="loop" value="loop"></v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar :title="currentRoomName">
+    <v-app-bar title="title">
       <v-chip prepend-icon="mdi-timer" text="2023-10-19"></v-chip>
       <v-btn color="blue-darken-1"> +1h </v-btn>
       <v-btn color="blue-darken-1"> +3h </v-btn>
@@ -67,9 +54,9 @@ function executeAction(src: string) {
       <v-btn icon="mdi-cog"></v-btn>
     </v-app-bar>
     <v-main class="align-center justify-center" style="min-height: 500px">
-      <PanelMedia :key="dateKey" :media-src="mediaSrc" :media-type="mediaType"></PanelMedia>
+      <PanelScene></PanelScene>
     </v-main>
-    <v-navigation-drawer location="right" :width="600">
+    <v-navigation-drawer location="right" :width="585">
       <RoomList></RoomList>
       <v-divider></v-divider>
       <v-container>
@@ -84,25 +71,20 @@ function executeAction(src: string) {
             value="2"
             @click="executeAction('imgs/th.jpg')"
           ></v-list-item>
-          <v-list-item
-            title="Show banner"
-            value="3"
-            @click="executeAction('imgs/banner.jpg')"
-          ></v-list-item>
         </v-list>
       </v-container>
     </v-navigation-drawer>
     <v-footer app name="footer">
-      <PanelStory :story="story"></PanelStory>
+      <PanelStory></PanelStory>
     </v-footer>
     <v-snackbar
-      v-model="snackbar"
-      color="deep-purple-accent-4"
+      v-model="snackbar.show"
+      :color="snackbar.color"
       :timeout="2000"
       multi-line
       location="top"
     >
-      {{ snackMessage }}
+      {{ snackbar.message }}
     </v-snackbar>
   </v-layout>
 </template>
