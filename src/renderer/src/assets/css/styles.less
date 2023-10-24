@@ -59,21 +59,48 @@ ul {
     object-fit: contain;
   }
 }
-.footer-panel {
-  height: calc(100% - 784px);
-  width: 720px;
-  align-items: normal;
-}
-.text-panel {
-  min-height: 240px;
-  height: calc(100% - 784px);
-}
-
-.right-drawer {
-  width: calc(100% - 1336px) !important;
-}
 
 .roomList {
   height: 506px;
   overflow: auto;
+}
+
+@media screen and (max-height: 1440px) and (max-width: 2560px) {
+  .media-panel {
+    width: 1920px;
+    height: 1080px;
+  }
+  .footer-panel {
+    height: calc(100% - 1144px);
+    width: 1920px;
+    align-items: normal;
+  }
+  .text-panel {
+    min-height: 240px;
+    height: calc(100% - 1144px);
+  }
+
+  .right-drawer {
+    width: calc(100% - 1976px) !important;
+  }
+}
+
+@media screen and (max-height: 1080px) and (max-width: 1920px) {
+  .media-panel {
+    width: 1280px;
+    height: 720px;
+  }
+  .footer-panel {
+    height: calc(100% - 784px);
+    width: 1280px;
+    align-items: normal;
+  }
+  .text-panel {
+    min-height: 240px;
+    height: calc(100% - 784px);
+  }
+
+  .right-drawer {
+    width: calc(100% - 1336px) !important;
+  }
 }
