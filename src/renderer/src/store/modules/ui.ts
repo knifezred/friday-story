@@ -48,7 +48,10 @@ export const useUIStore = defineStore({
     setSceneRooms(room: Room): void {
       this.sceneRooms = AllRooms.filter((x) => x.pid.split(',').indexOf(room.id.toString()) > -1)
     },
-    setRoom(room: Room): void {
+    setRoom(room: Room | undefined): void {
+      if (room == null) {
+        room = AllRooms[0]
+      }
       if (room.media == undefined || room.media == '') {
         this.setScene(room.bg)
       } else {

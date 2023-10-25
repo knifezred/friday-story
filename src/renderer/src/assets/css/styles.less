@@ -61,8 +61,7 @@ ul {
 }
 
 .roomList {
-  height: 506px;
-  overflow: auto;
+  overflow-y: auto;
 }
 
 @media screen and (max-height: 1440px) and (max-width: 2560px) {
@@ -83,6 +82,10 @@ ul {
   .right-drawer {
     width: calc(100% - 1976px) !important;
   }
+  .roomList {
+    max-height: 1080px;
+    height: 1080px;
+  }
 }
 
 @media screen and (max-height: 1080px) and (max-width: 1920px) {
@@ -102,5 +105,10 @@ ul {
 
   .right-drawer {
     width: calc(100% - 1336px) !important;
+  }
+
+  .roomList {
+    max-height: 720px;
+    height: 720px;
   }
 }

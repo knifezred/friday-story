@@ -6,6 +6,7 @@ export interface Room {
   description?: string
   media?: string
   empty?: boolean
+  hidden?: boolean
 }
 export const AllRooms: Room[] = [
   {
