@@ -1,14 +1,14 @@
-export interface Room {
-  id: number
-  pid: string
-  bg?: string
-  name?: string
-  description?: string
-  media?: string
-  empty?: boolean
-  hidden?: boolean
-}
+import { Room } from './entities'
+
 export const AllRooms: Room[] = [
+  {
+    id: 0,
+    pid: '1',
+    bg: '/imgs/room001.jpg',
+    name: '创建人物',
+    description: '创建人物 test',
+    empty: true
+  },
   {
     id: 1,
     pid: '8',

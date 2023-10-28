@@ -1,6 +1,8 @@
 <template>
   <div class="roomList">
-    <h3 class="text-h4 mx-auto text-center">Room List</h3>
+    <div>
+      <h3 class="text-h4 mx-auto text-center">Room List</h3>
+    </div>
     <v-row class="align-start ma-auto">
       <v-col v-for="(item, index) in uiStore.sceneRooms" :key="index" cols="auto">
         <v-card @click="roomTransfer(item)">
@@ -18,15 +20,17 @@
 <script setup lang="ts">
 import { staticPath } from '@renderer/utils/PathUtil'
 import { useUIStore } from '@renderer/store/modules/ui'
-import { Room } from '@renderer/data/roomData'
-import { useAppStore } from '@renderer/store/modules/app'
+import { Room } from '@renderer/data/entities'
 const uiStore = useUIStore()
-const appStore = useAppStore()
-const roomWidth = 165
+const roomWidth = 160
 function roomTransfer(room: Room) {
   uiStore.setRoom(room)
+  // 更新时间
+
   // 加载房间人员
+
   // 加载房间操作
+
   // 加载图片
 }
 uiStore.setRoom(undefined)

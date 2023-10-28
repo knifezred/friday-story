@@ -2,18 +2,15 @@
 import RoomList from './components/RoomList.vue'
 import PanelScene from './components/PanelScene.vue'
 import PanelStory from './components/PanelStory.vue'
+import PanelAction from './components/PanelAction.vue'
 import { SnackbarModel, infoBar } from './utils/MessageTips.ts'
 import { ref } from 'vue'
 import { useUIStore } from './store/modules/ui'
+const uiStore = useUIStore()
 const snackbar = ref({} as SnackbarModel)
 function showMessage(message: string) {
   snackbar.value = infoBar(message)
   snackbar.value.show = true
-}
-const uiStore = useUIStore()
-function executeAction(src: string) {
-  uiStore.setScene(src)
-  uiStore.setStory('clicked action ' + src)
 }
 </script>
 
@@ -23,8 +20,8 @@ function executeAction(src: string) {
       <v-list>
         <v-list-item
           prepend-icon="mdi-account-cowboy-hat"
-          title="Sandra Adams"
-          subtitle="sandra_a88@gmailcom"
+          title="Adams"
+          subtitle="finished:20%"
         ></v-list-item>
       </v-list>
 
@@ -59,20 +56,7 @@ function executeAction(src: string) {
     <v-navigation-drawer class="right-drawer" location="right">
       <RoomList></RoomList>
       <v-divider></v-divider>
-      <v-container>
-        <v-list density="compact" nav>
-          <v-list-item
-            title="Show video"
-            value="1"
-            @click="executeAction('imgs/test3.jpg')"
-          ></v-list-item>
-          <v-list-item
-            title="Show img"
-            value="2"
-            @click="executeAction('imgs/test1.jpg')"
-          ></v-list-item>
-        </v-list>
-      </v-container>
+      <PanelAction></PanelAction>
     </v-navigation-drawer>
     <v-footer app name="footer" class="footer-panel">
       <PanelStory></PanelStory>

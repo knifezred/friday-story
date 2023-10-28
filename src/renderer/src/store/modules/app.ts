@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { store } from '../index'
-import { Room } from '@renderer/data/roomData'
+import { Room } from '@renderer/data/entities'
 
 interface AppState {
   darkMode?: boolean

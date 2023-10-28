@@ -1,11 +1,4 @@
-export interface Character {
-  id: number
-  avatar?: string
-  name?: string
-  title?: string
-  job?: string
-  age?: number
-}
+import { Character } from './entities'
 
 export const Characters: Character[] = [
   {

@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
 import { store } from '../index'
 import { Ref, ref } from 'vue'
-import { AllRooms, Room } from '@renderer/data/roomData'
+import { AllRooms } from '@renderer/data/roomData'
+import { Room } from '@renderer/data/entities'
 
 interface UiState {
   darkMode?: boolean
