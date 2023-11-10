@@ -49,11 +49,11 @@
 </template>
 
 <script setup lang="ts">
-import RoomList from '../components/RoomList.vue'
-import PanelScene from '../components/PanelScene.vue'
-import PanelStory from '../components/PanelStory.vue'
-import PanelAction from '../components/PanelAction.vue'
-import { useUIStore } from './../store/modules/ui'
+import RoomList from '../RoomList.vue'
+import PanelScene from '../PanelScene.vue'
+import PanelStory from '../PanelStory.vue'
+import PanelAction from '../PanelAction.vue'
+import { useUIStore } from '../../store/modules/ui'
 const uiStore = useUIStore()
 </script>
 

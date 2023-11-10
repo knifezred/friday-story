@@ -3,7 +3,7 @@ import { Room } from './entities'
 export const AllRooms: Room[] = [
   {
     id: 0,
-    pid: '1',
+    pid: '',
     bg: '/imgs/room001.jpg',
     name: '创建人物',
     description: '创建人物 test',
@@ -11,7 +11,7 @@ export const AllRooms: Room[] = [
   },
   {
     id: 1,
-    pid: '8',
+    pid: '0,8',
     bg: '/imgs/room001.jpg',
     name: '家',
     description: 'test go home',
@@ -65,7 +65,7 @@ export const AllRooms: Room[] = [
   },
   {
     id: 8,
-    pid: '1,2,3,4,5,6,7,9',
+    pid: '0,1,2,3,4,5,6,7,9',
     bg: '/imgs/room001.jpg',
     name: '街道',
     empty: true

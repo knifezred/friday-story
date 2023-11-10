@@ -23,6 +23,13 @@ export interface StoryAction {
   title: string
   value: string
   function: string
-  story: string
-  room: number
+  story?: string
+  room?: number
+}
+
+export interface Story {
+  id: number
+  content: string
+  media: string
+  nextId: number
 }
