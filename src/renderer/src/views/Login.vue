@@ -1,6 +1,6 @@
 <template>
-  <v-card class="mx-auto mt-10" elevation="1" max-width="500">
-    <img src="../../static/logo.svg" class="login-logo" />
+  <v-card class="mx-auto mt-16" elevation="1" max-width="500">
+    <img src="../../static/logo2.png" class="login-logo" />
     <v-card-title class="py-5 font-weight-black">Fridayboot Electron</v-card-title>
 
     <v-card-text> Open-source App for free. just for fun </v-card-text>
@@ -18,8 +18,14 @@
       >
         Start or Continue
       </v-btn>
-
-      <v-btn block class="text-none mb-4" color="indigo-darken-3" size="x-large" variant="flat">
+      <v-btn
+        block
+        class="text-none mb-4"
+        color="indigo-darken-3"
+        size="x-large"
+        variant="flat"
+        @click="loadArchive"
+      >
         Load Archive
       </v-btn>
       <v-btn block class="text-none mb-4" color="pink-darken-1" size="x-large" variant="flat">
@@ -43,6 +49,9 @@ function startGame() {
   loading.value = !loading.value
   router.push('/index')
 }
+function loadArchive() {
+  console.log('load archive')
+}
 </script>
 
 <style scoped>
@@ -50,6 +59,6 @@ function startGame() {
   background: #283593;
   width: 100%;
   object-fit: scale-down;
-  height: 260px;
+  height: 200px;
 }
 </style>
