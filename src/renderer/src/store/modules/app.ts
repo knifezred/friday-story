@@ -1,27 +1,35 @@
 import { defineStore } from 'pinia'
 import { store } from '../index'
 import { Room } from '@renderer/data/entities'
+import projectSetting from '@renderer/settings/projectSetting'
+import { DbDexie, connDb } from '../../data/entities'
 
 interface AppState {
   darkMode?: boolean
-  dateTime?: Date
   saveData: string
   rooms: Room[]
+  db: DbDexie
 }
 export const useAppStore = defineStore({
   id: 'app',
   state: (): AppState => ({
-    darkMode: true,
-    dateTime: new Date(),
+    darkMode: projectSetting.darkMode,
     saveData: '',
-    rooms: []
+    rooms: [],
+    db: connDb(projectSetting.database)
   }),
   getters: {
     getSaveData(): string {
       return this.saveData
+    },
+    getDb(): DbDexie {
+      return this.db
     }
   },
   actions: {
+    setDb(dbName: string): void {
+      this.db = connDb(dbName)
+    },
     // 保存存档
     setSaveData(save: string, index: number): void {
       this.saveData = save
