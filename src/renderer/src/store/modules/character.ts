@@ -7,7 +7,7 @@ interface CharacterState {
   player: Character
 }
 export const useCharacterStore = defineStore({
-  id: 'app',
+  id: 'character',
   state: (): CharacterState => ({
     player: {} as Character
   }),

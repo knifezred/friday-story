@@ -1,43 +1,63 @@
 import { defineStore } from 'pinia'
 import { store } from '../index'
-import { Room } from '@renderer/data/entities'
+import { ArchiveData, Room } from '@renderer/data/entities'
 import projectSetting from '@renderer/settings/projectSetting'
-import { DbDexie, connDb } from '../../data/entities'
+import { useDbStore } from './db'
+import { useUIStore } from './ui'
 
 interface AppState {
   darkMode?: boolean
-  saveData: string
+  archiveId: number
+  archiveData: ArchiveData
   rooms: Room[]
-  db: DbDexie
 }
 export const useAppStore = defineStore({
   id: 'app',
   state: (): AppState => ({
     darkMode: projectSetting.darkMode,
-    saveData: '',
-    rooms: [],
-    db: connDb(projectSetting.database)
+    archiveId: 0,
+    archiveData: {} as ArchiveData,
+    rooms: []
   }),
   getters: {
-    getSaveData(): string {
-      return this.saveData
-    },
-    getDb(): DbDexie {
-      return this.db
+    getArchiveData(): ArchiveData {
+      return this.archiveData
     }
   },
   actions: {
-    setDb(dbName: string): void {
-      this.db = connDb(dbName)
-    },
     // 保存存档
-    setSaveData(save: string, index: number): void {
-      this.saveData = save
-      localStorage.setItem('save' + index, save)
+    setSaveData(index: number): void {
+      if (index == 0) {
+        index = this.archiveId
+      }
+      const dbStore = useDbStore()
+      dbStore.getDb.archives.put(
+        {
+          id: this.archiveId,
+          title: 'asd',
+          data: JSON.stringify(this.archiveData),
+          savedTime: new Date()
+        },
+        index
+      )
     },
     // 读取存档
-    loadSaveData(index: number): void {
-      this.saveData = localStorage.getItem('save' + index) as string
+    async loadSaveData(index: number): Promise<void> {
+      const dbStore = useDbStore()
+      dbStore.getDb.archives.get(index).then(async (archive) => {
+        const uiStore = useUIStore()
+        let roomId = 0
+        if (archive === null || archive === undefined) {
+          console.log('存档不存在')
+          this.archiveId = 1
+        } else {
+          this.archiveId = archive.id
+          this.archiveData = JSON.parse(archive.data) as ArchiveData
+          roomId = this.archiveData.roomId
+        }
+        console.log('load room ' + this.archiveData.roomId)
+        await uiStore.setRoom(roomId)
+      })
     }
   }
 })

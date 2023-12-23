@@ -16,7 +16,7 @@
         variant="flat"
         @click="startGame"
       >
-        Start or Continue
+        Start
       </v-btn>
       <v-btn
         block
@@ -24,7 +24,7 @@
         color="indigo-darken-3"
         size="x-large"
         variant="flat"
-        @click="loadArchive"
+        @click="showArchiveList"
       >
         Load Archive
       </v-btn>
@@ -34,23 +34,53 @@
       <p>tips: creation by KnifeZ</p>
     </v-card-text>
   </v-card>
+  <v-bottom-sheet v-model="archiveSheet">
+    <v-list>
+      <v-list-subheader>Load Archive in</v-list-subheader>
+      <v-list-item
+        v-for="item in archives"
+        :key="item.id"
+        :title="item.title"
+        @click="loadArchive(item.id)"
+      ></v-list-item>
+    </v-list>
+  </v-bottom-sheet>
 </template>
 <script setup lang="ts">
+import { Archive } from '@renderer/data/entities'
+import { useAppStore } from '@renderer/store/modules/app'
+import { useDbStore } from '@renderer/store/modules/db'
 import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 const loading = ref(false)
+const archiveSheet = ref(false)
 const router = useRouter()
 watch(loading, (val) => {
   if (!val) return
   setTimeout(() => (loading.value = false), 2000)
 })
+const dbStore = useDbStore()
+const appStore = useAppStore()
+let archives = [] as Archive[]
+dbStore.loadArchiveList().then((list) => {
+  archives = list
+})
 
 function startGame() {
   loading.value = !loading.value
-  router.push('/index')
+  appStore.loadSaveData(0).then(() => {
+    router.push('/index')
+  })
 }
-function loadArchive() {
+function loadArchive(id: number) {
   console.log('load archive')
+  appStore.loadSaveData(id).then(() => {
+    router.push('/index')
+  })
+  archiveSheet.value = false
+}
+function showArchiveList() {
+  archiveSheet.value = true
 }
 </script>
 

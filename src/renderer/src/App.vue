@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { SnackbarModel } from './utils/MessageTips'
+
 const snackbar = ref({} as SnackbarModel)
 </script>
 <template>

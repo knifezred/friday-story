@@ -24,7 +24,7 @@ function goScene(src: string) {
   uiStore.setScene(src)
   uiStore.setStory('clicked action ' + src)
 }
-
+// action 场景、人物、物品、story、
 </script>
 
 <style scoped></style>

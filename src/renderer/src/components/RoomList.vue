@@ -24,7 +24,7 @@ import { Room } from '@renderer/data/entities'
 const uiStore = useUIStore()
 const roomWidth = 160
 function roomTransfer(room: Room) {
-  uiStore.setRoom(room)
+  uiStore.setRoom(room.id)
   // 更新时间
 
   // 加载房间人员
@@ -33,5 +33,4 @@ function roomTransfer(room: Room) {
 
   // 加载图片
 }
-uiStore.setRoom(undefined)
 </script>

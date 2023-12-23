@@ -3,6 +3,7 @@ import { store } from '../index'
 import { Ref, ref } from 'vue'
 import { AllRooms } from '@renderer/data/roomData'
 import { Room } from '@renderer/data/entities'
+import { useDbStore } from './db'
 
 interface UiState {
   darkMode?: boolean
@@ -16,7 +17,7 @@ export interface SceneMedia {
   title: string
 }
 export const useUIStore = defineStore({
-  id: 'app',
+  id: 'ui',
   state: (): UiState => ({
     darkMode: true,
     scene: ref({ src: '', type: 'img', title: '' }),
@@ -49,18 +50,22 @@ export const useUIStore = defineStore({
     setSceneRooms(room: Room): void {
       this.sceneRooms = AllRooms.filter((x) => x.pid.split(',').indexOf(room.id.toString()) > -1)
     },
-    setRoom(room: Room | undefined): void {
-      if (room == null) {
-        room = AllRooms[0]
-      }
-      if (room.media == undefined || room.media == '') {
-        this.setScene(room.bg)
-      } else {
-        this.setScene(room.media)
-      }
-      this.scene.title = room.name as string
-      this.setStory(room.description)
-      this.setSceneRooms(room)
+    async setRoom(roomId: number): Promise<void> {
+      const dbStore = useDbStore()
+      await dbStore.getDb.rooms.get(roomId).then((room) => {
+        debugger
+        if (room == undefined) {
+          room = AllRooms[0]
+        }
+        if (room.media == undefined || room.media == '') {
+          this.setScene(room.bg)
+        } else {
+          this.setScene(room.media)
+        }
+        this.scene.title = room.name as string
+        this.setStory(room.description)
+        this.setSceneRooms(room)
+      })
     }
   }
 })

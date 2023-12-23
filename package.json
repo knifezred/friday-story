@@ -25,7 +25,7 @@
     "dexie": "^3.2.4",
     "pinia": "^2.1.7",
     "vue-router": "^4.2.5",
-    "vuetify": "^3.3.22"
+    "vuetify": "^3.4.8"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config": "^1.0.1",
