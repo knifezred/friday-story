@@ -53,7 +53,6 @@ export const AllRooms: Room[] = [
     pid: '1,2,3,4,5,6,7,',
     bg: '/imgs/t5.webp',
     name: '客厅',
-    media: '/imgs/video.mp4',
     empty: true
   },
   {
@@ -66,7 +65,7 @@ export const AllRooms: Room[] = [
   {
     id: 8,
     pid: '0,1,2,3,4,5,6,7,9',
-    bg: '/imgs/room001.jpg',
+    bg: '/imgs/street001.jpg',
     name: '街道',
     empty: true
   },

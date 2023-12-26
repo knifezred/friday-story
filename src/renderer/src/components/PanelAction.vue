@@ -4,9 +4,9 @@
       <v-list-item
         title="Show video"
         value="1"
-        @click="executeAction('imgs/test3.jpg')"
+        @click="executeAction('imgs/t2.webp')"
       ></v-list-item>
-      <v-list-item title="Show img" value="2" @click="goScene('imgs/test1.jpg')"></v-list-item>
+      <v-list-item title="Show img" value="2" @click="goScene('imgs/t3.webp')"></v-list-item>
     </v-list>
   </v-container>
 </template>
