@@ -4,7 +4,7 @@ export const AllRooms: Room[] = [
   {
     id: 0,
     pid: '',
-    bg: '/imgs/room001.jpg',
+    bg: '/imgs/t0.webp',
     name: '创建人物',
     description: '创建人物 test',
     empty: true
@@ -12,7 +12,7 @@ export const AllRooms: Room[] = [
   {
     id: 1,
     pid: '0,8',
-    bg: '/imgs/room001.jpg',
+    bg: '/imgs/t7.webp',
     name: '家',
     description: 'test go home',
     empty: true
@@ -20,7 +20,7 @@ export const AllRooms: Room[] = [
   {
     id: 2,
     pid: '1,2,3,4,5,6,7',
-    bg: '/imgs/room001.jpg',
+    bg: '/imgs/t1.webp',
     name: '卧室',
     description: 'test go 卧室',
     empty: true
@@ -28,7 +28,7 @@ export const AllRooms: Room[] = [
   {
     id: 3,
     pid: '1,2,3,4,5,6,7',
-    bg: '/imgs/th.jpg',
+    bg: '/imgs/t2.webp',
     name: '主卧',
     description: 'test go 主卧',
     empty: true
@@ -36,7 +36,7 @@ export const AllRooms: Room[] = [
   {
     id: 4,
     pid: '1,2,3,4,5,6,7',
-    bg: '/imgs/room001.jpg',
+    bg: '/imgs/t3.webp',
     name: '次卧',
     description: 'test go 次卧',
     empty: true
@@ -44,14 +44,14 @@ export const AllRooms: Room[] = [
   {
     id: 5,
     pid: '1,2,3,4,5,6,7,',
-    bg: '/imgs/room001.jpg',
+    bg: '/imgs/t4.webp',
     name: '卫生间',
     empty: true
   },
   {
     id: 6,
     pid: '1,2,3,4,5,6,7,',
-    bg: '/imgs/room001.jpg',
+    bg: '/imgs/t5.webp',
     name: '客厅',
     media: '/imgs/video.mp4',
     empty: true
@@ -59,7 +59,7 @@ export const AllRooms: Room[] = [
   {
     id: 7,
     pid: '1,2,3,4,5,6,7,',
-    bg: '/imgs/room001.jpg',
+    bg: '/imgs/t6.webp',
     name: '餐厅',
     empty: true
   },
@@ -73,7 +73,7 @@ export const AllRooms: Room[] = [
   {
     id: 9,
     pid: '8',
-    bg: '/imgs/room001.jpg',
+    bg: '/imgs/t8.webp',
     name: '大学',
     empty: true
   }
