@@ -1,8 +1,8 @@
 <template>
   <div class="roomList">
-    <div>
-      <h3 class="text-h4 mx-auto text-center">Room List</h3>
-    </div>
+    <v-sheet class="mx-auto text-center">
+      <p>rooms</p>
+    </v-sheet>
     <v-row class="align-start ma-auto">
       <v-col v-for="(item, index) in uiStore.sceneRooms" :key="index" cols="auto">
         <v-card @click="roomTransfer(item)">

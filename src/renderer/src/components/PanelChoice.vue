@@ -1,12 +1,8 @@
 <template>
   <v-container>
     <v-list density="compact" nav>
-      <v-list-item
-        title="Show video"
-        value="1"
-        @click="executeAction('imgs/t2.webp')"
-      ></v-list-item>
-      <v-list-item title="Show img" value="2" @click="goScene('imgs/t3.webp')"></v-list-item>
+      <v-list-item title="choose 1" value="1" @click="executeAction('imgs/t1.webp')"></v-list-item>
+      <v-list-item title="choose 2" value="2" @click="goScene('imgs/t2.webp')"></v-list-item>
     </v-list>
   </v-container>
 </template>

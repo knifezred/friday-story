@@ -4,7 +4,7 @@
       <v-list>
         <v-list-item
           prepend-icon="mdi-account-cowboy-hat"
-          title="Adams"
+          title="adam"
           subtitle="finished:20%"
         ></v-list-item>
       </v-list>
@@ -38,9 +38,9 @@
       <PanelScene></PanelScene>
     </v-main>
     <v-navigation-drawer class="right-drawer" location="right">
-      <RoomList></RoomList>
+      <PanelPlace></PanelPlace>
       <v-divider></v-divider>
-      <PanelAction></PanelAction>
+      <PanelChoice></PanelChoice>
     </v-navigation-drawer>
     <v-footer app name="footer" class="footer-panel">
       <PanelStory></PanelStory>
@@ -49,10 +49,10 @@
 </template>
 
 <script setup lang="ts">
-import RoomList from '../components/RoomList.vue'
+import PanelPlace from '../components/PanelPlace.vue'
 import PanelScene from '../components/PanelScene.vue'
 import PanelStory from '../components/PanelStory.vue'
-import PanelAction from '../components/PanelAction.vue'
+import PanelChoice from '../components/PanelChoice.vue'
 import { useUIStore } from './../store/modules/ui'
 const uiStore = useUIStore()
 </script>

@@ -11,8 +11,8 @@ const snackbar = ref({} as SnackbarModel)
       v-model="snackbar.show"
       :color="snackbar.color"
       :timeout="2000"
-      multi-line
       location="top"
+      multi-line
     >
       {{ snackbar.message }}
     </v-snackbar>

@@ -1,3 +1,4 @@
+import projectSetting from '@renderer/settings/projectSetting'
 import type { AppRouteRecordRaw, AppRouteModule } from './../types'
 
 import { PAGE_NOT_FOUND_ROUTE } from './basic'
@@ -19,7 +20,7 @@ export const asyncRoutes = [PAGE_NOT_FOUND_ROUTE, ...routeModuleList]
 export const RootRoute: AppRouteRecordRaw = {
   path: '/',
   name: 'Root',
-  redirect: '/login',
+  redirect: projectSetting.isAuth ? '/login' : '/index',
   meta: {
     title: 'Root'
   },

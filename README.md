@@ -1,6 +1,7 @@
 # fridayboot-electron
 
-An Electron application with Vue and TypeScript
+An Electron application with Vue and TypeScript for SLG Game.
+
 
 ## Recommended IDE Setup
 
@@ -11,24 +12,24 @@ An Electron application with Vue and TypeScript
 ### Install
 
 ```bash
-$ yarn
+$ pnpm i
 ```
 
 ### Development
 
 ```bash
-$ yarn dev
+$ pnpm dev
 ```
 
 ### Build
 
 ```bash
 # For windows
-$ yarn build:win
+$ pnpm build:win
 
 # For macOS
-$ yarn build:mac
+$ pnpm build:mac
 
 # For Linux
-$ yarn build:linux
+$ pnpm build:linux
 ```

@@ -29,6 +29,7 @@
         Load Archive
       </v-btn>
       <v-btn block class="text-none mb-4" color="pink-darken-1" size="x-large" variant="flat">
+        <!-- TODO 退出应用 -->
         Exit App
       </v-btn>
       <p>tips: creation by KnifeZ</p>
