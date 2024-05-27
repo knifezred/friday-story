@@ -1,5 +1,5 @@
 import projectSetting from '@renderer/settings/projectSetting'
-import type { AppRouteRecordRaw, AppRouteModule } from './../types'
+import type { AppRouteModule, AppRouteRecordRaw } from './../types'
 
 import { PAGE_NOT_FOUND_ROUTE } from './basic'
 

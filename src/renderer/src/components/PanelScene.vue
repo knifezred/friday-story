@@ -5,9 +5,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useUIStore } from '@renderer/store/modules/ui'
-import { staticPath } from '@renderer/utils/PathUtil'
+import { useUIStore } from '@renderer/store/modules/ui';
+import { staticPath } from '@renderer/utils/PathUtil';
+import { ref } from 'vue';
+// In the main process.
 
 const uiStore = useUIStore()
 const scene = ref(uiStore.getScene)

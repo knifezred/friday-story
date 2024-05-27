@@ -5,8 +5,7 @@
         <v-list-item
           prepend-icon="mdi-account-cowboy-hat"
           title="adam"
-          subtitle="finished:20%"
-        ></v-list-item>
+          subtitle="finished:20%"></v-list-item>
       </v-list>
 
       <v-divider></v-divider>
@@ -15,14 +14,12 @@
         <v-list-item
           prepend-icon="mdi-account-multiple"
           title="Relationship"
-          value="relationship"
-        ></v-list-item>
+          value="relationship"></v-list-item>
         <v-list-item prepend-icon="mdi-star" title="Starred" value="starred"></v-list-item>
         <v-list-item
           prepend-icon="mdi-format-list-checks"
           title="任务列表"
-          value="task"
-        ></v-list-item>
+          value="task"></v-list-item>
         <v-list-item prepend-icon="mdi-history" title="历史记录" value="history"></v-list-item>
         <v-list-item prepend-icon="mdi-all-inclusive" title="loop" value="loop"></v-list-item>
       </v-list>
@@ -49,10 +46,10 @@
 </template>
 
 <script setup lang="ts">
+import PanelChoice from '../components/PanelChoice.vue'
 import PanelPlace from '../components/PanelPlace.vue'
 import PanelScene from '../components/PanelScene.vue'
 import PanelStory from '../components/PanelStory.vue'
-import PanelChoice from '../components/PanelChoice.vue'
 import { useUIStore } from './../store/modules/ui'
 const uiStore = useUIStore()
 </script>

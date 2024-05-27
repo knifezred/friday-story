@@ -1,8 +1,8 @@
-import { defineStore } from 'pinia'
-import { store } from '../index'
-import { Ref, ref } from 'vue'
-import { AllRooms } from '@renderer/data/roomData'
 import { Room } from '@renderer/data/entities'
+import { AllRooms } from '@renderer/data/roomData'
+import { defineStore } from 'pinia'
+import { Ref, ref } from 'vue'
+import { store } from '../index'
 import { useDbStore } from './db'
 
 interface UiState {
@@ -53,7 +53,6 @@ export const useUIStore = defineStore({
     async setRoom(roomId: number): Promise<void> {
       const dbStore = useDbStore()
       await dbStore.getDb.rooms.get(roomId).then((room) => {
-        debugger
         if (room == undefined) {
           room = AllRooms[0]
         }

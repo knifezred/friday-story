@@ -1,14 +1,14 @@
+import '@mdi/font/css/materialdesignicons.css'
 import { createApp } from 'vue'
-import App from './App.vue'
-import { setupStore } from './store'
-import { setupRouter } from './router'
-import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
+import { md3 } from 'vuetify/blueprints'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
-import '@mdi/font/css/materialdesignicons.css'
 import { mdi } from 'vuetify/iconsets/mdi'
-import { md3 } from 'vuetify/blueprints'
+import 'vuetify/styles'
+import App from './App.vue'
+import { setupRouter } from './router'
+import { setupStore } from './store'
 
 const app = createApp(App)
 

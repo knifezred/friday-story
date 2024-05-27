@@ -3,7 +3,7 @@
     <img src="../../static/logo2.png" class="login-logo" />
     <v-card-title class="py-5 font-weight-black">Fridayboot Electron</v-card-title>
 
-    <v-card-text> Open-source App for free. just for fun </v-card-text>
+    <v-card-text> Open-Source App for free. just for fun </v-card-text>
 
     <v-card-text>
       <v-btn
@@ -14,8 +14,7 @@
         color="grey-darken-3"
         size="x-large"
         variant="flat"
-        @click="startGame"
-      >
+        @click="startGame">
         Start
       </v-btn>
       <v-btn
@@ -24,8 +23,7 @@
         color="indigo-darken-3"
         size="x-large"
         variant="flat"
-        @click="showArchiveList"
-      >
+        @click="showArchiveList">
         Load Archive
       </v-btn>
       <v-btn block class="text-none mb-4" color="pink-darken-1" size="x-large" variant="flat">
@@ -42,8 +40,7 @@
         v-for="item in archives"
         :key="item.id"
         :title="item.title"
-        @click="loadArchive(item.id)"
-      ></v-list-item>
+        @click="loadArchive(item.id)"></v-list-item>
     </v-list>
   </v-bottom-sheet>
 </template>
