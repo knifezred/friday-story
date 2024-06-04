@@ -28,7 +28,7 @@ export const RootRoute: AppRouteRecordRaw = {
     {
       path: '/index',
       name: 'Index',
-      component: () => import('@renderer/views/index.vue'),
+      component: () => import('@renderer/views/Index.vue'),
       meta: {
         title: 'Index'
       }
