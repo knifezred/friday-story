@@ -41,4 +41,6 @@ appImage:
 npmRebuild: false
 publish:
   provider: generic
-  url: https://example.com/auto-updates
+  url: https://www.knifez.net/download/118crm/
+electronDownload:
+  mirror: https://npmmirror.com/mirrors/electron/
