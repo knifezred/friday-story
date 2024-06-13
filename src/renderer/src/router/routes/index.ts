@@ -1,50 +1,73 @@
-import projectSetting from '@renderer/settings/projectSetting'
-import type { AppRouteModule, AppRouteRecordRaw } from './../types'
+import type { CustomRoute, ElegantConstRoute, ElegantRoute } from '@elegant-router/types'
+import { layouts, views } from '../elegant/imports'
+import { generatedRoutes } from '../elegant/routes'
+import { transformElegantRoutesToVueRoutes } from '../elegant/transform'
 
-import { PAGE_NOT_FOUND_ROUTE } from './basic'
-
-// import.meta.globEager() 直接引入所有的模块 Vite 独有的功能
-const modules = import.meta.glob('./modules/**/*.ts', { eager: true })
-const routeModuleList: AppRouteModule[] = []
-
-// 加入到路由集合中
-Object.keys(modules).forEach((val) => {
-  const mod = val['Router']
-  const modList = Array.isArray(mod) ? [...mod] : [mod]
-  routeModuleList.push(...modList)
-})
-
-export const asyncRoutes = [PAGE_NOT_FOUND_ROUTE, ...routeModuleList]
-
-// 根路由
-export const RootRoute: AppRouteRecordRaw = {
-  path: '/',
-  name: 'Root',
-  redirect: projectSetting.isAuth ? '/login' : '/index',
-  meta: {
-    title: 'Root'
-  },
-  children: [
-    {
-      path: '/index',
-      name: 'Index',
-      component: () => import('@renderer/views/Index.vue'),
-      meta: {
-        title: 'Index'
+const customRoutes: CustomRoute[] = [
+  {
+    name: 'exception',
+    path: '/exception',
+    component: 'layout.base',
+    meta: {
+      title: 'exception',
+      i18nKey: 'route.exception',
+      icon: 'ant-design:exception-outlined',
+      order: 7
+    },
+    children: [
+      {
+        name: 'exception_403',
+        path: '/exception/403',
+        component: 'view.403',
+        meta: {
+          title: 'exception_403',
+          i18nKey: 'route.exception_403',
+          icon: 'ic:baseline-block'
+        }
+      },
+      {
+        name: 'exception_404',
+        path: '/exception/404',
+        component: 'view.404',
+        meta: {
+          title: 'exception_404',
+          i18nKey: 'route.exception_404',
+          icon: 'ic:baseline-web-asset-off'
+        }
+      },
+      {
+        name: 'exception_500',
+        path: '/exception/500',
+        component: 'view.500',
+        meta: {
+          title: 'exception_500',
+          i18nKey: 'route.exception_500',
+          icon: 'ic:baseline-wifi-off'
+        }
       }
-    }
-  ]
-}
+    ]
+  }
+]
 
-export const LoginRoute: AppRouteRecordRaw = {
-  path: '/login',
-  name: 'Login',
-  component: () => import('@renderer/views/Login.vue'),
-  meta: {
-    title: 'login'
+export function createStaticRoutes() {
+  const constantRoutes: ElegantRoute[] = []
+
+  const authRoutes: ElegantRoute[] = []
+
+  ;[...customRoutes, ...generatedRoutes].forEach((item) => {
+    if (item.meta?.constant) {
+      constantRoutes.push(item)
+    } else {
+      authRoutes.push(item)
+    }
+  })
+
+  return {
+    constantRoutes,
+    authRoutes
   }
 }
 
-// Basic routing without permission
-// 未经许可的基本路由
-export const basicRoutes = [LoginRoute, RootRoute, PAGE_NOT_FOUND_ROUTE]
+export function getAuthVueRoutes(routes: ElegantConstRoute[]) {
+  return transformElegantRoutesToVueRoutes(routes, layouts, views)
+}

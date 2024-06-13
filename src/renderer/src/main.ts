@@ -7,14 +7,17 @@ import * as directives from 'vuetify/directives'
 import { mdi } from 'vuetify/iconsets/mdi'
 import 'vuetify/styles'
 import App from './App.vue'
+import { setupNProgress } from './plugins/nprogress'
 import { setupRouter } from './router'
 import { setupStore } from './store'
 
 const app = createApp(App)
 
+setupNProgress()
+
 setupStore(app)
 
-setupRouter(app)
+await setupRouter(app)
 
 const vuetify = createVuetify({
   theme: {
