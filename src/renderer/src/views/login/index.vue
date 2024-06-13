@@ -1,6 +1,6 @@
 <template>
   <v-card class="mx-auto mt-16" elevation="1" max-width="500">
-    <img :src="IconLogo" class="login-logo" />
+    <v-img :src="IconLogo" class="login-logo" />
     <v-card-title class="py-5 font-weight-black">Fridayboot Electron</v-card-title>
 
     <v-card-text> Open-Source App for free. just for fun </v-card-text>
@@ -35,7 +35,7 @@
   </v-card>
 </template>
 <script setup lang="ts">
-import IconLogo from '@resources/static/icons/logo.png'
+import IconLogo from '@renderer/assets/static/icons/logo.png'
 import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 const loading = ref(false)
@@ -49,7 +49,7 @@ watch(loading, (val) => {
 function startGame() {
   loading.value = !loading.value
   localStorage.setItem('token', '123123')
-  router.push('/about')
+  router.push('/home')
 }
 function showArchiveList() {
   archiveSheet.value = true

@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <router-view />
-  </div>
+  <RouterView />
 </template>
 <style lang="less">
 @import './assets/css/styles.less';

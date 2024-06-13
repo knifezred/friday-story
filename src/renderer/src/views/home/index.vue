@@ -1,57 +1,20 @@
 <template>
   <v-layout class="rounded rounded-md">
-    <v-navigation-drawer expand-on-hover rail>
-      <v-list>
-        <v-list-item
-          prepend-icon="mdi-account-cowboy-hat"
-          title="adam"
-          subtitle="finished:20%"></v-list-item>
-      </v-list>
-
-      <v-divider></v-divider>
-
-      <v-list density="compact" nav>
-        <v-list-item
-          prepend-icon="mdi-account-multiple"
-          title="Relationship"
-          value="relationship"></v-list-item>
-        <v-list-item prepend-icon="mdi-star" title="Starred" value="starred"></v-list-item>
-        <v-list-item
-          prepend-icon="mdi-format-list-checks"
-          title="任务列表"
-          value="task"></v-list-item>
-        <v-list-item prepend-icon="mdi-history" title="历史记录" value="history"></v-list-item>
-        <v-list-item prepend-icon="mdi-all-inclusive" title="loop" value="loop"></v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-app-bar :title="uiStore.getScene.title">
-      <v-chip prepend-icon="mdi-timer" text="2023-10-19"></v-chip>
-      <v-btn color="blue-darken-1"> +1h </v-btn>
-      <v-btn color="blue-darken-1"> +3h </v-btn>
-      <v-btn color="blue-darken-1"> +1d </v-btn>
-      <v-btn icon="mdi-cog"></v-btn>
-    </v-app-bar>
     <v-main class="align-center justify-center" style="min-height: 500px">
-      <PanelScene></PanelScene>
+      <div>home page test</div>
+
+      <v-btn @click="logout">退出登录</v-btn>
     </v-main>
-    <v-navigation-drawer class="right-drawer" location="right">
-      <PanelPlace></PanelPlace>
-      <v-divider></v-divider>
-      <PanelChoice></PanelChoice>
-    </v-navigation-drawer>
-    <v-footer app name="footer" class="footer-panel">
-      <PanelStory></PanelStory>
-    </v-footer>
   </v-layout>
 </template>
 
 <script setup lang="ts">
-import { useUIStore } from '@renderer/store/modules/ui'
-import PanelChoice from '../components/PanelChoice.vue'
-import PanelPlace from '../components/PanelPlace.vue'
-import PanelScene from '../components/PanelScene.vue'
-import PanelStory from '../components/PanelStory.vue'
-const uiStore = useUIStore()
+import { useRouter } from 'vue-router'
+const router = useRouter()
+function logout() {
+  localStorage.removeItem('token')
+  router.push('/login')
+}
 </script>
 
 <style scoped></style>
