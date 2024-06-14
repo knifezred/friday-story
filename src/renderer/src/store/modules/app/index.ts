@@ -1,11 +1,20 @@
 import { SetupStoreId } from '@renderer/enums'
-import useBoolean from '@renderer/hooks/common/use-boolean'
+import { $t, setLocale } from '@renderer/locales'
+import { setDayjsLocale } from '@renderer/locales/dayjs'
+import useBoolean from '@renderer/packages/hooks/use-boolean'
+import { router } from '@renderer/router'
 import { localStg } from '@renderer/utils/storage'
-import { breakpointsTailwind, useBreakpoints, useEventListener } from '@vueuse/core'
+import { breakpointsTailwind, useBreakpoints, useEventListener, useTitle } from '@vueuse/core'
 import { defineStore } from 'pinia'
-import { effectScope, nextTick, onScopeDispose, watch } from 'vue'
+import { effectScope, nextTick, onScopeDispose, ref, watch } from 'vue'
+import { useRouteStore } from '../route'
+// import { useTabStore } from '../tab'
+import { useThemeStore } from '../theme'
 
 export const useAppStore = defineStore(SetupStoreId.App, () => {
+  const themeStore = useThemeStore()
+  const routeStore = useRouteStore()
+  // const tabStore = useTabStore()
   const scope = effectScope()
   const breakpoints = useBreakpoints(breakpointsTailwind)
   const {
@@ -38,8 +47,7 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
   async function reloadPage(duration = 300) {
     setReloadFlag(false)
 
-    // TODO fix
-    const d = duration
+    const d = themeStore.page.animate ? duration : 40
 
     await new Promise((resolve) => {
       setTimeout(resolve, d)
@@ -48,8 +56,36 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
     setReloadFlag(true)
   }
 
+  const locale = ref<App.I18n.LangType>(localStg.get('lang') || 'zh-CN')
+
+  const localeOptions: App.I18n.LangOption[] = [
+    {
+      label: '中文',
+      key: 'zh-CN'
+    },
+    {
+      label: 'English',
+      key: 'en-US'
+    }
+  ]
+
+  function changeLocale(lang: App.I18n.LangType) {
+    locale.value = lang
+    setLocale(lang)
+    localStg.set('lang', lang)
+  }
+
+  /** Update document title by locale */
+  function updateDocumentTitleByLocale() {
+    const { i18nKey, title } = router.currentRoute.value.meta
+
+    const documentTitle = i18nKey ? $t(i18nKey) : title
+
+    useTitle(documentTitle)
+  }
+
   function init() {
-    console.log('app store init')
+    setDayjsLocale(locale.value)
   }
 
   // watch store
@@ -61,11 +97,11 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
         if (newValue) {
           // backup theme setting before is mobile
           localStg.set('backupThemeSettingBeforeIsMobile', {
-            layout: 'vertical',
+            layout: themeStore.layout.mode,
             siderCollapse: siderCollapse.value
           })
 
-          // themeStore.setThemeLayout('vertical')
+          themeStore.setThemeLayout('vertical')
           setSiderCollapse(true)
         } else {
           // when is not mobile, recover the backup theme setting
@@ -73,7 +109,7 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
 
           if (backup) {
             nextTick(() => {
-              // themeStore.setThemeLayout(backup.layout)
+              themeStore.setThemeLayout(backup.layout)
               setSiderCollapse(backup.siderCollapse)
 
               localStg.remove('backupThemeSettingBeforeIsMobile')
@@ -83,6 +119,21 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
       },
       { immediate: true }
     )
+
+    // watch locale
+    watch(locale, () => {
+      // update document title by locale
+      updateDocumentTitleByLocale()
+
+      // update global menus by locale
+      routeStore.updateGlobalMenusByLocale()
+
+      // update tabs by locale
+      // tabStore.updateTabsByLocale()
+
+      // sey dayjs locale
+      setDayjsLocale(locale.value)
+    })
   })
 
   // cache mixSiderFixed
@@ -103,6 +154,9 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
     reloadFlag,
     reloadPage,
     fullContent,
+    locale,
+    localeOptions,
+    changeLocale,
     themeDrawerVisible,
     openThemeDrawer,
     closeThemeDrawer,

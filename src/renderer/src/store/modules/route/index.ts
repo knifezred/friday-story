@@ -6,7 +6,7 @@ import type {
   RouteMap
 } from '@elegant-router/types'
 import { SetupStoreId } from '@renderer/enums'
-import useBoolean from '@renderer/hooks/common/use-boolean'
+import useBoolean from '@renderer/packages/hooks/use-boolean'
 import { router } from '@renderer/router'
 import { getRouteName, getRoutePath } from '@renderer/router/elegant/transform'
 import { createStaticRoutes, getAuthVueRoutes } from '@renderer/router/routes'

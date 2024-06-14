@@ -4,6 +4,7 @@ import type {
   RouteKey,
   RouteMap
 } from '@elegant-router/types'
+import { $t } from '@renderer/locales'
 import type { RouteLocationNormalizedLoaded, RouteRecordRaw } from 'vue-router'
 
 /**
@@ -104,7 +105,7 @@ export function updateLocaleOfGlobalMenus(menus: App.Global.Menu[]) {
   menus.forEach((menu) => {
     const { i18nKey, label, children } = menu
 
-    const newLabel = i18nKey ? i18nKey : label
+    const newLabel = i18nKey ? $t(i18nKey) : label
 
     const newMenu: App.Global.Menu = {
       ...menu,
@@ -130,7 +131,7 @@ function getGlobalMenuByBaseRoute(route: RouteLocationNormalizedLoaded | Elegant
   const { name, path } = route
   const { title, i18nKey } = route.meta ?? {}
 
-  const label = i18nKey ? i18nKey : title!
+  const label = i18nKey ? $t(i18nKey) : title!
 
   const menu: App.Global.Menu = {
     key: name as string,

@@ -1,57 +1,80 @@
 import ElegantVueRouter from '@elegant-router/vue/vite'
-import vue from '@vitejs/plugin-vue'
 import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
 import { resolve } from 'path'
+import { loadEnv } from 'vite'
 import { RouteMeta } from 'vue-router'
+import { setupVitePlugins } from './build/plugins'
 
-export default defineConfig({
-  main: {
-    plugins: [externalizeDepsPlugin()]
-  },
-  preload: {
-    plugins: [externalizeDepsPlugin()]
-  },
-  renderer: {
-    resolve: {
-      alias: {
-        '@renderer': resolve('src/renderer/src'),
-        '@resources': resolve('resources/')
-      }
+export default defineConfig((configEnv) => {
+  const viteEnv = loadEnv(configEnv.mode, process.cwd())
+  return {
+    main: {
+      plugins: [externalizeDepsPlugin()]
     },
-    plugins: [
-      vue(),
-      ElegantVueRouter({
-        cwd: 'src/renderer',
-        pageDir: 'src/renderer/src/views',
-        // dtsDir: 'src/renderer/src/typings/elegant-router.d.ts',
-        importsDir: 'src/renderer/src/router/elegant/imports.ts',
+    preload: {
+      plugins: [externalizeDepsPlugin()]
+    },
+    renderer: {
+      resolve: {
         alias: {
-          '@renderer': 'src/renderer/src'
-        },
-        layouts: {
-          base: 'src/renderer/src/layouts/base-layout/index.vue',
-          blank: 'src/renderer/src/layouts/blank-layout/index.vue'
-        },
-        customRoutes: {
-          names: ['exception_403', 'exception_404', 'exception_500']
-        },
-        onRouteMetaGen(routeName) {
-          const key = routeName
-
-          const constantRoutes = ['login', '403', '404', '500']
-
-          const meta: Partial<RouteMeta> = {
-            title: key,
-            i18nKey: `route.${key}`
-          }
-
-          if (constantRoutes.includes(key)) {
-            meta.constant = true
-          }
-
-          return meta
+          '@renderer': resolve('src/renderer/src'),
+          '@resources': resolve('resources/')
         }
-      })
-    ]
+      },
+      css: {
+        preprocessorOptions: {
+          scss: {
+            additionalData: `@use "src/renderer/src/styles/scss/global.scss" as *;`
+          }
+        }
+      },
+      plugins: [
+        setupVitePlugins(viteEnv),
+        ElegantVueRouter({
+          cwd: 'src/renderer',
+          pageDir: 'src/renderer/src/views',
+          importsDir: 'src/renderer/src/router/elegant/imports.ts',
+          alias: {
+            '@renderer': 'src/renderer/src'
+          },
+          layouts: {
+            base: 'src/renderer/src/layouts/base-layout/index.vue',
+            blank: 'src/renderer/src/layouts/blank-layout/index.vue'
+          },
+          customRoutes: {
+            names: ['exception_403', 'exception_404', 'exception_500']
+          },
+          routePathTransformer(routeName, routePath) {
+            const key = routeName
+
+            if (key === 'login') {
+              const modules = ['pwd-login', 'register', 'reset-pwd']
+
+              const moduleReg = modules.join('|')
+
+              return `/login/:module(${moduleReg})?`
+            }
+
+            return routePath
+          },
+          onRouteMetaGen(routeName) {
+            const key = routeName
+
+            const constantRoutes = ['login', '403', '404', '500']
+
+            const meta: Partial<RouteMeta> = {
+              title: key,
+              i18nKey: `route.${key}`
+            }
+
+            if (constantRoutes.includes(key)) {
+              meta.constant = true
+            }
+
+            return meta
+          }
+        })
+      ]
+    }
   }
 })

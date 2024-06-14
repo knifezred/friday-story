@@ -1,7 +1,13 @@
-<template>
-  <RouterView />
-</template>
+<script setup lang="ts">
+import GlobalContent from '../modules/global-content/index.vue'
 
-<script setup lang="ts"></script>
+defineOptions({
+  name: 'BlankLayout'
+})
+</script>
+
+<template>
+  <GlobalContent :show-padding="false" />
+</template>
 
 <style scoped></style>

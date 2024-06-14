@@ -1,13 +1,8 @@
 <template>
-  <div class="error">500</div>
+  <n-result status="500" title="500 服务器错误" description="服务器出错可能说明该雇更多程序员了">
+    <template #footer>
+      <n-button>散财消灾</n-button>
+    </template>
+  </n-result>
 </template>
-
 <script setup lang="ts"></script>
-
-<style scoped>
-.error {
-  font-size: 2rem;
-  text-align: center;
-  padding-top: 20%;
-}
-</style>

@@ -1,37 +1,29 @@
-import '@mdi/font/css/materialdesignicons.css'
 import { createApp } from 'vue'
-import { createVuetify } from 'vuetify'
-import { md3 } from 'vuetify/blueprints'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
-import { mdi } from 'vuetify/iconsets/mdi'
-import 'vuetify/styles'
 import App from './App.vue'
-import { setupNProgress } from './plugins/nprogress'
+import { setupI18n } from './locales'
+import { setupDayjs, setupIconifyOffline, setupLoading, setupNProgress } from './plugins'
+import './plugins/assets'
 import { setupRouter } from './router'
 import { setupStore } from './store'
 
-const app = createApp(App)
+async function setupApp() {
+  setupLoading()
 
-setupNProgress()
+  setupNProgress()
 
-setupStore(app)
+  setupIconifyOffline()
 
-await setupRouter(app)
+  setupDayjs()
 
-const vuetify = createVuetify({
-  theme: {
-    defaultTheme: 'dark'
-  },
-  blueprint: md3,
-  icons: {
-    defaultSet: 'mdi',
-    sets: {
-      mdi
-    }
-  },
-  components,
-  directives
-})
+  const app = createApp(App)
 
-app.use(vuetify).mount('#app')
+  setupStore(app)
+
+  await setupRouter(app)
+
+  setupI18n(app)
+
+  app.mount('#app')
+}
+
+setupApp()

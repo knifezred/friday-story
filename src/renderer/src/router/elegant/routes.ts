@@ -56,12 +56,13 @@ export const generatedRoutes: GeneratedRoute[] = [
   },
   {
     name: 'login',
-    path: '/login',
+    path: '/login/:module(pwd-login|register|reset-pwd)?',
     component: 'layout.blank$view.login',
     meta: {
       title: 'login',
       i18nKey: 'route.login',
       constant: true
-    }
+    },
+    props: true
   }
 ];

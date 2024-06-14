@@ -8,11 +8,12 @@ declare namespace UnionKey {
    * - register: register
    * - reset-pwd: reset password
    * - bind-wechat: bind wechat
+   * | 'code-login' | 'register' | 'reset-pwd' | 'bind-wechat'
    */
-  type LoginModule = 'pwd-login' | 'code-login' | 'register' | 'reset-pwd' | 'bind-wechat';
+  type LoginModule = 'pwd-login' | 'register' | 'reset-pwd'
 
   /** Theme scheme */
-  type ThemeScheme = 'light' | 'dark' | 'auto';
+  type ThemeScheme = 'light' | 'dark' | 'auto'
 
   /**
    * The layout mode
@@ -22,7 +23,7 @@ declare namespace UnionKey {
    * - vertical-mix: two vertical mixed menus in left
    * - horizontal-mix: the vertical menu in left and horizontal menu in top
    */
-  type ThemeLayoutMode = 'vertical' | 'horizontal' | 'vertical-mix' | 'horizontal-mix';
+  type ThemeLayoutMode = 'vertical' | 'horizontal' | 'vertical-mix' | 'horizontal-mix'
 
   /**
    * The scroll mode when content overflow
@@ -30,10 +31,17 @@ declare namespace UnionKey {
    * - wrapper: the wrapper component's root element overflow
    * - content: the content component overflow
    */
-  type ThemeScrollMode = import('@sa/materials').LayoutScrollMode;
+  type ThemeScrollMode = import('@renderer/packages/materials').LayoutScrollMode
 
   /** Page animate mode */
-  type ThemePageAnimateMode = 'fade' | 'fade-slide' | 'fade-bottom' | 'fade-scale' | 'zoom-fade' | 'zoom-out' | 'none';
+  type ThemePageAnimateMode =
+    | 'fade'
+    | 'fade-slide'
+    | 'fade-bottom'
+    | 'fade-scale'
+    | 'zoom-fade'
+    | 'zoom-out'
+    | 'none'
 
   /**
    * Tab mode
@@ -41,7 +49,7 @@ declare namespace UnionKey {
    * - chrome: chrome style
    * - button: button style
    */
-  type ThemeTabMode = import('@sa/materials').PageTabMode;
+  type ThemeTabMode = import('@renderer/packages/materials').PageTabMode
 
   /** Unocss animate key */
   type UnoCssAnimateKey =
@@ -145,5 +153,5 @@ declare namespace UnionKey {
     | 'back-out-up'
     | 'back-out-down'
     | 'back-out-right'
-    | 'back-out-left';
+    | 'back-out-left'
 }

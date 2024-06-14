@@ -2,6 +2,7 @@ declare namespace Dto {
   namespace Auth {
     interface LoginToken {
       token: string
+      accessToken: string
       refreshToken: string
     }
 
