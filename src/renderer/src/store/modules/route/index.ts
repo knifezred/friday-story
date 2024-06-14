@@ -14,8 +14,9 @@ import { ROOT_ROUTE } from '@renderer/router/routes/builtin'
 import { defineStore } from 'pinia'
 import { computed, ref, shallowRef } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
-import { useAppStore } from '../app/index'
-import { useAuthStore } from '../auth/index'
+import { useAppStore } from '../app'
+import { useAuthStore } from '../auth'
+import { useTabStore } from '../tab'
 import {
   filterAuthRoutesByRoles,
   getBreadcrumbsByRoute,
@@ -31,6 +32,7 @@ import {
 export const useRouteStore = defineStore(SetupStoreId.Route, () => {
   const appStore = useAppStore()
   const authStore = useAuthStore()
+  const tabStore = useTabStore()
   const { bool: isInitConstantRoute, setBool: setIsInitConstantRoute } = useBoolean()
   const { bool: isInitAuthRoute, setBool: setIsInitAuthRoute } = useBoolean()
 
@@ -209,6 +211,8 @@ export const useRouteStore = defineStore(SetupStoreId.Route, () => {
     } else {
       await initDynamicAuthRoute()
     }
+
+    tabStore.initHomeTab()
   }
 
   /** Init static auth route */
@@ -230,21 +234,19 @@ export const useRouteStore = defineStore(SetupStoreId.Route, () => {
 
   /** Init dynamic auth route */
   async function initDynamicAuthRoute() {
-    console.log('TODO: dynamic routes')
-    const error = true
-    const data = {} as Dto.Route.UserRoute
+    const error = false
+    const data = {
+      home: 'home' as LastLevelRouteKey,
+      routes: []
+    }
+
     // const { data, error } = await fetchGetUserRoutes()
     if (!error) {
       const { routes, home } = data
-
       addAuthRoutes(routes)
-
       handleConstantAndAuthRoutes()
-
       setRouteHome(home)
-
       handleUpdateRootRouteRedirect(home)
-
       setIsInitAuthRoute(true)
     } else {
       // if fetch user routes failed, reset store
@@ -325,8 +327,10 @@ export const useRouteStore = defineStore(SetupStoreId.Route, () => {
       const { authRoutes: staticAuthRoutes } = createStaticRoutes()
       return isRouteExistByRouteName(routeName, staticAuthRoutes)
     }
-    // TODO route exists
+
+    // TODO 验证路由是否存在
     // const { data } = await fetchIsRouteExist(routeName)
+
     return true
   }
 

@@ -33,16 +33,12 @@ export default defineConfig((configEnv) => {
         ElegantVueRouter({
           cwd: 'src/renderer',
           pageDir: 'src/renderer/src/views',
-          importsDir: 'src/renderer/src/router/elegant/imports.ts',
           alias: {
             '@renderer': 'src/renderer/src'
           },
           layouts: {
             base: 'src/renderer/src/layouts/base-layout/index.vue',
             blank: 'src/renderer/src/layouts/blank-layout/index.vue'
-          },
-          customRoutes: {
-            names: ['exception_403', 'exception_404', 'exception_500']
           },
           routePathTransformer(routeName, routePath) {
             const key = routeName

@@ -4,6 +4,7 @@ import type {
   RouteKey,
   RouteMap
 } from '@elegant-router/types'
+import { useSvgIcon } from '@renderer/hooks/common/icon'
 import { $t } from '@renderer/locales'
 import type { RouteLocationNormalizedLoaded, RouteRecordRaw } from 'vue-router'
 
@@ -128,8 +129,10 @@ export function updateLocaleOfGlobalMenus(menus: App.Global.Menu[]) {
  * @param route
  */
 function getGlobalMenuByBaseRoute(route: RouteLocationNormalizedLoaded | ElegantConstRoute) {
+  const { SvgIconVNode } = useSvgIcon()
+
   const { name, path } = route
-  const { title, i18nKey } = route.meta ?? {}
+  const { title, i18nKey, icon = import.meta.env.VITE_MENU_ICON, localIcon } = route.meta ?? {}
 
   const label = i18nKey ? $t(i18nKey) : title!
 
@@ -138,7 +141,8 @@ function getGlobalMenuByBaseRoute(route: RouteLocationNormalizedLoaded | Elegant
     label,
     i18nKey,
     routeKey: name as RouteKey,
-    routePath: path as RouteMap[RouteKey]
+    routePath: path as RouteMap[RouteKey],
+    icon: SvgIconVNode({ icon, localIcon, fontSize: 20 })
   }
 
   return menu

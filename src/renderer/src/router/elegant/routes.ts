@@ -45,7 +45,9 @@ export const generatedRoutes: GeneratedRoute[] = [
     component: 'layout.base$view.about',
     meta: {
       title: 'about',
-      i18nKey: 'route.about'
+      i18nKey: 'route.about',
+      icon: 'fluent:book-information-24-regular',
+      order: 10
     }
   },
   {
@@ -54,7 +56,9 @@ export const generatedRoutes: GeneratedRoute[] = [
     component: 'layout.base$view.home',
     meta: {
       title: 'home',
-      i18nKey: 'route.home'
+      i18nKey: 'route.home',
+      icon: 'mdi:monitor-dashboard',
+      order: 1
     }
   },
   {
@@ -69,4 +73,4 @@ export const generatedRoutes: GeneratedRoute[] = [
     },
     props: true
   }
-]
+];
