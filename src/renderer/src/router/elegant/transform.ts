@@ -166,7 +166,7 @@ const routeMap: RouteMap = {
   "500": "/500",
   "about": "/about",
   "home": "/home",
-  "login": "/login/:module(pwd-login|register|reset-pwd)?"
+  "login": "/login/:module(pwd-login|register|reset-pwd|game-start)?"
 };
 
 /**

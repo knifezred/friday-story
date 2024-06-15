@@ -190,6 +190,11 @@ const local: App.I18n.Schema = {
       },
       bindWeChat: {
         title: 'Bind WeChat'
+      },
+      gameStart: {
+        title: 'A simple slg game',
+        newGame: 'New Game',
+        loadArchive: 'Load Archive'
       }
     },
     about: {

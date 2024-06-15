@@ -277,6 +277,11 @@ declare namespace App {
           bindWeChat: {
             title: string
           }
+          gameStart: {
+            title: string
+            newGame: string
+            loadArchive: string
+          }
         }
         about: {
           title: string

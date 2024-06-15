@@ -189,6 +189,11 @@ const local: App.I18n.Schema = {
       },
       bindWeChat: {
         title: '绑定微信'
+      },
+      gameStart: {
+        title: '一个SLG游戏',
+        newGame: '新的开始',
+        loadArchive: '读取存档'
       }
     },
     about: {
