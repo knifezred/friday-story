@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import type { AdminLayoutProps } from '../../types'
-import style from './index.module.css'
-import { LAYOUT_MAX_Z_INDEX, LAYOUT_SCROLL_EL_ID, createLayoutCssVars } from './shared'
+import { computed } from 'vue';
+import type { AdminLayoutProps } from '../../types';
+import style from './index.module.css';
+import { LAYOUT_MAX_Z_INDEX, LAYOUT_SCROLL_EL_ID, createLayoutCssVars } from './shared';
 
 defineOptions({
   name: 'AdminLayout'
@@ -69,7 +69,9 @@ const isContentScroll = computed(() => props.scrollMode === 'content')
 const isVertical = computed(() => props.mode === 'vertical')
 const isHorizontal = computed(() => props.mode === 'horizontal')
 
-const fixedHeaderAndTab = computed(() => props.fixedTop || (isHorizontal.value && isWrapperScroll.value))
+const fixedHeaderAndTab = computed(
+  () => props.fixedTop || (isHorizontal.value && isWrapperScroll.value)
+)
 
 // css
 const leftGapClass = computed(() => {

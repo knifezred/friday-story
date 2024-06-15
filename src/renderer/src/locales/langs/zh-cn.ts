@@ -276,7 +276,9 @@ const local: App.I18n.Schema = {
     collapse: '折叠菜单',
     expand: '展开菜单',
     pin: '固定',
-    unpin: '取消固定'
+    unpin: '取消固定',
+    minimize: '最小化',
+    maximize: '最大化'
   },
   datatable: {
     itemCount: '共 {total} 条'

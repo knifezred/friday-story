@@ -30,7 +30,7 @@ defineProps<Props>()
 const appStore = useAppStore()
 const themeStore = useThemeStore()
 const routeStore = useRouteStore()
-const { isFullscreen, toggle } = useFullscreen()
+const { toggle } = useFullscreen()
 const { menus } = useMixMenuContext()
 
 const headerMenus = computed(() => {
@@ -47,19 +47,29 @@ const headerMenus = computed(() => {
 </script>
 
 <template>
-  <DarkModeContainer class="h-full flex-y-center px-12px shadow-header">
+  <DarkModeContainer
+    class="h-full flex-y-center px-12px shadow-header"
+    style="-webkit-app-region: drag">
     <GlobalLogo v-if="showLogo" class="h-full" :style="{ width: themeStore.sider.width + 'px' }" />
-    <HorizontalMenu v-if="showMenu" mode="horizontal" :menus="headerMenus" class="px-12px" />
+    <HorizontalMenu
+      v-if="showMenu"
+      mode="horizontal"
+      :menus="headerMenus"
+      class="px-12px"
+      style="-webkit-app-region: no-drag" />
     <div v-else class="h-full flex-y-center flex-1-hidden">
       <MenuToggler
         v-if="showMenuToggler"
         :collapsed="appStore.siderCollapse"
+        style="-webkit-app-region: no-drag"
         @click="appStore.toggleSiderCollapse" />
       <GlobalBreadcrumb v-if="!appStore.isMobile" class="ml-12px" />
     </div>
-    <div class="h-full flex-y-center justify-end">
+    <div class="h-full flex-y-center justify-end" style="-webkit-app-region: no-drag">
+      <WindowMinimize />
+      <WindowMaximize @click="toggle" />
       <GlobalSearch />
-      <FullScreen v-if="!appStore.isMobile" :full="isFullscreen" @click="toggle" />
+      <!-- <FullScreen v-if="!appStore.isMobile" :full="isFullscreen" @click="toggle" /> -->
       <LangSwitch
         :lang="appStore.locale"
         :lang-options="appStore.localeOptions"
@@ -70,6 +80,7 @@ const headerMenus = computed(() => {
         @switch="themeStore.toggleThemeScheme" />
       <ThemeButton />
       <UserAvatar />
+      <WindowClose />
     </div>
   </DarkModeContainer>
 </template>

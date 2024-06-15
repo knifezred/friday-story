@@ -340,6 +340,8 @@ declare namespace App {
         expand: string
         pin: string
         unpin: string
+        minimize: string
+        maximize: string
       }
       datatable: {
         itemCount: string

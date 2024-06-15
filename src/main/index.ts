@@ -1,5 +1,5 @@
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
-import { BrowserWindow, app, shell } from 'electron'
+import { BrowserWindow, Menu, Tray, app, ipcMain, shell } from 'electron'
 import { join } from 'path'
 import icon from '../../resources/icon.png?asset'
 
@@ -11,6 +11,7 @@ function createWindow(): void {
     height: 1080,
     title: 'fridayboot-electron v' + app.getVersion(),
     show: false,
+    frame: false,
     resizable: true,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
@@ -68,8 +69,40 @@ app.whenReady().then(() => {
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
+    console.log('app quit')
     app.quit()
   }
+})
+app.whenReady().then(() => {
+  const tray = new Tray(icon)
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: '恢复窗口',
+      click: () => {
+        /* 恢复窗口的逻辑 */
+        mainWindow.show()
+      }
+    },
+    {
+      label: '退出',
+      click: () => {
+        if (mainWindow.isClosable()) {
+          mainWindow.close()
+        }
+        app.quit()
+      }
+    }
+  ])
+  tray.setToolTip('This is my application.')
+  tray.setContextMenu(contextMenu)
+})
+
+ipcMain.on('hide-window', () => {
+  mainWindow.hide()
+})
+
+ipcMain.on('close-window', () => {
+  mainWindow.close()
 })
 
 // In this file you can include the rest of your app"s specific main process

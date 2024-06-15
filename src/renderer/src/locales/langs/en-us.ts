@@ -277,7 +277,9 @@ const local: App.I18n.Schema = {
     collapse: 'Collapse Menu',
     expand: 'Expand Menu',
     pin: 'Pin',
-    unpin: 'Unpin'
+    unpin: 'Unpin',
+    minimize: 'Minimize',
+    maximize: 'Maximize'
   },
   datatable: {
     itemCount: 'Total {total} items'
