@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useFormRules, useNaiveForm } from '@renderer/hooks/common/form'
-import { useRouterPush } from '@renderer/hooks/common/router'
 import { $t } from '@renderer/locales'
 import { useAuthStore } from '@renderer/store/modules/auth'
 import { computed, reactive } from 'vue'
@@ -10,7 +9,6 @@ defineOptions({
 })
 
 const authStore = useAuthStore()
-const { toggleLoginModule } = useRouterPush()
 const { formRef, validate } = useNaiveForm()
 
 interface FormModel {
@@ -42,23 +40,14 @@ async function handleSubmit() {
 <template>
   <NForm ref="formRef" :model="model" :rules="rules" size="large" :show-label="false">
     <NSpace vertical :size="24">
-      <NButton
-        type="primary"
-        size="large"
-        round
-        block
-        :loading="authStore.loginLoading"
-        @click="handleSubmit">
+      <NButton type="primary" size="large" round block @click="handleSubmit">
         {{ $t('page.login.gameStart.newGame') }}
       </NButton>
-      <NButton
-        type="warning"
-        size="large"
-        round
-        block
-        :loading="authStore.loginLoading"
-        @click="handleSubmit">
+      <NButton type="primary" size="large" round block @click="handleSubmit">
         {{ $t('page.login.gameStart.loadArchive') }}
+      </NButton>
+      <NButton type="primary" size="large" round block @click="handleSubmit">
+        {{ $t('page.setting.title') }}
       </NButton>
     </NSpace>
   </NForm>

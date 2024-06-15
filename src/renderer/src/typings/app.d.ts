@@ -169,6 +169,7 @@ declare namespace App {
           yes: string
           no: string
         }
+        save: string
       }
       request: {
         logout: string
@@ -285,7 +286,6 @@ declare namespace App {
         }
         about: {
           title: string
-          introduction: string
           projectInfo: {
             title: string
             version: string
@@ -322,6 +322,9 @@ declare namespace App {
             desc5: string
           }
           creativity: string
+        }
+        setting: {
+          title: string
         }
       }
       form: {

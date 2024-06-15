@@ -1,6 +1,6 @@
 const local: App.I18n.Schema = {
   system: {
-    title: 'fridayboot'
+    title: 'Friday Story'
   },
   common: {
     action: 'Action',
@@ -41,7 +41,8 @@ const local: App.I18n.Schema = {
     yesOrNo: {
       yes: 'Yes',
       no: 'No'
-    }
+    },
+    save: 'Save'
   },
   request: {
     logout: 'Logout user after request failed',
@@ -199,7 +200,6 @@ const local: App.I18n.Schema = {
     },
     about: {
       title: 'About',
-      introduction: `SoybeanAdmin is an elegant and powerful admin template, based on the latest front-end technology stack, including Vue3, Vite5, TypeScript, Pinia and UnoCSS. It has built-in rich theme configuration and components, strict code specifications, and an automated file routing system. In addition, it also uses the online mock data solution based on ApiFox. SoybeanAdmin provides you with a one-stop admin solution, no additional configuration, and out of the box. It is also a best practice for learning cutting-edge technologies quickly.`,
       projectInfo: {
         title: 'Project Info',
         version: 'Version',
@@ -236,6 +236,9 @@ const local: App.I18n.Schema = {
         desc5: 'Soybean just wrote some of the workbench pages casually, and it was enough to see!'
       },
       creativity: 'Creativity'
+    },
+    setting: {
+      title: 'Setting'
     }
   },
   form: {

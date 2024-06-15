@@ -73,4 +73,4 @@ export const generatedRoutes: GeneratedRoute[] = [
     },
     props: true
   }
-];
+]
