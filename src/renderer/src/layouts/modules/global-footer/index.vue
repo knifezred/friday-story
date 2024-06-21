@@ -10,7 +10,7 @@ defineOptions({
       href="https://gitee.com/KnifeZ/friday-story/blob/main/LICENSE"
       target="_blank"
       rel="noopener noreferrer">
-      Copyright MIT © 2024 KnifeZ
+      Copyright GPL 2.0 © 2024 KnifeZ
     </a>
   </DarkModeContainer>
 </template>
