@@ -213,7 +213,8 @@
     "login": "Login",
     "setting": "Setting",
     "setting_about": "About",
-    "setting_system": "system"
+    "setting_system": "system",
+    "setting_theme": "Appearance"
   },
   "system": {
     "title": "Friday Story"
@@ -232,7 +233,7 @@
       "right": "Right Footer",
       "visible": "Footer Visible"
     },
-    "grayScale": "grayScale",
+    "grayScale": "Gray-Scale Mode",
     "header": {
       "breadcrumb": {
         "showIcon": "Breadcrumb Icon Visible",

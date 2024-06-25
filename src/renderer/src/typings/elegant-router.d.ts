@@ -26,6 +26,7 @@ declare module "@elegant-router/types" {
     "setting": "/setting";
     "setting_about": "/setting/about";
     "setting_system": "/setting/system";
+    "setting_theme": "/setting/theme";
   };
 
   /**
@@ -88,6 +89,7 @@ declare module "@elegant-router/types" {
     | "login"
     | "setting_about"
     | "setting_system"
+    | "setting_theme"
   >;
 
   /**

@@ -169,7 +169,8 @@ const routeMap: RouteMap = {
   "login": "/login/:module(pwd-login|register|reset-pwd|game-start)?",
   "setting": "/setting",
   "setting_about": "/setting/about",
-  "setting_system": "/setting/system"
+  "setting_system": "/setting/system",
+  "setting_theme": "/setting/theme"
 };
 
 /**

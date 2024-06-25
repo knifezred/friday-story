@@ -23,4 +23,5 @@ export const views: Record<LastLevelRouteKey, RouteComponent | (() => Promise<Ro
   login: () => import("@renderer/views/login/index.vue"),
   setting_about: () => import("@renderer/views/setting/about/index.vue"),
   setting_system: () => import("@renderer/views/setting/system/index.vue"),
+  setting_theme: () => import("@renderer/views/setting/theme/index.vue"),
 };

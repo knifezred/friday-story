@@ -103,6 +103,16 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: 'mynaui:cog-one',
           i18nKey: 'route.setting_system'
         }
+      },
+      {
+        name: 'setting_theme',
+        path: '/setting/theme',
+        component: 'view.setting_theme',
+        meta: {
+          title: 'setting_theme',
+          icon: 'majesticons:color-swatch-line',
+          i18nKey: 'route.setting_theme'
+        }
       }
     ]
   }

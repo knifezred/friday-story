@@ -192,8 +192,7 @@
       }
     },
     "setting": {
-      "button": {
-      },
+      "button": {},
       "title": "设置"
     }
   },
@@ -214,10 +213,11 @@
     "login": "登录",
     "setting": "设置",
     "setting_about": "关于",
-    "setting_system": "系统"
+    "setting_system": "通用",
+    "setting_theme": "外观"
   },
   "system": {
-    "title": "friday story"
+    "title": "Friday Story"
   },
   "theme": {
     "configOperation": {

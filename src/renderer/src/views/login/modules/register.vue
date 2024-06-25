@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouterPush } from '@renderer/hooks/common/router'
 import { $t } from '@renderer/locales'
+import { findUser } from '@renderer/service/api/user'
 import { reactive } from 'vue'
 
 defineOptions({
@@ -20,10 +21,12 @@ const model: FormModel = reactive({
   code: '',
   userName: ''
 })
-
-async function handleSubmit() {
-  // request to register
-  window.$message?.success($t('page.login.common.validateSuccess'))
+function handleSubmit() {
+  findUser(1).then((res) => {
+    console.log(res)
+    // request to register
+    window.$message?.success($t('page.login.common.validateSuccess'))
+  })
 }
 </script>
 
