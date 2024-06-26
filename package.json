@@ -58,7 +58,7 @@
     "@electron-toolkit/eslint-config-ts": "^1.0.1",
     "@electron-toolkit/tsconfig": "^1.0.1",
     "@elegant-router/vue": "^0.3.7",
-    "@iconify/json": "^2.2.219",
+    "@iconify/json": "^2.2.222",
     "@rushstack/eslint-patch": "^1.7.1",
     "@types/crypto-js": "^4.2.2",
     "@types/lodash-es": "^4.17.12",
