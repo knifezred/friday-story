@@ -56,3 +56,7 @@ export function toggleHtmlClass(className: string) {
     remove
   }
 }
+
+export function staticPath(src: string) {
+  return 'http://localhost:5175' + src
+}

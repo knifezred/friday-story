@@ -87,7 +87,6 @@ app.on('before-quit', function () {
 
 app.whenReady().then(() => {
   // 连接 Sqlite 数据库
-  logger.info('app ready')
   AppDataSource.initialize().catch((err) => {
     logger.error(err)
   })
