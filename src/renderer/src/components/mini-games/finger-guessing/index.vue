@@ -1,0 +1,195 @@
+<template>
+  <n-grid
+    :x-gap="12"
+    :y-gap="12"
+    :cols="4"
+    layout-shift-disabled
+    class="text-center"
+    style="min-width: 500px">
+    <n-gi> </n-gi>
+    <n-gi :span="2">
+      <n-h2>
+        <ButtonIcon text icon="streamline:peace-hand"></ButtonIcon>
+        石头剪刀布
+      </n-h2>
+    </n-gi>
+    <n-gi> </n-gi>
+
+    <n-gi>
+      <n-h3>
+        {{ playerName1 }}
+        <n-icon v-for="index in totalRounds" :key="index">
+          <icon-solar:star-bold v-if="computerScore >= index" color="#fcc419" />
+          <icon-solar:star-bold-duotone v-else />
+        </n-icon>
+      </n-h3>
+    </n-gi>
+    <n-gi :span="2">
+      <n-h3>当前轮次: {{ currentRound }} </n-h3>
+    </n-gi>
+    <n-gi>
+      <n-h3>
+        {{ playerName2 }}
+        <n-icon v-for="index in totalRounds" :key="index">
+          <icon-solar:star-bold v-if="playerScore >= index" color="#fcc419" />
+          <icon-solar:star-bold-duotone v-else />
+        </n-icon>
+      </n-h3>
+    </n-gi>
+
+    <n-gi v-if="currentRound > 0">
+      <ButtonIcon text :icon="`${'la:hand-' + computerChoice}`" style="font-size: 48px" />
+    </n-gi>
+    <n-gi v-if="currentRound > 0" :span="2">
+      <n-h3>{{ result }}</n-h3>
+    </n-gi>
+
+    <n-gi v-if="currentRound > 0">
+      <ButtonIcon text :icon="`${'la:hand-' + playerChoice}`" style="font-size: 48px" />
+    </n-gi>
+
+    <n-gi> </n-gi>
+    <n-gi :span="2">
+      <n-button v-if="currentRound == 0" @click="startGame">开始游戏</n-button>
+      <n-space v-else-if="!gameEnded && currentRound > 0" justify="space-around" size="large">
+        <n-button text style="font-size: 64px" @click="makeChoice('rock')">
+          <n-icon>
+            <icon-la:hand-rock />
+          </n-icon>
+        </n-button>
+        <n-button text style="font-size: 64px" @click="makeChoice('scissors')">
+          <n-icon>
+            <icon-la:hand-scissors />
+          </n-icon>
+        </n-button>
+        <n-button text style="font-size: 64px" @click="makeChoice('paper')">
+          <n-icon>
+            <icon-la:hand-paper />
+          </n-icon>
+        </n-button>
+      </n-space>
+    </n-gi>
+    <n-gi> </n-gi>
+
+    <n-gi> </n-gi>
+    <n-gi :span="2">
+      <n-result v-if="gameEnded" :status="`${playerScore > computerScore ? 'success' : 'error'}`">
+        <n-h1 v-if="playerScore != computerScore" class="text-center">
+          {{ playerScore > computerScore ? '你赢了!' : '你输了!' }}
+        </n-h1>
+        <n-h1 v-else class="text-center">平局!</n-h1>
+        <template #footer>
+          <n-space justify="center">
+            <n-button @click="startGame"> 再来一局 </n-button>
+            <n-button @click="endGame"> 结束 </n-button>
+          </n-space>
+        </template>
+      </n-result>
+    </n-gi>
+    <n-gi> </n-gi>
+  </n-grid>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+// 猜拳（石头剪刀布）
+defineOptions({
+  name: 'FingerGuessing'
+})
+
+type Choice = 'rock' | 'paper' | 'scissors'
+
+const playerScore = ref(0)
+const computerScore = ref(0)
+const currentRound = ref(0)
+const playerChoice = ref<Choice | null>(null)
+const computerChoice = ref<Choice | null>(null)
+const result = ref<string>('')
+const gameEnded = ref(false)
+const history = ref([])
+
+interface Props {
+  playerName1?: string
+  playerName2?: string
+  totalRounds: number
+}
+const { totalRounds } = withDefaults(defineProps<Props>(), {
+  playerName1: '电脑',
+  playerName2: '你',
+  totalRounds: 3
+})
+interface Emits {
+  (e: 'gameResult', result: boolean): boolean
+}
+
+const emit = defineEmits<Emits>()
+function startGame() {
+  if (totalRounds > 0) {
+    currentRound.value = 1
+    playerScore.value = 0
+    computerScore.value = 0
+    gameEnded.value = false
+    playerChoice.value = null
+    computerChoice.value = null
+    result.value = ''
+    history.value = []
+  }
+}
+
+function endGame() {
+  emit('gameResult', playerScore.value > computerScore.value)
+  console.log(result.value)
+}
+
+function getRandomChoice(): Choice {
+  const choices: Choice[] = ['rock', 'paper', 'scissors']
+  return choices[Math.floor(Math.random() * choices.length)]
+}
+
+function makeChoice(choice: Choice) {
+  if (canPlay()) {
+    playerChoice.value = choice
+    computerChoice.value = getRandomChoice()
+    determineResult()
+  }
+}
+
+function determineResult() {
+  if (playerChoice.value === computerChoice.value) {
+    result.value = '平局!'
+  } else if (
+    (playerChoice.value === 'rock' && computerChoice.value === 'scissors') ||
+    (playerChoice.value === 'paper' && computerChoice.value === 'rock') ||
+    (playerChoice.value === 'scissors' && computerChoice.value === 'paper')
+  ) {
+    playerScore.value++
+    result.value = '你赢了!'
+  } else {
+    computerScore.value++
+    result.value = '你输了!'
+  }
+  history.value.push({
+    playerChoice: playerChoice.value,
+    computerChoice: computerChoice.value,
+    playerScore: playerScore.value,
+    computerScore: computerScore.value
+  } as never)
+  if (canPlay()) {
+    nextRound()
+  } else {
+    gameEnded.value = true
+  }
+}
+
+function nextRound() {
+  currentRound.value++
+  // playerChoice.value = null
+  // result.value = ''
+}
+
+function canPlay() {
+  return playerScore.value < totalRounds && computerScore.value < totalRounds
+}
+</script>
+
+<style scoped></style>

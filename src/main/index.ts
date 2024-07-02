@@ -13,8 +13,8 @@ let mainWindow: BrowserWindow
 function createWindow(): void {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1920,
-    height: 1080,
+    width: 1600,
+    height: 900,
     title: Settings.AppTitle + ' v' + app.getVersion(),
     show: false,
     frame: false,
@@ -87,7 +87,6 @@ app.on('before-quit', function () {
 
 app.whenReady().then(() => {
   // 连接 Sqlite 数据库
-  logger.info('app ready')
   AppDataSource.initialize().catch((err) => {
     logger.error(err)
   })

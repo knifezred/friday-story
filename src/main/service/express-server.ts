@@ -1,6 +1,6 @@
 import cors from 'cors'
 import { app } from 'electron'
-import log from 'electron-log'
+import logger from 'electron-log'
 import express from 'express'
 import http from 'http'
 import { setupServerApi } from '../database'
@@ -11,6 +11,7 @@ export function createExpressServer() {
   const serverDir = app.getAppPath()
   // 设置静态文件目录
   server.use(express.static(serverDir))
+  logger.info(serverDir)
   // 解析 JSON 请求体
   server.use(express.json())
   // 解析URL编码的请求体
@@ -27,7 +28,7 @@ export function createExpressServer() {
   setupServerApi(server)
   // 启动服务器
   server.listen(Settings.ServerPort, () => {
-    log.info('Server started on port ' + Settings.ServerPort)
+    logger.info('Server started on port ' + Settings.ServerPort)
   })
   const httpServer = http.createServer(server)
   return httpServer
@@ -36,9 +37,9 @@ export function createExpressServer() {
 export function closeExpressServer(httpServer: http.Server) {
   try {
     httpServer.close(() => {
-      log.info('Http Server closed successfully')
+      logger.info('Http Server closed successfully')
     })
   } catch (error) {
-    log.error(error)
+    logger.error(error)
   }
 }
