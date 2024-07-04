@@ -41,7 +41,19 @@
       <ButtonIcon text :icon="`${'la:hand-' + computerChoice}`" style="font-size: 48px" />
     </n-gi>
     <n-gi v-if="currentRound > 0" :span="2">
-      <n-h3>{{ result }}</n-h3>
+      <n-result v-if="gameEnded" :status="`${playerScore > computerScore ? 'success' : 'error'}`">
+        <n-h1 v-if="playerScore != computerScore" class="text-center">
+          {{ playerScore > computerScore ? '你赢了!' : '你输了!' }}
+        </n-h1>
+        <n-h1 v-else class="text-center">平局!</n-h1>
+        <template #footer>
+          <n-space justify="center">
+            <n-button @click="startGame"> 再来一局 </n-button>
+            <n-button @click="endGame"> 结束 </n-button>
+          </n-space>
+        </template>
+      </n-result>
+      <n-h3 v-else>{{ result }}</n-h3>
     </n-gi>
 
     <n-gi v-if="currentRound > 0">
@@ -68,23 +80,6 @@
           </n-icon>
         </n-button>
       </n-space>
-    </n-gi>
-    <n-gi> </n-gi>
-
-    <n-gi> </n-gi>
-    <n-gi :span="2">
-      <n-result v-if="gameEnded" :status="`${playerScore > computerScore ? 'success' : 'error'}`">
-        <n-h1 v-if="playerScore != computerScore" class="text-center">
-          {{ playerScore > computerScore ? '你赢了!' : '你输了!' }}
-        </n-h1>
-        <n-h1 v-else class="text-center">平局!</n-h1>
-        <template #footer>
-          <n-space justify="center">
-            <n-button @click="startGame"> 再来一局 </n-button>
-            <n-button @click="endGame"> 结束 </n-button>
-          </n-space>
-        </template>
-      </n-result>
     </n-gi>
     <n-gi> </n-gi>
   </n-grid>
