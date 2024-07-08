@@ -5,6 +5,7 @@ import { setupDayjs, setupIconifyOffline, setupLoading, setupNProgress } from '.
 import './plugins/assets'
 import { setupRouter } from './router'
 import { setupStore } from './store'
+import { localStg } from './utils/storage'
 
 async function setupApp() {
   setupLoading()
@@ -16,6 +17,9 @@ async function setupApp() {
   setupDayjs()
 
   const app = createApp(App)
+
+  // 取消登录
+  localStg.remove('token')
 
   setupStore(app)
 

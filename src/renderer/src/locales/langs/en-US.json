@@ -29,6 +29,7 @@
     "refresh": "Refresh",
     "reset": "Reset",
     "save": "Save",
+    "saveSuccess": "Save successful",
     "search": "Search",
     "switch": "Switch",
     "tip": "Tip",
@@ -193,6 +194,7 @@
       }
     },
     "setting": {
+      "saveTips": "Save successful",
       "title": "Setting"
     }
   },

@@ -18,7 +18,7 @@ import DarkMode from '@renderer/layouts/modules/theme-drawer/modules/dark-mode.v
 import LayoutMode from '@renderer/layouts/modules/theme-drawer/modules/layout-mode.vue'
 import PageFun from '@renderer/layouts/modules/theme-drawer/modules/page-fun.vue'
 import ThemeColor from '@renderer/layouts/modules/theme-drawer/modules/theme-color.vue'
-import { createStorage, findStorage, updateStorage } from '@renderer/service/api/storage'
+import { $t } from '@renderer/locales'
 import { useThemeStore } from '@renderer/store/modules/theme'
 
 defineOptions({
@@ -28,22 +28,8 @@ defineOptions({
 const themeStore = useThemeStore()
 
 function saveThemeConfig() {
-  const settings = themeStore.settingsJson
-  findStorage('theme.settings').then((res) => {
-    console.log(res.data)
-  })
-  if (themeStore.settingId > 0) {
-    updateStorage({
-      key: 'theme.settings',
-      value: settings,
-      id: themeStore.settingId
-    })
-  } else {
-    createStorage({
-      key: 'theme.settings',
-      value: settings
-    })
-  }
+  themeStore.cacheThemeSettings()
+  window.$message?.success($t('common.saveSuccess'))
 }
 </script>
 

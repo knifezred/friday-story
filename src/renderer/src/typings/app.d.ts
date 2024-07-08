@@ -170,6 +170,7 @@ declare namespace App {
           no: string
         }
         save: string
+        saveSuccess: string
       }
       request: {
         logout: string
