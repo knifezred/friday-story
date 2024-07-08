@@ -1,10 +1,16 @@
+import logger from 'electron-log'
+import { AppDataSource } from './data-source'
 import { initArchiveApi } from './repository/archive'
 import { initStorageApi } from './repository/storage'
-import { initUserApi } from './repository/user'
-
 // 绑定api接口
 export function setupServerApi(server) {
-  initUserApi(server)
-  initArchiveApi(server)
-  initStorageApi(server)
+  // 连接 Sqlite 数据库
+  AppDataSource.initialize()
+    .then(() => {
+      initArchiveApi(server)
+      initStorageApi(server)
+    })
+    .catch((err) => {
+      logger.error(err)
+    })
 }

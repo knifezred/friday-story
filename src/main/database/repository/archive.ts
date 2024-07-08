@@ -3,18 +3,10 @@ import { Archive } from '../entity/archive'
 
 export function initArchiveApi(server) {
   const repository = AppDataSource.getRepository(Archive)
-  server.get('/api/archive/:id', async (req, res) => {
-    try {
-      const result = await repository.findOneBy({ id: req.params.id })
-      res.status(200).json(result)
-    } catch (error) {
-      res.status(500).send(error)
-    }
-  })
 
-  server.post('/api/archive/', async (req, res) => {
+  server.post('/api/archive/list', async (_req, res) => {
     try {
-      const result = await repository.save(req.body)
+      const result = await repository.find()
       res.status(200).json(result)
     } catch (error) {
       res.status(500).send(error)
@@ -34,18 +26,27 @@ export function initArchiveApi(server) {
     }
   })
 
-  server.post('/api/archive/:id', async (req, res) => {
+  server.get('/api/archive/:id', async (req, res) => {
     try {
-      const result = await repository.update(req.params.id, req.body)
+      const result = await repository.findOneBy({ id: req.params.id })
       res.status(200).json(result)
     } catch (error) {
       res.status(500).send(error)
     }
   })
 
-  server.delete('/api/archive/:id', async (req, res) => {
+  server.post('/api/archive/', async (req, res) => {
     try {
-      const result = await repository.delete(req.params.id)
+      const result = await repository.save(req.body)
+      res.status(200).json(result)
+    } catch (error) {
+      res.status(500).send(error)
+    }
+  })
+
+  server.post('/api/archive/:id', async (req, res) => {
+    try {
+      const result = await repository.update(req.params.id, req.body)
       res.status(200).json(result)
     } catch (error) {
       res.status(500).send(error)
@@ -61,9 +62,9 @@ export function initArchiveApi(server) {
     }
   })
 
-  server.post('/api/archive/list', async (_req, res) => {
+  server.delete('/api/archive/:id', async (req, res) => {
     try {
-      const result = repository.find()
+      const result = await repository.delete(req.params.id)
       res.status(200).json(result)
     } catch (error) {
       res.status(500).send(error)

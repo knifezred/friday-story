@@ -1,40 +1,42 @@
 <script setup lang="ts">
 import { useRouterPush } from '@renderer/hooks/common/router'
 import { $t } from '@renderer/locales'
-import { findUser } from '@renderer/service/api/user'
+import { createArchive } from '@renderer/service/api/archive'
+import { useAuthStore } from '@renderer/store/modules/auth'
 import { reactive } from 'vue'
 
 defineOptions({
   name: 'Register'
 })
 
+const authStore = useAuthStore()
 const { toggleLoginModule } = useRouterPush()
-
-interface FormModel {
-  phone: string
-  code: string
-  userName: string
-}
-
-const model: FormModel = reactive({
-  phone: '',
-  code: '',
-  userName: ''
+const model: Dto.DbArchive = reactive({
+  name: '',
+  totalTime: 0,
+  saveTime: 0,
+  cover: '',
+  data: '{}',
+  place: 0
 })
 function handleSubmit() {
-  findUser(1).then((res) => {
+  model.saveTime = Date.now()
+  createArchive(model).then((res) => {
     console.log(res)
-    // request to register
-    window.$message?.success($t('page.login.common.validateSuccess'))
+    if (res.data != null) {
+      authStore.login(model.name, res.data.id)
+      // request to register
+      window.$message?.success($t('page.login.common.validateSuccess'))
+    }
   })
 }
 </script>
 
 <template>
   <NForm size="large" :show-label="false">
-    <NFormItem path="userName">
+    <NFormItem path="name">
       <NInput
-        v-model:value="model.userName"
+        v-model:value="model.name"
         show-password-on="click"
         :placeholder="$t('page.login.common.userNamePlaceholder')" />
     </NFormItem>

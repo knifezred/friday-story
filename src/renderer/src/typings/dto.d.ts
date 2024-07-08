@@ -7,10 +7,11 @@ declare namespace Dto {
     }
 
     interface UserInfo {
-      userId: string
+      userId: number | undefined
       userName: string
       roles: string[]
       buttons: string[]
+      archive: DbArchive
     }
   }
   namespace Route {
@@ -126,6 +127,7 @@ declare namespace Dto {
     /** 用户姓名 */
     username: string
   }
+
   /** user search params */
   type UserSearchParams = CommonType.RecordNullable<
     Pick<SystemManage.AppUserPagedQueryRequest, 'username' | 'organizationIds' | 'locked'> &
@@ -143,4 +145,16 @@ declare namespace Dto {
     createdTime?: number
     updatedTime?: number
   }
+
+  type DbArchive = {
+    id?: number
+    name: string
+    cover: string
+    saveTime: number
+    totalTime: number
+    place: number
+    data: string
+  }
+
+  type DbArchiveList = Array<DbArchive> | null
 }

@@ -51,7 +51,7 @@
 <script setup lang="ts">
 import { $t } from '@renderer/locales'
 import { onMounted, onUnmounted, ref } from 'vue'
-import pkg from '../../../../../../package.json'
+import pkg from '../../../../../../../package.json'
 const ipcRenderer = window.electron.ipcRenderer
 const updatePercentage = ref(0)
 interface PkgJson {

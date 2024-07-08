@@ -9,6 +9,7 @@ import useLoading from '@renderer/packages/hooks/use-loading'
 
 import { useRouterPush } from '@renderer/hooks/common/router'
 import { $t } from '@renderer/locales'
+import { findArchive } from '@renderer/service/api/archive'
 import { localStg } from '@renderer/utils/storage'
 export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   const router = useRouter()
@@ -52,12 +53,12 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
    * @param password Password
    * @param [redirect=true] Whether to redirect after login. Default is `true`
    */
-  async function login(userName: string, password: string, redirect = true) {
+  async function login(userName: string, id: number | undefined, redirect = true) {
     startLoading()
     // const { data: loginToken, error } = await fetchLogin(userName, password);
-    const error = userName == password
+    const error = userName == '' || id == undefined
     const loginToken = {
-      accessToken: '123123'
+      accessToken: id?.toString()
     } as Dto.Auth.LoginToken
 
     if (!error) {
@@ -88,23 +89,14 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   async function loginByToken(loginToken: Dto.Auth.LoginToken) {
     // 1. stored in the localStorage, the later requests need it in headers
     localStg.set('token', loginToken.accessToken)
-    localStg.set('refreshToken', loginToken.refreshToken)
-
-    // const { data: userInfoDTO, error } = await fetchGetUserInfo();
-    const error = loginToken.accessToken != '123123'
+    const { data, error } = await findArchive(loginToken.accessToken as unknown as number)
     if (!error) {
-      // 2. store user info
-      // const info: App.Auth.UserInfo = {
-      //   userId: userInfoDTO.account || '',
-      //   userName: userInfoDTO.username || '',
-      //   roles: userInfoDTO.userRoles,
-      //   buttons: userInfoDTO.permissions
-      // };
-      // localStg.set('userInfo', info);
-
+      // 2. store archive info
+      userInfo.userId = data.id
+      userInfo.userName = data.name
+      userInfo.archive = data
       // 3. update store
-      token.value = loginToken.accessToken
-      // Object.assign(userInfo, info);
+      token.value = data.id == undefined ? '' : data.id.toString()
 
       return true
     }

@@ -8,10 +8,19 @@ export function getToken() {
 /** Get user info */
 export function getUserInfo() {
   const emptyInfo: Dto.Auth.UserInfo = {
-    userId: '',
+    userId: 0,
     userName: 'guest',
     roles: ['SuperAdmin'],
-    buttons: []
+    buttons: [],
+    archive: {
+      id: 0,
+      name: '',
+      cover: '',
+      saveTime: 0,
+      totalTime: 0,
+      place: 0,
+      data: ''
+    }
   }
   const userInfo = localStg.get('userInfo') || emptyInfo
 

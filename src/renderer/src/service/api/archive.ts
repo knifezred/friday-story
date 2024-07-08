@@ -1,28 +1,33 @@
 import { request } from '../request'
-export function fetchArchivePagedList(params?: Dto.UserSearchParams) {
-  return request<Dto.UserList>({
+export function fetchArchiveList() {
+  return request<Dto.DbArchiveList>({
     url: '/archive/list',
-    method: 'post',
-    data: params
+    method: 'post'
+  })
+}
+export function findLatestArchive() {
+  return request<Dto.DbArchive>({
+    url: '/archive/latest',
+    method: 'post'
   })
 }
 
 export function findArchive(id: number) {
-  return request<Dto.UserDTO>({
+  return request<Dto.DbArchive>({
     url: `/archive/${id}`,
     method: 'get'
   })
 }
 
-export function createArchive(params: Dto.UserModifyDTO) {
-  return request<boolean>({
+export function createArchive(params: Dto.DbArchive) {
+  return request<Dto.DbArchive>({
     url: '/archive',
     method: 'post',
     data: params
   })
 }
 
-export function updateArchive(params: Dto.UserModifyDTO) {
+export function updateArchive(params: Dto.DbArchive) {
   return request<boolean>({
     url: `/archive/${params.id}`,
     method: 'post',

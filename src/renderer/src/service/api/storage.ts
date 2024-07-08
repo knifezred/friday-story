@@ -10,8 +10,9 @@ export function fetchStoragePagedList(params?: Dto.DbStorage) {
 
 export function findStorage(key: string) {
   return request<Dto.DbStorage>({
-    url: `/storage/${key}`,
-    method: 'get'
+    url: `/storage/filter-key`,
+    method: 'get',
+    data: { key: key }
   })
 }
 

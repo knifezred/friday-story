@@ -60,3 +60,45 @@ export function toggleHtmlClass(className: string) {
 export function staticPath(src: string) {
   return 'http://localhost:5175' + src
 }
+
+// 格式化时间戳
+export function formatTimestamp(timestamp) {
+  // 创建一个Date对象
+  const date = new Date(timestamp)
+
+  // 获取年份（四位数）
+  const year = date.getFullYear()
+
+  // 获取月份（两位数，01-12）
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+
+  // 获取日期（两位数，01-31）
+  const day = String(date.getDate()).padStart(2, '0')
+
+  // 获取小时（两位数，00-23）
+  const hours = String(date.getHours()).padStart(2, '0')
+
+  // 获取分钟（两位数，00-59）
+  const minutes = String(date.getMinutes()).padStart(2, '0')
+
+  // 获取秒数（两位数，00-59）
+  const seconds = String(date.getSeconds()).padStart(2, '0')
+
+  // 返回格式化后的字符串
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
+}
+
+export function formatSeconds(seconds) {
+  // 获取小时数
+  const hours = Math.floor(seconds / (60 * 60))
+
+  // 获取分钟数，并对小时取余后的秒数进行分钟计算
+  const minutes = Math.floor((seconds % (60 * 60)) / 60)
+
+  // 获取剩余的秒数
+  const remainingSeconds = seconds % 60
+
+  // 格式化输出
+  // 如果小时、分钟或秒数小于10，则前面补0
+  return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`
+}

@@ -19,4 +19,7 @@ export class Archive {
 
   @Column({ type: 'integer' })
   place!: number
+
+  @Column({ type: 'text' })
+  data!: string
 }

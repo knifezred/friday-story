@@ -12,9 +12,10 @@
 </template>
 <script setup lang="ts">
 import { NConfigProvider, darkTheme } from 'naive-ui'
-import { computed } from 'vue'
+import { computed, onUnmounted } from 'vue'
 import { naiveDateLocales, naiveLocales } from './locales/naive'
 import { useAppStore } from './store/modules/app'
+import { clearAuthStorage } from './store/modules/auth/shared'
 import { useThemeStore } from './store/modules/theme'
 
 defineOptions({
@@ -31,5 +32,9 @@ const naiveLocale = computed(() => {
 
 const naiveDateLocale = computed(() => {
   return naiveDateLocales[appStore.locale]
+})
+
+onUnmounted(() => {
+  clearAuthStorage()
 })
 </script>

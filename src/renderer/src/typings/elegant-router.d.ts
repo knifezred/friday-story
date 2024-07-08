@@ -24,9 +24,6 @@ declare module "@elegant-router/types" {
     "home": "/home";
     "login": "/login/:module(pwd-login|register|reset-pwd|game-start)?";
     "setting": "/setting";
-    "setting_about": "/setting/about";
-    "setting_system": "/setting/system";
-    "setting_theme": "/setting/theme";
   };
 
   /**
@@ -81,15 +78,13 @@ declare module "@elegant-router/types" {
    */
   export type LastLevelRouteKey = Extract<
     RouteKey,
+    | "archive"
+    | "setting"
     | "403"
     | "404"
     | "500"
-    | "archive"
     | "home"
     | "login"
-    | "setting_about"
-    | "setting_system"
-    | "setting_theme"
   >;
 
   /**

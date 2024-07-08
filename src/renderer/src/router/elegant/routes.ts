@@ -42,12 +42,13 @@ export const generatedRoutes: GeneratedRoute[] = [
   {
     name: 'archive',
     path: '/archive',
-    component: 'layout.base$view.archive',
+    component: 'layout.blank$view.archive',
     meta: {
       title: 'archive',
       icon: 'mynaui:archive',
       i18nKey: 'route.archive',
-      order: 10
+      constant: true,
+      hideInMenu: true
     }
   },
   {
@@ -76,44 +77,13 @@ export const generatedRoutes: GeneratedRoute[] = [
   {
     name: 'setting',
     path: '/setting',
-    component: 'layout.base',
+    component: 'layout.blank$view.setting',
     meta: {
       title: 'setting',
-      icon: 'carbon:settings-adjust',
       i18nKey: 'route.setting',
+      constant: true,
+      icon: 'carbon:settings-adjust',
       order: 999
-    },
-    children: [
-      {
-        name: 'setting_about',
-        path: '/setting/about',
-        component: 'view.setting_about',
-        meta: {
-          title: 'setting_about',
-          icon: 'mynaui:info-square',
-          i18nKey: 'route.setting_about'
-        }
-      },
-      {
-        name: 'setting_system',
-        path: '/setting/system',
-        component: 'view.setting_system',
-        meta: {
-          title: 'setting_system',
-          icon: 'mynaui:cog-one',
-          i18nKey: 'route.setting_system'
-        }
-      },
-      {
-        name: 'setting_theme',
-        path: '/setting/theme',
-        component: 'view.setting_theme',
-        meta: {
-          title: 'setting_theme',
-          icon: 'majesticons:color-swatch-line',
-          i18nKey: 'route.setting_theme'
-        }
-      }
-    ]
+    }
   }
 ];
