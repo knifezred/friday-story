@@ -169,7 +169,7 @@
       "gameStart": {
         "loadArchive": "读取存档",
         "newGame": "新的开始",
-        "title": "一个SLG游戏"
+        "title": "Friday Story"
       },
       "pwdLogin": {
         "admin": "管理员",
@@ -211,10 +211,13 @@
     "archive": "存档",
     "home": "首页",
     "login": "登录",
-    "setting": "设置",
+    "personal": "个人中心",
+    "setting": "系统设置",
     "setting_about": "关于",
     "setting_system": "通用",
-    "setting_theme": "外观"
+    "setting_theme": "外观",
+    "achievement": "成就",
+    "task": "任务"
   },
   "system": {
     "title": "Friday Story"

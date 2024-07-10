@@ -164,10 +164,14 @@ const routeMap: RouteMap = {
   "403": "/403",
   "404": "/404",
   "500": "/500",
+  "achievement": "/achievement",
   "archive": "/archive",
+  "demo": "/demo",
   "home": "/home",
   "login": "/login/:module(pwd-login|register|reset-pwd|game-start)?",
-  "setting": "/setting"
+  "personal": "/personal",
+  "setting": "/setting",
+  "task": "/task"
 };
 
 /**

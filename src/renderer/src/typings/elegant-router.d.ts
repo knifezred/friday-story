@@ -20,10 +20,14 @@ declare module "@elegant-router/types" {
     "403": "/403";
     "404": "/404";
     "500": "/500";
+    "achievement": "/achievement";
     "archive": "/archive";
+    "demo": "/demo";
     "home": "/home";
     "login": "/login/:module(pwd-login|register|reset-pwd|game-start)?";
+    "personal": "/personal";
     "setting": "/setting";
+    "task": "/task";
   };
 
   /**
@@ -58,10 +62,14 @@ declare module "@elegant-router/types" {
     | "403"
     | "404"
     | "500"
+    | "achievement"
     | "archive"
+    | "demo"
     | "home"
     | "login"
+    | "personal"
     | "setting"
+    | "task"
   >;
 
   /**
@@ -79,12 +87,16 @@ declare module "@elegant-router/types" {
   export type LastLevelRouteKey = Extract<
     RouteKey,
     | "archive"
+    | "demo"
+    | "personal"
     | "setting"
     | "403"
     | "404"
     | "500"
+    | "achievement"
     | "home"
     | "login"
+    | "task"
   >;
 
   /**

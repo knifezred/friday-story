@@ -565,4 +565,15 @@ declare namespace App {
       result: T
     }
   }
+
+  namespace UI {
+    interface ActionButton {
+      id: number
+      text: string
+      icon: string
+      type: string
+      isDisabled: boolean
+      isShow: boolean
+    }
+  }
 }
