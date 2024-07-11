@@ -1,5 +1,5 @@
 <template>
-  <NSpace vertical :size="16">
+  <NFlex vertical :size="16">
     <NCard
       :title="`${$t('page.about.title') + ' ' + $t('system.title')}`"
       :bordered="false"
@@ -45,7 +45,7 @@
         </NDescriptionsItem>
       </NDescriptions>
     </NCard>
-  </NSpace>
+  </NFlex>
 </template>
 
 <script setup lang="ts">

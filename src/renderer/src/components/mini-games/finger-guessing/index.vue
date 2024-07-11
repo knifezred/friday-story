@@ -47,10 +47,10 @@
         </n-h1>
         <n-h1 v-else class="text-center">平局!</n-h1>
         <template #footer>
-          <n-space justify="center">
+          <n-flex justify="center">
             <n-button @click="startGame"> 再来一局 </n-button>
             <n-button @click="endGame"> 结束 </n-button>
-          </n-space>
+          </n-flex>
         </template>
       </n-result>
       <n-h3 v-else>{{ result }}</n-h3>
@@ -63,7 +63,7 @@
     <n-gi> </n-gi>
     <n-gi :span="2">
       <n-button v-if="currentRound == 0" @click="startGame">开始游戏</n-button>
-      <n-space v-else-if="!gameEnded && currentRound > 0" justify="space-around" size="large">
+      <n-flex v-else-if="!gameEnded && currentRound > 0" justify="space-around" size="large">
         <n-button text style="font-size: 64px" @click="makeChoice('rock')">
           <n-icon>
             <icon-la:hand-rock />
@@ -79,7 +79,7 @@
             <icon-la:hand-paper />
           </n-icon>
         </n-button>
-      </n-space>
+      </n-flex>
     </n-gi>
     <n-gi> </n-gi>
   </n-grid>

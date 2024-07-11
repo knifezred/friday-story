@@ -10,7 +10,7 @@ const { toggleLoginModule, routerPushByKey } = useRouterPush()
 </script>
 
 <template>
-  <NSpace vertical :size="24">
+  <NFlex vertical :size="24">
     <NButton type="primary" size="large" round block @click="toggleLoginModule('register')">
       {{ $t('page.login.gameStart.newGame') }}
     </NButton>
@@ -20,7 +20,7 @@ const { toggleLoginModule, routerPushByKey } = useRouterPush()
     <NButton type="primary" size="large" round block @click="routerPushByKey('setting')">
       {{ $t('page.setting.title') }}
     </NButton>
-  </NSpace>
+  </NFlex>
 </template>
 
 <style scoped></style>

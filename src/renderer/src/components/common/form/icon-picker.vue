@@ -1,22 +1,22 @@
 <template>
-  <NSpace>
+  <NFlex>
     <ImageIcon
       class="w-16 h-16 cursor-pointer"
       :icon="'/static/imgs/' + currentIcon"
       @click="activate('right')">
     </ImageIcon>
-  </NSpace>
+  </NFlex>
   <n-drawer v-model:show="active" :width="502" :placement="placement">
     <n-drawer-content>
       <n-scrollbar>
-        <NSpace v-if="type == 'img'">
+        <NFlex v-if="type == 'img'">
           <ImageIcon
             v-for="item in icons"
             :key="item"
             :icon="'/static/imgs/' + item"
             class="w-24 h-24 cursor-pointer"
             @click="selectIcon(item)"></ImageIcon>
-        </NSpace>
+        </NFlex>
       </n-scrollbar>
     </n-drawer-content>
   </n-drawer>

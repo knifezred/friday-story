@@ -1,5 +1,5 @@
 <template>
-  <NSpace>
+  <NFlex>
     <NCard :bordered="false" class="w-auto">
       <DarkMode />
       <LayoutMode />
@@ -11,7 +11,7 @@
         {{ $t('common.save') }}
       </NButton>
     </NCard>
-  </NSpace>
+  </NFlex>
 </template>
 <script setup lang="ts">
 import DarkMode from '@renderer/layouts/modules/theme-drawer/modules/dark-mode.vue'

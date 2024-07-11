@@ -1,5 +1,5 @@
 <template>
-  <n-space class="pa-4" vertical>
+  <n-flex class="pa-4" vertical>
     <n-tabs type="segment" animated>
       <n-tab-pane name="chap1" :tab="$t('route.setting_about')">
         <SettingAbout></SettingAbout>
@@ -11,7 +11,7 @@
         <SettingTheme></SettingTheme>
       </n-tab-pane>
     </n-tabs>
-  </n-space>
+  </n-flex>
 </template>
 <script setup lang="ts">
 import { $t } from '@renderer/locales'

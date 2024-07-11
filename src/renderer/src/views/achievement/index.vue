@@ -1,9 +1,9 @@
 <template>
-  <NSpace vertical>
+  <NFlex vertical>
     <NCard class="w-full text-center">
       <n-h3>成就(2/3)</n-h3>
     </NCard>
-    <NSpace>
+    <NFlex>
       <NCard title="帽子戏法" class="relative z-4 w-52 shadow-primary shadow-op-30">
         <template #header-extra>
           <n-tag type="info">R</n-tag>
@@ -52,8 +52,8 @@
         <n-p>简单介绍一下</n-p>
         <n-p> <n-tag type="warning" class="w-24"> 未解锁 </n-tag></n-p>
       </NCard>
-    </NSpace>
-  </NSpace>
+    </NFlex>
+  </NFlex>
 </template>
 
 <script setup>

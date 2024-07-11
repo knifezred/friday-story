@@ -2,17 +2,17 @@
   <n-split
     direction="horizontal"
     style="height: 100%; width: 100%; padding: 0"
-    :default-size="0.8"
-    :min="0.7"
-    :max="0.8">
+    :default-size="0.71"
+    :min="0.675"
+    :max="0.75">
     <template #1>
       <n-split direction="vertical" :default-size="0.675" :min="0.675" :max="0.675">
         <template #1>
-          <NSpace vertical>
+          <NFlex vertical>
             <NCard :bordered="false" class="relative w-auto rd-12px">
               <FingerGuessing :total-rounds="3" @game-result="gameResult"></FingerGuessing>
             </NCard>
-          </NSpace>
+          </NFlex>
         </template>
         <template #2>
           <NCard>
@@ -26,15 +26,37 @@
     <template #2>
       <n-split direction="vertical" :default-size="0.675" :min="0.5" :max="0.8">
         <template #1>
-          <NSpace vertical class="pa-2 text-center">
-            <n-h3>test</n-h3>
-          </NSpace>
+          <NFlex vertical class="pa-2 text-center">
+            <n-h3>Map</n-h3>
+            <NFlex>
+              <n-card
+                v-for="item in mapItems"
+                :key="item.id"
+                :title="item.text"
+                class="w-6.5vw text-center cursor-pointer map-card"
+                size="small"
+                hoverable
+                @click="mapFunc(item)">
+                <template #cover>
+                  <image-icon :icon="item.cover" />
+                </template>
+              </n-card>
+            </NFlex>
+          </NFlex>
         </template>
         <template #2>
           <n-button-group vertical class="w-full pa-1">
-            <n-button block type="info" @click="actionFunc"> 随机 </n-button>
-            <n-button block type="error" @click="actionFunc"> 警告 </n-button>
-            <n-button block type="info" disabled @click="actionFunc"> 不少 </n-button>
+            <n-button
+              v-for="btn in actionButtons"
+              :key="btn.id"
+              :type="btn.type"
+              :icon="btn.icon"
+              :is-disabled="btn.isDisabled"
+              :is-show="btn.isShow"
+              block
+              @click="actionFunc(btn)">
+              {{ btn.text }}
+            </n-button>
           </n-button-group>
         </template>
       </n-split>
@@ -44,16 +66,83 @@
 
 <script setup lang="ts">
 import FingerGuessing from '@renderer/components/mini-games/finger-guessing/index.vue'
+import { ref } from 'vue'
 defineOptions({
   name: 'Home'
 })
 
-function gameResult(result: boolean) {
-  console.log(result)
+const mapItems = ref<Array<UI.MapItem>>([])
+const actionButtons = ref<Array<UI.ActionButton>>([])
+mapItems.value.push(
+  {
+    id: 1,
+    text: '字数测试',
+    cover: '/static/imgs/t1.webp',
+    video: '',
+    icon: '',
+    isDisabled: false,
+    isShow: false,
+    level: 1
+  },
+  {
+    id: 2,
+    text: '这是五个字',
+    cover: '/static/imgs/t2.webp',
+    video: '',
+    icon: '',
+    isDisabled: false,
+    isShow: false,
+    level: 1
+  },
+  {
+    id: 3,
+    text: '三个字',
+    cover: '/static/imgs/t3.webp',
+    video: '',
+    icon: '',
+    isDisabled: false,
+    isShow: false,
+    level: 1
+  },
+  {
+    id: 4,
+    text: '六个字怎么样',
+    cover: '/static/imgs/t4.webp',
+    video: '',
+    icon: '',
+    isDisabled: false,
+    isShow: false,
+    level: 1
+  }
+)
+actionButtons.value.push(
+  {
+    id: 1,
+    text: '测试1',
+    icon: '',
+    type: 'default',
+    isDisabled: false,
+    isShow: true
+  },
+  {
+    id: 2,
+    text: '测试2',
+    icon: '',
+    type: 'default',
+    isDisabled: false,
+    isShow: true
+  }
+)
+
+function mapFunc(map: UI.MapItem) {
+  window.$message?.info(map.text)
+}
+function actionFunc(action: UI.ActionButton) {
+  window.$message?.info(action.text)
 }
 
-function actionFunc() {
-  window.$message?.info('test')
+function gameResult(result: boolean) {
+  console.log(result)
 }
 
 // map 地图
@@ -66,5 +155,3 @@ function actionFunc() {
 // main-line 支线
 // unit-plot 单元剧
 </script>
-
-<style scoped></style>

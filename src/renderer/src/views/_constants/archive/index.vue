@@ -1,6 +1,6 @@
 <template>
-  <n-space vertical :size="24">
-    <NSpace class="py-2 px-4">
+  <n-flex vertical :size="24">
+    <NFlex class="py-2 px-4">
       <NCard
         v-for="archive in archives"
         :key="archive.id"
@@ -12,13 +12,13 @@
           <n-p> 保存时间：{{ formatTimestamp(archive.saveTime) }} </n-p>
           <n-p> 游玩时间：{{ formatSeconds(archive.totalTime) }}</n-p>
         </NAlert>
-        <n-space class="py-2" justify="space-around">
+        <n-flex class="py-2" justify="space-around">
           <n-button type="primary" @click="loadGame(archive)">Start</n-button>
           <n-button type="error" @click="deleteSelectArchive(archive.id)">Delete</n-button>
-        </n-space>
+        </n-flex>
       </NCard>
-    </NSpace>
-  </n-space>
+    </NFlex>
+  </n-flex>
 </template>
 
 <script setup lang="ts">

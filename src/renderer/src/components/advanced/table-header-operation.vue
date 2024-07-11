@@ -39,7 +39,7 @@ function refresh() {
 </script>
 
 <template>
-  <NSpace :align="itemAlign" wrap justify="end" class="lt-sm:w-200px">
+  <NFlex :align="itemAlign" wrap justify="end" class="lt-sm:w-200px">
     <slot name="prefix"></slot>
     <slot name="default">
       <NButton size="small" ghost type="primary" @click="add">
@@ -68,7 +68,7 @@ function refresh() {
     </NButton>
     <TableColumnSetting v-model:columns="columns" />
     <slot name="suffix"></slot>
-  </NSpace>
+  </NFlex>
 </template>
 
 <style scoped></style>

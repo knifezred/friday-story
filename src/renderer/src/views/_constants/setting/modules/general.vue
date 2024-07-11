@@ -1,5 +1,5 @@
 <template>
-  <NSpace>
+  <NFlex>
     <NCard :bordered="false" class="relative z-4 w-2xl rd-12px">
       <template #cover>
         <ImageIcon icon="/static/imgs/t0.webp" />
@@ -12,7 +12,7 @@
       <n-divider />
       <NAlert title="Home page" type="info" :bordered="false"></NAlert>
     </NCard>
-  </NSpace>
+  </NFlex>
 </template>
 
 <script setup lang="ts"></script>

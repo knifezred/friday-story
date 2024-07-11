@@ -1,11 +1,11 @@
 <template>
-  <n-space>
+  <n-flex>
     <Dice
       v-for="dice in diceCount"
       :key="dice"
       :is-roll="isRolling"
       @dice-number="getDiceNumber"></Dice>
-  </n-space>
+  </n-flex>
 </template>
 
 <script setup lang="ts">

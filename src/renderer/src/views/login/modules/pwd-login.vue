@@ -54,7 +54,7 @@ async function handleSubmit() {
         show-password-on="click"
         :placeholder="$t('page.login.common.passwordPlaceholder')" />
     </NFormItem>
-    <NSpace vertical :size="24">
+    <NFlex vertical :size="24">
       <div class="flex-y-center justify-between">
         <NCheckbox>{{ $t('page.login.pwdLogin.rememberMe') }}</NCheckbox>
         <NButton quaternary @click="toggleLoginModule('reset-pwd')">
@@ -75,7 +75,7 @@ async function handleSubmit() {
           {{ $t(loginModuleRecord.register) }}
         </NButton>
       </div>
-    </NSpace>
+    </NFlex>
   </NForm>
 </template>
 

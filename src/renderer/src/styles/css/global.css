@@ -15,3 +15,7 @@ html {
 html.grayScale {
   filter: grayScale(100%);
 }
+
+.map-card>.n-card-header {
+  padding: 0.1em !important;
+}
