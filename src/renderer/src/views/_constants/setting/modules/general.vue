@@ -2,7 +2,7 @@
   <NSpace>
     <NCard :bordered="false" class="relative z-4 w-2xl rd-12px">
       <template #cover>
-        <img :src="staticPath('/static/imgs/t0.webp')" />
+        <ImageIcon icon="/static/imgs/t0.webp" />
       </template>
       <n-h3>标题</n-h3>
       <n-p>Hello world</n-p>
@@ -15,8 +15,6 @@
   </NSpace>
 </template>
 
-<script setup lang="ts">
-import { staticPath } from '@renderer/utils/common'
-</script>
+<script setup lang="ts"></script>
 
 <style scoped></style>

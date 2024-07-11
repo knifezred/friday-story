@@ -6,7 +6,7 @@
         :key="archive.id"
         :bordered="false"
         class="relative z-4 w-auto rd-12px text-center">
-        <n-image class="w-32 h-32" :src="staticPath('/static/imgs/' + archive.cover)"></n-image>
+        <ImageIcon :icon="'/static/imgs/' + archive.cover" class="w-32 h-32" />
         <n-divider />
         <NAlert :title="archive.name" type="info" :bordered="false">
           <n-p> 保存时间：{{ formatTimestamp(archive.saveTime) }} </n-p>
@@ -24,7 +24,7 @@
 <script setup lang="ts">
 import { deleteArchive, fetchArchiveList } from '@renderer/service/api/archive'
 import { useAuthStore } from '@renderer/store/modules/auth'
-import { formatSeconds, formatTimestamp, staticPath } from '@renderer/utils/common'
+import { formatSeconds, formatTimestamp } from '@renderer/utils/common'
 import { ref } from 'vue'
 
 const authStore = useAuthStore()

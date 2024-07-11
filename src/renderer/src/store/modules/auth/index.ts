@@ -22,6 +22,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
 
   const userInfo: Dto.Auth.UserInfo = reactive(getUserInfo())
 
+  const startTime = ref(0)
   /** is super role in static route */
   const isStaticSuper = computed(() => {
     const { VITE_AUTH_ROUTE_MODE, VITE_STATIC_SUPER_ROLE } = import.meta.env
@@ -72,6 +73,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
         }
 
         if (routeStore.isInitAuthRoute) {
+          startTime.value = Date.now()
           window.$message?.success(
             $t('page.login.common.welcomeBack', { userName: userInfo.userName })
           )

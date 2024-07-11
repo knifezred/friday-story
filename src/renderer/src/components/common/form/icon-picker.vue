@@ -1,28 +1,29 @@
 <template>
   <NSpace>
-    <n-image
+    <ImageIcon
       class="w-16 h-16 cursor-pointer"
-      :src="staticPath('/static/imgs/' + currentIcon)"
-      preview-disabled
-      @click="activate('right')"></n-image>
+      :icon="'/static/imgs/' + currentIcon"
+      @click="activate('right')">
+    </ImageIcon>
   </NSpace>
   <n-drawer v-model:show="active" :width="502" :placement="placement">
     <n-drawer-content>
-      <NSpace v-if="type == 'img'">
-        <n-image
-          v-for="item in icons"
-          :key="item"
-          class="w-16 h-16 cursor-pointer"
-          :src="staticPath('/static/imgs/' + item)"
-          preview-disabled
-          @click="selectIcon(item)"></n-image>
-      </NSpace>
+      <n-scrollbar>
+        <NSpace v-if="type == 'img'">
+          <ImageIcon
+            v-for="item in icons"
+            :key="item"
+            :icon="'/static/imgs/' + item"
+            class="w-24 h-24 cursor-pointer"
+            @click="selectIcon(item)"></ImageIcon>
+        </NSpace>
+      </n-scrollbar>
     </n-drawer-content>
   </n-drawer>
 </template>
 
 <script setup lang="ts">
-import { formatNumber, staticPath } from '@renderer/utils/common'
+import { formatNumber } from '@renderer/utils/common'
 import { DrawerPlacement } from 'naive-ui'
 import { ref } from 'vue'
 defineOptions({ name: 'IconPicker' })

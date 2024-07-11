@@ -12,7 +12,7 @@
 </template>
 <script setup lang="ts">
 import { NConfigProvider, darkTheme } from 'naive-ui'
-import { computed } from 'vue'
+import { computed, onMounted, onUnmounted } from 'vue'
 import { naiveDateLocales, naiveLocales } from './locales/naive'
 import { useAppStore } from './store/modules/app'
 import { useThemeStore } from './store/modules/theme'
@@ -31,5 +31,11 @@ const naiveLocale = computed(() => {
 
 const naiveDateLocale = computed(() => {
   return naiveDateLocales[appStore.locale]
+})
+onMounted(() => {
+  // 计算时间
+})
+onUnmounted(() => {
+  // 取消计算
 })
 </script>

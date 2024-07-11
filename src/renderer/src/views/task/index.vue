@@ -17,12 +17,12 @@
 </template>
 
 <script setup lang="ts">
-import { addDays, isYesterday } from 'date-fns/esm'
+import { addDays } from 'date-fns/esm'
 import { useMessage } from 'naive-ui'
 import { ref } from 'vue'
 
 const message = useMessage()
-const calendar = ref(addDays(Date.now(), 1).valueOf())
+const calendar = ref(addDays(Date.now(), 0).valueOf())
 function handleUpdateValue(
   timestamp: number,
   { year, month, date }: { year: number; month: number; date: number }
@@ -30,7 +30,7 @@ function handleUpdateValue(
   message.success(`${year}-${month}-${date} ${timestamp}`)
 }
 function isDateDisabled(timestamp: number) {
-  if (isYesterday(timestamp)) {
+  if (timestamp > calendar.value) {
     return true
   }
   return false

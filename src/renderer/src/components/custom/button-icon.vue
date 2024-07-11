@@ -64,7 +64,8 @@ const cls = computed(() => {
     <template #trigger>
       <Button :class-name="cls" v-bind="$attrs">
         <slot>
-          <SvgIcon :icon="icon" />
+          <SvgIcon v-if="icon.startsWith('local')" :local-icon="icon" />
+          <SvgIcon v-else :icon="icon" />
         </slot>
       </Button>
     </template>
@@ -72,7 +73,8 @@ const cls = computed(() => {
   </NTooltip>
   <Button v-else :class-name="cls" v-bind="$attrs">
     <slot>
-      <SvgIcon :icon="icon" />
+      <SvgIcon v-if="icon.startsWith('local')" :local-icon="icon" />
+      <SvgIcon v-else :icon="icon" />
     </slot>
   </Button>
 </template>
