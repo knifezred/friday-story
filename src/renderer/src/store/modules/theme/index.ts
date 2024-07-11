@@ -30,8 +30,6 @@ export const useThemeStore = defineStore(SetupStoreId.Theme, () => {
     return settings.value.themeScheme === 'dark'
   })
 
-  const settingId = computed(() => settings.value.id)
-
   /** grayScale mode */
   const grayscaleMode = computed(() => settings.value.grayScale)
 
@@ -191,7 +189,6 @@ export const useThemeStore = defineStore(SetupStoreId.Theme, () => {
     toggleThemeScheme,
     updateThemeColors,
     cacheThemeSettings,
-    setThemeLayout,
-    settingId
+    setThemeLayout
   }
 })

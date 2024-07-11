@@ -2,8 +2,8 @@
   <n-split
     direction="horizontal"
     style="height: 100%; width: 100%; padding: 0"
-    :default-size="0.71"
-    :min="0.675"
+    :default-size="0.685"
+    :min="0.65"
     :max="0.75">
     <template #1>
       <n-split direction="vertical" :default-size="0.675" :min="0.675" :max="0.675">
@@ -27,7 +27,14 @@
       <n-split direction="vertical" :default-size="0.675" :min="0.5" :max="0.8">
         <template #1>
           <NFlex vertical class="pa-2 text-center">
-            <n-h3>Map</n-h3>
+            <n-p>
+              <n-tag type="primary">2024-07-11 18:23 </n-tag>
+              <button-icon
+                text
+                icon="mynaui:plus-square"
+                style="vertical-align: sub"
+                class="mx-1"></button-icon>
+            </n-p>
             <NFlex>
               <n-card
                 v-for="item in mapItems"

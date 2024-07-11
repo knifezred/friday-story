@@ -22,4 +22,8 @@ declare namespace CommonType {
   type RecordNullable<T> = {
     [K in keyof T]?: T[K] | null
   }
+
+  type CardLevel = 'N' | 'R' | 'SR' | 'SSR' | 'X'
+
+  type StateLevel = 'D' | 'C' | 'B' | 'A' | 'S' | 'SS' | 'SSS' | 'X'
 }
