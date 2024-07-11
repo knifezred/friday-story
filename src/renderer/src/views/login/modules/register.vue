@@ -21,6 +21,7 @@ const model: Dto.DbArchive = reactive({
 })
 function handleSubmit() {
   model.saveTime = Date.now()
+  console.log(model)
   createArchive(model).then((res) => {
     console.log(res)
     if (res.data != null) {
@@ -35,9 +36,9 @@ function handleSubmit() {
 <template>
   <NForm size="large" :show-label="false">
     <NFormItem path="name">
+      <IconPicker v-model:value="model.cover" type="img" icon="avatar" />
       <NInput
         v-model:value="model.name"
-        show-password-on="click"
         :placeholder="$t('page.login.common.userNamePlaceholder')" />
     </NFormItem>
     <NSpace vertical :size="18" class="w-full">
@@ -50,5 +51,4 @@ function handleSubmit() {
     </NSpace>
   </NForm>
 </template>
-
 <style scoped></style>

@@ -102,3 +102,8 @@ export function formatSeconds(seconds) {
   // 如果小时、分钟或秒数小于10，则前面补0
   return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`
 }
+
+// 数字补零
+export function formatNumber(num: number, length: number) {
+  return num.toString().padStart(length, '0')
+}

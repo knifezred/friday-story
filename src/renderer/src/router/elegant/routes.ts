@@ -102,7 +102,6 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'personal',
       i18nKey: 'route.personal',
-      constant: true,
       hideInMenu: true
     }
   },
