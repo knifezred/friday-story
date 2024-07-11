@@ -1,7 +1,7 @@
 <template>
   <NFlex vertical>
     <NCard :bordered="false" class="relative z-4 w-auto rd-12px text-center">
-      <ImageIcon :icon="'/static/imgs/' + auth.userInfo.archive.cover" class="w-32 h-32" />
+      <image-icon :src="'/static/imgs/' + auth.userInfo.archive.cover" class="w-32 h-32" />
       <n-h2 class="my-2"> {{ auth.userInfo.userName }}</n-h2>
       <n-flex class="text-center" justify="center">
         <n-tag>成就1</n-tag>

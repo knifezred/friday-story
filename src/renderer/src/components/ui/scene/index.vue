@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ImageIcon v-if="map != undefined && map.cover != ''" :icon="map.cover" />
+    <image-icon v-if="map != undefined && map.cover != ''" :src="map.cover" />
   </div>
 </template>
 

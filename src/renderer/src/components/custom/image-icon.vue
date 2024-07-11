@@ -1,5 +1,5 @@
 <template>
-  <n-image :src="staticPath(icon)" preview-disabled></n-image>
+  <n-image :src="staticPath(src)" preview-disabled></n-image>
 </template>
 
 <script setup lang="ts">
@@ -8,7 +8,7 @@ defineOptions({
   name: 'ImageIcon'
 })
 interface Props {
-  icon: string
+  src: string
 }
 defineProps<Props>()
 </script>

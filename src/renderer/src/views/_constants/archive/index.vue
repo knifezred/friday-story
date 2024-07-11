@@ -6,7 +6,7 @@
         :key="archive.id"
         :bordered="false"
         class="relative z-4 w-auto rd-12px text-center">
-        <ImageIcon :icon="'/static/imgs/' + archive.cover" class="w-32 h-32" />
+        <image-icon :src="'/static/imgs/' + archive.cover" class="w-32 h-32" />
         <n-divider />
         <NAlert :title="archive.name" type="info" :bordered="false">
           <n-p> 保存时间：{{ formatTimestamp(archive.saveTime) }} </n-p>

@@ -38,7 +38,7 @@
                 hoverable
                 @click="mapFunc(item)">
                 <template #cover>
-                  <image-icon :icon="item.cover" />
+                  <image-icon :src="item.cover" />
                 </template>
               </n-card>
             </NFlex>
