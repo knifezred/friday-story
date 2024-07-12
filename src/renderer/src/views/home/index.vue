@@ -77,81 +77,99 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { useAuthStore } from '@renderer/store/modules/auth'
+import { onMounted, ref } from 'vue'
 defineOptions({
   name: 'Home'
 })
 
 const mapItems = ref<Array<UI.MapItem>>([])
 const actionButtons = ref<Array<UI.ActionButton>>([])
-mapItems.value.push(
-  {
-    id: 1,
-    text: '字数测试',
-    cover: '/static/imgs/t1.webp',
-    video: '',
-    icon: '',
-    isDisabled: false,
-    isShow: false,
-    level: 1
-  },
-  {
-    id: 2,
-    text: '这是五个字',
-    cover: '/static/imgs/t2.webp',
-    video: '',
-    icon: '',
-    isDisabled: false,
-    isShow: false,
-    level: 1
-  },
-  {
-    id: 3,
-    text: '三个字',
-    cover: '/static/imgs/t3.webp',
-    video: '',
-    icon: '',
-    isDisabled: false,
-    isShow: false,
-    level: 1
-  },
-  {
-    id: 4,
-    text: '六个字怎么样',
-    cover: '/static/imgs/t4.webp',
-    video: '',
-    icon: '',
-    isDisabled: false,
-    isShow: false,
-    level: 1
-  }
-)
-actionButtons.value.push(
-  {
-    id: 1,
-    text: '石头剪刀布',
-    icon: 'streamline:peace-hand',
-    type: 'default',
-    isDisabled: false,
-    isShow: true
-  },
-  {
-    id: 2,
-    text: '掷骰子',
-    icon: 'streamline-emojis:game-dice',
-    type: 'default',
-    isDisabled: false,
-    isShow: true
-  }
-)
-const currentMap = ref<UI.MapItem>(mapItems.value[0])
 
+const currentMap = ref<UI.MapItem>({
+  id: 0,
+  text: '',
+  cover: '',
+  video: '',
+  icon: '',
+  isDisabled: false,
+  isShow: false,
+  level: 0
+})
+const { userInfo } = useAuthStore()
 function mapFunc(map: UI.MapItem) {
   currentMap.value = map
 }
 function actionFunc(action: UI.ActionButton) {
   window.$message?.info(action.text)
 }
+onMounted(() => {
+  // 初始化地图
+  mapItems.value.push(
+    {
+      id: 1,
+      text: '字数测试',
+      cover: '/static/imgs/t1.webp',
+      video: '',
+      icon: '',
+      isDisabled: false,
+      isShow: false,
+      level: 1
+    },
+    {
+      id: 2,
+      text: '这是五个字',
+      cover: '/static/imgs/t2.webp',
+      video: '',
+      icon: '',
+      isDisabled: false,
+      isShow: false,
+      level: 1
+    },
+    {
+      id: 3,
+      text: '三个字',
+      cover: '/static/imgs/t3.webp',
+      video: '',
+      icon: '',
+      isDisabled: false,
+      isShow: false,
+      level: 1
+    },
+    {
+      id: 4,
+      text: '六个字怎么样',
+      cover: '/static/imgs/t4.webp',
+      video: '',
+      icon: '',
+      isDisabled: false,
+      isShow: false,
+      level: 1
+    }
+  )
+  // 初始化操作按钮
+  actionButtons.value.push(
+    {
+      id: 1,
+      text: '石头剪刀布',
+      icon: 'streamline:peace-hand',
+      type: 'default',
+      isDisabled: false,
+      isShow: true
+    },
+    {
+      id: 2,
+      text: '掷骰子',
+      icon: 'streamline-emojis:game-dice',
+      type: 'default',
+      isDisabled: false,
+      isShow: true
+    }
+  )
+  if (userInfo.archive.place > 0) {
+    currentMap.value = mapItems.value.filter((x) => x.id == userInfo.archive.place)[0]
+  }
+})
 
 // map 地图
 // task 任务
