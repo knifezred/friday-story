@@ -15,7 +15,7 @@ const model: Dto.DbArchive = reactive({
   name: '',
   totalTime: 0,
   saveTime: 0,
-  cover: '',
+  cover: 'avatar/man-001.svg',
   data: '{}',
   place: 0
 })

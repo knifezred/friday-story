@@ -6,17 +6,13 @@
 
 <script setup lang="ts">
 defineOptions({
-  name: 'Scene'
+  name: 'UiScene'
 })
 
 interface Props {
-  type: 'map' | 'action'
   map: UI.MapItem
 }
-
-withDefaults(defineProps<Props>(), {
-  type: 'map'
-})
+defineProps<Props>()
 </script>
 
 <style scoped></style>

@@ -2,69 +2,74 @@
   <n-split
     direction="horizontal"
     style="height: 100%; width: 100%; padding: 0"
-    :default-size="0.685"
-    :min="0.65"
-    :max="0.75">
+    :default-size="0.68"
+    :min="0.68"
+    :max="0.68">
     <template #1>
       <n-split direction="vertical" :default-size="0.675" :min="0.675" :max="0.675">
         <template #1>
           <NFlex vertical>
-            <NCard :bordered="false" class="relative w-auto rd-12px">
-              <FingerGuessing :total-rounds="3" @game-result="gameResult"></FingerGuessing>
-            </NCard>
+            <UiScene :map="currentMap" />
           </NFlex>
         </template>
         <template #2>
-          <NCard>
-            <n-scrollbar class="h-sm" :distance="10">
-              <n-p class="text-2xl">hello world</n-p>
-            </n-scrollbar>
-          </NCard>
+          <n-scrollbar class="h-30vh" :distance="10">
+            <n-card>
+              <n-p class="text-xl">hello world</n-p>
+            </n-card>
+          </n-scrollbar>
         </template>
       </n-split>
     </template>
     <template #2>
-      <n-split direction="vertical" :default-size="0.675" :min="0.5" :max="0.8">
+      <n-split direction="vertical" :default-size="0.675" :min="0.675" :max="0.675">
         <template #1>
           <NFlex vertical class="pa-2 text-center">
             <n-p>
-              <n-tag type="primary">2024-07-11 18:23 </n-tag>
-              <button-icon
-                text
-                icon="mynaui:plus-square"
-                style="vertical-align: sub"
-                class="mx-1"></button-icon>
+              <icon-wi:day-sunny class="size-8" />
+              <n-tag type="primary"> 2024-07-11 18:23</n-tag>
+              <button-icon text icon="mynaui:plus-square" style="vertical-align: sub" class="mx-1">
+              </button-icon>
             </n-p>
-            <NFlex>
-              <n-card
-                v-for="item in mapItems"
-                :key="item.id"
-                :title="item.text"
-                class="w-6.5vw text-center cursor-pointer map-card"
-                size="small"
-                hoverable
-                @click="mapFunc(item)">
-                <template #cover>
-                  <image-icon :src="item.cover" />
-                </template>
-              </n-card>
-            </NFlex>
+            <n-scrollbar class="h-56vh" :distance="10">
+              <NFlex>
+                <n-card
+                  v-for="item in mapItems"
+                  :key="item.id"
+                  :title="item.text"
+                  class="w-9.2vw text-center cursor-pointer map-card"
+                  size="small"
+                  hoverable
+                  @click="mapFunc(item)">
+                  <template #cover>
+                    <image-icon :src="item.cover" />
+                  </template>
+                  <template #header-extra>
+                    <icon-solar:user-bold-duotone
+                      v-if="item.id == currentMap.id"
+                      class="color-primary" />
+                  </template>
+                </n-card>
+              </NFlex>
+            </n-scrollbar>
           </NFlex>
         </template>
         <template #2>
-          <n-button-group vertical class="w-full pa-1">
-            <n-button
-              v-for="btn in actionButtons"
-              :key="btn.id"
-              :type="btn.type"
-              :icon="btn.icon"
-              :is-disabled="btn.isDisabled"
-              :is-show="btn.isShow"
-              block
-              @click="actionFunc(btn)">
-              {{ btn.text }}
-            </n-button>
-          </n-button-group>
+          <n-scrollbar class="h-30vh" :distance="10">
+            <n-button-group vertical class="w-full pa-1">
+              <n-button
+                v-for="btn in actionButtons"
+                :key="btn.id"
+                :type="btn.type"
+                :is-disabled="btn.isDisabled"
+                :is-show="btn.isShow"
+                block
+                @click="actionFunc(btn)">
+                {{ btn.text }}
+                <SvgIcon v-if="btn.icon != ''" :icon="btn.icon" class="ml-1" />
+              </n-button>
+            </n-button-group>
+          </n-scrollbar>
         </template>
       </n-split>
     </template>
@@ -72,7 +77,6 @@
 </template>
 
 <script setup lang="ts">
-import FingerGuessing from '@renderer/components/mini-games/finger-guessing/index.vue'
 import { ref } from 'vue'
 defineOptions({
   name: 'Home'
@@ -125,31 +129,28 @@ mapItems.value.push(
 actionButtons.value.push(
   {
     id: 1,
-    text: '测试1',
-    icon: '',
+    text: '石头剪刀布',
+    icon: 'streamline:peace-hand',
     type: 'default',
     isDisabled: false,
     isShow: true
   },
   {
     id: 2,
-    text: '测试2',
-    icon: '',
+    text: '掷骰子',
+    icon: 'streamline-emojis:game-dice',
     type: 'default',
     isDisabled: false,
     isShow: true
   }
 )
+const currentMap = ref<UI.MapItem>(mapItems.value[0])
 
 function mapFunc(map: UI.MapItem) {
-  window.$message?.info(map.text)
+  currentMap.value = map
 }
 function actionFunc(action: UI.ActionButton) {
   window.$message?.info(action.text)
-}
-
-function gameResult(result: boolean) {
-  console.log(result)
 }
 
 // map 地图

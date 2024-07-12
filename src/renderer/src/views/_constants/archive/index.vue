@@ -1,6 +1,6 @@
 <template>
   <n-flex vertical :size="24">
-    <NFlex class="py-2 px-4">
+    <n-flex v-if="archives && archives.length > 0" class="py-2 px-4">
       <NCard
         v-for="archive in archives"
         :key="archive.id"
@@ -17,7 +17,8 @@
           <n-button type="error" @click="deleteSelectArchive(archive.id)">Delete</n-button>
         </n-flex>
       </NCard>
-    </NFlex>
+    </n-flex>
+    <n-empty v-else size="huge" description="还没有存档" class="mt-60"> </n-empty>
   </n-flex>
 </template>
 
