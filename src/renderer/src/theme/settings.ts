@@ -22,7 +22,7 @@ export const themeSettings: App.Theme.ThemeSetting = {
   header: {
     height: 42,
     breadcrumb: {
-      visible: true,
+      visible: false,
       showIcon: true
     }
   },
