@@ -210,6 +210,7 @@
     "403": "No Permission",
     "404": "Page Not Found",
     "500": "Server Error",
+    "achievement": "achievement",
     "archive": "Archive",
     "home": "Home",
     "login": "Login",
@@ -217,7 +218,8 @@
     "setting": "Setting",
     "setting_about": "About",
     "setting_system": "General",
-    "setting_theme": "Appearance"
+    "setting_theme": "Appearance",
+    "task": "task"
   },
   "system": {
     "title": "Friday Story"

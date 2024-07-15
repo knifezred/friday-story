@@ -12,6 +12,7 @@ declare namespace UI {
 
   interface MapItem {
     id: number
+    title: string
     text: string
     cover: string
     video: string

@@ -362,6 +362,20 @@ declare namespace App {
       dataTable: {
         itemCount: string
       }
+      map: {
+        title: {
+          title1: string
+          title2: string
+          title3: string
+          title4: string
+        }
+        text: {
+          text1: string
+          text2: string
+          text3: string
+          text4: string
+        }
+      }
     }
 
     type GetI18nKey<
@@ -406,7 +420,6 @@ declare namespace App {
 
     /** Theme setting */
     interface ThemeSetting {
-      id: number
       /** Theme scheme */
       themeScheme: UnionKey.ThemeScheme
       /** grayScale mode */

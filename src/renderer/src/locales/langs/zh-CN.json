@@ -109,6 +109,7 @@
       "title": "关于",
       "update": {
         "checkUpdate": "检查更新",
+        "content": "发现了一个新版本，您确定要更新它吗？",
         "newUpdateVersion": "发现新版本, 确定更新?",
         "noUpdateVersion": "当前版本已经是最新版本",
         "rebootAndUpdate": "下载完成，是否重启并更新？"
@@ -193,6 +194,7 @@
       }
     },
     "setting": {
+      "saveTips": "保存成功",
       "title": "设置"
     }
   },
@@ -208,6 +210,7 @@
     "403": "无权限",
     "404": "页面不存在",
     "500": "服务器错误",
+    "achievement": "成就",
     "archive": "存档",
     "home": "首页",
     "login": "登录",
@@ -216,7 +219,6 @@
     "setting_about": "关于",
     "setting_system": "通用",
     "setting_theme": "外观",
-    "achievement": "成就",
     "task": "任务"
   },
   "system": {
@@ -305,6 +307,20 @@
       "dark": "暗黑模式",
       "light": "亮色模式",
       "title": "主题模式"
+    }
+  },
+  "map": {
+    "title": {
+      "title1": "标题1",
+      "title2": "标题2",
+      "title3": "标题3",
+      "title4": "标题4"
+    },
+    "text": {
+      "text1": "选择你的初始身份",
+      "text2": "标题2",
+      "text3": "标题3",
+      "text4": "标题4"
     }
   }
 }

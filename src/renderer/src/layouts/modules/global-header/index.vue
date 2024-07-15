@@ -49,7 +49,11 @@ const headerMenus = computed(() => {
   <DarkModeContainer
     class="h-full flex-y-center px-12px shadow-header"
     style="-webkit-app-region: drag">
-    <GlobalLogo v-if="showLogo" class="h-full" :style="{ width: themeStore.sider.width + 'px' }" />
+    <GlobalLogo
+      v-if="showLogo || (appStore.siderCollapse && themeStore.layout.mode === 'vertical-mix')"
+      :show-title="themeStore.layout.mode != 'vertical-mix'"
+      class="h-full"
+      :style="{ width: themeStore.sider.collapsedWidth + 'px' }" />
     <HorizontalMenu
       v-if="showMenu"
       mode="horizontal"
