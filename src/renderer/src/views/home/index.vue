@@ -150,6 +150,12 @@ function mapFunc(map: Dto.MapItem) {
 }
 function reloadMapList(id: number) {
   mapItems.value = DefaultMaps.filter((x) => x.pid == id)
+  setTimeout(() => {
+    if (mapItems.value.length > 0) {
+      currentMap.value = mapItems.value[0]
+      currentText.value = currentMap.value.text
+    }
+  }, 10)
 }
 
 onMounted(() => {
