@@ -82,7 +82,7 @@
 </template>
 
 <script setup lang="ts">
-import { DefaultNpcInfoList } from '@renderer/constants/data'
+import { DefaultNpcInfoList } from '@renderer/constants/data/npc'
 import { onMounted, ref } from 'vue'
 defineOptions({
   name: 'Relationship'

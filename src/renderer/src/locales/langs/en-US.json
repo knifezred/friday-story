@@ -94,14 +94,33 @@
     "unpin": "Unpin"
   },
   "map": {
-    "text": {
-      "text1": "This is the text for Map 1"
-    },
-    "title": {
-      "title1": "Home",
-      "title2": "living room",
-      "title3": "Master bedroom",
-      "title4": "gate"
+    "home": {
+      "bedroom": {
+        "text": "Parents room",
+        "title": "Parents room"
+      },
+      "door": {
+        "text": "Door",
+        "title": "Door"
+      },
+      "living_room": {
+        "text": "Living room",
+        "title": "Living room"
+      },
+      "room_cousin": {
+        "text": "Cousin room",
+        "title": "Cousin room"
+      },
+      "room_player": {
+        "text": "My bedroom",
+        "title": "My bedroom"
+      },
+      "room_sister": {
+        "text": "Sister room",
+        "title": "Sister room"
+      },
+      "text": "Home",
+      "title": "Home"
     }
   },
   "page": {

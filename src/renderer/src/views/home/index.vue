@@ -77,7 +77,7 @@
 
 <script setup lang="ts">
 import MiniGame from '@renderer/components/mini-games/index.vue'
-import { DefaultMaps } from '@renderer/constants/data'
+import { DefaultMaps } from '@renderer/constants/data/map'
 import { useAppStore } from '@renderer/store/modules/app'
 import { useAuthStore } from '@renderer/store/modules/auth'
 import { formatTimestamp } from '@renderer/utils/common'

@@ -186,10 +186,10 @@ declare namespace Dto {
     title: string
     text: string
     cover: string
-    video: string
-    icon: string
-    isDisabled: boolean
-    isShow: boolean
+    video?: string | undefined
+    icon?: string
+    isDisabled?: boolean
+    isShow?: boolean
     level: number
     jumpId?: number | undefined
   }

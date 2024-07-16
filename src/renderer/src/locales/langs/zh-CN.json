@@ -94,17 +94,33 @@
     "unpin": "取消固定"
   },
   "map": {
-    "text": {
-      "text1": "这是地图1的文本",
-      "text2": "标题2",
-      "text3": "标题3",
-      "text4": "标题4"
-    },
-    "title": {
-      "title1": "家",
-      "title2": "客厅",
-      "title3": "主卧",
-      "title4": "大门"
+    "home": {
+      "title": "家",
+      "text": "家",
+      "door": {
+        "title": "大门",
+        "text": "大门"
+      },
+      "living_room": {
+        "title": "客厅",
+        "text": "客厅"
+      },
+      "bedroom": {
+        "title": "主卧",
+        "text": "主卧"
+      },
+      "room_player": {
+        "title": "我的卧室",
+        "text": "我的卧室"
+      },
+      "room_sister": {
+        "title": "姐姐的房间",
+        "text": "姐姐的房间"
+      },
+      "room_cousin": {
+        "title": "表妹的房间",
+        "text": "表妹的房间"
+      }
     }
   },
   "page": {
