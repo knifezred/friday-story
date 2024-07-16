@@ -169,6 +169,7 @@ declare namespace Dto {
   }
 
   type Type = 'default' | 'tertiary' | 'primary' | 'info' | 'success' | 'warning' | 'error'
+  type LevelType = 'N' | 'R' | 'SR' | 'SSR'
   interface ActionButton {
     id: number
     text: string
@@ -197,6 +198,7 @@ declare namespace Dto {
     name: string
     desc: string
     introduce: string
+    level: LevelType
     avatar: string
     staticPath: string
     age: number

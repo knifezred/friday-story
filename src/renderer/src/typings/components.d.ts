@@ -67,6 +67,7 @@ declare module 'vue' {
     'IconWi:daySunny': typeof import('~icons/wi/day-sunny')['default']
     ImageIcon: typeof import('./../components/custom/image-icon.vue')['default']
     LangSwitch: typeof import('./../components/common/lang-switch.vue')['default']
+    LevelTag: typeof import('./../components/ui/level-tag.vue')['default']
     LookForward: typeof import('./../components/custom/look-forward.vue')['default']
     MatchThree: typeof import('../components/mini-games/modules/match-three-game.vue')['default']
     MatchThreeGame: typeof import('./../components/mini-games/modules/match-three-game.vue')['default']

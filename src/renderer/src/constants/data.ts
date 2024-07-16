@@ -63,6 +63,7 @@ export const DefaultNpcInfoList: Array<Dto.NpcInfo> = [
     gender: '1',
     relationship: [3, 2, 1],
     relationshipWithPlayer: '',
+    level: 'SSR',
     isLocked: false
   },
   {
@@ -76,6 +77,7 @@ export const DefaultNpcInfoList: Array<Dto.NpcInfo> = [
     gender: '1',
     relationship: [3, 2, 3],
     relationshipWithPlayer: '',
+    level: 'SR',
     isLocked: true
   }
 ]

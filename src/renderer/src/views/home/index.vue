@@ -171,9 +171,6 @@ onMounted(() => {
 })
 
 // map 地图
-// task 任务
-// achievement 成就
-// relationship 关系
 // story 故事
 // plot 剧情
 // branch-line 主线

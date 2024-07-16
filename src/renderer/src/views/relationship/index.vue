@@ -3,10 +3,11 @@
     <NCard class="w-full text-center">
       <n-h3>{{ $t('route.relationship') }}</n-h3>
       <n-flex justify="center">
-        <n-tag type="success" :bordered="false" strong>N</n-tag>
-        <n-tag type="info" :bordered="false" strong>R</n-tag>
-        <n-tag type="warning" :bordered="false" strong>SR</n-tag>
-        <n-tag type="error" :bordered="false" strong>SSR</n-tag>
+        <LevelTag />
+        <LevelTag level="N" />
+        <LevelTag level="R" />
+        <LevelTag level="SR" />
+        <LevelTag level="SSR" />
       </n-flex>
     </NCard>
     <NFlex>
@@ -20,9 +21,7 @@
             <ImageIcon src="/static/imgs/avatar/default.svg" class="w-36" />
           </n-p>
           <n-flex vertical>
-            <n-p class="my-0">
-              <n-tag type="warning" :bordered="false" strong>???</n-tag> 陌生人
-            </n-p>
+            <n-p class="my-0"> <LevelTag />陌生人 </n-p>
             <n-p class="my-0"> 尚未解锁 </n-p>
             <n-p class="my-0">
               友好：
@@ -52,9 +51,7 @@
             <ImageIcon :src="item.avatar" class="w-36" />
           </n-p>
           <n-flex vertical>
-            <n-p class="my-0">
-              <n-tag type="warning" :bordered="false" strong>SR</n-tag> {{ item.name }}
-            </n-p>
+            <n-p class="my-0"> <LevelTag :level="item.level" />{{ item.name }} </n-p>
             <n-p class="my-0"> {{ item.desc }} </n-p>
             <n-p class="my-0">
               友好：
