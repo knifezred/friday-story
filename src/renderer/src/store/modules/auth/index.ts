@@ -95,9 +95,9 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
       userInfo.userId = data.id
       userInfo.userName = data.name
       userInfo.archive = data
+      localStg.set('userInfo', userInfo)
       // 3. update store
       token.value = data.id == undefined ? '' : data.id.toString()
-
       return true
     }
 

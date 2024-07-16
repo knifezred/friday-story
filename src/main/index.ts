@@ -17,7 +17,7 @@ function createWindow(): void {
     title: Settings.AppTitle + ' v' + app.getVersion(),
     show: false,
     frame: false,
-    resizable: true,
+    resizable: false,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {

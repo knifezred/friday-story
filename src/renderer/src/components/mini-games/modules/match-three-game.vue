@@ -27,7 +27,7 @@
 <script setup lang="ts">
 // 三消
 defineOptions({
-  name: 'MatchThree'
+  name: 'MatchThreeGame'
 })
 </script>
 

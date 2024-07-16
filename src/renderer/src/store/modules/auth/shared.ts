@@ -10,7 +10,7 @@ export function getUserInfo() {
   const emptyInfo: Dto.Auth.UserInfo = {
     userId: 0,
     userName: 'guest',
-    roles: ['SuperAdmin'],
+    roles: ['NormalPlayer'],
     buttons: [],
     archive: {
       id: 0,

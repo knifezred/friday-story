@@ -35,7 +35,7 @@ const headerPropsConfig: Record<UnionKey.ThemeLayoutMode, App.Global.HeaderProps
   'vertical-mix': {
     showLogo: false,
     showMenu: false,
-    showMenuToggler: true
+    showMenuToggler: false
   },
   horizontal: {
     showLogo: true,

@@ -8,6 +8,7 @@ declare namespace UI {
     type: Type | undefined
     isDisabled: boolean
     isShow: boolean
+    miniGame: UnionKey.MiniGameModule | undefined
   }
 
   interface MapItem {

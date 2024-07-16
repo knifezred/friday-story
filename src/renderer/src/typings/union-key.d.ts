@@ -12,6 +12,8 @@ declare namespace UnionKey {
    */
   type LoginModule = 'pwd-login' | 'register' | 'reset-pwd' | 'game-start'
 
+  type MiniGameModule = 'dice-number' | 'finger-guessing' | 'match-three'
+
   /** Theme scheme */
   type ThemeScheme = 'light' | 'dark' | 'auto'
 

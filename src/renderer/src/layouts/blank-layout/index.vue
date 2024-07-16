@@ -91,7 +91,7 @@ function getSiderCollapsedWidth() {
     :is-mobile="appStore.isMobile"
     :full-content="appStore.fullContent"
     :fixed-top="themeStore.fixedHeaderAndTab"
-    :header-height="32"
+    :header-height="themeStore.header.height"
     :tab-visible="themeStore.tab.visible"
     :tab-height="themeStore.tab.height"
     :content-class="appStore.contentXScrollable ? 'overflow-x-hidden' : ''"

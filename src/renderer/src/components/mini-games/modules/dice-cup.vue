@@ -1,5 +1,5 @@
 <template>
-  <n-flex>
+  <n-flex justify="center">
     <Dice
       v-for="dice in diceCount"
       :key="dice"
@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import Dice from './dice.vue'
+import Dice from './dice-single.vue'
 // 骰子比大小
 defineOptions({
   name: 'DiceCup'

@@ -46,7 +46,7 @@
           {{ playerScore > computerScore ? '你赢了!' : '你输了!' }}
         </n-h1>
         <n-h1 v-else class="text-center">平局!</n-h1>
-        <template #footer>
+        <template v-if="isSuper" #footer>
           <n-flex justify="center">
             <n-button @click="startGame"> 再来一局 </n-button>
             <n-button @click="endGame"> 结束 </n-button>
@@ -89,11 +89,10 @@
 import { ref } from 'vue'
 // 猜拳（石头剪刀布）
 defineOptions({
-  name: 'FingerGuessing'
+  name: 'FingerGuessingGame'
 })
 
 type Choice = 'rock' | 'paper' | 'scissors'
-
 const playerScore = ref(0)
 const computerScore = ref(0)
 const currentRound = ref(0)
@@ -104,20 +103,24 @@ const gameEnded = ref(false)
 const history = ref([])
 
 interface Props {
+  isSuper: boolean
   playerName1?: string
   playerName2?: string
   totalRounds: number
+  value: boolean
 }
-const { totalRounds } = withDefaults(defineProps<Props>(), {
+const { totalRounds, isSuper } = withDefaults(defineProps<Props>(), {
   playerName1: '电脑',
   playerName2: '你',
   totalRounds: 3
 })
 interface Emits {
-  (e: 'gameResult', result: boolean): boolean
+  (e: 'update:value', result: boolean): boolean
+  (e: 'game-result', result: boolean): boolean
 }
 
 const emit = defineEmits<Emits>()
+
 function startGame() {
   if (totalRounds > 0) {
     currentRound.value = 1
@@ -132,8 +135,10 @@ function startGame() {
 }
 
 function endGame() {
-  emit('gameResult', playerScore.value > computerScore.value)
-  console.log(result.value)
+  setTimeout(() => {
+    emit('update:value', playerScore.value > computerScore.value)
+    emit('game-result', playerScore.value > computerScore.value)
+  }, 1000)
 }
 
 function getRandomChoice(): Choice {
@@ -173,6 +178,9 @@ function determineResult() {
     nextRound()
   } else {
     gameEnded.value = true
+    if (!isSuper) {
+      endGame()
+    }
   }
 }
 
