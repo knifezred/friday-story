@@ -95,16 +95,16 @@
   },
   "map": {
     "text": {
-      "text1": "标题1",
+      "text1": "这是地图1的文本",
       "text2": "标题2",
       "text3": "标题3",
       "text4": "标题4"
     },
     "title": {
-      "title1": "标题1",
-      "title2": "标题2",
-      "title3": "标题3",
-      "title4": "标题4"
+      "title1": "家",
+      "title2": "客厅",
+      "title3": "主卧",
+      "title4": "大门"
     }
   },
   "page": {

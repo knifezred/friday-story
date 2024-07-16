@@ -1,53 +1,54 @@
-import { $t } from '@renderer/locales'
 // 地图列表
 export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 1,
-    title: $t('map.title.title1'),
-    text: $t('map.text.text1'),
+    title: 'map.title.title1',
+    text: 'map.text.text1',
     cover: '/static/imgs/t8.webp',
     video: '',
     icon: '',
     isDisabled: false,
     isShow: false,
     level: 1,
-    pid: 0
+    pid: 0,
+    jumpId: 1
   },
   {
     id: 2,
-    title: $t('map.title.title2'),
-    text: $t('map.text.text2'),
+    title: 'map.title.title2',
+    text: 'map.text.text2',
     cover: '/static/imgs/t2.webp',
     video: '',
     icon: '',
     isDisabled: false,
     isShow: false,
-    level: 1,
-    pid: 0
+    level: 2,
+    pid: 1
   },
   {
     id: 3,
-    title: $t('map.title.title3'),
-    text: $t('map.text.text3'),
+    title: 'map.title.title3',
+    text: 'map.text.text3',
     cover: '/static/imgs/t3.webp',
     video: '',
     icon: '',
     isDisabled: false,
     isShow: false,
-    level: 1,
-    pid: 0
+    level: 2,
+    pid: 1
   },
   {
     id: 4,
-    title: $t('map.title.title4'),
-    text: $t('map.text.text4'),
+    title: 'map.title.title4',
+    text: 'map.text.text4',
     cover: '/static/imgs/t4.webp',
     video: '',
     icon: '',
     isDisabled: false,
     isShow: false,
-    level: 1,
-    pid: 0
+    level: 2,
+    pid: 1,
+    jumpId: 0
   }
 ]
 // NPC列表

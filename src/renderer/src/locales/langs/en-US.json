@@ -93,6 +93,17 @@
     "themeSchema": "Theme Schema",
     "unpin": "Unpin"
   },
+  "map": {
+    "text": {
+      "text1": "This is the text for Map 1"
+    },
+    "title": {
+      "title1": "Home",
+      "title2": "living room",
+      "title3": "Master bedroom",
+      "title4": "gate"
+    }
+  },
   "page": {
     "about": {
       "devDep": "Development Dependency",
@@ -116,6 +127,7 @@
       }
     },
     "archive": {
+      "playTime": "playtime",
       "saveTime": "Save time"
     },
     "home": {
@@ -218,6 +230,7 @@
     "home": "Home",
     "login": "Login",
     "personal": "Personal Center",
+    "relationship": "Relationship",
     "setting": "Setting",
     "setting_about": "About",
     "setting_system": "General",

@@ -43,7 +43,9 @@ interface Emits {
 }
 const emit = defineEmits<Emits>()
 function gameResult(result: boolean) {
-  emit('game-result', result)
+  setTimeout(() => {
+    emit('game-result', result)
+  }, 100)
 }
 </script>
 

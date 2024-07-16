@@ -71,9 +71,7 @@ function startGame() {
   totalPoints.value = 0
 }
 function endGame() {
-  setTimeout(() => {
-    emit('game-result', gameEnded.value)
-  }, 1000)
+  emit('game-result', gameEnded.value)
 }
 
 function rollingDice(choose: string) {

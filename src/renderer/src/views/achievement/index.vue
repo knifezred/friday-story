@@ -6,7 +6,7 @@
     <NFlex>
       <NCard title="帽子戏法" class="relative z-4 w-52 shadow-primary shadow-op-30">
         <template #header-extra>
-          <n-tag type="info">R</n-tag>
+          <LevelTag level="SR" />
         </template>
         <n-p class="text-center">
           <icon-streamline-emojis:game-dice class="w-32 h-32" />
@@ -22,7 +22,7 @@
       </NCard>
       <NCard title="后发先制" class="relative z-4 w-52 shadow-primary shadow-op-30">
         <template #header-extra>
-          <n-tag type="info">R</n-tag>
+          <LevelTag level="R" />
         </template>
         <n-p class="text-center">
           <icon-streamline:peace-hand class="w-32 h-32 color-primary" />
@@ -38,7 +38,7 @@
       </NCard>
       <NCard title="初出茅庐" class="relative z-4 w-52 shadow-primary shadow-op-30 grayscale-100">
         <template #header-extra>
-          <n-tag type="info">R</n-tag>
+          <LevelTag level="R" />
         </template>
         <n-p class="text-center">
           <icon-local-logo class="w-32 h-32" />
@@ -57,7 +57,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 // N R SR SSR
 const totalStar = ref(5)
 const playerScore = ref(3)

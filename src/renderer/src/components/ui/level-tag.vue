@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 defineOptions({
   name: 'LevelTag'
@@ -16,21 +16,24 @@ interface Props {
 type Type = 'default' | 'success' | 'error' | 'primary' | 'info' | 'warning' | undefined
 const { level } = defineProps<Props>()
 const levelType = ref<Type>('success')
-if (level == undefined) {
-  levelType.value = 'default'
-}
-if (level == 'SSR') {
-  levelType.value = 'error'
-}
-if (level == 'SR') {
-  levelType.value = 'warning'
-}
-if (level == 'R') {
-  levelType.value = 'info'
-}
-if (level == 'N') {
-  levelType.value = 'success'
-}
+
+onMounted(() => {
+  if (level == undefined) {
+    levelType.value = 'default'
+  }
+  if (level == 'SSR') {
+    levelType.value = 'error'
+  }
+  if (level == 'SR') {
+    levelType.value = 'warning'
+  }
+  if (level == 'R') {
+    levelType.value = 'info'
+  }
+  if (level == 'N') {
+    levelType.value = 'success'
+  }
+})
 </script>
 
 <style scoped></style>

@@ -173,11 +173,11 @@ declare namespace Dto {
   interface ActionButton {
     id: number
     text: string
-    icon: string
+    icon?: string | undefined
     type: Type | undefined
     isDisabled: boolean
     isShow: boolean
-    miniGame: UnionKey.MiniGameModule | undefined
+    miniGame?: UnionKey.MiniGameModule | undefined
   }
 
   interface MapItem {
@@ -191,6 +191,7 @@ declare namespace Dto {
     isDisabled: boolean
     isShow: boolean
     level: number
+    jumpId?: number | undefined
   }
 
   interface NpcInfo {

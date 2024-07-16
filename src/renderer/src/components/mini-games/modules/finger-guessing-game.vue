@@ -115,7 +115,6 @@ const { totalRounds, isSuper } = withDefaults(defineProps<Props>(), {
   totalRounds: 3
 })
 interface Emits {
-  (e: 'update:value', result: boolean): boolean
   (e: 'game-result', result: boolean): boolean
 }
 
@@ -135,10 +134,7 @@ function startGame() {
 }
 
 function endGame() {
-  setTimeout(() => {
-    emit('update:value', playerScore.value > computerScore.value)
-    emit('game-result', playerScore.value > computerScore.value)
-  }, 1000)
+  emit('game-result', playerScore.value > computerScore.value)
 }
 
 function getRandomChoice(): Choice {

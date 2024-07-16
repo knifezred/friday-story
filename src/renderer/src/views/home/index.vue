@@ -15,23 +15,23 @@
           style="border: 0; border-radius: 0">
           <n-scrollbar class="h-20vh" :distance="10" @click="nextText">
             <n-p class="text-xl color-white">
-              {{ currentText }}
+              {{ $t(currentText) }}
             </n-p>
           </n-scrollbar>
           <template #footer>
-            <n-button-group class="w-full">
+            <n-flex>
               <n-button
                 v-for="btn in actionButtons"
                 :key="btn.id"
                 :type="btn.type"
                 :is-disabled="btn.isDisabled"
                 :is-show="btn.isShow"
-                class="color-white"
+                class="color-white w-40"
                 @click="actionFunc(btn)">
-                <SvgIcon v-if="btn.icon != ''" :icon="btn.icon" class="mr-1" />
+                <SvgIcon v-if="btn.icon != undefined" :icon="btn.icon" class="mr-1" />
                 {{ btn.text }}
               </n-button>
-            </n-button-group>
+            </n-flex>
           </template>
         </n-card>
       </NFlex>
@@ -51,7 +51,7 @@
             <n-card
               v-for="item in mapItems"
               :key="item.id"
-              :title="item.title"
+              :title="$t(item.title)"
               class="w-9.2vw text-center cursor-pointer map-card"
               size="small"
               hoverable
@@ -62,6 +62,9 @@
               <template #header-extra>
                 <icon-solar:user-bold-duotone
                   v-if="item.id == currentMap.id"
+                  class="color-primary" />
+                <icon-solar:exit-line-duotone
+                  v-if="item.jumpId != undefined"
                   class="color-primary" />
               </template>
             </n-card>
@@ -117,20 +120,13 @@ watch(
   },
   { immediate: true }
 )
-function mapFunc(map: Dto.MapItem) {
-  if (!isShowMiniGame.value) {
-    currentMap.value = map
-    currentText.value = map.text
-  } else {
-    window.$message?.info('in mini game,please wait game ended')
-  }
-}
 function actionFunc(action: Dto.ActionButton) {
   if (action.miniGame != undefined) {
     isShowMiniGame.value = true
     miniGameModule.value = action.miniGame
+  } else {
+    nextText()
   }
-  window.$message?.info(action.text)
 }
 
 function gameResult(result) {
@@ -141,9 +137,24 @@ function nextText() {
   currentText.value = 'next text todo'
 }
 
+function mapFunc(map: Dto.MapItem) {
+  if (map.jumpId != undefined) {
+    reloadMapList(map.jumpId)
+  }
+  if (!isShowMiniGame.value) {
+    currentMap.value = map
+    currentText.value = map.text
+  } else {
+    window.$message?.info('in mini game,please wait game ended')
+  }
+}
+function reloadMapList(id: number) {
+  mapItems.value = DefaultMaps.filter((x) => x.pid == id)
+}
+
 onMounted(() => {
   // 初始化地图
-  mapItems.value = DefaultMaps
+  reloadMapList(0)
   // 初始化操作按钮
   actionButtons.value.push(
     {
@@ -163,6 +174,13 @@ onMounted(() => {
       isDisabled: false,
       isShow: true,
       miniGame: 'dice-number'
+    },
+    {
+      id: 2,
+      text: '发呆',
+      type: 'primary',
+      isDisabled: false,
+      isShow: true
     }
   )
   if (userInfo.archive.place > 0) {
