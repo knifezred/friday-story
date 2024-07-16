@@ -157,4 +157,58 @@ declare namespace Dto {
   }
 
   type DbArchiveList = Array<DbArchive> | null
+
+  type ArchiveFileData = {
+    worldTime: number
+    weather: string
+    money: number
+    items: Array<number>
+    relationShip: []
+    achievement: Array<number>
+    taskStatus: []
+  }
+
+  type Type = 'default' | 'tertiary' | 'primary' | 'info' | 'success' | 'warning' | 'error'
+  interface ActionButton {
+    id: number
+    text: string
+    icon: string
+    type: Type | undefined
+    isDisabled: boolean
+    isShow: boolean
+    miniGame: UnionKey.MiniGameModule | undefined
+  }
+
+  interface MapItem {
+    id: number
+    pid: number
+    title: string
+    text: string
+    cover: string
+    video: string
+    icon: string
+    isDisabled: boolean
+    isShow: boolean
+    level: number
+  }
+
+  interface NpcInfo {
+    id: number
+    name: string
+    desc: string
+    introduce: string
+    avatar: string
+    staticPath: string
+    age: number
+    gender: UserGender | null
+    relationship: Array<number>
+    relationshipWithPlayer: string
+    isLocked: boolean
+  }
+
+  type NpcList = CommonType.RecordNullable<NpcInfo>
+
+  type archiveNpcRelationShip = CommonType.RecordNullable<
+    Pick<NpcInfo, 'id' | 'relationship', 'relationshipWithPlayer'>
+  >
 }

@@ -115,6 +115,9 @@
         "rebootAndUpdate": "Download completed, do you want to restart and update?"
       }
     },
+    "archive": {
+      "saveTime": "Save time"
+    },
     "home": {
       "creativity": "Creativity",
       "dealCount": "Deal Count",

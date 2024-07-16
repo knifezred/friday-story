@@ -106,6 +106,17 @@ export const generatedRoutes: GeneratedRoute[] = [
     }
   },
   {
+    name: 'relationship',
+    path: '/relationship',
+    component: 'layout.base$view.relationship',
+    meta: {
+      title: 'relationship',
+      i18nKey: 'route.relationship',
+      icon: 'solar:user-heart-rounded-broken',
+      order: 40
+    }
+  },
+  {
     name: 'setting',
     path: '/setting',
     component: 'layout.blank$view.setting',

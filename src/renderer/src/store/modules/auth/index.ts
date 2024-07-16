@@ -22,6 +22,16 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
 
   const userInfo: Dto.Auth.UserInfo = reactive(getUserInfo())
 
+  const archiveFileData = ref<Dto.ArchiveFileData>({
+    worldTime: 0,
+    weather: '',
+    money: 0,
+    items: [],
+    relationShip: [],
+    achievement: [],
+    taskStatus: []
+  })
+
   const startTime = ref(0)
   /** is super role in static route */
   const isStaticSuper = computed(() => {
@@ -96,6 +106,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
       userInfo.userName = data.name
       userInfo.archive = data
       localStg.set('userInfo', userInfo)
+      archiveFileData.value = JSON.parse(userInfo.archive.data) as Dto.ArchiveFileData
       // 3. update store
       token.value = data.id == undefined ? '' : data.id.toString()
       return true
@@ -106,6 +117,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   return {
     token,
     userInfo,
+    archiveFileData,
     isStaticSuper,
     isLogin,
     loginLoading,

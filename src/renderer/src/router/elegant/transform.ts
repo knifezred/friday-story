@@ -170,6 +170,7 @@ const routeMap: RouteMap = {
   "home": "/home",
   "login": "/login/:module(pwd-login|register|reset-pwd|game-start)?",
   "personal": "/personal",
+  "relationship": "/relationship",
   "setting": "/setting",
   "task": "/task"
 };

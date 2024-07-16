@@ -9,7 +9,7 @@
       <NFlex v-if="!isShowMiniGame" vertical :size="0">
         <UiScene :map="currentMap" />
         <n-card
-          class="w-full bg-gray-800 bg-op-30"
+          class="w-full bg-primary bg-op-30"
           :class="isShowMap ? 'pos-relative' : 'pos-fixed bottom-0'"
           :style="appStore.siderCollapse ? 'height:20.5vw' : 'height:18vw'"
           style="border: 0; border-radius: 0">
@@ -40,10 +40,9 @@
     <template #2>
       <NFlex v-if="isShowMap" vertical class="pa-2 text-center">
         <n-p>
-          <n-tag type="primary"> {{ formatTimestamp(worldTime) }} ⛅ </n-tag>
-          <button-icon text icon="mynaui:plus-square" class="vertical-sub mx-1"> </button-icon>
+          <n-tag type="primary"> {{ formatTimestamp(worldTime, 'YYYY-MM-DD HH:mm') }} ⛅ </n-tag>
         </n-p>
-        <n-statistic label="" tabular-nums>
+        <n-statistic>
           <template #prefix>💴</template>
           <n-number-animation show-separator :from="0" :to="12039" />
         </n-statistic>
@@ -75,7 +74,7 @@
 
 <script setup lang="ts">
 import MiniGame from '@renderer/components/mini-games/index.vue'
-import { $t } from '@renderer/locales'
+import { DefaultMaps } from '@renderer/constants/data'
 import { useAppStore } from '@renderer/store/modules/app'
 import { useAuthStore } from '@renderer/store/modules/auth'
 import { formatTimestamp } from '@renderer/utils/common'
@@ -84,14 +83,14 @@ defineOptions({
   name: 'Home'
 })
 const worldTime = ref(Date.now())
-const mapItems = ref<Array<UI.MapItem>>([])
-const actionButtons = ref<Array<UI.ActionButton>>([])
+const mapItems = ref<Array<Dto.MapItem>>([])
+const actionButtons = ref<Array<Dto.ActionButton>>([])
 const isShowMap = ref(false)
 const currentText = ref('')
 const isShowMiniGame = ref(false)
 const miniGameModule = ref<UnionKey.MiniGameModule>('finger-guessing')
 const splitSize = ref(1)
-const currentMap = ref<UI.MapItem>({
+const currentMap = ref<Dto.MapItem>({
   id: 0,
   title: 'test',
   text: 'text1',
@@ -100,7 +99,8 @@ const currentMap = ref<UI.MapItem>({
   icon: '',
   isDisabled: false,
   isShow: false,
-  level: 0
+  level: 0,
+  pid: 0
 })
 const { userInfo } = useAuthStore()
 const appStore = useAppStore()
@@ -117,7 +117,7 @@ watch(
   },
   { immediate: true }
 )
-function mapFunc(map: UI.MapItem) {
+function mapFunc(map: Dto.MapItem) {
   if (!isShowMiniGame.value) {
     currentMap.value = map
     currentText.value = map.text
@@ -125,7 +125,7 @@ function mapFunc(map: UI.MapItem) {
     window.$message?.info('in mini game,please wait game ended')
   }
 }
-function actionFunc(action: UI.ActionButton) {
+function actionFunc(action: Dto.ActionButton) {
   if (action.miniGame != undefined) {
     isShowMiniGame.value = true
     miniGameModule.value = action.miniGame
@@ -143,52 +143,7 @@ function nextText() {
 
 onMounted(() => {
   // 初始化地图
-  mapItems.value.push(
-    {
-      id: 1,
-      title: $t('map.title.title1'),
-      text: $t('map.text.text1'),
-      cover: '/static/imgs/t1.webp',
-      video: '',
-      icon: '',
-      isDisabled: false,
-      isShow: false,
-      level: 1
-    },
-    {
-      id: 2,
-      title: $t('map.title.title2'),
-      text: $t('map.text.text2'),
-      cover: '/static/imgs/t2.webp',
-      video: '',
-      icon: '',
-      isDisabled: false,
-      isShow: false,
-      level: 1
-    },
-    {
-      id: 3,
-      title: $t('map.title.title3'),
-      text: $t('map.text.text3'),
-      cover: '/static/imgs/t3.webp',
-      video: '',
-      icon: '',
-      isDisabled: false,
-      isShow: false,
-      level: 1
-    },
-    {
-      id: 4,
-      title: $t('map.title.title4'),
-      text: $t('map.text.text4'),
-      cover: '/static/imgs/t4.webp',
-      video: '',
-      icon: '',
-      isDisabled: false,
-      isShow: false,
-      level: 1
-    }
-  )
+  mapItems.value = DefaultMaps
   // 初始化操作按钮
   actionButtons.value.push(
     {
@@ -211,7 +166,7 @@ onMounted(() => {
     }
   )
   if (userInfo.archive.place > 0) {
-    currentMap.value = mapItems.value.filter((x) => x.id == userInfo.archive.place)[0]
+    mapFunc(mapItems.value.filter((x) => x.id == userInfo.archive.place)[0])
   }
 })
 

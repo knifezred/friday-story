@@ -10,7 +10,7 @@ defineOptions({
 })
 
 interface Props {
-  map: UI.MapItem
+  map: Dto.MapItem
 }
 defineProps<Props>()
 </script>

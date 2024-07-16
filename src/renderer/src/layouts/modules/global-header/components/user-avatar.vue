@@ -18,7 +18,7 @@ function loginOrRegister() {
   toLogin()
 }
 
-type DropdownKey = 'logout' | 'setting' | 'personal'
+type DropdownKey = 'logout' | 'setting' | 'personal' | 'archive'
 
 type DropdownOption = {
   key: DropdownKey
@@ -32,6 +32,11 @@ const options = computed(() => {
       label: $t('route.personal'),
       key: 'personal',
       icon: SvgIconVNode({ icon: 'ph:user-circle', fontSize: 18 })
+    },
+    {
+      label: $t('route.archive'),
+      key: 'archive',
+      icon: SvgIconVNode({ icon: 'solar:archive-linear', fontSize: 18 })
     },
     {
       label: $t('route.setting'),

@@ -16,8 +16,8 @@ const model: Dto.DbArchive = reactive({
   totalTime: 0,
   saveTime: 0,
   cover: 'avatar/man-001.svg',
-  data: '{}',
-  place: 0
+  data: JSON.stringify(authStore.archiveFileData),
+  place: 1
 })
 function handleSubmit() {
   model.saveTime = Date.now()

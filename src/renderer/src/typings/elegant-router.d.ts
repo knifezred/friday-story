@@ -26,6 +26,7 @@ declare module "@elegant-router/types" {
     "home": "/home";
     "login": "/login/:module(pwd-login|register|reset-pwd|game-start)?";
     "personal": "/personal";
+    "relationship": "/relationship";
     "setting": "/setting";
     "task": "/task";
   };
@@ -68,6 +69,7 @@ declare module "@elegant-router/types" {
     | "home"
     | "login"
     | "personal"
+    | "relationship"
     | "setting"
     | "task"
   >;
@@ -96,6 +98,7 @@ declare module "@elegant-router/types" {
     | "achievement"
     | "home"
     | "login"
+    | "relationship"
     | "task"
   >;
 

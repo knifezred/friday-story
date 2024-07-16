@@ -93,6 +93,20 @@
     "themeSchema": "主题模式",
     "unpin": "取消固定"
   },
+  "map": {
+    "text": {
+      "text1": "标题1",
+      "text2": "标题2",
+      "text3": "标题3",
+      "text4": "标题4"
+    },
+    "title": {
+      "title1": "标题1",
+      "title2": "标题2",
+      "title3": "标题3",
+      "title4": "标题4"
+    }
+  },
   "page": {
     "about": {
       "devDep": "开发依赖",
@@ -114,6 +128,10 @@
         "noUpdateVersion": "当前版本已经是最新版本",
         "rebootAndUpdate": "下载完成，是否重启并更新？"
       }
+    },
+    "archive": {
+      "playTime": "游玩时间",
+      "saveTime": "保存时间"
     },
     "home": {
       "creativity": "创意",
@@ -211,10 +229,11 @@
     "404": "页面不存在",
     "500": "服务器错误",
     "achievement": "成就",
-    "archive": "存档",
+    "archive": "角色存档",
     "home": "首页",
     "login": "登录",
     "personal": "个人中心",
+    "relationship": "关系",
     "setting": "系统设置",
     "setting_about": "关于",
     "setting_system": "通用",
@@ -307,20 +326,6 @@
       "dark": "暗黑模式",
       "light": "亮色模式",
       "title": "主题模式"
-    }
-  },
-  "map": {
-    "title": {
-      "title1": "标题1",
-      "title2": "标题2",
-      "title3": "标题3",
-      "title4": "标题4"
-    },
-    "text": {
-      "text1": "选择你的初始身份",
-      "text2": "标题2",
-      "text3": "标题3",
-      "text4": "标题4"
     }
   }
 }
