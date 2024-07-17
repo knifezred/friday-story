@@ -36,7 +36,7 @@ function handleSubmit() {
 <template>
   <NForm size="large" :show-label="false">
     <NFormItem path="name">
-      <IconPicker v-model:value="model.cover" type="img" icon="avatar" />
+      <ImageIconPicker v-model:value="model.cover" type="img" icon="avatar" />
       <NInput
         v-model:value="model.name"
         :placeholder="$t('page.login.common.userNamePlaceholder')" />

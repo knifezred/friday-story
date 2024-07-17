@@ -26,7 +26,7 @@
 import { formatNumber } from '@renderer/utils/common'
 import { DrawerPlacement } from 'naive-ui'
 import { ref } from 'vue'
-defineOptions({ name: 'IconPicker' })
+defineOptions({ name: 'ImageIconPicker' })
 const active = ref(false)
 const placement = ref<DrawerPlacement>('right')
 const activate = (place: DrawerPlacement) => {
