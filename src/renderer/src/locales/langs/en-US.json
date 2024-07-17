@@ -287,7 +287,8 @@
     "setting_about": "About",
     "setting_system": "General",
     "setting_theme": "Appearance",
-    "task": "task"
+    "task": "Task",
+    "demo": "Demo"
   },
   "system": {
     "title": "Friday Story"
