@@ -94,6 +94,11 @@
     "unpin": "取消固定"
   },
   "map": {
+    "common": {
+      "exit": {
+        "title": "退出"
+      }
+    },
     "home": {
       "bedroom": {
         "text": "主卧",
@@ -152,6 +157,30 @@
       "living_room": {
         "text": "客厅",
         "title": "客厅"
+      }
+    },
+    "country": {
+      "friday": {
+        "title": "弗雷德共和国",
+        "text": "弗雷德共和国"
+      }
+    },
+    "city": {
+      "boot": {
+        "title": "布特城",
+        "text": "布特城"
+      }
+    },
+    "area": {
+      "dongshan": {
+        "title": "东山区",
+        "text": "东山区"
+      }
+    },
+    "street": {
+      "pingan": {
+        "title": "平安路",
+        "text": "平安路"
       }
     }
   },

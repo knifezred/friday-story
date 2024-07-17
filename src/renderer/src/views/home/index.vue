@@ -148,6 +148,18 @@ function mapFunc(map: Dto.MapItem) {
 }
 function reloadMapList(jumpId: number, pid: number) {
   mapItems.value = allMaps.value.filter((x) => x.pid == jumpId)
+  if (jumpId > 0) {
+    const upLevel = allMaps.value.filter((x) => x.id == jumpId)[0]
+    mapItems.value.push({
+      id: 999999,
+      pid: mapItems.value[0].pid,
+      jumpId: upLevel.pid,
+      staticId: 'map.common.exit',
+      title: 'map.common.exit.title',
+      text: '',
+      cover: '/static/map/common/exit.png'
+    })
+  }
   setTimeout(() => {
     if (mapItems.value.length > 0) {
       if (mapItems.value.filter((x) => x.id == pid).length > 0) {
@@ -199,12 +211,6 @@ onMounted(() => {
       isShow: true
     }
   )
-  // if (userInfo.archive.place > 0) {
-  //   currentMap.value = mapItems.value.filter((x) => x.id == userInfo.archive.place)[0]
-  //   currentText.value = currentMap.value.text
-  //     ? currentMap.value.text
-  //     : currentMap.value.staticId + '.text'
-  // }
 })
 
 // map 地图
