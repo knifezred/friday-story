@@ -1,6 +1,12 @@
 // title=map.${staticId}.title
 // text=map.${staticId}.text
 // cover=/static/map/${staticId.replace('.','/')}.jpeg
+// ## 判断条件
+// 时间（间隔天数，星期几，几号，几月）
+// 位置（房间id）
+// 角色属性
+// 人物关系
+// 配置
 
 export const DefaultMaps: Array<Dto.MapItem> = [
   {

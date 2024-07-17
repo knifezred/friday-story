@@ -103,6 +103,14 @@
         "text": "Door",
         "title": "Door"
       },
+      "home": {
+        "text": "home",
+        "title": "home"
+      },
+      "kitchen": {
+        "text": "kitchen",
+        "title": "kitchen"
+      },
       "living_room": {
         "text": "Living room",
         "title": "Living room"
@@ -118,9 +126,33 @@
       "room_sister": {
         "text": "Sister room",
         "title": "Sister room"
+      }
+    },
+    "house_lin": {
+      "bathroom": {
+        "text": "TOILET",
+        "title": "TOILET"
       },
-      "text": "Home",
-      "title": "Home"
+      "bedroom": {
+        "text": "Master bedroom",
+        "title": "Master bedroom"
+      },
+      "door": {
+        "text": "gate",
+        "title": "gate"
+      },
+      "home": {
+        "text": "Hayashiya ",
+        "title": "Hayashiya "
+      },
+      "kitchen": {
+        "text": "kitchen",
+        "title": "kitchen"
+      },
+      "living_room": {
+        "text": "a living room",
+        "title": "a living room"
+      }
     }
   },
   "page": {
@@ -139,8 +171,10 @@
       "title": "About",
       "update": {
         "checkUpdate": "Check Update",
+        "downloading": "Downloading, please wait a moment",
         "newUpdateVersion": "Discovered a new version, are you sure you want to update it?",
         "noUpdateVersion": "It is already the latest version",
+        "reboot": "Restart Update",
         "rebootAndUpdate": "Download completed, do you want to restart and update?"
       }
     },

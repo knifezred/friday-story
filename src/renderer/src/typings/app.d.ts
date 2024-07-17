@@ -126,9 +126,6 @@ declare namespace App {
     }
 
     type Schema = {
-      system: {
-        title: string
-      }
       common: {
         action: string
         add: string
@@ -136,16 +133,16 @@ declare namespace App {
         backToHome: string
         batchDelete: string
         cancel: string
-        close: string
         check: string
-        expandColumn: string
+        close: string
         columnSetting: string
         config: string
         confirm: string
+        confirmDelete: string
         delete: string
         deleteSuccess: string
-        confirmDelete: string
         edit: string
+        expandColumn: string
         index: string
         keywordSearch: string
         logout: string
@@ -158,6 +155,8 @@ declare namespace App {
         pleaseCheckValue: string
         refresh: string
         reset: string
+        save: string
+        saveSuccess: string
         search: string
         switch: string
         tip: string
@@ -166,11 +165,232 @@ declare namespace App {
         updateSuccess: string
         userCenter: string
         yesOrNo: {
-          yes: string
           no: string
+          yes: string
         }
-        save: string
-        saveSuccess: string
+      }
+      dataTable: {
+        itemCount: string
+      }
+      dropdown: {
+        closeAll: string
+        closeCurrent: string
+        closeLeft: string
+        closeOther: string
+        closeRight: string
+      }
+      form: {
+        code: {
+          invalid: string
+          required: string
+        }
+        confirmPwd: {
+          invalid: string
+          required: string
+        }
+        email: {
+          invalid: string
+          required: string
+        }
+        phone: {
+          invalid: string
+          required: string
+        }
+        pwd: {
+          invalid: string
+          required: string
+        }
+        required: string
+        userName: {
+          invalid: string
+          required: string
+        }
+      }
+      icon: {
+        collapse: string
+        expand: string
+        fullscreen: string
+        fullscreenExit: string
+        lang: string
+        maximize: string
+        minimize: string
+        pin: string
+        reload: string
+        themeConfig: string
+        themeSchema: string
+        unpin: string
+      }
+      map: {
+        home: {
+          bedroom: {
+            text: string
+            title: string
+          }
+          door: {
+            text: string
+            title: string
+          }
+          home: {
+            text: string
+            title: string
+          }
+          kitchen: {
+            text: string
+            title: string
+          }
+          living_room: {
+            text: string
+            title: string
+          }
+          room_cousin: {
+            text: string
+            title: string
+          }
+          room_player: {
+            text: string
+            title: string
+          }
+          room_sister: {
+            text: string
+            title: string
+          }
+        }
+        house_lin: {
+          bathroom: {
+            text: string
+            title: string
+          }
+          bedroom: {
+            text: string
+            title: string
+          }
+          door: {
+            text: string
+            title: string
+          }
+          home: {
+            text: string
+            title: string
+          }
+          kitchen: {
+            text: string
+            title: string
+          }
+          living_room: {
+            text: string
+            title: string
+          }
+        }
+      }
+      page: {
+        about: {
+          devDep: string
+          introduction: string
+          prdDep: string
+          projectInfo: {
+            author: string
+            githubLink: string
+            latestBuildTime: string
+            previewLink: string
+            title: string
+            version: string
+          }
+          title: string
+          update: {
+            checkUpdate: string
+            downloading: string
+            newUpdateVersion: string
+            noUpdateVersion: string
+            reboot: string
+            rebootAndUpdate: string
+          }
+        }
+        archive: {
+          playTime: string
+          saveTime: string
+        }
+        home: {
+          creativity: string
+          dealCount: string
+          downloadCount: string
+          entertainment: string
+          greeting: string
+          message: string
+          projectCount: string
+          projectNews: {
+            desc1: string
+            desc2: string
+            desc3: string
+            desc4: string
+            desc5: string
+            moreNews: string
+            title: string
+          }
+          registerCount: string
+          rest: string
+          schedule: string
+          study: string
+          todo: string
+          turnover: string
+          visitCount: string
+          weatherDesc: string
+          work: string
+        }
+        login: {
+          bindWeChat: {
+            title: string
+          }
+          codeLogin: {
+            getCode: string
+            imageCodePlaceholder: string
+            reGetCode: string
+            sendCodeSuccess: string
+            title: string
+          }
+          common: {
+            back: string
+            codeLogin: string
+            codePlaceholder: string
+            confirm: string
+            confirmPasswordPlaceholder: string
+            loginOrRegister: string
+            loginSuccess: string
+            passwordPlaceholder: string
+            phonePlaceholder: string
+            userNamePlaceholder: string
+            validateSuccess: string
+            welcomeBack: string
+          }
+          gameStart: {
+            loadArchive: string
+            newGame: string
+            title: string
+          }
+          pwdLogin: {
+            admin: string
+            forgetPassword: string
+            otherAccountLogin: string
+            otherLoginMode: string
+            register: string
+            rememberMe: string
+            superAdmin: string
+            title: string
+            user: string
+          }
+          register: {
+            agreement: string
+            policy: string
+            protocol: string
+            title: string
+          }
+          resetPwd: {
+            title: string
+          }
+        }
+        setting: {
+          saveTips: string
+          title: string
+        }
       }
       request: {
         logout: string
@@ -180,204 +400,111 @@ declare namespace App {
         refreshToken: string
         tokenExpired: string
       }
+      route: {
+        '403': string
+        '404': string
+        '500': string
+        achievement: string
+        archive: string
+        home: string
+        login: string
+        personal: string
+        relationship: string
+        setting: string
+        setting_about: string
+        setting_system: string
+        setting_theme: string
+        task: string
+      }
+      system: {
+        title: string
+      }
       theme: {
-        themeSchema: { title: string } & Record<UnionKey.ThemeScheme, string>
-        grayScale: string
-        layoutMode: { title: string } & Record<UnionKey.ThemeLayoutMode, string>
-        recommendColor: string
-        recommendColorDesc: string
-        themeColor: {
-          title: string
-          followPrimary: string
-        } & Theme.ThemeColor
-        scrollMode: { title: string } & Record<UnionKey.ThemeScrollMode, string>
-        page: {
-          animate: string
-          mode: { title: string } & Record<UnionKey.ThemePageAnimateMode, string>
-        }
-        fixedHeaderAndTab: string
-        header: {
-          height: string
-          breadcrumb: {
-            visible: string
-            showIcon: string
-          }
-        }
-        tab: {
-          visible: string
-          cache: string
-          height: string
-          mode: { title: string } & Record<UnionKey.ThemeTabMode, string>
-        }
-        sider: {
-          inverted: string
-          width: string
-          collapsedWidth: string
-          mixWidth: string
-          mixCollapsedWidth: string
-          mixChildMenuWidth: string
-        }
-        footer: {
-          visible: string
-          fixed: string
-          height: string
-          right: string
-        }
-        themeDrawerTitle: string
-        pageFunTitle: string
         configOperation: {
           copyConfig: string
           copySuccessMsg: string
           resetConfig: string
           resetSuccessMsg: string
         }
-      }
-      route: Record<I18nRouteKey, string>
-      page: {
-        login: {
-          common: {
-            loginOrRegister: string
-            userNamePlaceholder: string
-            phonePlaceholder: string
-            codePlaceholder: string
-            passwordPlaceholder: string
-            confirmPasswordPlaceholder: string
-            codeLogin: string
-            confirm: string
-            back: string
-            validateSuccess: string
-            loginSuccess: string
-            welcomeBack: string
-          }
-          pwdLogin: {
-            title: string
-            rememberMe: string
-            forgetPassword: string
-            register: string
-            otherAccountLogin: string
-            otherLoginMode: string
-            superAdmin: string
-            admin: string
-            user: string
-          }
-          codeLogin: {
-            title: string
-            getCode: string
-            reGetCode: string
-            sendCodeSuccess: string
-            imageCodePlaceholder: string
-          }
-          register: {
-            title: string
-            agreement: string
-            protocol: string
-            policy: string
-          }
-          resetPwd: {
-            title: string
-          }
-          bindWeChat: {
-            title: string
-          }
-          gameStart: {
-            title: string
-            newGame: string
-            loadArchive: string
-          }
+        fixedHeaderAndTab: string
+        footer: {
+          fixed: string
+          height: string
+          right: string
+          visible: string
         }
-        about: {
+        grayScale: string
+        header: {
+          breadcrumb: {
+            showIcon: string
+            visible: string
+          }
+          height: string
+        }
+        layoutMode: {
+          horizontal: string
+          'horizontal-mix': string
           title: string
-          projectInfo: {
-            title: string
-            author: string
-            version: string
-            latestBuildTime: string
-            githubLink: string
-            previewLink: string
-          }
-          update: {
-            newUpdateVersion: string
-            noUpdateVersion: string
-            rebootAndUpdate: string
-            checkUpdate: string
-          }
-          prdDep: string
-          devDep: string
+          vertical: string
+          'vertical-mix': string
         }
-        home: {
-          greeting: string
-          weatherDesc: string
-          projectCount: string
-          todo: string
-          message: string
-          downloadCount: string
-          registerCount: string
-          schedule: string
-          study: string
-          work: string
-          rest: string
-          entertainment: string
-          visitCount: string
-          turnover: string
-          dealCount: string
-          projectNews: {
+        page: {
+          animate: string
+          mode: {
+            fade: string
+            'fade-bottom': string
+            'fade-scale': string
+            'fade-slide': string
+            none: string
             title: string
-            moreNews: string
-            desc1: string
-            desc2: string
-            desc3: string
-            desc4: string
-            desc5: string
+            'zoom-fade': string
+            'zoom-out': string
           }
-          creativity: string
         }
-        setting: {
+        pageFunTitle: string
+        recommendColor: string
+        recommendColorDesc: string
+        scrollMode: {
+          content: string
           title: string
+          wrapper: string
         }
-      }
-      form: {
-        required: string
-        userName: FormMsg
-        phone: FormMsg
-        pwd: FormMsg
-        confirmPwd: FormMsg
-        code: FormMsg
-        email: FormMsg
-      }
-      dropdown: Record<Global.DropdownKey, string>
-      icon: {
-        themeConfig: string
-        themeSchema: string
-        lang: string
-        fullscreen: string
-        fullscreenExit: string
-        reload: string
-        collapse: string
-        expand: string
-        pin: string
-        unpin: string
-        minimize: string
-        maximize: string
-      }
-      dataTable: {
-        itemCount: string
-      }
-      map: {
-        title: {
-          title1: string
-          title2: string
-          title3: string
-          title4: string
+        sider: {
+          collapsedWidth: string
+          inverted: string
+          mixChildMenuWidth: string
+          mixCollapsedWidth: string
+          mixWidth: string
+          width: string
         }
-        text: {
-          text1: string
-          text2: string
-          text3: string
-          text4: string
+        tab: {
+          cache: string
+          height: string
+          mode: {
+            button: string
+            chrome: string
+            title: string
+          }
+          visible: string
+        }
+        themeColor: {
+          error: string
+          followPrimary: string
+          info: string
+          primary: string
+          success: string
+          title: string
+          warning: string
+        }
+        themeDrawerTitle: string
+        themeSchema: {
+          auto: string
+          dark: string
+          light: string
+          title: string
         }
       }
     }
-
     type GetI18nKey<
       T extends Record<string, unknown>,
       K extends keyof T = keyof T
