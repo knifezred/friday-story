@@ -126,6 +126,7 @@ declare namespace App {
     }
 
     type Schema = {
+      route: Record<I18nRouteKey, string>
       common: {
         action: string
         add: string
@@ -399,22 +400,6 @@ declare namespace App {
         logoutWithModalMsg: string
         refreshToken: string
         tokenExpired: string
-      }
-      route: {
-        '403': string
-        '404': string
-        '500': string
-        achievement: string
-        archive: string
-        home: string
-        login: string
-        personal: string
-        relationship: string
-        setting: string
-        setting_about: string
-        setting_system: string
-        setting_theme: string
-        task: string
       }
       system: {
         title: string
