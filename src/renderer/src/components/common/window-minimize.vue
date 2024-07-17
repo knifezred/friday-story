@@ -6,7 +6,7 @@ defineOptions({
 })
 
 function hideWindow() {
-  window.electron.ipcRenderer.send('hide-window')
+  window.electron.ipcRenderer.invoke('hide-window')
 }
 </script>
 

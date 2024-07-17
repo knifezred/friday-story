@@ -1,6 +1,6 @@
-# fridayboot-electron
+# friday-story
 
-An Electron application with Vue and TypeScript for SLG Game.
+An Electron application with Vue and TypeScript for QSG Game.
 
 ## Recommended IDE Setup
 

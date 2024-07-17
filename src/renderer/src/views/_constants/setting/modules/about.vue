@@ -17,14 +17,9 @@
       <NDescriptions label-placement="left" bordered size="small">
         <NDescriptionsItem :label="$t('page.about.projectInfo.version')">
           <NTag type="primary">{{ pkgJson.version }}</NTag>
-          <NButton class="ml-2" size="small" type="primary" @click="checkVersion">
-            <template #icon>
-              <n-progress
-                v-if="updatePercentage > 0"
-                type="circle"
-                :percentage="updatePercentage" />
-            </template>
+          <NButton class="ml-2 w-24" size="small" type="primary" @click="checkVersion">
             {{ $t('page.about.update.checkUpdate') }}
+            <icon-svg-spinners:180-ring-with-bg v-if="loading" class="ml-1" />
           </NButton>
         </NDescriptionsItem>
         <NDescriptionsItem :label="$t('page.about.projectInfo.latestBuildTime')">
@@ -45,6 +40,46 @@
         </NDescriptionsItem>
       </NDescriptions>
     </NCard>
+    <n-modal v-model:show="showModal" preset="dialog" :title="$t('common.tip')">
+      <n-flex vertical>
+        <template v-if="updatePercentage == 0">
+          <n-p class="ma-auto">
+            <icon-local-aircraft class="w-32 h-32" />
+          </n-p>
+          <n-h3 prefix="bar" align-text type="info">
+            {{ $t('page.about.update.newUpdateVersion') }}
+          </n-h3>
+        </template>
+        <template v-if="updatePercentage > 0">
+          <n-p class="ma-auto">
+            <n-progress
+              type="circle"
+              :percentage="updatePercentage"
+              indicator-placement="inside"
+              :border-radius="4"
+              :height="24" />
+          </n-p>
+          <n-h3 v-if="updateSuccess" prefix="bar" align-text type="info">
+            {{ $t('page.about.update.rebootAndUpdate') }}
+          </n-h3>
+          <n-h3 v-else prefix="bar" align-text type="info">
+            {{ $t('page.about.update.downloading') }}
+            <icon-svg-spinners:180-ring-with-bg class="ml-1" />
+          </n-h3>
+        </template>
+      </n-flex>
+      <template #action>
+        <n-button @click="showModal = false">
+          {{ $t('common.cancel') }}
+        </n-button>
+        <n-button v-if="updateSuccess" type="primary" @click="rebootUpdate">
+          {{ $t('page.about.update.reboot') }}
+        </n-button>
+        <n-button v-else type="primary" @click="submitCallback">
+          {{ $t('common.confirm') }}
+        </n-button>
+      </template>
+    </n-modal>
   </NFlex>
 </template>
 
@@ -54,13 +89,15 @@ import { onMounted, onUnmounted, ref } from 'vue'
 import pkg from '../../../../../../../package.json'
 const ipcRenderer = window.electron.ipcRenderer
 const updatePercentage = ref(0)
+const showModal = ref(false)
+const updateSuccess = ref(false)
+const loading = ref(false)
+const { name, author, version } = pkg
 interface PkgJson {
   name: string
   author: string
   version: string
 }
-
-const { name, author, version } = pkg
 const pkgJson: PkgJson = {
   name,
   author,
@@ -69,41 +106,34 @@ const pkgJson: PkgJson = {
 const latestBuildTime = BUILD_TIME
 
 function checkVersion() {
+  loading.value = true
   ipcRenderer.send('check-for-update')
+}
+
+function submitCallback() {
+  ipcRenderer.send('download-update')
+}
+
+function rebootUpdate() {
+  ipcRenderer.send('quit-and-install')
 }
 
 onMounted(() => {
   ipcRenderer.on('check-for-update-reply', (_event, arg) => {
+    loading.value = false
     if (arg == true) {
-      window.$dialog?.info({
-        title: $t('common.tip'),
-        content: $t('page.about.update.newUpdateVersion'),
-        positiveText: $t('common.confirm'),
-        negativeText: $t('common.cancel'),
-        onPositiveClick: () => {
-          // 下载更新
-          ipcRenderer.send('download-update')
-        }
-      })
+      showModal.value = true
     } else {
       window.$message?.info($t('page.about.update.noUpdateVersion'))
     }
   })
   ipcRenderer.on('download-update-percent-reply', (_event, arg) => {
-    updatePercentage.value = arg
+    updatePercentage.value = parseFloat(arg.toFixed(2))
   })
   ipcRenderer.on('download-update-reply', (_event, arg) => {
     if (arg) {
-      window.$dialog?.info({
-        title: $t('common.tip'),
-        content: $t('page.about.update.rebootAndUpdate'),
-        positiveText: $t('common.confirm'),
-        negativeText: $t('common.cancel'),
-        onPositiveClick: () => {
-          // 重启更新
-          ipcRenderer.send('quit-and-install')
-        }
-      })
+      updatePercentage.value = 100
+      updateSuccess.value = true
     }
   })
 })

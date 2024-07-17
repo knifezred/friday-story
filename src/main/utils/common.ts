@@ -1,26 +1,40 @@
-// 格式化时间戳
-export function formatTimestamp(timestamp) {
-  // 创建一个Date对象
-  const date = new Date(timestamp)
+import { app } from 'electron'
+import fs from 'fs'
+import path from 'node:path'
 
-  // 获取年份（四位数）
-  const year = date.getFullYear()
+export function listDir() {
+  const dirPath = path.join(app.getAppPath(), 'static')
+  const fileList = [] as Array<string>
+  traverseDir(dirPath, fileList)
+  return fileList
+}
 
-  // 获取月份（两位数，01-12）
-  const month = String(date.getMonth() + 1).padStart(2, '0')
+function traverseDir(dirPath, fileList: Array<string>) {
+  fs.readdir(dirPath, (err, files) => {
+    if (err) {
+      console.error('Could not list the directory.', err)
+      return
+    }
 
-  // 获取日期（两位数，01-31）
-  const day = String(date.getDate()).padStart(2, '0')
+    files.forEach((file) => {
+      const fullPath = path.join(dirPath, file)
 
-  // 获取小时（两位数，00-23）
-  const hours = String(date.getHours()).padStart(2, '0')
+      fs.stat(fullPath, (err, stats) => {
+        if (err) {
+          return console.error('Error getting stats: ', err)
+        }
 
-  // 获取分钟（两位数，00-59）
-  const minutes = String(date.getMinutes()).padStart(2, '0')
-
-  // 获取秒数（两位数，00-59）
-  const seconds = String(date.getSeconds()).padStart(2, '0')
-
-  // 返回格式化后的字符串
-  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
+        if (stats.isDirectory()) {
+          console.log(`${fullPath} is a directory`)
+          // 递归遍历子目录
+          traverseDir(fullPath, fileList)
+        } else {
+          fileList.push(
+            '/static/' + fullPath.split('/static/')[fullPath.split('/static/').length - 1]
+          )
+          console.log(`${fullPath} is a file`)
+        }
+      })
+    })
+  })
 }

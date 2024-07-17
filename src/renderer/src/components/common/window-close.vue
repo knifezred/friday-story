@@ -6,7 +6,7 @@ defineOptions({
 })
 
 function closeWindow() {
-  window.electron.ipcRenderer.send('close-window')
+  window.electron.ipcRenderer.invoke('close-window')
 }
 </script>
 

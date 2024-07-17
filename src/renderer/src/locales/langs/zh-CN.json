@@ -95,31 +95,63 @@
   },
   "map": {
     "home": {
-      "title": "家",
-      "text": "家",
+      "bedroom": {
+        "text": "主卧",
+        "title": "主卧"
+      },
       "door": {
-        "title": "大门",
-        "text": "大门"
+        "text": "大门",
+        "title": "大门"
+      },
+      "home": {
+        "text": "家",
+        "title": "家"
+      },
+      "kitchen": {
+        "text": "厨房",
+        "title": "厨房"
       },
       "living_room": {
-        "title": "客厅",
-        "text": "客厅"
-      },
-      "bedroom": {
-        "title": "主卧",
-        "text": "主卧"
-      },
-      "room_player": {
-        "title": "我的卧室",
-        "text": "我的卧室"
-      },
-      "room_sister": {
-        "title": "姐姐的房间",
-        "text": "姐姐的房间"
+        "text": "客厅",
+        "title": "客厅"
       },
       "room_cousin": {
-        "title": "表妹的房间",
-        "text": "表妹的房间"
+        "text": "表妹房间",
+        "title": "表妹房间"
+      },
+      "room_player": {
+        "text": "我的卧室",
+        "title": "我的卧室"
+      },
+      "room_sister": {
+        "text": "姐姐房间",
+        "title": "姐姐房间"
+      }
+    },
+    "house_lin": {
+      "bathroom": {
+        "text": "卫生间",
+        "title": "卫生间"
+      },
+      "bedroom": {
+        "text": "主卧",
+        "title": "主卧"
+      },
+      "door": {
+        "text": "大门",
+        "title": "大门"
+      },
+      "home": {
+        "text": "林家",
+        "title": "林家"
+      },
+      "kitchen": {
+        "text": "厨房",
+        "title": "厨房"
+      },
+      "living_room": {
+        "text": "客厅",
+        "title": "客厅"
       }
     }
   },
@@ -139,9 +171,10 @@
       "title": "关于",
       "update": {
         "checkUpdate": "检查更新",
-        "content": "发现了一个新版本，您确定要更新它吗？",
-        "newUpdateVersion": "发现新版本, 确定更新?",
+        "downloading": "下载中，请稍后",
+        "newUpdateVersion": "发现了一个新版本，您确定要更新它吗？",
         "noUpdateVersion": "当前版本已经是最新版本",
+        "reboot": "重启更新",
         "rebootAndUpdate": "下载完成，是否重启并更新？"
       }
     },

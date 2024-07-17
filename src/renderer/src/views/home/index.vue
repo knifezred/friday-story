@@ -86,6 +86,7 @@ defineOptions({
   name: 'Home'
 })
 const worldTime = ref(Date.now())
+const allMaps = ref<Array<Dto.MapItem>>(DefaultMaps)
 const mapItems = ref<Array<Dto.MapItem>>([])
 const actionButtons = ref<Array<Dto.ActionButton>>([])
 const isShowMap = ref(false)
@@ -95,15 +96,11 @@ const miniGameModule = ref<UnionKey.MiniGameModule>('finger-guessing')
 const splitSize = ref(1)
 const currentMap = ref<Dto.MapItem>({
   id: 0,
-  title: 'test',
-  text: 'text1',
-  cover: '/static/imgs/t1.webp',
-  video: '',
-  icon: '',
-  isDisabled: false,
-  isShow: false,
-  level: 0,
-  pid: 0
+  pid: 0,
+  staticId: 'test.home',
+  title: '',
+  text: '',
+  cover: ''
 })
 const { userInfo } = useAuthStore()
 const appStore = useAppStore()
@@ -139,28 +136,41 @@ function nextText() {
 
 function mapFunc(map: Dto.MapItem) {
   if (map.jumpId != undefined) {
-    reloadMapList(map.jumpId)
+    reloadMapList(map.jumpId, map.pid)
   }
   if (!isShowMiniGame.value) {
+    userInfo.archive.place = map.id
     currentMap.value = map
-    currentText.value = map.text
+    currentText.value = map.text ? map.text : map.staticId + '.text'
   } else {
     window.$message?.info('in mini game,please wait game ended')
   }
 }
-function reloadMapList(id: number) {
-  mapItems.value = DefaultMaps.filter((x) => x.pid == id)
+function reloadMapList(jumpId: number, pid: number) {
+  mapItems.value = allMaps.value.filter((x) => x.pid == jumpId)
   setTimeout(() => {
     if (mapItems.value.length > 0) {
-      currentMap.value = mapItems.value[0]
+      if (mapItems.value.filter((x) => x.id == pid).length > 0) {
+        currentMap.value = mapItems.value.filter((x) => x.id == pid)[0]
+      } else {
+        currentMap.value = mapItems.value[0]
+      }
       currentText.value = currentMap.value.text
+        ? currentMap.value.text
+        : currentMap.value.staticId + '.text'
     }
-  }, 10)
+  }, 1)
 }
 
 onMounted(() => {
+  allMaps.value.forEach((map) => {
+    map.staticId = 'map.' + map.staticId
+    map.title = map.title ? map.title : map.staticId + '.title'
+    map.text = map.text ? map.text : map.staticId + '.text'
+    map.cover = map.cover ? map.cover : '/static/' + map.staticId.replaceAll('.', '/') + '.jpeg'
+  })
   // 初始化地图
-  reloadMapList(0)
+  reloadMapList(0, 0)
   // 初始化操作按钮
   actionButtons.value.push(
     {
@@ -189,9 +199,12 @@ onMounted(() => {
       isShow: true
     }
   )
-  if (userInfo.archive.place > 0) {
-    mapFunc(mapItems.value.filter((x) => x.id == userInfo.archive.place)[0])
-  }
+  // if (userInfo.archive.place > 0) {
+  //   currentMap.value = mapItems.value.filter((x) => x.id == userInfo.archive.place)[0]
+  //   currentText.value = currentMap.value.text
+  //     ? currentMap.value.text
+  //     : currentMap.value.staticId + '.text'
+  // }
 })
 
 // map 地图

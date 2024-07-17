@@ -183,15 +183,17 @@ declare namespace Dto {
   interface MapItem {
     id: number
     pid: number
+    staticId: string
     title: string
     text: string
     cover: string
-    video?: string | undefined
+    video?: string
     icon?: string
     isDisabled?: boolean
     isShow?: boolean
-    level: number
-    jumpId?: number | undefined
+    level?: number
+    jumpId?: number
+    order?: number
   }
 
   interface NpcInfo {

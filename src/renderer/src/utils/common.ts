@@ -87,3 +87,7 @@ export function formatSeconds(seconds) {
 export function formatNumber(num: number, length: number) {
   return num.toString().padStart(length, '0')
 }
+
+export function listAllStaticFiles() {
+  return window.electron.ipcRenderer.invoke('list-static-files')
+}
