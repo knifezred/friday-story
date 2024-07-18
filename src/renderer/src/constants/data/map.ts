@@ -16,7 +16,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: 'country.friday',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'country'
   },
   {
     id: 2,
@@ -25,7 +26,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: 'city.boot',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'city'
   },
   {
     id: 3,
@@ -34,7 +36,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: 'area.dongshan',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'area'
   },
   {
     id: 4,
@@ -43,7 +46,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: 'street.pingan',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'street'
   },
   {
     id: 5,
@@ -52,7 +56,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: 'home.home',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'house'
   },
   {
     id: 6,
@@ -60,7 +65,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: 'home.living_room',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'room'
   },
   {
     id: 7,
@@ -68,7 +74,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: 'home.bedroom',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'room'
   },
   {
     id: 8,
@@ -76,7 +83,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: 'home.room_player',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'room'
   },
   {
     id: 9,
@@ -84,7 +92,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: 'home.room_sister',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'room'
   },
   {
     id: 10,
@@ -92,7 +101,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: 'home.room_cousin',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'room'
   },
   {
     id: 11,
@@ -100,7 +110,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: 'home.kitchen',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'room'
   },
   {
     id: 12,
@@ -108,7 +119,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: 'home.bathroom',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'room'
   },
   {
     id: 13,
@@ -117,7 +129,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: 'home.door',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'room'
   },
   {
     id: 14,
@@ -126,7 +139,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: 'house_lin.home',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'house'
   },
   {
     id: 15,
@@ -134,7 +148,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: 'house_lin.living_room',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'room'
   },
   {
     id: 16,
@@ -142,7 +157,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: 'house_lin.bedroom',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'room'
   },
   {
     id: 17,
@@ -150,7 +166,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: 'house_lin.kitchen',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'room'
   },
   {
     id: 18,
@@ -158,7 +175,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: 'house_lin.lin_room',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'room'
   },
   {
     id: 19,
@@ -166,7 +184,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: 'house_lin.bathroom',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'room'
   },
   {
     id: 20,
@@ -175,7 +194,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: 'house_lin.door',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'room'
   },
   {
     id: 21,
@@ -183,7 +203,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: 'street.entrance',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'street'
   },
   {
     id: 22,
@@ -191,7 +212,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: 'city.c01',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'city'
   },
   {
     id: 23,
@@ -199,7 +221,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: '',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'room'
   },
   {
     id: 23,
@@ -207,7 +230,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: '',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'room'
   },
   {
     id: 247,
@@ -215,7 +239,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: '',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'room'
   },
   {
     id: 25,
@@ -223,7 +248,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: '',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'room'
   },
   {
     id: 26,
@@ -231,7 +257,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: '',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'room'
   },
   {
     id: 27,
@@ -239,7 +266,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: '',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'room'
   },
   {
     id: 28,
@@ -247,7 +275,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: '',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'room'
   },
   {
     id: 29,
@@ -255,7 +284,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: '',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'room'
   },
   {
     id: 30,
@@ -263,6 +293,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     staticId: '',
     title: '',
     text: '',
-    cover: ''
+    cover: '',
+    level: 'room'
   }
 ]

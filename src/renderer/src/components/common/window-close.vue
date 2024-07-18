@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { $t } from '@renderer/locales'
+import { useAuthStore } from '@renderer/store/modules/auth'
 
 defineOptions({
   name: 'WindowClose'
 })
-
+const authStore = useAuthStore()
 function closeWindow() {
-  window.electron.ipcRenderer.invoke('close-window')
+  authStore.saveArchiveData().then(() => {
+    window.electron.ipcRenderer.invoke('close-window')
+  })
 }
 </script>
 

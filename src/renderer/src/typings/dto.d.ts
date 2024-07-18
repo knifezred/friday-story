@@ -180,6 +180,7 @@ declare namespace Dto {
     miniGame?: UnionKey.MiniGameModule | undefined
   }
 
+  type MapLevel = 'room' | 'house' | 'street' | 'area' | 'city' | 'country'
   interface MapItem {
     id: number
     pid: number
@@ -191,7 +192,7 @@ declare namespace Dto {
     icon?: string
     isDisabled?: boolean
     isShow?: boolean
-    level?: number
+    level: MapLevel
     jumpId?: number
     order?: number
   }

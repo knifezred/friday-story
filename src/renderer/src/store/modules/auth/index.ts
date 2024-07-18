@@ -9,7 +9,7 @@ import useLoading from '@renderer/packages/hooks/use-loading'
 
 import { useRouterPush } from '@renderer/hooks/common/router'
 import { $t } from '@renderer/locales'
-import { findArchive } from '@renderer/service/api/archive'
+import { findArchive, updateArchive } from '@renderer/service/api/archive'
 import { localStg } from '@renderer/utils/storage'
 export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   const router = useRouter()
@@ -114,6 +114,11 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
 
     return false
   }
+
+  async function saveArchiveData() {
+    userInfo.archive.data = JSON.stringify(archiveFileData.value)
+    return await updateArchive(userInfo.archive)
+  }
   return {
     token,
     userInfo,
@@ -122,6 +127,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     isLogin,
     loginLoading,
     login,
+    saveArchiveData,
     resetStore
   }
 })

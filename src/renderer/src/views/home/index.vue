@@ -7,7 +7,7 @@
     :max="splitSize">
     <template #1>
       <NFlex v-if="!isShowMiniGame" vertical :size="0">
-        <UiScene :map="currentMap" />
+        <UiScene :map="mapStore.currMap" />
         <n-card
           class="w-full bg-primary bg-op-30"
           :class="isShowMap ? 'pos-relative' : 'pos-fixed bottom-0'"
@@ -49,7 +49,7 @@
         <n-scrollbar class="h-100vh" :distance="10">
           <NFlex>
             <n-card
-              v-for="item in mapItems"
+              v-for="item in mapStore.currLevelMaps"
               :key="item.id"
               :title="$t(item.title)"
               class="w-9.2vw text-center cursor-pointer map-card"
@@ -61,7 +61,7 @@
               </template>
               <template #header-extra>
                 <icon-solar:user-bold-duotone
-                  v-if="item.id == currentMap.id"
+                  v-if="item.id == mapStore.currMap.id"
                   class="color-primary" />
                 <icon-solar:exit-line-duotone
                   v-if="item.jumpId != undefined"
@@ -77,33 +77,25 @@
 
 <script setup lang="ts">
 import MiniGame from '@renderer/components/mini-games/index.vue'
-import { DefaultMaps } from '@renderer/constants/data/map'
 import { useAppStore } from '@renderer/store/modules/app'
 import { useAuthStore } from '@renderer/store/modules/auth'
+import { useMapStore } from '@renderer/store/modules/map'
 import { formatTimestamp } from '@renderer/utils/common'
 import { onMounted, ref, watch } from 'vue'
 defineOptions({
   name: 'Home'
 })
 const worldTime = ref(Date.now())
-const allMaps = ref<Array<Dto.MapItem>>(DefaultMaps)
-const mapItems = ref<Array<Dto.MapItem>>([])
 const actionButtons = ref<Array<Dto.ActionButton>>([])
-const isShowMap = ref(false)
 const currentText = ref('')
+const isShowMap = ref(false)
 const isShowMiniGame = ref(false)
 const miniGameModule = ref<UnionKey.MiniGameModule>('finger-guessing')
 const splitSize = ref(1)
-const currentMap = ref<Dto.MapItem>({
-  id: 0,
-  pid: 0,
-  staticId: 'test.home',
-  title: '',
-  text: '',
-  cover: ''
-})
 const { userInfo } = useAuthStore()
 const appStore = useAppStore()
+const mapStore = useMapStore()
+const { currLevelMaps, reloadMap } = useMapStore()
 
 watch(
   [() => appStore.siderCollapse],
@@ -136,53 +128,21 @@ function nextText() {
 
 function mapFunc(map: Dto.MapItem) {
   if (map.jumpId != undefined) {
-    reloadMapList(map.jumpId, map.pid)
+    reloadMap(map.jumpId, map.pid)
+    currentText.value = map.text
   }
   if (!isShowMiniGame.value) {
     userInfo.archive.place = map.id
-    currentMap.value = map
+    mapStore.currMap = map
     currentText.value = map.text ? map.text : map.staticId + '.text'
   } else {
     window.$message?.info('in mini game,please wait game ended')
   }
 }
-function reloadMapList(jumpId: number, pid: number) {
-  mapItems.value = allMaps.value.filter((x) => x.pid == jumpId)
-  if (jumpId > 0) {
-    const upLevel = allMaps.value.filter((x) => x.id == jumpId)[0]
-    mapItems.value.push({
-      id: 999999,
-      pid: mapItems.value[0].pid,
-      jumpId: upLevel.pid,
-      staticId: 'map.common.exit',
-      title: 'map.common.exit.title',
-      text: '',
-      cover: '/static/map/common/exit.png'
-    })
-  }
-  setTimeout(() => {
-    if (mapItems.value.length > 0) {
-      if (mapItems.value.filter((x) => x.id == pid).length > 0) {
-        currentMap.value = mapItems.value.filter((x) => x.id == pid)[0]
-      } else {
-        currentMap.value = mapItems.value[0]
-      }
-      currentText.value = currentMap.value.text
-        ? currentMap.value.text
-        : currentMap.value.staticId + '.text'
-    }
-  }, 1)
-}
 
 onMounted(() => {
-  allMaps.value.forEach((map) => {
-    map.staticId = 'map.' + map.staticId
-    map.title = map.title ? map.title : map.staticId + '.title'
-    map.text = map.text ? map.text : map.staticId + '.text'
-    map.cover = map.cover ? map.cover : '/static/' + map.staticId.replaceAll('.', '/') + '.jpeg'
-  })
   // 初始化地图
-  reloadMapList(0, 0)
+  mapStore.initMap(userInfo.archive.place)
   // 初始化操作按钮
   actionButtons.value.push(
     {
