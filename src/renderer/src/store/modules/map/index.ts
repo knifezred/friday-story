@@ -2,8 +2,10 @@ import { DefaultMaps } from '@renderer/constants/data/map'
 import { SetupStoreId } from '@renderer/enums'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import { useAuthStore } from '../auth'
 
 export const useMapStore = defineStore(SetupStoreId.Map, () => {
+  const { userInfo } = useAuthStore()
   const allMaps = ref<Array<Dto.MapItem>>(DefaultMaps)
   const currLevelMaps = ref<Array<Dto.MapItem>>([])
   const currMap = ref<Dto.MapItem>({
@@ -32,11 +34,13 @@ export const useMapStore = defineStore(SetupStoreId.Map, () => {
       })
     }
     if (currLevelMaps.value.length > 0) {
+      debugger
       if (currLevelMaps.value.filter((x) => x.id == pid).length > 0) {
         currMap.value = currLevelMaps.value.filter((x) => x.id == pid)[0]
       } else {
         currMap.value = currLevelMaps.value[0]
       }
+      userInfo.archive.place = currMap.value.id
     }
   }
 

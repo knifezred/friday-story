@@ -95,6 +95,10 @@
   },
   "map": {
     "common": {
+      "demo": {
+        "title": "测试",
+        "text": "测试"
+      },
       "exit": {
         "title": "退出"
       }

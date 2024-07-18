@@ -218,7 +218,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 23,
     pid: 3,
-    staticId: '',
+    staticId: 'common.demo',
     title: '',
     text: '',
     cover: '',
@@ -227,7 +227,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 23,
     pid: 3,
-    staticId: '',
+    staticId: 'common.demo',
     title: '',
     text: '',
     cover: '',
@@ -236,7 +236,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 247,
     pid: 3,
-    staticId: '',
+    staticId: 'common.demo',
     title: '',
     text: '',
     cover: '',
@@ -245,7 +245,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 25,
     pid: 3,
-    staticId: '',
+    staticId: 'common.demo',
     title: '',
     text: '',
     cover: '',
@@ -254,7 +254,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 26,
     pid: 3,
-    staticId: '',
+    staticId: 'common.demo',
     title: '',
     text: '',
     cover: '',
@@ -263,7 +263,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 27,
     pid: 3,
-    staticId: '',
+    staticId: 'common.demo',
     title: '',
     text: '',
     cover: '',
@@ -272,7 +272,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 28,
     pid: 3,
-    staticId: '',
+    staticId: 'common.demo',
     title: '',
     text: '',
     cover: '',
@@ -281,7 +281,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 29,
     pid: 3,
-    staticId: '',
+    staticId: 'common.demo',
     title: '',
     text: '',
     cover: '',
@@ -290,7 +290,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 30,
     pid: 3,
-    staticId: '',
+    staticId: 'common.demo',
     title: '',
     text: '',
     cover: '',

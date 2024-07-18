@@ -95,7 +95,7 @@ const splitSize = ref(1)
 const { userInfo } = useAuthStore()
 const appStore = useAppStore()
 const mapStore = useMapStore()
-const { currLevelMaps, reloadMap } = useMapStore()
+const { reloadMap } = useMapStore()
 
 watch(
   [() => appStore.siderCollapse],
@@ -130,13 +130,14 @@ function mapFunc(map: Dto.MapItem) {
   if (map.jumpId != undefined) {
     reloadMap(map.jumpId, map.pid)
     currentText.value = map.text
-  }
-  if (!isShowMiniGame.value) {
-    userInfo.archive.place = map.id
-    mapStore.currMap = map
-    currentText.value = map.text ? map.text : map.staticId + '.text'
   } else {
-    window.$message?.info('in mini game,please wait game ended')
+    if (!isShowMiniGame.value) {
+      userInfo.archive.place = map.id
+      mapStore.currMap = map
+      currentText.value = map.text
+    } else {
+      window.$message?.info('in mini game,please wait game ended')
+    }
   }
 }
 
