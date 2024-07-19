@@ -29,8 +29,9 @@
               <ButtonIcon
                 v-if="isStaticSuper"
                 icon="solar:cash-out-line-duotone"
-                text
-                class="mx-2"
+                class="mx-1"
+                tooltip-content="+100000"
+                tooltip-placement="top"
                 @click="addMoney(100000)" />
             </n-statistic>
           </n-gi>
@@ -46,9 +47,9 @@
               <ButtonIcon
                 v-if="isStaticSuper"
                 icon="solar:cash-out-line-duotone"
-                text
-                tooltips="Add Money"
-                class="mx-2"
+                class="mx-1"
+                tooltip-content="+100"
+                tooltip-placement="top"
                 @click="addGold(100)" />
             </n-statistic>
           </n-gi>
@@ -114,17 +115,17 @@ watch(
   { immediate: true }
 )
 function mapFunc(map: Dto.MapItem) {
-  if (map.jumpId != undefined) {
-    reloadMap(map.jumpId, map.pid)
-    // currentText.value = map.text
-  } else {
-    if (!isShowMiniGame.value) {
+  if (!isShowMiniGame.value) {
+    if (map.jumpId != undefined) {
+      reloadMap(map.jumpId, map.pid)
+      // currentText.value = map.text
+    } else {
       userInfo.archive.place = map.id
       mapStore.currMap = map
       // currentText.value = map.text
-    } else {
-      window.$message?.info('in mini game,please wait game ended')
     }
+  } else {
+    window.$message?.info('in mini game,please wait game ended')
   }
 }
 

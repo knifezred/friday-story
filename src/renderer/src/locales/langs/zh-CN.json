@@ -93,6 +93,46 @@
     "themeSchema": "主题模式",
     "unpin": "取消固定"
   },
+  "items": {
+    "food": {
+      "cola": {
+        "title": "可乐",
+        "desc": "一瓶碳酸饮料"
+      },
+      "beer": {
+        "title": "啤酒",
+        "desc": ""
+      },
+      "coffee": {
+        "title": "咖啡",
+        "desc": ""
+      },
+      "croissant": {
+        "title": "牛角包",
+        "desc": ""
+      },
+      "fired_eggs": {
+        "title": "煎蛋",
+        "desc": ""
+      },
+      "fish": {
+        "title": "鱼",
+        "desc": ""
+      },
+      "hamburger": {
+        "title": "汉堡",
+        "desc": ""
+      },
+      "milk": {
+        "title": "牛奶",
+        "desc": ""
+      },
+      "sandwich": {
+        "title": "三明治",
+        "desc": ""
+      }
+    }
+  },
   "map": {
     "common": {
       "exit": {
@@ -126,6 +166,10 @@
       "pingan": {
         "title": "平安路",
         "text": "平安路"
+      },
+      "backstreet": {
+        "title": "后街",
+        "text": "后街"
       }
     },
     "building": {
@@ -174,8 +218,8 @@
         }
       },
       "house_lin": {
-        "text": "林家",
-        "title": "林家",
+        "text": "邻居",
+        "title": "邻居",
         "bathroom": {
           "text": "卫生间",
           "title": "卫生间"

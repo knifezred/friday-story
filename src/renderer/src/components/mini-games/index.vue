@@ -14,9 +14,10 @@ import { computed } from 'vue'
 import DiceNumberGame from './modules/dice-number-game.vue'
 import FingerGuessingGame from './modules/finger-guessing-game.vue'
 import MatchThreeGame from './modules/match-three-game.vue'
+import ShopItemsGame from './modules/shop-items-game.vue'
 
 defineOptions({
-  name: 'MiniGame'
+  name: 'MiniGames'
 })
 const authStore = useAuthStore()
 interface Props {
@@ -33,7 +34,8 @@ interface MiniGameModule {
 const moduleMap: Record<UnionKey.MiniGameModule, MiniGameModule> = {
   'dice-number': { label: 'FingerGuessing', component: DiceNumberGame },
   'finger-guessing': { label: 'FingerGuessing', component: FingerGuessingGame },
-  'match-three': { label: 'FingerGuessing', component: MatchThreeGame }
+  'match-three': { label: 'FingerGuessing', component: MatchThreeGame },
+  shop: { label: 'Shop', component: ShopItemsGame }
 }
 
 const activeModule = computed(() => moduleMap[props.module || 'finger-guess'])

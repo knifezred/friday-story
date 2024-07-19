@@ -158,7 +158,7 @@ declare namespace Dto {
 
   type DbArchiveList = Array<DbArchive> | null
 
-  type Type = 'default' | 'tertiary' | 'primary' | 'info' | 'success' | 'warning' | 'error'
+  type Type = 'default' | 'primary' | 'info' | 'success' | 'warning' | 'error'
 
   type ActionType = 'map' | 'mini-game' | 'shop'
 
@@ -171,7 +171,7 @@ declare namespace Dto {
     weather: WeatherType
     money: number
     gold: number
-    items: Array<number>
+    items: Array<ArchivedItem>
     relationShip: []
     achievement: Array<number>
     taskStatus: []
@@ -192,7 +192,7 @@ declare namespace Dto {
   interface MapItem {
     id: number
     pid: number
-    staticId: string
+    name: string
     title: string
     text: string
     cover: string
@@ -226,4 +226,26 @@ declare namespace Dto {
   type ArchiveNpcRelationShip = CommonType.RecordNullable<
     Pick<NpcInfo, 'id' | 'relationship', 'relationshipWithPlayer'>
   >
+  type GameItemType = 'other' | 'food' | 'equipment' | 'task' | 'car'
+
+  interface GameItem {
+    id: number
+    name: string
+    title: string
+    desc: string
+    cover: string
+    type: GameItemType
+    level: LevelType
+    maxNum?: number
+    isLocked?: boolean
+  }
+  interface ArchivedItem {
+    id: number
+    count: number
+  }
+  interface ShopGoods extends GameItem {
+    price: number
+    count: number
+    selectedCount: number
+  }
 }

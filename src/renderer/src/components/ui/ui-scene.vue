@@ -4,14 +4,15 @@
       v-if="!isShowMiniGame"
       :style="'background-image: url(http://localhost:5175' + map.cover + ');padding-top: 56.25%;'"
       class="bg-repeat-round"></div>
-    <MiniGame v-else :module="miniGameModule" @game-result="gameResult" />
+    <MiniGames v-else :module="miniGameModule" @game-result="gameResult" />
     <n-card
-      class="w-full bg-primary bg-op-30"
-      :class="!appStore.siderCollapse ? 'pos-relative' : 'pos-fixed bottom-0'"
+      v-if="!isShowMiniGame"
+      class="w-full bg-gray-8"
+      :class="!appStore.siderCollapse ? 'pos-relative bg-op-1' : 'pos-fixed bottom-0 bg-op-50'"
       :style="appStore.siderCollapse ? 'height:20.5vw' : 'height:18vw'"
       style="border: 0; border-radius: 0">
       <n-scrollbar class="h-20vh" :distance="10" @click="nextText">
-        <n-p class="text-xl">
+        <n-p class="text-xl color-success">
           {{ $t(currentText) }}
         </n-p>
       </n-scrollbar>
@@ -72,9 +73,10 @@ function actionFunc(action: Dto.ActionButton) {
   }
 }
 
-function gameResult(result: string) {
+function gameResult(result: boolean) {
   isShowMiniGame.value = false
   currentText.value = 'game result:' + result
+  emit('update:value', isShowMiniGame.value)
 }
 
 function nextText() {

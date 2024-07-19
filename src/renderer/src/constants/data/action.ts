@@ -25,7 +25,8 @@ export const DefaultActions: Array<Dto.ActionButton> = [
     type: 'primary',
     isDisabled: false,
     isShow: true,
-    actionType: 'shop'
+    miniGame: 'shop',
+    actionType: 'map'
   },
   {
     id: 4,

@@ -1,6 +1,6 @@
-// title=map.${staticId}.title
-// text=map.${staticId}.text
-// cover=/static/map/${staticId.replace('.','/')}.jpeg
+// title=map.${name}.title
+// text=map.${name}.text
+// cover=/static/map/${name.replace('.','/')}.jpeg
 // ## 判断条件
 // 时间（间隔天数，星期几，几号，几月）
 // 位置（房间id）
@@ -13,7 +13,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 1,
     pid: 0,
     jumpId: 1,
-    staticId: 'friday',
+    name: 'friday',
     title: '',
     text: '',
     cover: '',
@@ -24,7 +24,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 2,
     pid: 1,
     jumpId: 2,
-    staticId: 'boot',
+    name: 'boot',
     title: '',
     text: '',
     cover: '',
@@ -35,7 +35,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 3,
     pid: 2,
     jumpId: 3,
-    staticId: 'dongshan',
+    name: 'dongshan',
     title: '',
     text: '',
     cover: '',
@@ -46,7 +46,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 4,
     pid: 3,
     jumpId: 4,
-    staticId: 'pingan',
+    name: 'pingan',
     title: '',
     text: '',
     cover: '',
@@ -57,7 +57,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 5,
     pid: 4,
     jumpId: 5,
-    staticId: 'home',
+    name: 'home',
     title: '',
     text: '',
     cover: '',
@@ -67,7 +67,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 6,
     pid: 5,
-    staticId: 'home.living_room',
+    name: 'home.living_room',
     title: '',
     text: '',
     cover: '',
@@ -77,7 +77,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 7,
     pid: 5,
-    staticId: 'home.bedroom',
+    name: 'home.bedroom',
     title: '',
     text: '',
     cover: '',
@@ -87,7 +87,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 8,
     pid: 5,
-    staticId: 'home.room_player',
+    name: 'home.room_player',
     title: '',
     text: '',
     cover: '',
@@ -97,7 +97,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 9,
     pid: 5,
-    staticId: 'home.room_sister',
+    name: 'home.room_sister',
     title: '',
     text: '',
     cover: '',
@@ -107,7 +107,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 10,
     pid: 5,
-    staticId: 'home.room_cousin',
+    name: 'home.room_cousin',
     title: '',
     text: '',
     cover: '',
@@ -117,7 +117,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 11,
     pid: 5,
-    staticId: 'home.kitchen',
+    name: 'home.kitchen',
     title: '',
     text: '',
     cover: '',
@@ -127,7 +127,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 12,
     pid: 5,
-    staticId: 'home.bathroom',
+    name: 'home.bathroom',
     title: '',
     text: '',
     cover: '',
@@ -138,7 +138,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 13,
     pid: 5,
     jumpId: 4,
-    staticId: 'home.door',
+    name: 'home.door',
     title: '',
     text: '',
     cover: '',
@@ -149,7 +149,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 14,
     pid: 4,
     jumpId: 14,
-    staticId: 'house_lin',
+    name: 'house_lin',
     title: '',
     text: '',
     cover: '',
@@ -159,7 +159,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 15,
     pid: 14,
-    staticId: 'house_lin.living_room',
+    name: 'house_lin.living_room',
     title: '',
     text: '',
     cover: '',
@@ -169,7 +169,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 16,
     pid: 14,
-    staticId: 'house_lin.bedroom',
+    name: 'house_lin.bedroom',
     title: '',
     text: '',
     cover: '',
@@ -179,7 +179,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 17,
     pid: 14,
-    staticId: 'house_lin.kitchen',
+    name: 'house_lin.kitchen',
     title: '',
     text: '',
     cover: '',
@@ -189,7 +189,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 18,
     pid: 14,
-    staticId: 'house_lin.lin_room',
+    name: 'house_lin.lin_room',
     title: '',
     text: '',
     cover: '',
@@ -199,7 +199,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 19,
     pid: 14,
-    staticId: 'house_lin.bathroom',
+    name: 'house_lin.bathroom',
     title: '',
     text: '',
     cover: '',
@@ -210,7 +210,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 20,
     pid: 14,
     jumpId: 4,
-    staticId: 'house_lin.door',
+    name: 'house_lin.door',
     title: '',
     text: '',
     cover: '',
@@ -220,17 +220,17 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 21,
     pid: 4,
-    staticId: 'happy_shop',
+    name: 'happy_shop',
     title: '',
     text: '',
-    cover: '',
+    cover: '.png',
     level: 'building',
     actions: [3]
   },
   {
     id: 22,
     pid: 3,
-    staticId: 'backstreet',
+    name: 'backstreet',
     title: '',
     text: '',
     cover: '',
@@ -240,7 +240,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 23,
     pid: 3,
-    staticId: 'demo',
+    name: 'demo',
     title: '',
     text: '',
     cover: '',
@@ -250,7 +250,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 23,
     pid: 3,
-    staticId: 'demo',
+    name: 'demo',
     title: '',
     text: '',
     cover: '',
@@ -260,7 +260,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 247,
     pid: 3,
-    staticId: 'demo',
+    name: 'demo',
     title: '',
     text: '',
     cover: '',
@@ -270,7 +270,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 25,
     pid: 3,
-    staticId: 'demo',
+    name: 'demo',
     title: '',
     text: '',
     cover: '',
@@ -280,7 +280,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 26,
     pid: 3,
-    staticId: 'demo',
+    name: 'demo',
     title: '',
     text: '',
     cover: '',
@@ -290,7 +290,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 27,
     pid: 3,
-    staticId: 'demo',
+    name: 'demo',
     title: '',
     text: '',
     cover: '',
@@ -300,7 +300,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 28,
     pid: 3,
-    staticId: 'demo',
+    name: 'demo',
     title: '',
     text: '',
     cover: '',
@@ -310,7 +310,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 29,
     pid: 3,
-    staticId: 'demo',
+    name: 'demo',
     title: '',
     text: '',
     cover: '',
@@ -320,7 +320,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 30,
     pid: 3,
-    staticId: 'demo',
+    name: 'demo',
     title: '',
     text: '',
     cover: '',
