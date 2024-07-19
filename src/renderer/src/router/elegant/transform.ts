@@ -168,6 +168,7 @@ const routeMap: RouteMap = {
   "archive": "/archive",
   "demo": "/demo",
   "home": "/home",
+  "inventory": "/inventory",
   "login": "/login/:module(pwd-login|register|reset-pwd|game-start)?",
   "personal": "/personal",
   "relationship": "/relationship",

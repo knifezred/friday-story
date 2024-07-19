@@ -108,3 +108,13 @@ export const DefaultShopGoods: Array<Dto.ShopGoods> = [
     selectedCount: 0
   }
 ]
+
+export function ShopGoods() {
+  const goodsList = DefaultShopGoods
+  goodsList.forEach((item) => {
+    item.desc = 'items.' + item.type + '.' + item.name + '.desc'
+    item.title = 'items.' + item.type + '.' + item.name + '.title'
+    item.cover = '/static/items/' + item.type + '/' + item.name.replaceAll('.', '/') + '.png'
+  })
+  return goodsList
+}

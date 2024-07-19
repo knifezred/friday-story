@@ -46,8 +46,8 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'achievement',
       i18nKey: 'route.achievement',
-      icon: 'mynaui:gift',
-      order: 20
+      icon: 'streamline-emojis:wrapped-gift-2',
+      order: 30
     }
   },
   {
@@ -79,8 +79,19 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'home',
       i18nKey: 'route.home',
-      icon: 'mynaui:home',
+      icon: 'streamline-emojis:house-with-garden',
       order: 1
+    }
+  },
+  {
+    name: 'inventory',
+    path: '/inventory',
+    component: 'layout.base$view.inventory',
+    meta: {
+      title: 'inventory',
+      i18nKey: 'route.inventory',
+      icon: 'streamline-emojis:package',
+      order: 10
     }
   },
   {
@@ -112,7 +123,7 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'relationship',
       i18nKey: 'route.relationship',
-      icon: 'solar:user-heart-rounded-broken',
+      icon: 'streamline-emojis:unicorn-face',
       order: 40
     }
   },
@@ -136,8 +147,8 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'task',
       i18nKey: 'route.task',
-      icon: 'mynaui:panel-top-open',
-      order: 10
+      icon: 'unjs:fs-memo',
+      order: 20
     }
   }
-];
+]

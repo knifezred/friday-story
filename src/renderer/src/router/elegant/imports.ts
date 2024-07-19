@@ -24,6 +24,7 @@ export const views: Record<LastLevelRouteKey, RouteComponent | (() => Promise<Ro
   500: () => import("@renderer/views/_error/500/index.vue"),
   achievement: () => import("@renderer/views/achievement/index.vue"),
   home: () => import("@renderer/views/home/index.vue"),
+  inventory: () => import("@renderer/views/inventory/index.vue"),
   login: () => import("@renderer/views/login/index.vue"),
   relationship: () => import("@renderer/views/relationship/index.vue"),
   task: () => import("@renderer/views/task/index.vue"),

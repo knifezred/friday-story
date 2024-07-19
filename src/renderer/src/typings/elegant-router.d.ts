@@ -24,6 +24,7 @@ declare module "@elegant-router/types" {
     "archive": "/archive";
     "demo": "/demo";
     "home": "/home";
+    "inventory": "/inventory";
     "login": "/login/:module(pwd-login|register|reset-pwd|game-start)?";
     "personal": "/personal";
     "relationship": "/relationship";
@@ -67,6 +68,7 @@ declare module "@elegant-router/types" {
     | "archive"
     | "demo"
     | "home"
+    | "inventory"
     | "login"
     | "personal"
     | "relationship"
@@ -97,6 +99,7 @@ declare module "@elegant-router/types" {
     | "500"
     | "achievement"
     | "home"
+    | "inventory"
     | "login"
     | "relationship"
     | "task"
