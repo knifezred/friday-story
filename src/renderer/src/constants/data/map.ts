@@ -7,13 +7,13 @@
 // 角色属性
 // 人物关系
 // 配置
-// room house street area city country
+
 export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 1,
     pid: 0,
     jumpId: 1,
-    staticId: 'country.friday',
+    staticId: 'friday',
     title: '',
     text: '',
     cover: '',
@@ -23,7 +23,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 2,
     pid: 1,
     jumpId: 2,
-    staticId: 'city.boot',
+    staticId: 'boot',
     title: '',
     text: '',
     cover: '',
@@ -33,7 +33,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 3,
     pid: 2,
     jumpId: 3,
-    staticId: 'area.dongshan',
+    staticId: 'dongshan',
     title: '',
     text: '',
     cover: '',
@@ -43,7 +43,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 4,
     pid: 3,
     jumpId: 4,
-    staticId: 'street.pingan',
+    staticId: 'pingan',
     title: '',
     text: '',
     cover: '',
@@ -53,11 +53,11 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 5,
     pid: 4,
     jumpId: 5,
-    staticId: 'home.home',
+    staticId: 'home',
     title: '',
     text: '',
     cover: '',
-    level: 'house'
+    level: 'building'
   },
   {
     id: 6,
@@ -136,11 +136,11 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 14,
     pid: 4,
     jumpId: 14,
-    staticId: 'house_lin.home',
+    staticId: 'house_lin',
     title: '',
     text: '',
     cover: '',
-    level: 'house'
+    level: 'building'
   },
   {
     id: 15,
@@ -200,16 +200,16 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 21,
     pid: 4,
-    staticId: 'street.entrance',
+    staticId: 'happy_shop',
     title: '',
     text: '',
     cover: '',
-    level: 'street'
+    level: 'building'
   },
   {
     id: 22,
     pid: 3,
-    staticId: 'city.c01',
+    staticId: 'c01',
     title: '',
     text: '',
     cover: '',

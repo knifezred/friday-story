@@ -34,7 +34,6 @@ export const useMapStore = defineStore(SetupStoreId.Map, () => {
       })
     }
     if (currLevelMaps.value.length > 0) {
-      debugger
       if (currLevelMaps.value.filter((x) => x.id == pid).length > 0) {
         currMap.value = currLevelMaps.value.filter((x) => x.id == pid)[0]
       } else {
@@ -46,7 +45,11 @@ export const useMapStore = defineStore(SetupStoreId.Map, () => {
 
   function initMap(id: number) {
     allMaps.value.forEach((map) => {
-      map.staticId = 'map.' + map.staticId
+      if (map.level == 'room') {
+        map.staticId = 'map.building.' + map.staticId
+      } else {
+        map.staticId = 'map.' + map.level + '.' + map.staticId
+      }
       map.title = map.title ? map.title : map.staticId + '.title'
       map.text = map.text ? map.text : map.staticId + '.text'
       map.cover = map.cover ? map.cover : '/static/' + map.staticId.replaceAll('.', '/') + '.jpeg'

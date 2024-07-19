@@ -158,18 +158,23 @@ declare namespace Dto {
 
   type DbArchiveList = Array<DbArchive> | null
 
-  type ArchiveFileData = {
+  type Type = 'default' | 'tertiary' | 'primary' | 'info' | 'success' | 'warning' | 'error'
+
+  type WeatherType = 'sun' | 'cloud'
+
+  type LevelType = 'N' | 'R' | 'SR' | 'SSR'
+
+  interface ArchivedData {
     worldTime: number
-    weather: string
+    weather: WeatherType
     money: number
+    gold: number
     items: Array<number>
     relationShip: []
     achievement: Array<number>
     taskStatus: []
   }
 
-  type Type = 'default' | 'tertiary' | 'primary' | 'info' | 'success' | 'warning' | 'error'
-  type LevelType = 'N' | 'R' | 'SR' | 'SSR'
   interface ActionButton {
     id: number
     text: string
@@ -180,7 +185,7 @@ declare namespace Dto {
     miniGame?: UnionKey.MiniGameModule | undefined
   }
 
-  type MapLevel = 'room' | 'house' | 'street' | 'area' | 'city' | 'country'
+  type MapLevelType = 'room' | 'building' | 'street' | 'area' | 'city' | 'country'
   interface MapItem {
     id: number
     pid: number
@@ -192,7 +197,7 @@ declare namespace Dto {
     icon?: string
     isDisabled?: boolean
     isShow?: boolean
-    level: MapLevel
+    level: MapLevelType
     jumpId?: number
     order?: number
   }
@@ -214,7 +219,7 @@ declare namespace Dto {
 
   type NpcList = CommonType.RecordNullable<NpcInfo>
 
-  type archiveNpcRelationShip = CommonType.RecordNullable<
+  type ArchiveNpcRelationShip = CommonType.RecordNullable<
     Pick<NpcInfo, 'id' | 'relationship', 'relationshipWithPlayer'>
   >
 }

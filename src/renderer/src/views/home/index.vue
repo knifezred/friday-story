@@ -14,7 +14,7 @@
           :style="appStore.siderCollapse ? 'height:20.5vw' : 'height:18vw'"
           style="border: 0; border-radius: 0">
           <n-scrollbar class="h-20vh" :distance="10" @click="nextText">
-            <n-p class="text-xl color-white">
+            <n-p class="text-xl">
               {{ $t(currentText) }}
             </n-p>
           </n-scrollbar>
@@ -40,12 +40,39 @@
     <template #2>
       <NFlex v-if="isShowMap" vertical class="pa-2 text-center">
         <n-p>
-          <n-tag type="primary"> {{ formatTimestamp(worldTime, 'YYYY-MM-DD HH:mm') }} ⛅ </n-tag>
+          <n-tag type="primary">
+            {{ formatTimestamp(archivedData.worldTime, 'YYYY-MM-DD HH:mm') }}
+          </n-tag>
+          <SvgIcon icon="fluent-emoji:sun" class="text-icon-xl inline-block mx-1 v-bottom" />
         </n-p>
-        <n-statistic>
-          <template #prefix>💴</template>
-          <n-number-animation show-separator :from="0" :to="12039" />
-        </n-statistic>
+        <n-flex>
+          <n-statistic>
+            <template #prefix>
+              <icon-local-cash class="inline-block" />
+            </template>
+            <n-number-animation show-separator :from="moneyOldNumber" :to="archivedData.money" />
+            <ButtonIcon
+              v-if="isStaticSuper"
+              icon="solar:cash-out-line-duotone"
+              text
+              tooltips="Add Money"
+              class="mx-2"
+              @click="addMoney(100000)" />
+          </n-statistic>
+          <n-statistic>
+            <template #prefix>
+              <icon-local-gold class="inline-block" />
+            </template>
+            <n-number-animation show-separator :from="goldOldNumber" :to="archivedData.gold" />
+            <ButtonIcon
+              v-if="isStaticSuper"
+              icon="solar:cash-out-line-duotone"
+              text
+              tooltips="Add Money"
+              class="mx-2"
+              @click="addGold(100)" />
+          </n-statistic>
+        </n-flex>
         <n-scrollbar class="h-100vh" :distance="10">
           <NFlex>
             <n-card
@@ -85,17 +112,18 @@ import { onMounted, ref, watch } from 'vue'
 defineOptions({
   name: 'Home'
 })
-const worldTime = ref(Date.now())
+const appStore = useAppStore()
+const mapStore = useMapStore()
+const { reloadMap } = useMapStore()
+const { userInfo, archivedData, isStaticSuper } = useAuthStore()
+const moneyOldNumber = ref(0)
+const goldOldNumber = ref(0)
 const actionButtons = ref<Array<Dto.ActionButton>>([])
 const currentText = ref('')
 const isShowMap = ref(false)
 const isShowMiniGame = ref(false)
 const miniGameModule = ref<UnionKey.MiniGameModule>('finger-guessing')
 const splitSize = ref(1)
-const { userInfo } = useAuthStore()
-const appStore = useAppStore()
-const mapStore = useMapStore()
-const { reloadMap } = useMapStore()
 
 watch(
   [() => appStore.siderCollapse],
@@ -115,7 +143,20 @@ function actionFunc(action: Dto.ActionButton) {
     miniGameModule.value = action.miniGame
   } else {
     nextText()
+    coastTime(60)
+    addMoney(1000)
   }
+}
+function coastTime(minutes: number) {
+  archivedData.worldTime += minutes * 60 * 1000
+}
+function addMoney(money: number) {
+  moneyOldNumber.value = archivedData.money
+  archivedData.money = archivedData.money + money
+}
+function addGold(gold: number) {
+  goldOldNumber.value = archivedData.gold
+  archivedData.gold = archivedData.gold + gold
 }
 
 function gameResult(result) {
@@ -165,8 +206,8 @@ onMounted(() => {
       miniGame: 'dice-number'
     },
     {
-      id: 2,
-      text: '发呆',
+      id: 3,
+      text: '工作',
       type: 'primary',
       isDisabled: false,
       isShow: true

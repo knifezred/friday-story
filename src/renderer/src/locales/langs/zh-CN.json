@@ -103,66 +103,6 @@
         "title": "退出"
       }
     },
-    "home": {
-      "bedroom": {
-        "text": "主卧",
-        "title": "主卧"
-      },
-      "door": {
-        "text": "大门",
-        "title": "大门"
-      },
-      "home": {
-        "text": "家",
-        "title": "家"
-      },
-      "kitchen": {
-        "text": "厨房",
-        "title": "厨房"
-      },
-      "living_room": {
-        "text": "客厅",
-        "title": "客厅"
-      },
-      "room_cousin": {
-        "text": "表妹房间",
-        "title": "表妹房间"
-      },
-      "room_player": {
-        "text": "我的卧室",
-        "title": "我的卧室"
-      },
-      "room_sister": {
-        "text": "姐姐房间",
-        "title": "姐姐房间"
-      }
-    },
-    "house_lin": {
-      "bathroom": {
-        "text": "卫生间",
-        "title": "卫生间"
-      },
-      "bedroom": {
-        "text": "主卧",
-        "title": "主卧"
-      },
-      "door": {
-        "text": "大门",
-        "title": "大门"
-      },
-      "home": {
-        "text": "林家",
-        "title": "林家"
-      },
-      "kitchen": {
-        "text": "厨房",
-        "title": "厨房"
-      },
-      "living_room": {
-        "text": "客厅",
-        "title": "客厅"
-      }
-    },
     "country": {
       "friday": {
         "title": "弗雷德共和国",
@@ -185,6 +125,68 @@
       "pingan": {
         "title": "平安路",
         "text": "平安路"
+      }
+    },
+    "building": {
+      "happy_shop": {
+        "title": "开心超市",
+        "text": "开心超市，平安路上一家小超市，可以购买一些日用品"
+      },
+      "home": {
+        "title": "家",
+        "text": "家",
+        "bedroom": {
+          "text": "主卧",
+          "title": "主卧"
+        },
+        "door": {
+          "text": "大门",
+          "title": "大门"
+        },
+        "kitchen": {
+          "text": "厨房",
+          "title": "厨房"
+        },
+        "living_room": {
+          "text": "客厅",
+          "title": "客厅"
+        },
+        "room_cousin": {
+          "text": "表妹房间",
+          "title": "表妹房间"
+        },
+        "room_player": {
+          "text": "我的卧室",
+          "title": "我的卧室"
+        },
+        "room_sister": {
+          "text": "姐姐房间",
+          "title": "姐姐房间"
+        }
+      },
+      "house_lin": {
+        "text": "林家",
+        "title": "林家",
+        "bathroom": {
+          "text": "卫生间",
+          "title": "卫生间"
+        },
+        "bedroom": {
+          "text": "主卧",
+          "title": "主卧"
+        },
+        "door": {
+          "text": "大门",
+          "title": "大门"
+        },
+        "kitchen": {
+          "text": "厨房",
+          "title": "厨房"
+        },
+        "living_room": {
+          "text": "客厅",
+          "title": "客厅"
+        }
       }
     }
   },

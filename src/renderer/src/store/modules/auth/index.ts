@@ -22,10 +22,11 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
 
   const userInfo: Dto.Auth.UserInfo = reactive(getUserInfo())
 
-  const archiveFileData = ref<Dto.ArchiveFileData>({
-    worldTime: 0,
-    weather: '',
-    money: 0,
+  const archivedData = ref<Dto.ArchivedData>({
+    worldTime: 1600000000,
+    weather: 'sun',
+    money: 1000,
+    gold: 1,
     items: [],
     relationShip: [],
     achievement: [],
@@ -106,7 +107,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
       userInfo.userName = data.name
       userInfo.archive = data
       localStg.set('userInfo', userInfo)
-      archiveFileData.value = JSON.parse(userInfo.archive.data) as Dto.ArchiveFileData
+      archivedData.value = JSON.parse(userInfo.archive.data) as Dto.archivedData
       // 3. update store
       token.value = data.id == undefined ? '' : data.id.toString()
       return true
@@ -116,13 +117,14 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   }
 
   async function saveArchiveData() {
-    userInfo.archive.data = JSON.stringify(archiveFileData.value)
+    userInfo.archive.data = JSON.stringify(archivedData.value)
     return await updateArchive(userInfo.archive)
   }
+
   return {
     token,
     userInfo,
-    archiveFileData,
+    archivedData,
     isStaticSuper,
     isLogin,
     loginLoading,
