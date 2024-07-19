@@ -7,6 +7,7 @@ import { localStg } from '@renderer/utils/storage'
 import { breakpointsTailwind, useBreakpoints, useEventListener, useTitle } from '@vueuse/core'
 import { defineStore } from 'pinia'
 import { effectScope, nextTick, onScopeDispose, ref, watch } from 'vue'
+import { useAuthStore } from '../auth'
 import { useRouteStore } from '../route'
 import { useTabStore } from '../tab'
 import { useThemeStore } from '../theme'
@@ -15,6 +16,7 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
   const themeStore = useThemeStore()
   const routeStore = useRouteStore()
   const tabStore = useTabStore()
+  const authStore = useAuthStore()
   const scope = effectScope()
   const breakpoints = useBreakpoints(breakpointsTailwind)
   const {
@@ -40,6 +42,19 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
   /** Is mobile layout */
   const isMobile = breakpoints.smaller('sm')
 
+  const fromMoney = ref(0)
+  const fromGold = ref(0)
+  function addMoney(money: number) {
+    fromMoney.value = authStore.archivedData.money
+    authStore.archivedData.money = authStore.archivedData.money + money
+  }
+  function addGold(gold: number) {
+    fromGold.value = authStore.archivedData.gold
+    authStore.archivedData.gold = authStore.archivedData.gold + gold
+  }
+  function coastTime(minutes: number) {
+    authStore.archivedData.worldTime += minutes * 60 * 1000
+  }
   /**
    * Reload page
    *
@@ -169,6 +184,11 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
     toggleSiderCollapse,
     mixSiderFixed,
     setMixSiderFixed,
-    toggleMixSiderFixed
+    toggleMixSiderFixed,
+    fromMoney,
+    fromGold,
+    addMoney,
+    addGold,
+    coastTime
   }
 })

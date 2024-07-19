@@ -222,64 +222,99 @@ declare namespace App {
         unpin: string
       }
       map: {
-        home: {
-          bedroom: {
-            text: string
-            title: string
-          }
-          door: {
-            text: string
-            title: string
-          }
-          home: {
-            text: string
-            title: string
-          }
-          kitchen: {
-            text: string
-            title: string
-          }
-          living_room: {
-            text: string
-            title: string
-          }
-          room_cousin: {
-            text: string
-            title: string
-          }
-          room_player: {
-            text: string
-            title: string
-          }
-          room_sister: {
-            text: string
+        common: {
+          exit: {
             title: string
           }
         }
-        house_lin: {
-          bathroom: {
-            text: string
+        country: {
+          friday: {
             title: string
+            text: string
           }
-          bedroom: {
-            text: string
+        }
+        city: {
+          boot: {
             title: string
+            text: string
           }
-          door: {
-            text: string
+        }
+        area: {
+          dongshan: {
             title: string
+            text: string
+          }
+        }
+        street: {
+          pingan: {
+            title: string
+            text: string
+          }
+        }
+        building: {
+          demo: {
+            title: string
+            text: string
+          }
+          happy_shop: {
+            title: string
+            text: string
           }
           home: {
-            text: string
             title: string
+            text: string
+            bedroom: {
+              text: string
+              title: string
+            }
+            door: {
+              text: string
+              title: string
+            }
+            kitchen: {
+              text: string
+              title: string
+            }
+            living_room: {
+              text: string
+              title: string
+            }
+            room_cousin: {
+              text: string
+              title: string
+            }
+            room_player: {
+              text: string
+              title: string
+            }
+            room_sister: {
+              text: string
+              title: string
+            }
           }
-          kitchen: {
+          house_lin: {
             text: string
             title: string
-          }
-          living_room: {
-            text: string
-            title: string
+            bathroom: {
+              text: string
+              title: string
+            }
+            bedroom: {
+              text: string
+              title: string
+            }
+            door: {
+              text: string
+              title: string
+            }
+            kitchen: {
+              text: string
+              title: string
+            }
+            living_room: {
+              text: string
+              title: string
+            }
           }
         }
       }

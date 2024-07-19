@@ -160,6 +160,8 @@ declare namespace Dto {
 
   type Type = 'default' | 'tertiary' | 'primary' | 'info' | 'success' | 'warning' | 'error'
 
+  type ActionType = 'map' | 'mini-game' | 'shop'
+
   type WeatherType = 'sun' | 'cloud'
 
   type LevelType = 'N' | 'R' | 'SR' | 'SSR'
@@ -183,6 +185,7 @@ declare namespace Dto {
     isDisabled: boolean
     isShow: boolean
     miniGame?: UnionKey.MiniGameModule | undefined
+    actionType: ActionType
   }
 
   type MapLevelType = 'room' | 'building' | 'street' | 'area' | 'city' | 'country'
@@ -200,6 +203,7 @@ declare namespace Dto {
     level: MapLevelType
     jumpId?: number
     order?: number
+    actions: Array<number>
   }
 
   interface NpcInfo {

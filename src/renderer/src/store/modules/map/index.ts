@@ -12,10 +12,11 @@ export const useMapStore = defineStore(SetupStoreId.Map, () => {
     id: 0,
     pid: 0,
     staticId: 'test',
-    title: '',
-    text: '',
-    cover: '',
-    level: 'room'
+    title: 'map.common.test.title',
+    text: 'map.common.test.text',
+    cover: '/static/map/common/exit.png',
+    level: 'room',
+    actions: []
   })
 
   function reloadMap(jumpId: number | undefined, pid: number) {
@@ -28,9 +29,10 @@ export const useMapStore = defineStore(SetupStoreId.Map, () => {
         jumpId: upLevel.pid,
         staticId: 'map.common.exit',
         title: 'map.common.exit.title',
-        text: '',
+        text: 'map.common.exit.text',
         cover: '/static/map/common/exit.png',
-        level: 'room'
+        level: 'room',
+        actions: []
       })
     }
     if (currLevelMaps.value.length > 0) {

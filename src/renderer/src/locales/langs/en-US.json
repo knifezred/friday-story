@@ -94,64 +94,99 @@
     "unpin": "Unpin"
   },
   "map": {
-    "home": {
-      "bedroom": {
-        "text": "Parents room",
-        "title": "Parents room"
-      },
-      "door": {
-        "text": "Door",
-        "title": "Door"
-      },
-      "home": {
-        "text": "home",
-        "title": "home"
-      },
-      "kitchen": {
-        "text": "kitchen",
-        "title": "kitchen"
-      },
-      "living_room": {
-        "text": "Living room",
-        "title": "Living room"
-      },
-      "room_cousin": {
-        "text": "Cousin room",
-        "title": "Cousin room"
-      },
-      "room_player": {
-        "text": "My bedroom",
-        "title": "My bedroom"
-      },
-      "room_sister": {
-        "text": "Sister room",
-        "title": "Sister room"
+    "common": {
+      "exit": {
+        "title": ""
       }
     },
-    "house_lin": {
-      "bathroom": {
-        "text": "TOILET",
-        "title": "TOILET"
+    "country": {
+      "friday": {
+        "title": "",
+        "text": ""
+      }
+    },
+    "city": {
+      "boot": {
+        "title": "",
+        "text": ""
+      }
+    },
+    "area": {
+      "dongshan": {
+        "title": "",
+        "text": ""
+      }
+    },
+    "street": {
+      "pingan": {
+        "title": "",
+        "text": ""
+      }
+    },
+    "building": {
+      "demo": {
+        "title": "",
+        "text": ""
       },
-      "bedroom": {
-        "text": "Master bedroom",
-        "title": "Master bedroom"
-      },
-      "door": {
-        "text": "gate",
-        "title": "gate"
+      "happy_shop": {
+        "title": "",
+        "text": ""
       },
       "home": {
-        "text": "Hayashiya ",
-        "title": "Hayashiya "
+        "title": "",
+        "text": "",
+        "bedroom": {
+          "text": "",
+          "title": ""
+        },
+        "door": {
+          "text": "",
+          "title": ""
+        },
+        "kitchen": {
+          "text": "",
+          "title": ""
+        },
+        "living_room": {
+          "text": "",
+          "title": ""
+        },
+        "room_cousin": {
+          "text": "",
+          "title": ""
+        },
+        "room_player": {
+          "text": "",
+          "title": ""
+        },
+        "room_sister": {
+          "text": "",
+          "title": ""
+        }
       },
-      "kitchen": {
-        "text": "kitchen",
-        "title": "kitchen"
-      },
-      "living_room": {
-        "text": "a living room",
-        "title": "a living room"
+      "house_lin": {
+        "text": "",
+        "title": "",
+        "bathroom": {
+          "text": "",
+          "title": ""
+        },
+        "bedroom": {
+          "text": "",
+          "title": ""
+        },
+        "door": {
+          "text": "",
+          "title": ""
+        },
+        "kitchen": {
+          "text": "",
+          "title": ""
+        },
+        "living_room": {
+          "text": "",
+          "title": ""
+        }
       }
     }
   },

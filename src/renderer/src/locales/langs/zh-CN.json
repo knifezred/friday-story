@@ -95,12 +95,13 @@
   },
   "map": {
     "common": {
-      "demo": {
-        "title": "测试",
-        "text": "测试"
-      },
       "exit": {
-        "title": "退出"
+        "title": "退出",
+        "text": ""
+      },
+      "test": {
+        "title": "",
+        "text": ""
       }
     },
     "country": {
@@ -128,6 +129,10 @@
       }
     },
     "building": {
+      "demo": {
+        "title": "测试",
+        "text": "测试"
+      },
       "happy_shop": {
         "title": "开心超市",
         "text": "开心超市，平安路上一家小超市，可以购买一些日用品"
@@ -146,6 +151,10 @@
         "kitchen": {
           "text": "厨房",
           "title": "厨房"
+        },
+        "bathroom": {
+          "text": "卫生间",
+          "title": "卫生间"
         },
         "living_room": {
           "text": "客厅",

@@ -17,7 +17,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     title: '',
     text: '',
     cover: '',
-    level: 'country'
+    level: 'country',
+    actions: []
   },
   {
     id: 2,
@@ -27,7 +28,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     title: '',
     text: '',
     cover: '',
-    level: 'city'
+    level: 'city',
+    actions: []
   },
   {
     id: 3,
@@ -37,7 +39,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     title: '',
     text: '',
     cover: '',
-    level: 'area'
+    level: 'area',
+    actions: []
   },
   {
     id: 4,
@@ -47,7 +50,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     title: '',
     text: '',
     cover: '',
-    level: 'street'
+    level: 'street',
+    actions: []
   },
   {
     id: 5,
@@ -57,7 +61,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     title: '',
     text: '',
     cover: '',
-    level: 'building'
+    level: 'building',
+    actions: []
   },
   {
     id: 6,
@@ -66,7 +71,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     title: '',
     text: '',
     cover: '',
-    level: 'room'
+    level: 'room',
+    actions: []
   },
   {
     id: 7,
@@ -75,7 +81,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     title: '',
     text: '',
     cover: '',
-    level: 'room'
+    level: 'room',
+    actions: []
   },
   {
     id: 8,
@@ -84,7 +91,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     title: '',
     text: '',
     cover: '',
-    level: 'room'
+    level: 'room',
+    actions: []
   },
   {
     id: 9,
@@ -93,7 +101,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     title: '',
     text: '',
     cover: '',
-    level: 'room'
+    level: 'room',
+    actions: []
   },
   {
     id: 10,
@@ -102,7 +111,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     title: '',
     text: '',
     cover: '',
-    level: 'room'
+    level: 'room',
+    actions: []
   },
   {
     id: 11,
@@ -111,7 +121,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     title: '',
     text: '',
     cover: '',
-    level: 'room'
+    level: 'room',
+    actions: []
   },
   {
     id: 12,
@@ -120,7 +131,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     title: '',
     text: '',
     cover: '',
-    level: 'room'
+    level: 'room',
+    actions: []
   },
   {
     id: 13,
@@ -130,7 +142,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     title: '',
     text: '',
     cover: '',
-    level: 'room'
+    level: 'room',
+    actions: []
   },
   {
     id: 14,
@@ -140,7 +153,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     title: '',
     text: '',
     cover: '',
-    level: 'building'
+    level: 'building',
+    actions: []
   },
   {
     id: 15,
@@ -149,7 +163,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     title: '',
     text: '',
     cover: '',
-    level: 'room'
+    level: 'room',
+    actions: []
   },
   {
     id: 16,
@@ -158,7 +173,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     title: '',
     text: '',
     cover: '',
-    level: 'room'
+    level: 'room',
+    actions: []
   },
   {
     id: 17,
@@ -167,7 +183,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     title: '',
     text: '',
     cover: '',
-    level: 'room'
+    level: 'room',
+    actions: []
   },
   {
     id: 18,
@@ -176,7 +193,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     title: '',
     text: '',
     cover: '',
-    level: 'room'
+    level: 'room',
+    actions: []
   },
   {
     id: 19,
@@ -185,7 +203,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     title: '',
     text: '',
     cover: '',
-    level: 'room'
+    level: 'room',
+    actions: []
   },
   {
     id: 20,
@@ -195,7 +214,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     title: '',
     text: '',
     cover: '',
-    level: 'room'
+    level: 'room',
+    actions: []
   },
   {
     id: 21,
@@ -204,96 +224,107 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     title: '',
     text: '',
     cover: '',
-    level: 'building'
+    level: 'building',
+    actions: [3]
   },
   {
     id: 22,
     pid: 3,
-    staticId: 'c01',
+    staticId: 'backstreet',
     title: '',
     text: '',
     cover: '',
-    level: 'city'
+    level: 'street',
+    actions: []
   },
   {
     id: 23,
     pid: 3,
-    staticId: 'common.demo',
+    staticId: 'demo',
     title: '',
     text: '',
     cover: '',
-    level: 'room'
+    level: 'room',
+    actions: []
   },
   {
     id: 23,
     pid: 3,
-    staticId: 'common.demo',
+    staticId: 'demo',
     title: '',
     text: '',
     cover: '',
-    level: 'room'
+    level: 'room',
+    actions: []
   },
   {
     id: 247,
     pid: 3,
-    staticId: 'common.demo',
+    staticId: 'demo',
     title: '',
     text: '',
     cover: '',
-    level: 'room'
+    level: 'room',
+    actions: []
   },
   {
     id: 25,
     pid: 3,
-    staticId: 'common.demo',
+    staticId: 'demo',
     title: '',
     text: '',
     cover: '',
-    level: 'room'
+    level: 'room',
+    actions: []
   },
   {
     id: 26,
     pid: 3,
-    staticId: 'common.demo',
+    staticId: 'demo',
     title: '',
     text: '',
     cover: '',
-    level: 'room'
+    level: 'room',
+    actions: []
   },
   {
     id: 27,
     pid: 3,
-    staticId: 'common.demo',
+    staticId: 'demo',
     title: '',
     text: '',
     cover: '',
-    level: 'room'
+    level: 'room',
+    actions: []
   },
   {
     id: 28,
     pid: 3,
-    staticId: 'common.demo',
+    staticId: 'demo',
     title: '',
     text: '',
     cover: '',
-    level: 'room'
+    level: 'room',
+    actions: []
   },
   {
     id: 29,
     pid: 3,
-    staticId: 'common.demo',
+    staticId: 'demo',
     title: '',
     text: '',
     cover: '',
-    level: 'room'
+    level: 'room',
+    actions: []
   },
   {
     id: 30,
     pid: 3,
-    staticId: 'common.demo',
+    staticId: 'demo',
     title: '',
     text: '',
     cover: '',
-    level: 'room'
+    level: 'room',
+    actions: []
   }
 ]

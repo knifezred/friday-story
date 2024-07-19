@@ -107,7 +107,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
       userInfo.userName = data.name
       userInfo.archive = data
       localStg.set('userInfo', userInfo)
-      archivedData.value = JSON.parse(userInfo.archive.data) as Dto.archivedData
+      archivedData.value = JSON.parse(userInfo.archive.data) as Dto.ArchivedData
       // 3. update store
       token.value = data.id == undefined ? '' : data.id.toString()
       return true
