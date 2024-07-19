@@ -4,7 +4,7 @@
       <n-h3>成就(2/3)</n-h3>
     </NCard>
     <NFlex>
-      <NCard title="帽子戏法" class="relative z-4 w-52 shadow-primary shadow-op-30 hover-card">
+      <NCard title="帽子戏法" class="relative z-4 w-52 shadow-primary shadow-op-30">
         <template #header-extra>
           <LevelTag level="SR" />
         </template>

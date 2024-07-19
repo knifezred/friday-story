@@ -14,7 +14,7 @@
       <NCard
         v-for="item in npcItems"
         :key="item.id"
-        class="relative z-4 w-100 shadow-primary shadow-op-30 hover-card"
+        class="relative z-4 w-100 shadow-primary shadow-op-30"
         :class="item.isLocked ? 'grayscale-100' : ''">
         <n-flex v-if="item.isLocked">
           <n-p class="text-center">

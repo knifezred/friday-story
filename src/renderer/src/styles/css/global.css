@@ -20,7 +20,7 @@ html.grayScale {
   padding: 0.1em !important;
 }
 
-.hover-card:hover {
+.n-card:hover {
   box-shadow: 0px 0px 8px 6px var(--un-shadow-color);
   cursor: pointer;
 }

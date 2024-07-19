@@ -8,7 +8,7 @@
           <n-card
             v-for="goods in shopItems"
             :key="goods.id"
-            class="relative z-4 w-56 ma-1 shadow-primary shadow-op-30 hover-card">
+            class="relative z-4 w-56 ma-1 shadow-primary shadow-op-30">
             <n-flex>
               <n-badge :value="goods.count">
                 <ImageIcon :src="goods.cover" class="w-16 h-16" />
