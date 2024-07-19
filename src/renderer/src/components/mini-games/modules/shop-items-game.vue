@@ -1,22 +1,23 @@
 <template>
   <n-grid :x-gap="12" :y-gap="12" :cols="4" layout-shift-disabled class="text-center">
     <n-gi :span="4">
-      <n-scrollbar class="h-80vh">
-        <n-flex justify="left">
+      <n-scrollbar class="h-80vh pl-4">
+        <n-flex>
           <n-card
             v-for="goods in shopItems"
             :key="goods.id"
-            class="relative z-4 w-56 ma-2 shadow-primary shadow-op-30">
+            class="relative z-4 w-56 ma-1 shadow-primary shadow-op-30 hover-card">
             <n-flex>
               <n-badge :value="goods.selectedCount">
                 <ImageIcon :src="goods.cover" class="w-16 h-16" />
               </n-badge>
-              <n-p>
-                <LevelTag :level="goods.level" />
-                {{ $t(goods.title) }}
-                <br />
-                {{ $t(goods.desc) }}
-              </n-p>
+              <n-flex vertical class="pl-1">
+                <n-p class="my-0">
+                  <LevelTag :level="goods.level" />
+                  {{ $t(goods.title) }}
+                </n-p>
+                <n-p class="my-0"> {{ $t(goods.desc) }}</n-p>
+              </n-flex>
             </n-flex>
             <template #action>
               <n-button :disabled="goods.selectedCount == 0" @click="removeToCart(goods)">
@@ -100,11 +101,4 @@ onMounted(() => {
 })
 </script>
 
-<style lang="css">
-.n-card:hover {
-  box-shadow: 0px 0px 8px 6px var(--un-shadow-color);
-}
-.n-card__action {
-  padding: 1em !important;
-}
-</style>
+<style lang="css" scoped></style>

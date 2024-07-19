@@ -4,7 +4,7 @@
       <n-h3>成就(2/3)</n-h3>
     </NCard>
     <NFlex>
-      <NCard title="帽子戏法" class="relative z-4 w-52 shadow-primary shadow-op-30">
+      <NCard title="帽子戏法" class="relative z-4 w-52 shadow-primary shadow-op-30 hover-card">
         <template #header-extra>
           <LevelTag level="SR" />
         </template>
@@ -63,8 +63,4 @@ const totalStar = ref(5)
 const playerScore = ref(3)
 </script>
 
-<style lang="scss" scoped>
-.n-card:hover {
-  box-shadow: 0px 0px 8px 6px var(--un-shadow-color);
-}
-</style>
+<style lang="scss" scoped></style>

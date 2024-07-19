@@ -19,3 +19,12 @@ html.grayScale {
 .map-card>.n-card-header {
   padding: 0.1em !important;
 }
+
+.hover-card:hover {
+  box-shadow: 0px 0px 8px 6px var(--un-shadow-color);
+  cursor: pointer;
+}
+
+.n-card__action {
+  padding: 1em !important;
+}

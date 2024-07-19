@@ -15,6 +15,7 @@
     "delete": "删除",
     "deleteSuccess": "删除成功",
     "edit": "编辑",
+    "empty": "这里什么也没有",
     "expandColumn": "展开列",
     "index": "序号",
     "keywordSearch": "请输入关键词搜索",
@@ -95,95 +96,65 @@
   },
   "items": {
     "food": {
-      "cola": {
-        "title": "可乐",
-        "desc": "一瓶碳酸饮料"
-      },
       "beer": {
-        "title": "啤酒",
-        "desc": ""
+        "desc": "",
+        "title": "啤酒"
       },
       "coffee": {
-        "title": "咖啡",
-        "desc": ""
+        "desc": "",
+        "title": "咖啡"
+      },
+      "cola": {
+        "desc": "一瓶碳酸饮料",
+        "title": "可乐"
       },
       "croissant": {
-        "title": "牛角包",
-        "desc": ""
+        "desc": "",
+        "title": "牛角包"
       },
       "fired_eggs": {
-        "title": "煎蛋",
-        "desc": ""
+        "desc": "",
+        "title": "煎蛋"
       },
       "fish": {
-        "title": "鱼",
-        "desc": ""
+        "desc": "",
+        "title": "鱼"
       },
       "hamburger": {
-        "title": "汉堡",
-        "desc": ""
+        "desc": "",
+        "title": "汉堡"
       },
       "milk": {
-        "title": "牛奶",
-        "desc": ""
+        "desc": "",
+        "title": "牛奶"
       },
       "sandwich": {
-        "title": "三明治",
-        "desc": ""
+        "desc": "",
+        "title": "三明治"
       }
     }
   },
   "map": {
-    "common": {
-      "exit": {
-        "title": "退出",
-        "text": ""
-      },
-      "test": {
-        "title": "",
-        "text": ""
-      }
-    },
-    "country": {
-      "friday": {
-        "title": "弗雷德共和国",
-        "text": "弗雷德共和国"
-      }
-    },
-    "city": {
-      "boot": {
-        "title": "布特城",
-        "text": "布特城"
-      }
-    },
     "area": {
       "dongshan": {
-        "title": "东山区",
-        "text": "东山区"
-      }
-    },
-    "street": {
-      "pingan": {
-        "title": "平安路",
-        "text": "平安路"
-      },
-      "backstreet": {
-        "title": "后街",
-        "text": "后街"
+        "text": "东山区",
+        "title": "东山区"
       }
     },
     "building": {
       "demo": {
-        "title": "测试",
-        "text": "测试"
+        "text": "测试",
+        "title": "测试"
       },
       "happy_shop": {
-        "title": "开心超市",
-        "text": "开心超市，平安路上一家小超市，可以购买一些日用品"
+        "text": "开心超市，平安路上一家小超市，可以购买一些日用品",
+        "title": "开心超市"
       },
       "home": {
-        "title": "家",
-        "text": "家",
+        "bathroom": {
+          "text": "卫生间",
+          "title": "卫生间"
+        },
         "bedroom": {
           "text": "主卧",
           "title": "主卧"
@@ -195,10 +166,6 @@
         "kitchen": {
           "text": "厨房",
           "title": "厨房"
-        },
-        "bathroom": {
-          "text": "卫生间",
-          "title": "卫生间"
         },
         "living_room": {
           "text": "客厅",
@@ -215,11 +182,11 @@
         "room_sister": {
           "text": "姐姐房间",
           "title": "姐姐房间"
-        }
+        },
+        "text": "家",
+        "title": "家"
       },
       "house_lin": {
-        "text": "邻居",
-        "title": "邻居",
         "bathroom": {
           "text": "卫生间",
           "title": "卫生间"
@@ -239,7 +206,41 @@
         "living_room": {
           "text": "客厅",
           "title": "客厅"
-        }
+        },
+        "text": "邻居",
+        "title": "邻居"
+      }
+    },
+    "city": {
+      "boot": {
+        "text": "布特城",
+        "title": "布特城"
+      }
+    },
+    "common": {
+      "exit": {
+        "text": "",
+        "title": "退出"
+      },
+      "test": {
+        "text": "",
+        "title": ""
+      }
+    },
+    "country": {
+      "friday": {
+        "text": "弗雷德共和国",
+        "title": "弗雷德共和国"
+      }
+    },
+    "street": {
+      "backstreet": {
+        "text": "后街",
+        "title": "后街"
+      },
+      "pingan": {
+        "text": "平安路",
+        "title": "平安路"
       }
     }
   },
@@ -367,7 +368,9 @@
     "500": "服务器错误",
     "achievement": "成就",
     "archive": "角色存档",
+    "demo": "Demo",
     "home": "首页",
+    "inventory": "物品",
     "login": "登录",
     "personal": "个人中心",
     "relationship": "关系",
@@ -375,9 +378,7 @@
     "setting_about": "关于",
     "setting_system": "通用",
     "setting_theme": "外观",
-    "task": "任务",
-    "inventory": "物品",
-    "demo": "Demo"
+    "task": "任务"
   },
   "system": {
     "title": "Friday Story"
