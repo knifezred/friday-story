@@ -156,7 +156,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     level: 'building',
     options: ['finger-guessing', 'dice-number'],
     isLocked: true,
-    lockedReason: 'locked_door'
+    conditions: 'hasItem.10'
   },
   {
     id: 15,
@@ -227,7 +227,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '.png',
     level: 'building',
-    options: ['shop', 'scene.start']
+    options: ['shop', 'scene.start'],
+    conditions: 'lockedHours.22-9'
   },
   {
     id: 22,

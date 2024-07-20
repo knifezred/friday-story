@@ -177,7 +177,7 @@ declare namespace Dto {
 
   type MapLevelType = 'room' | 'building' | 'street' | 'area' | 'city' | 'country'
 
-  type MapLockedReasonType = 'no_key' | 'locked_door' | 'no_open'
+  type MapLockedReasonType = 'no_key' | 'locked_door' | 'no_open' | 'outTime'
 
   interface MapItem {
     id: number
@@ -195,6 +195,7 @@ declare namespace Dto {
     order?: number
     options: Array<string>
     isLocked?: boolean
+    conditions?: string
     lockedReason?: MapLockedReasonType
   }
 
@@ -282,7 +283,7 @@ declare namespace Dto {
     cover: string
     text: string
     nextScene: string
-    conditions?: string | string[]
+    conditions?: string
   }
 
   interface GameScene {
@@ -306,6 +307,6 @@ declare namespace Dto {
     miniGame?: UnionKey.MiniGameModule | undefined
     next?: string | undefined
     actionType: UnionKey.SceneModule
-    conditions?: string | string[]
+    conditions?: string
   }
 }

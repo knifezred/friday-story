@@ -1,5 +1,6 @@
 import { DefaultMaps } from '@renderer/constants/data/map'
 import { SetupStoreId } from '@renderer/enums'
+import { useActionCondition } from '@renderer/hooks/business/action-condition'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useAuthStore } from '../auth'
@@ -38,10 +39,31 @@ export const usePlaceStore = defineStore(SetupStoreId.Place, () => {
       coastTime = coastTime * 60 * 8
     }
     authStore.archivedData.worldTime += coastTime
-    canJumpNext.value = map.isLocked != true
-    if (!canJumpNext.value) {
-      currMap.value = map
+    checkCondition(map)
+    if (map.isLocked != true) {
+      canJumpNext.value = true
+    } else {
+      canJumpNext.value = false
     }
+    currMap.value = map
+  }
+
+  function checkCondition(map: Dto.MapItem) {
+    const actionCondition = useActionCondition()
+    if (map.conditions != undefined) {
+      const conditions = map.conditions.split('|')
+      conditions.forEach((condition) => {
+        if (condition.startsWith('lockedHours')) {
+          map.isLocked = actionCondition.lockedHours(condition.split('.')[1])
+          map.lockedReason = 'outTime'
+        }
+        if (condition.startsWith('hasItem')) {
+          map.isLocked = !actionCondition.hasItem(condition.split('.')[1])
+          map.lockedReason = 'locked_door'
+        }
+      })
+    }
+    console.log(map.isLocked)
   }
 
   function reloadMap(nextId: number | undefined, pid: number) {

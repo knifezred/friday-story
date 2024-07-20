@@ -46,7 +46,8 @@ export const DefaultActions: Array<Dto.ActionOption> = [
     isDisabled: false,
     isShow: true,
     actionType: 'map',
-    name: 'knocked'
+    name: 'knocked',
+    conditions: 'hasItem.10'
   },
   {
     text: 'map.action.story_start',

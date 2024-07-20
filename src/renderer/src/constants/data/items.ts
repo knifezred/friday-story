@@ -52,6 +52,12 @@ export const DefaultGameItems: Array<Dto.GameItem> = [
     name: 'sandwich',
     type: 'food',
     level: 'SR'
+  },
+  {
+    id: 10,
+    name: 'house_lin_key',
+    type: 'task',
+    level: 'SR'
   }
 ]
 

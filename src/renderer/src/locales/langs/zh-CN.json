@@ -246,7 +246,8 @@
     },
     "locked": {
       "locked_door": "门已上锁",
-      "no_key": "没有钥匙",
+      "no_key": "门已上锁，没有钥匙",
+      "outTime": "已关门，请过一段时间再来",
       "no_open": "暂未开放"
     },
     "street": {
