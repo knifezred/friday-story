@@ -42,6 +42,7 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
   /** Is mobile layout */
   const isMobile = breakpoints.smaller('sm')
 
+  // custom start
   const fromMoney = ref(0)
   const fromGold = ref(0)
   function addMoney(money: number) {
@@ -55,6 +56,7 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
   function coastTime(minutes: number) {
     authStore.archivedData.worldTime += minutes * 60 * 1000
   }
+  // custom end
   /**
    * Reload page
    *

@@ -14,7 +14,9 @@
           <n-tag type="primary">
             {{ formatTimestamp(archivedData.worldTime, 'YYYY-MM-DD HH:mm') }}
           </n-tag>
-          <SvgIcon icon="fluent-emoji:sun" class="text-icon-xl inline-block mx-1 v-bottom" />
+          <SvgIcon
+            icon="meteocons:clear-day-fill"
+            class="text-icon-xl inline-block mx-1 v-bottom" />
         </n-p>
         <n-grid x-gap="12" :cols="2">
           <n-gi>

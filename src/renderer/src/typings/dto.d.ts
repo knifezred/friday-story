@@ -231,19 +231,50 @@ declare namespace Dto {
   interface GameItem {
     id: number
     name: string
-    title: string
-    desc: string
-    cover: string
     type: GameItemType
     level: LevelType
+    title?: string
+    desc?: string
+    cover?: string
+    count?: number
     maxNum?: number
     isLocked?: boolean
   }
+
+  interface GameItemFull {
+    id: number
+    name: string
+    type: GameItemType
+    level: LevelType
+    title: string
+    desc: string
+    cover: string
+    count: number
+    maxNum?: number
+    isLocked?: boolean
+  }
+
   interface ArchivedItem {
     id: number
     count: number
   }
-  interface ShopGoods extends GameItem {
+
+  interface ShopGoods {
+    id: number
+    price: number
+    count: number
+    selectedCount?: number
+    name?: string
+    type?: GameItemType
+    level?: LevelType
+    title?: string
+    desc?: string
+    cover?: string
+    maxNum?: number
+    isLocked?: boolean
+  }
+
+  interface ShopGoodsFull extends GameItemFull {
     price: number
     count: number
     selectedCount: number

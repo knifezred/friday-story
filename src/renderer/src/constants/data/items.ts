@@ -1,120 +1,122 @@
-export const DefaultShopGoods: Array<Dto.ShopGoods> = [
+export const DefaultGameItems: Array<Dto.GameItem> = [
   {
     id: 1,
     name: 'cola',
-    title: '',
-    desc: '',
-    cover: '',
     type: 'food',
-    level: 'SR',
-    price: 5,
-    count: 10,
-    selectedCount: 0
+    level: 'SR'
   },
   {
     id: 2,
     name: 'beer',
-    title: '',
-    desc: '',
-    cover: '',
     type: 'food',
-    level: 'SR',
-    price: 10,
-    count: 20,
-    selectedCount: 0
+    level: 'SR'
   },
   {
     id: 3,
     name: 'coffee',
-    title: '',
-    desc: '',
-    cover: '',
     type: 'food',
-    level: 'SR',
-    price: 20,
-    count: 10,
-    selectedCount: 0
+    level: 'SR'
   },
   {
     id: 4,
     name: 'croissant',
-    title: '',
-    desc: '',
-    cover: '',
     type: 'food',
-    level: 'SR',
-    price: 30,
-    count: 10,
-    selectedCount: 0
+    level: 'SR'
   },
   {
     id: 5,
     name: 'fired_eggs',
-    title: '',
-    desc: '',
-    cover: '',
     type: 'food',
-    level: 'SR',
-    price: 5,
-    count: 20,
-    selectedCount: 0
+    level: 'SR'
   },
   {
     id: 6,
     name: 'fish',
-    title: '',
-    desc: '',
-    cover: '',
     type: 'food',
-    level: 'SR',
-    price: 50,
-    count: 40,
-    selectedCount: 0
+    level: 'SR'
   },
   {
     id: 7,
     name: 'hamburger',
-    title: '',
-    desc: '',
-    cover: '',
     type: 'food',
-    level: 'SR',
-    price: 20,
-    count: 80,
-    selectedCount: 0
+    level: 'SR'
   },
   {
     id: 8,
     name: 'milk',
-    title: '',
-    desc: '',
-    cover: '',
     type: 'food',
-    level: 'SR',
-    price: 10,
-    count: 90,
-    selectedCount: 0
+    level: 'SR'
   },
   {
     id: 9,
     name: 'sandwich',
-    title: '',
-    desc: '',
-    cover: '',
     type: 'food',
-    level: 'SR',
-    price: 10,
-    count: 30,
-    selectedCount: 0
+    level: 'SR'
   }
 ]
 
-export function ShopGoods() {
-  const goodsList = DefaultShopGoods
-  goodsList.forEach((item) => {
-    item.desc = 'items.' + item.type + '.' + item.name + '.desc'
-    item.title = 'items.' + item.type + '.' + item.name + '.title'
-    item.cover = '/static/items/' + item.type + '/' + item.name.replaceAll('.', '/') + '.png'
-  })
-  return goodsList
+export type ShopType = 'happy_shop' | 'walmart' | 'yong_hui'
+
+export const ShopGoodsRecord: Record<ShopType, Array<Dto.ShopGoods>> = {
+  happy_shop: [
+    {
+      id: 1,
+      count: 10,
+      price: 10
+    },
+    {
+      id: 2,
+      count: 18,
+      price: 20
+    },
+    {
+      id: 3,
+      count: 80,
+      price: 40
+    },
+    {
+      id: 4,
+      count: 60,
+      price: 50
+    },
+    {
+      id: 5,
+      count: 150,
+      price: 1000
+    },
+    {
+      id: 6,
+      count: 20,
+      price: 20
+    },
+    {
+      id: 7,
+      count: 30,
+      price: 20
+    },
+    {
+      id: 8,
+      count: 105,
+      price: 50
+    },
+    {
+      id: 9,
+      count: 100,
+      price: 110
+    }
+  ],
+  walmart: [
+    {
+      id: 1,
+      count: 10,
+      price: 10
+    }
+  ],
+  yong_hui: [
+    {
+      id: 1,
+      count: 10,
+      price: 10
+    }
+  ]
 }

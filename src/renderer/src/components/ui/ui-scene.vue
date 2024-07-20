@@ -38,6 +38,7 @@
 <script setup lang="ts">
 import { DefaultActions } from '@renderer/constants/data/action'
 import { useAppStore } from '@renderer/store/modules/app'
+import { useShopStore } from '@renderer/store/modules/shop'
 import { ref, watch } from 'vue'
 
 defineOptions({
@@ -49,6 +50,7 @@ const isShowMiniGame = ref(false)
 const miniGameModule = ref<UnionKey.MiniGameModule>('finger-guessing')
 const appStore = useAppStore()
 const { addMoney, coastTime } = useAppStore()
+const shopStore = useShopStore()
 interface Props {
   map: Dto.MapItem
   value: boolean
@@ -65,6 +67,9 @@ function actionFunc(action: Dto.ActionButton) {
   if (action.miniGame != undefined) {
     isShowMiniGame.value = true
     miniGameModule.value = action.miniGame
+    if (action.actionType == 'shop') {
+      shopStore.currentShop = props.map.name
+    }
     emit('update:value', isShowMiniGame.value)
   } else {
     nextText()

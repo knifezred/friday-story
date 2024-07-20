@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { ShopGoods } from '@renderer/constants/data/items'
+import { DefaultGameItems } from '@renderer/constants/data/items'
 import { useAuthStore } from '@renderer/store/modules/auth'
 import { onMounted, ref } from 'vue'
 
@@ -38,16 +38,22 @@ defineOptions({
   name: 'Inventory'
 })
 
-const shopItems = ref<Array<Dto.ShopGoods>>([])
+const shopItems = ref<Array<Dto.GameItemFull>>([])
 const { archivedData } = useAuthStore()
 
 onMounted(() => {
-  shopItems.value = ShopGoods().filter(
-    (x) => archivedData.items.filter((p) => p.id == x.id).length > 0
+  shopItems.value = []
+  DefaultGameItems.filter((x) => archivedData.items.filter((p) => p.id == x.id).length > 0).forEach(
+    (item) => {
+      shopItems.value.push({
+        ...item,
+        title: item.title ?? '',
+        desc: item.desc ?? '',
+        cover: item.cover ?? '',
+        count: archivedData.items.filter((x) => x.id == item.id)[0].count
+      })
+    }
   )
-  shopItems.value.forEach((item) => {
-    item.count = archivedData.items.filter((x) => x.id == item.id)[0].count
-  })
 })
 </script>
 

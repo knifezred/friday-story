@@ -151,4 +151,4 @@ export const generatedRoutes: GeneratedRoute[] = [
       order: 20
     }
   }
-]
+];

@@ -8,17 +8,28 @@
             :key="goods.id"
             class="relative z-4 w-56 ma-1 shadow-primary shadow-op-30">
             <n-flex>
-              <n-badge :value="goods.selectedCount">
-                <ImageIcon :src="goods.cover" class="w-16 h-16" />
-              </n-badge>
-              <n-flex vertical class="pl-1">
-                <n-p class="my-0">
+              <n-grid y-gap="4" x-gap="2" :cols="3" class="mb-1 text-left">
+                <n-gi>
+                  <n-badge :value="goods.selectedCount">
+                    <ImageIcon :src="goods.cover" class="w-16 h-16" />
+                  </n-badge>
+                </n-gi>
+                <n-gi class="pl-4">
                   <LevelTag :level="goods.level" />
-                  {{ $t(goods.title) }}
-                </n-p>
-                <n-p class="my-0"> {{ $t(goods.desc) }}</n-p>
-              </n-flex>
+                  <n-tag type="info" :bordered="false" class="mt-2">
+                    <template #icon>
+                      <icon-local-money class="inline-block w-4 h-4" />
+                    </template>
+                  </n-tag>
+                </n-gi>
+                <n-gi>
+                  <span class="mt-0.5 block"> {{ $t(goods.title) }}</span>
+
+                  <span class="mt-4 block"> {{ $t(goods.price.toString()) }}</span>
+                </n-gi>
+              </n-grid>
             </n-flex>
+            <n-p class="my-0"> {{ $t(goods.desc) }}</n-p>
             <template #action>
               <n-button :disabled="goods.selectedCount == 0" @click="removeToCart(goods)">
                 -1
@@ -30,23 +41,26 @@
         </n-flex>
       </n-scrollbar>
     </n-gi>
-    <n-gi :span="4"> <n-button type="primary" class="w-sm" @click="checkout">结算</n-button> </n-gi>
+    <n-gi :span="4">
+      <n-button type="primary" class="w-sm" @click="checkout">结算（{{ totalCoast }}）</n-button>
+    </n-gi>
   </n-grid>
 </template>
 
 <script setup lang="ts">
-import { DefaultShopGoods } from '@renderer/constants/data/items'
 import { $t } from '@renderer/locales'
 import { useAppStore } from '@renderer/store/modules/app'
 import { useAuthStore } from '@renderer/store/modules/auth'
+import { useShopStore } from '@renderer/store/modules/shop'
 import { onMounted, ref } from 'vue'
 
 defineOptions({
   name: 'ShopItemsGame'
 })
-const shopItems = ref<Array<Dto.ShopGoods>>([])
+const shopItems = ref<Array<Dto.ShopGoodsFull>>([])
 const authStore = useAuthStore()
 const appStore = useAppStore()
+const shopStore = useShopStore()
 const totalCoast = ref(0)
 interface Emits {
   (e: 'game-result', result: boolean): boolean
@@ -54,7 +68,7 @@ interface Emits {
 
 const emit = defineEmits<Emits>()
 
-function addToCart(goods: Dto.ShopGoods) {
+function addToCart(goods: Dto.ShopGoodsFull) {
   if (totalCoast.value > authStore.archivedData.money) {
     window.$message?.error('余额不足')
   } else {
@@ -65,7 +79,7 @@ function addToCart(goods: Dto.ShopGoods) {
     }
   }
 }
-function removeToCart(goods: Dto.ShopGoods) {
+function removeToCart(goods: Dto.ShopGoodsFull) {
   if (goods.selectedCount > 0) {
     goods.count++
     goods.selectedCount--
@@ -92,11 +106,17 @@ function checkout() {
 }
 
 onMounted(() => {
-  shopItems.value = DefaultShopGoods
-  shopItems.value.forEach((item) => {
-    item.desc = 'items.' + item.type + '.' + item.name + '.desc'
-    item.title = 'items.' + item.type + '.' + item.name + '.title'
-    item.cover = '/static/items/' + item.type + '/' + item.name.replaceAll('.', '/') + '.png'
+  shopStore.ShopGoods().forEach((goods) => {
+    shopItems.value.push({
+      ...goods,
+      name: goods.name ?? '',
+      title: goods.title ?? '',
+      desc: goods.desc ?? '',
+      cover: goods.cover ?? '',
+      type: goods.type ?? 'food',
+      level: goods.level ?? 'N',
+      selectedCount: goods.selectedCount ?? 0
+    })
   })
 })
 </script>
