@@ -135,6 +135,11 @@
     }
   },
   "map": {
+    "locked": {
+      "no_key": "没有钥匙",
+      "locked_door": "门已上锁",
+      "no_open": "暂未开放"
+    },
     "area": {
       "dongshan": {
         "text": "东山区",
@@ -207,7 +212,7 @@
           "text": "客厅",
           "title": "客厅"
         },
-        "text": "邻居",
+        "text": "林的家，一座漂亮的小别墅",
         "title": "邻居"
       }
     },

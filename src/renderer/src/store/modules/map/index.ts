@@ -18,10 +18,7 @@ export const useMapStore = defineStore(SetupStoreId.Map, () => {
     level: 'room',
     actions: []
   })
-
-  function canJump() {
-    return true
-  }
+  const canJumpNext = ref(true)
 
   function beforeNextMap(map: Dto.MapItem) {
     let coastTime = 60 * 1000
@@ -41,12 +38,16 @@ export const useMapStore = defineStore(SetupStoreId.Map, () => {
       coastTime = coastTime * 60 * 8
     }
     authStore.archivedData.worldTime += coastTime
+    canJumpNext.value = map.isLocked != true
+    if (!canJumpNext.value) {
+      currMap.value = map
+    }
   }
 
   function reloadMap(jumpId: number | undefined, pid: number) {
-    currLevelMaps.value = allMaps.value.filter((x) => x.pid == jumpId)
-    if (jumpId != undefined && jumpId > 0) {
-      if (canJump()) {
+    if (canJumpNext.value) {
+      currLevelMaps.value = allMaps.value.filter((x) => x.pid == jumpId)
+      if (jumpId != undefined && jumpId > 0) {
         const upLevel = allMaps.value.filter((x) => x.id == jumpId)[0]
         currLevelMaps.value.push({
           id: 0,
@@ -60,15 +61,15 @@ export const useMapStore = defineStore(SetupStoreId.Map, () => {
           actions: []
         })
       }
-    }
-    if (currLevelMaps.value.length > 0) {
-      if (currLevelMaps.value.filter((x) => x.id == pid).length > 0) {
-        currMap.value = currLevelMaps.value.filter((x) => x.id == pid)[0]
-      } else {
-        currMap.value = currLevelMaps.value[0]
+      if (currLevelMaps.value.length > 0) {
+        if (currLevelMaps.value.filter((x) => x.id == pid).length > 0) {
+          currMap.value = currLevelMaps.value.filter((x) => x.id == pid)[0]
+        } else {
+          currMap.value = currLevelMaps.value[0]
+        }
       }
-      authStore.userInfo.archive.place = currMap.value.id
     }
+    authStore.userInfo.archive.place = currMap.value.id
   }
 
   function initMap(id: number) {

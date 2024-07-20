@@ -13,7 +13,7 @@
       style="border: 0; border-radius: 0">
       <n-scrollbar class="h-20vh" :distance="10" @click="nextText">
         <n-p class="text-xl color-success">
-          {{ $t(currentText) }}
+          <TypedText :strings="$t(currentText)" />
         </n-p>
       </n-scrollbar>
       <template #footer>
@@ -49,7 +49,7 @@ const currentText = ref('')
 const isShowMiniGame = ref(false)
 const miniGameModule = ref<UnionKey.MiniGameModule>('finger-guessing')
 const appStore = useAppStore()
-const { addMoney, coastTime } = useAppStore()
+const { coastTime } = useAppStore()
 const shopStore = useShopStore()
 interface Props {
   map: Dto.MapItem
@@ -72,9 +72,8 @@ function actionFunc(action: Dto.ActionButton) {
     }
     emit('update:value', isShowMiniGame.value)
   } else {
-    nextText()
-    coastTime(60)
-    addMoney(1000)
+    nextText(action)
+    coastTime(5)
   }
 }
 
@@ -84,7 +83,10 @@ function gameResult(result: boolean) {
   emit('update:value', isShowMiniGame.value)
 }
 
-function nextText() {
+function nextText(action: Dto.ActionButton) {
+  if (props.map.name == 'map.building.house_lin' && action.id == 5) {
+    currentText.value = '你敲了敲门，但没有人回应'
+  }
   // plot text array
 }
 
@@ -95,6 +97,10 @@ watch(
     currentText.value = props.map.text
     // 加载按钮
     actionButtons.value = DefaultActions.filter((x) => props.map.actions.includes(x.id))
+    if (props.map.isLocked == true) {
+      currentText.value = 'map.locked.' + props.map.lockedReason
+      actionButtons.value.push(DefaultActions.filter((x) => x.id == 5)[0])
+    }
     // 加载事件
 
     // 加载NPC

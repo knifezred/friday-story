@@ -35,5 +35,13 @@ export const DefaultActions: Array<Dto.ActionButton> = [
     isDisabled: false,
     isShow: true,
     actionType: 'map'
+  },
+  {
+    id: 5,
+    text: '敲门',
+    type: 'primary',
+    isDisabled: false,
+    isShow: true,
+    actionType: 'map'
   }
 ]

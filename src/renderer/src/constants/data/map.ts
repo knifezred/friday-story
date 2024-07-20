@@ -154,7 +154,9 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'building',
-    actions: []
+    actions: [],
+    isLocked: true,
+    lockedReason: 'locked_door'
   },
   {
     id: 15,

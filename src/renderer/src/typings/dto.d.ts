@@ -189,7 +189,7 @@ declare namespace Dto {
   }
 
   type MapLevelType = 'room' | 'building' | 'street' | 'area' | 'city' | 'country'
-
+  type MapLockedReasonType = 'no_key' | 'locked_door' | 'no_open'
   interface MapItem {
     id: number
     pid: number
@@ -205,6 +205,8 @@ declare namespace Dto {
     jumpId?: number
     order?: number
     actions: Array<number>
+    isLocked?: boolean
+    lockedReason?: MapLockedReasonType
   }
 
   interface NpcInfo {
