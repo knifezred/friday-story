@@ -85,7 +85,7 @@ function gameResult(result: boolean) {
 }
 
 function nextText() {
-  currentText.value = 'next text todo'
+  // plot text array
 }
 
 watch(
@@ -95,6 +95,9 @@ watch(
     currentText.value = props.map.text
     // 加载按钮
     actionButtons.value = DefaultActions.filter((x) => props.map.actions.includes(x.id))
+    // 加载事件
+
+    // 加载NPC
   },
   { immediate: true }
 )

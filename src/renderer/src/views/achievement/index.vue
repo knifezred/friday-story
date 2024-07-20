@@ -9,7 +9,7 @@
           <LevelTag level="SR" />
         </template>
         <n-p class="text-center">
-          <icon-streamline-emojis:game-dice class="w-32 h-32" />
+          <icon-streamline-emojis:game-dice class="size-32" />
         </n-p>
         <n-p>
           <n-icon v-for="index in totalStar" :key="index">
@@ -25,7 +25,7 @@
           <LevelTag level="R" />
         </template>
         <n-p class="text-center">
-          <icon-streamline:peace-hand class="w-32 h-32 color-primary" />
+          <icon-streamline:peace-hand class="size-32 color-primary" />
         </n-p>
         <n-p>
           <n-icon v-for="index in totalStar" :key="index">
@@ -41,7 +41,7 @@
           <LevelTag level="R" />
         </template>
         <n-p class="text-center">
-          <icon-local-logo class="w-32 h-32" />
+          <icon-local-logo class="size-32" />
         </n-p>
         <n-p>
           <n-icon v-for="index in totalStar" :key="index">

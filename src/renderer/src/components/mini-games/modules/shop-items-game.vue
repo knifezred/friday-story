@@ -13,7 +13,7 @@
                   <n-badge :value="goods.selectedCount">
                     <ImageIcon
                       :src="goods.cover"
-                      class="w-18 h-18"
+                      class="size-18"
                       :class="getLevelBorder(goods.level)" />
                   </n-badge>
                 </n-gi>

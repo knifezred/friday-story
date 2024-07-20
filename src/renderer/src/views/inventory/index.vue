@@ -10,10 +10,7 @@
             :key="goods.id"
             class="relative z-4 w-xs ma-1 shadow-primary shadow-op-30">
             <n-flex>
-              <ImageIcon
-                :src="goods.cover"
-                class="w-18 h-18"
-                :class="getLevelBorder(goods.level)" />
+              <ImageIcon :src="goods.cover" class="size-18" :class="getLevelBorder(goods.level)" />
               <n-flex vertical class="pl-1 text-left">
                 <n-p class="my-0">
                   <LevelTag :level="goods.level" />

@@ -5,7 +5,7 @@ import { ref } from 'vue'
 import { useAuthStore } from '../auth'
 
 export const useMapStore = defineStore(SetupStoreId.Map, () => {
-  const { userInfo } = useAuthStore()
+  const authStore = useAuthStore()
   const allMaps = ref<Array<Dto.MapItem>>(DefaultMaps)
   const currLevelMaps = ref<Array<Dto.MapItem>>([])
   const currMap = ref<Dto.MapItem>({
@@ -21,6 +21,26 @@ export const useMapStore = defineStore(SetupStoreId.Map, () => {
 
   function canJump() {
     return true
+  }
+
+  function beforeNextMap(map: Dto.MapItem) {
+    let coastTime = 60 * 1000
+    if (map.level == 'room') {
+      coastTime = coastTime * 5
+    }
+    if (map.level == 'building') {
+      coastTime = coastTime * 15
+    }
+    if (map.level == 'area') {
+      coastTime = coastTime * 40
+    }
+    if (map.level == 'city') {
+      coastTime = coastTime * 60 * 2
+    }
+    if (map.level == 'country') {
+      coastTime = coastTime * 60 * 8
+    }
+    authStore.archivedData.worldTime += coastTime
   }
 
   function reloadMap(jumpId: number | undefined, pid: number) {
@@ -47,7 +67,7 @@ export const useMapStore = defineStore(SetupStoreId.Map, () => {
       } else {
         currMap.value = currLevelMaps.value[0]
       }
-      userInfo.archive.place = currMap.value.id
+      authStore.userInfo.archive.place = currMap.value.id
     }
   }
 
@@ -75,7 +95,7 @@ export const useMapStore = defineStore(SetupStoreId.Map, () => {
     })
     reloadMap(currMap.value.jumpId, currMap.value.pid)
     currMap.value = allMaps.value.filter((x) => x.id == id)[0]
-    userInfo.archive.place = id
+    authStore.userInfo.archive.place = id
   }
 
   return {
@@ -83,6 +103,7 @@ export const useMapStore = defineStore(SetupStoreId.Map, () => {
     currLevelMaps,
     currMap,
     initMap,
-    reloadMap
+    reloadMap,
+    beforeNextMap
   }
 })

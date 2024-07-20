@@ -189,6 +189,7 @@ declare namespace Dto {
   }
 
   type MapLevelType = 'room' | 'building' | 'street' | 'area' | 'city' | 'country'
+
   interface MapItem {
     id: number
     pid: number

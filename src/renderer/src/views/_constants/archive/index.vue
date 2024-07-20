@@ -9,7 +9,7 @@
         :key="archive.id"
         :bordered="false"
         class="relative z-4 w-auto rd-12px text-center shadow-primary shadow-op-30">
-        <image-icon :src="'/static/imgs/' + archive.cover" class="w-32 h-32" />
+        <image-icon :src="'/static/imgs/' + archive.cover" class="size-32" />
         <n-divider />
         <NAlert :title="archive.name" type="info" :bordered="false">
           <n-p> {{ $t('page.archive.saveTime') + ': ' + formatTimestamp(archive.saveTime) }} </n-p>

@@ -1,7 +1,7 @@
 <template>
   <NFlex>
     <ImageIcon
-      class="w-16 h-16 cursor-pointer"
+      class="size-16 cursor-pointer"
       :src="'/static/imgs/' + currentIcon"
       @click="activate('right')">
     </ImageIcon>
@@ -14,7 +14,7 @@
             v-for="item in icons"
             :key="item"
             :src="'/static/imgs/' + item"
-            class="w-24 h-24 cursor-pointer"
+            class="size-24 cursor-pointer"
             @click="selectIcon(item)"></ImageIcon>
         </NFlex>
       </n-scrollbar>

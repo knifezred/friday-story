@@ -11,7 +11,7 @@
     <template #2>
       <NFlex v-if="isShowMap" vertical class="pa-2 text-center">
         <n-p>
-          <n-tag type="primary">
+          <n-tag type="primary" class="text-xl">
             {{ formatTimestamp(archivedData.worldTime, 'YYYY-MM-DD HH:mm') }}
           </n-tag>
           <SvgIcon
@@ -97,7 +97,7 @@ defineOptions({
 const appStore = useAppStore()
 const mapStore = useMapStore()
 const { addMoney, addGold } = useAppStore()
-const { reloadMap } = useMapStore()
+const { reloadMap, beforeNextMap } = useMapStore()
 const { userInfo, archivedData, isStaticSuper } = useAuthStore()
 
 const isShowMap = ref(false)
@@ -117,14 +117,13 @@ watch(
   { immediate: true }
 )
 function mapFunc(map: Dto.MapItem) {
+  beforeNextMap(map)
   if (!isShowMiniGame.value) {
     if (map.jumpId != undefined) {
       reloadMap(map.jumpId, map.pid)
-      // currentText.value = map.text
     } else {
       userInfo.archive.place = map.id
       mapStore.currMap = map
-      // currentText.value = map.text
     }
   } else {
     window.$message?.info('in mini game,please wait game ended')

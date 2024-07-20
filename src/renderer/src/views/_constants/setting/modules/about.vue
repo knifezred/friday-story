@@ -6,7 +6,7 @@
       size="small"
       segmented
       class="card-wrapper">
-      <p><icon-local-logo class="w-32 h-32" /> {{ $t('page.about.introduction') }}</p>
+      <p><icon-local-logo class="size-32" /> {{ $t('page.about.introduction') }}</p>
     </NCard>
     <NCard
       :title="$t('page.about.projectInfo.title')"
@@ -44,7 +44,7 @@
       <n-flex vertical>
         <template v-if="updatePercentage == 0">
           <n-p class="ma-auto">
-            <icon-local-aircraft class="w-32 h-32" />
+            <icon-local-aircraft class="size-32" />
           </n-p>
           <n-h3 prefix="bar" align-text type="info">
             {{ $t('page.about.update.newUpdateVersion') }}
