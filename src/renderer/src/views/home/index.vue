@@ -136,10 +136,6 @@ onMounted(() => {
   mapStore.initMap(userInfo.archive.place)
 })
 
-// map 地图
 // story 故事
 // plot 剧情
-// branch-line 主线
-// main-line 支线
-// unit-plot 单元剧
 </script>

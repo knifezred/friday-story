@@ -1,24 +1,27 @@
 <template>
-  <n-grid :x-gap="12" :y-gap="12" :cols="4" layout-shift-disabled class="text-center">
+  <n-grid :x-gap="12" :y-gap="12" :cols="4" layout-shift-disabled>
     <n-gi :span="4">
-      <n-scrollbar class="h-80vh pl-4">
-        <n-flex>
+      <n-scrollbar class="h-80vh pl-2">
+        <n-flex class="ma-2">
           <n-card
             v-for="goods in shopItems"
             :key="goods.id"
-            class="relative z-4 w-56 ma-1 shadow-primary shadow-op-30">
+            class="relative z-4 w-xs shadow-primary shadow-op-30">
             <n-flex>
-              <n-grid y-gap="4" x-gap="2" :cols="3" class="mb-1 text-left">
+              <n-grid y-gap="4" x-gap="2" :cols="3" class="mb-1">
                 <n-gi>
                   <n-badge :value="goods.selectedCount">
-                    <ImageIcon :src="goods.cover" class="w-16 h-16" />
+                    <ImageIcon
+                      :src="goods.cover"
+                      class="w-18 h-18"
+                      :class="getLevelBorder(goods.level)" />
                   </n-badge>
                 </n-gi>
                 <n-gi class="pl-4">
                   <LevelTag :level="goods.level" />
-                  <n-tag type="info" :bordered="false" class="mt-2">
+                  <n-tag type="info" :bordered="false" class="mt-2 w-10">
                     <template #icon>
-                      <icon-local-money class="inline-block w-4 h-4" />
+                      <icon-local-money />
                     </template>
                   </n-tag>
                 </n-gi>
@@ -29,19 +32,21 @@
                 </n-gi>
               </n-grid>
             </n-flex>
-            <n-p class="my-0"> {{ $t(goods.desc) }}</n-p>
+            <n-p class="my-1"> {{ $t(goods.desc) }}</n-p>
             <template #action>
-              <n-button :disabled="goods.selectedCount == 0" @click="removeToCart(goods)">
-                -1
-              </n-button>
-              <span class="w-10 inline-block">{{ goods.count }}</span>
-              <n-button :disabled="goods.count == 0" @click="addToCart(goods)">+1</n-button>
+              <n-flex justify="space-around">
+                <n-button :disabled="goods.selectedCount == 0" @click="removeToCart(goods)">
+                  -1
+                </n-button>
+                <span class="mt-2">{{ goods.count }}</span>
+                <n-button :disabled="goods.count == 0" @click="addToCart(goods)">+1</n-button>
+              </n-flex>
             </template>
           </n-card>
         </n-flex>
       </n-scrollbar>
     </n-gi>
-    <n-gi :span="4">
+    <n-gi :span="4" class="text-center">
       <n-button type="primary" class="w-sm" @click="checkout">结算（{{ totalCoast }}）</n-button>
     </n-gi>
   </n-grid>
@@ -52,11 +57,13 @@ import { $t } from '@renderer/locales'
 import { useAppStore } from '@renderer/store/modules/app'
 import { useAuthStore } from '@renderer/store/modules/auth'
 import { useShopStore } from '@renderer/store/modules/shop'
+import { getLevelBorder } from '@renderer/utils/common'
 import { onMounted, ref } from 'vue'
 
 defineOptions({
   name: 'ShopItemsGame'
 })
+
 const shopItems = ref<Array<Dto.ShopGoodsFull>>([])
 const authStore = useAuthStore()
 const appStore = useAppStore()

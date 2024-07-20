@@ -41,6 +41,7 @@ declare module 'vue' {
     'IconMynaui:checkCircle': typeof import('~icons/mynaui/check-circle')['default']
     'IconMynaui:cornerUpLeft': typeof import('~icons/mynaui/corner-up-left')['default']
     'IconMynaui:maximize': typeof import('~icons/mynaui/maximize')['default']
+    'IconSolar:altArrowRightBoldDuotone': typeof import('~icons/solar/alt-arrow-right-bold-duotone')['default']
     'IconSolar:exitLineDuotone': typeof import('~icons/solar/exit-line-duotone')['default']
     'IconSolar:heartBold': typeof import('~icons/solar/heart-bold')['default']
     'IconSolar:heartBoldDuotone': typeof import('~icons/solar/heart-bold-duotone')['default']

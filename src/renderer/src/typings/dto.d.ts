@@ -279,4 +279,16 @@ declare namespace Dto {
     count: number
     selectedCount: number
   }
+
+  // 主线 支线 奇遇
+  type PlotType = 'main-line' | 'branch-line' | 'adventure'
+
+  interface StoryPlot {
+    id: number
+    name: string
+    type: PlotType
+    cover: string
+    video: string
+    text: Array<string>
+  }
 }

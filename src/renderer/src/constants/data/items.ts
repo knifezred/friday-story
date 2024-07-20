@@ -9,7 +9,7 @@ export const DefaultGameItems: Array<Dto.GameItem> = [
     id: 2,
     name: 'beer',
     type: 'food',
-    level: 'SR'
+    level: 'SSR'
   },
   {
     id: 3,
@@ -21,19 +21,19 @@ export const DefaultGameItems: Array<Dto.GameItem> = [
     id: 4,
     name: 'croissant',
     type: 'food',
-    level: 'SR'
+    level: 'R'
   },
   {
     id: 5,
     name: 'fired_eggs',
     type: 'food',
-    level: 'SR'
+    level: 'R'
   },
   {
     id: 6,
     name: 'fish',
     type: 'food',
-    level: 'SR'
+    level: 'N'
   },
   {
     id: 7,
@@ -45,7 +45,7 @@ export const DefaultGameItems: Array<Dto.GameItem> = [
     id: 8,
     name: 'milk',
     type: 'food',
-    level: 'SR'
+    level: 'SSR'
   },
   {
     id: 9,

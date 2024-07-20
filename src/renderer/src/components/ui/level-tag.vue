@@ -1,5 +1,5 @@
 <template>
-  <n-tag :type="levelType" strong :bordered="false" class="mr-1">
+  <n-tag :type="levelType" strong :bordered="false" class="w-10 text-center mr-1">
     {{ level == undefined ? '???' : level }}
   </n-tag>
 </template>

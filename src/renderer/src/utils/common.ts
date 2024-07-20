@@ -91,3 +91,20 @@ export function formatNumber(num: number, length: number) {
 export function listAllStaticFiles() {
   return window.electron.ipcRenderer.invoke('list-static-files')
 }
+
+export function getLevelBorder(level: Dto.LevelType) {
+  let borderColor = 'border-primary'
+  if (level == 'SSR') {
+    borderColor = 'border-error'
+  }
+  if (level == 'SR') {
+    borderColor = 'border-warning'
+  }
+  if (level == 'R') {
+    borderColor = 'border-info'
+  }
+  if (level == 'N') {
+    borderColor = 'border-success'
+  }
+  return borderColor + ' pa-2 b-2 rd-lg'
+}

@@ -97,7 +97,7 @@
   "items": {
     "food": {
       "beer": {
-        "desc": "",
+        "desc": "鲜生啤，千杯不醉",
         "title": "啤酒"
       },
       "coffee": {
@@ -106,7 +106,7 @@
       },
       "cola": {
         "desc": "一瓶碳酸饮料",
-        "title": "可乐"
+        "title": "可口可乐"
       },
       "croissant": {
         "desc": "",

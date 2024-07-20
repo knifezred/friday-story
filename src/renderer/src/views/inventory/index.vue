@@ -8,17 +8,21 @@
           <n-card
             v-for="goods in shopItems"
             :key="goods.id"
-            class="relative z-4 w-56 ma-1 shadow-primary shadow-op-30">
+            class="relative z-4 w-xs ma-1 shadow-primary shadow-op-30">
             <n-flex>
-              <n-badge :value="goods.count">
-                <ImageIcon :src="goods.cover" class="w-16 h-16" />
-              </n-badge>
-
-              <n-flex vertical class="pl-1">
+              <ImageIcon
+                :src="goods.cover"
+                class="w-18 h-18"
+                :class="getLevelBorder(goods.level)" />
+              <n-flex vertical class="pl-1 text-left">
                 <n-p class="my-0">
                   <LevelTag :level="goods.level" />
-                  {{ $t(goods.title) }}
+                  <n-tag :bordered="false" type="info">
+                    {{ $t(goods.title) }}
+                    ({{ $t(goods.count.toString()) }})
+                  </n-tag>
                 </n-p>
+                <n-p class="my-0"> </n-p>
                 <n-p class="my-0"> {{ $t(goods.desc) }}</n-p>
               </n-flex>
             </n-flex>
@@ -32,6 +36,7 @@
 <script setup lang="ts">
 import { DefaultGameItems } from '@renderer/constants/data/items'
 import { useAuthStore } from '@renderer/store/modules/auth'
+import { getLevelBorder } from '@renderer/utils/common'
 import { onMounted, ref } from 'vue'
 
 defineOptions({
