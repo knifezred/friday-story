@@ -10,7 +10,7 @@
     <n-gi :span="2">
       <n-h2>
         <ButtonIcon text icon="streamline:peace-hand"></ButtonIcon>
-        石头剪刀布
+        {{ $t('miniGame.finger-guessing') }}
       </n-h2>
     </n-gi>
     <n-gi> </n-gi>
@@ -25,7 +25,7 @@
       </n-h3>
     </n-gi>
     <n-gi :span="2">
-      <n-h3>当前轮次: {{ currentRound }} </n-h3>
+      <n-h3> {{ $t('miniGame.currentRound') }}: {{ currentRound }} </n-h3>
     </n-gi>
     <n-gi>
       <n-h3>
@@ -43,17 +43,21 @@
     <n-gi v-if="currentRound > 0" :span="2">
       <n-result v-if="gameEnded" :status="`${playerScore > computerScore ? 'success' : 'error'}`">
         <n-h1 v-if="playerScore != computerScore" class="text-center">
-          {{ playerScore > computerScore ? '你赢了!' : '你输了!' }}
+          {{
+            playerScore > computerScore
+              ? $t('miniGame.gameResult.youWin')
+              : $t('miniGame.gameResult.youLose')
+          }}
         </n-h1>
-        <n-h1 v-else class="text-center">平局!</n-h1>
+        <n-h1 v-else class="text-center">{{ $t('miniGame.gameResult.equal') }}</n-h1>
         <template v-if="isSuper" #footer>
           <n-flex justify="center">
-            <n-button @click="startGame"> 再来一局 </n-button>
-            <n-button @click="endGame"> 结束 </n-button>
+            <n-button @click="startGame"> {{ $t('miniGame.playAgain') }} </n-button>
+            <n-button @click="endGame"> {{ $t('miniGame.endGame') }} </n-button>
           </n-flex>
         </template>
       </n-result>
-      <n-h3 v-else>{{ result }}</n-h3>
+      <n-h3 v-else>{{ $t(result) }}</n-h3>
     </n-gi>
 
     <n-gi v-if="currentRound > 0">
@@ -62,7 +66,9 @@
 
     <n-gi> </n-gi>
     <n-gi :span="2">
-      <n-button v-if="currentRound == 0" @click="startGame">开始游戏</n-button>
+      <n-button v-if="currentRound == 0" @click="startGame">{{
+        $t('miniGame.startGame')
+      }}</n-button>
       <n-flex v-else-if="!gameEnded && currentRound > 0" justify="space-around" size="large">
         <n-button text style="font-size: 64px" @click="makeChoice('rock')">
           <n-icon>
@@ -152,17 +158,17 @@ function makeChoice(choice: Choice) {
 
 function determineResult() {
   if (playerChoice.value === computerChoice.value) {
-    result.value = '平局!'
+    result.value = 'miniGame.gameResult.equal'
   } else if (
     (playerChoice.value === 'rock' && computerChoice.value === 'scissors') ||
     (playerChoice.value === 'paper' && computerChoice.value === 'rock') ||
     (playerChoice.value === 'scissors' && computerChoice.value === 'paper')
   ) {
     playerScore.value++
-    result.value = '你赢了!'
+    result.value = 'miniGame.gameResult.youWin'
   } else {
     computerScore.value++
-    result.value = '你输了!'
+    result.value = 'miniGame.gameResult.youLose'
   }
   history.value.push({
     playerChoice: playerChoice.value,

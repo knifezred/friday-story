@@ -5,6 +5,7 @@ export enum SetupStoreId {
   Route = 'route-store',
   Tab = 'tab-store',
   Server = 'server-store',
-  Map = 'map-store',
-  Shop = 'shop-store'
+  Place = 'place-store',
+  Shop = 'shop-store',
+  Story = 'story-store'
 }

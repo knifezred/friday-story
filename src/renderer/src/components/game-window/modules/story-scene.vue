@@ -1,12 +1,9 @@
 <template>
   <NFlex vertical :size="0">
     <div
-      v-if="!isShowMiniGame"
       :style="'background-image: url(http://localhost:5175' + map.cover + ');padding-top: 56.25%;'"
       class="bg-repeat-round"></div>
-    <MiniGames v-else :module="miniGameModule" @game-result="gameResult" />
     <n-card
-      v-if="!isShowMiniGame"
       class="w-full bg-gray-8"
       :class="!appStore.siderCollapse ? 'pos-relative bg-op-1' : 'pos-fixed bottom-0 bg-op-50'"
       :style="appStore.siderCollapse ? 'height:20.5vw' : 'height:18vw'"
@@ -27,7 +24,7 @@
             class="color-white w-40"
             @click="actionFunc(btn)">
             <SvgIcon v-if="btn.icon != undefined" :icon="btn.icon" class="mr-1" />
-            {{ btn.text }}
+            {{ $t(btn.text) }}
           </n-button>
         </n-flex>
       </template>
@@ -46,7 +43,6 @@ defineOptions({
 })
 const actionButtons = ref<Array<Dto.ActionButton>>([])
 const currentText = ref('')
-const isShowMiniGame = ref(false)
 const miniGameModule = ref<UnionKey.MiniGameModule>('finger-guessing')
 const appStore = useAppStore()
 const { coastTime } = useAppStore()
@@ -57,30 +53,16 @@ interface Props {
 }
 const props = defineProps<Props>()
 
-interface Emits {
-  (e: 'update:value', result: boolean): boolean
-}
-
-const emit = defineEmits<Emits>()
-
 function actionFunc(action: Dto.ActionButton) {
   if (action.miniGame != undefined) {
-    isShowMiniGame.value = true
     miniGameModule.value = action.miniGame
     if (action.actionType == 'shop') {
       shopStore.currentShop = props.map.name
     }
-    emit('update:value', isShowMiniGame.value)
   } else {
     nextText(action)
     coastTime(5)
   }
-}
-
-function gameResult(result: boolean) {
-  isShowMiniGame.value = false
-  currentText.value = 'game result:' + result
-  emit('update:value', isShowMiniGame.value)
 }
 
 function nextText(action: Dto.ActionButton) {

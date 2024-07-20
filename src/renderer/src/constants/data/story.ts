@@ -1,10 +1,33 @@
-export const MainLineStart: Array<Dto.StoryPlot> = [
+export const DefaultStories: Array<Dto.StoryPlot> = [
   {
-    id: 1,
-    name: 'story.start',
+    name: 'start',
     type: 'main-line',
     cover: '',
-    video: '',
-    text: []
+    text: ['这是一个主线剧情'],
+    scenes: ['scene.set_name']
+  }
+]
+
+export const DefaultScenes: Array<Dto.GameScene> = [
+  {
+    name: 'scene.set_name',
+    title: 'title',
+    cover: '',
+    next: '',
+    options: [
+      {
+        name: '',
+        title: '',
+        text: '',
+        next: 'scene.choose_id'
+      }
+    ]
+  },
+  {
+    name: 'scene.choose_id',
+    title: '',
+    cover: '',
+    next: '',
+    options: []
   }
 ]

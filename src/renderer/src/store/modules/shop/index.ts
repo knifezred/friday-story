@@ -28,7 +28,6 @@ export const useShopStore = defineStore(SetupStoreId.Shop, () => {
       item.cover = '/static/items/' + item.type + '/' + item.name.replaceAll('.', '/') + '.png'
     })
   }
-  initShopItems()
 
-  return { currentShop, ShopGoods }
+  return { currentShop, ShopGoods, initShopItems }
 })

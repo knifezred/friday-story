@@ -160,8 +160,6 @@ declare namespace Dto {
 
   type Type = 'default' | 'primary' | 'info' | 'success' | 'warning' | 'error'
 
-  type ActionType = 'map' | 'mini-game' | 'shop'
-
   type WeatherType = 'sun' | 'cloud'
 
   type LevelType = 'N' | 'R' | 'SR' | 'SSR'
@@ -185,11 +183,13 @@ declare namespace Dto {
     isDisabled: boolean
     isShow: boolean
     miniGame?: UnionKey.MiniGameModule | undefined
-    actionType: ActionType
+    actionType: UnionKey.SceneModule
   }
 
   type MapLevelType = 'room' | 'building' | 'street' | 'area' | 'city' | 'country'
+
   type MapLockedReasonType = 'no_key' | 'locked_door' | 'no_open'
+
   interface MapItem {
     id: number
     pid: number
@@ -198,11 +198,11 @@ declare namespace Dto {
     text: string
     cover: string
     video?: string
+    nextId?: number
     icon?: string
     isDisabled?: boolean
     isShow?: boolean
     level: MapLevelType
-    jumpId?: number
     order?: number
     actions: Array<number>
     isLocked?: boolean
@@ -287,11 +287,30 @@ declare namespace Dto {
   type PlotType = 'main-line' | 'branch-line' | 'adventure'
 
   interface StoryPlot {
-    id: number
+    id?: number
     name: string
     type: PlotType
     cover: string
-    video: string
-    text: Array<string>
+    text: string | string[]
+    scenes: Array<string>
+    conditions?: string | string[]
+  }
+
+  interface GameScene {
+    id?: number
+    name: string
+    title: string
+    cover: string
+    next: string
+    options: Array<StoryOption>
+  }
+  interface StoryOption {
+    id?: number
+    name: string
+    title: string
+    text: string
+    icon?: string
+    next: string
+    conditions?: string | string[]
   }
 }

@@ -6,7 +6,7 @@
     :min="splitSize"
     :max="splitSize">
     <template #1>
-      <UiScene v-model:value="isShowMiniGame" :map="mapStore.currMap" />
+      <GameWindow v-model:value="appStore.currentSceneType" />
     </template>
     <template #2>
       <NFlex v-if="isShowMap" vertical class="pa-2 text-center">
@@ -74,7 +74,7 @@
                   v-if="item.id == mapStore.currMap.id"
                   class="color-primary" />
                 <icon-solar:exit-line-duotone
-                  v-if="item.jumpId != undefined"
+                  v-if="item.nextId != undefined"
                   class="color-primary" />
               </template>
             </n-card>
@@ -88,20 +88,19 @@
 <script setup lang="ts">
 import { useAppStore } from '@renderer/store/modules/app'
 import { useAuthStore } from '@renderer/store/modules/auth'
-import { useMapStore } from '@renderer/store/modules/map'
+import { usePlaceStore } from '@renderer/store/modules/place'
 import { formatTimestamp } from '@renderer/utils/common'
 import { onMounted, ref, watch } from 'vue'
 defineOptions({
   name: 'Home'
 })
 const appStore = useAppStore()
-const mapStore = useMapStore()
+const mapStore = usePlaceStore()
 const { addMoney, addGold } = useAppStore()
-const { reloadMap, beforeNextMap } = useMapStore()
+const { reloadMap, beforeNextMap } = usePlaceStore()
 const { userInfo, archivedData, isStaticSuper } = useAuthStore()
 
 const isShowMap = ref(false)
-const isShowMiniGame = ref(false)
 const splitSize = ref(1)
 
 watch(
@@ -118,9 +117,9 @@ watch(
 )
 function mapFunc(map: Dto.MapItem) {
   beforeNextMap(map)
-  if (!isShowMiniGame.value) {
-    if (map.jumpId != undefined) {
-      reloadMap(map.jumpId, map.pid)
+  if (appStore.currentSceneType === 'map') {
+    if (map.nextId != undefined) {
+      reloadMap(map.nextId, map.pid)
     } else {
       userInfo.archive.place = map.id
       mapStore.currMap = map

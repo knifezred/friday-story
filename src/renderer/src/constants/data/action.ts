@@ -1,36 +1,35 @@
 export const DefaultActions: Array<Dto.ActionButton> = [
   {
     id: 1,
-    text: '石头剪刀布',
+    text: 'map.action.finger-guessing',
     icon: 'fluent-emoji:victory-hand',
     type: 'primary',
     isDisabled: false,
     isShow: true,
     miniGame: 'finger-guessing',
-    actionType: 'map'
+    actionType: 'mini-game'
   },
   {
     id: 2,
-    text: '掷骰子',
+    text: 'map.action.dice-number',
     icon: 'streamline-emojis:game-dice',
     type: 'error',
     isDisabled: false,
     isShow: true,
     miniGame: 'dice-number',
-    actionType: 'map'
+    actionType: 'mini-game'
   },
   {
     id: 3,
-    text: '进入',
+    text: 'map.action.enter',
     type: 'primary',
     isDisabled: false,
     isShow: true,
-    miniGame: 'shop',
-    actionType: 'map'
+    actionType: 'shop'
   },
   {
     id: 4,
-    text: '工作',
+    text: 'map.action.work',
     type: 'primary',
     isDisabled: false,
     isShow: true,
@@ -38,7 +37,7 @@ export const DefaultActions: Array<Dto.ActionButton> = [
   },
   {
     id: 5,
-    text: '敲门',
+    text: 'map.action.knocked',
     type: 'primary',
     isDisabled: false,
     isShow: true,

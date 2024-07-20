@@ -12,7 +12,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 1,
     pid: 0,
-    jumpId: 1,
+    nextId: 1,
     name: 'friday',
     title: '',
     text: '',
@@ -23,7 +23,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 2,
     pid: 1,
-    jumpId: 2,
+    nextId: 2,
     name: 'boot',
     title: '',
     text: '',
@@ -34,7 +34,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 3,
     pid: 2,
-    jumpId: 3,
+    nextId: 3,
     name: 'dongshan',
     title: '',
     text: '',
@@ -45,7 +45,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 4,
     pid: 3,
-    jumpId: 4,
+    nextId: 4,
     name: 'pingan',
     title: '',
     text: '',
@@ -56,7 +56,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 5,
     pid: 4,
-    jumpId: 5,
+    nextId: 5,
     name: 'home',
     title: '',
     text: '',
@@ -137,7 +137,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 13,
     pid: 5,
-    jumpId: 4,
+    nextId: 4,
     name: 'home.door',
     title: '',
     text: '',
@@ -148,13 +148,13 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 14,
     pid: 4,
-    jumpId: 14,
+    nextId: 14,
     name: 'house_lin',
     title: '',
     text: '',
     cover: '',
     level: 'building',
-    actions: [],
+    actions: [1, 2],
     isLocked: true,
     lockedReason: 'locked_door'
   },
@@ -211,7 +211,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 20,
     pid: 14,
-    jumpId: 4,
+    nextId: 4,
     name: 'house_lin.door',
     title: '',
     text: '',

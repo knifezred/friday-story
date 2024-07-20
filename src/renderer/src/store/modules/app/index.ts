@@ -9,6 +9,7 @@ import { defineStore } from 'pinia'
 import { effectScope, nextTick, onScopeDispose, ref, watch } from 'vue'
 import { useAuthStore } from '../auth'
 import { useRouteStore } from '../route'
+import { useShopStore } from '../shop'
 import { useTabStore } from '../tab'
 import { useThemeStore } from '../theme'
 
@@ -17,6 +18,7 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
   const routeStore = useRouteStore()
   const tabStore = useTabStore()
   const authStore = useAuthStore()
+  const shopStore = useShopStore()
   const scope = effectScope()
   const breakpoints = useBreakpoints(breakpointsTailwind)
   const {
@@ -43,6 +45,8 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
   const isMobile = breakpoints.smaller('sm')
 
   // custom start
+  const currentSceneType = ref<UnionKey.SceneModule>('map')
+  const currentMiniGame = ref<UnionKey.MiniGameModule>('finger-guessing')
   const fromMoney = ref(0)
   const fromGold = ref(0)
   function addMoney(money: number) {
@@ -104,6 +108,7 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
 
   function init() {
     setDayjsLocale(locale.value)
+    shopStore.initShopItems()
   }
 
   // watch store
@@ -191,6 +196,8 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
     fromGold,
     addMoney,
     addGold,
-    coastTime
+    coastTime,
+    currentSceneType,
+    currentMiniGame
   }
 })

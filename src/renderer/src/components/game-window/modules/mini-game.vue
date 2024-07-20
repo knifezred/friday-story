@@ -8,24 +8,21 @@
 </template>
 
 <script setup lang="ts">
+import { useAppStore } from '@renderer/store/modules/app'
 import { useAuthStore } from '@renderer/store/modules/auth'
 import type { Component } from 'vue'
 import { computed } from 'vue'
-import DiceNumberGame from './modules/dice-number-game.vue'
-import FingerGuessingGame from './modules/finger-guessing-game.vue'
-import MatchThreeGame from './modules/match-three-game.vue'
-import ShopItemsGame from './modules/shop-items-game.vue'
+import DiceNumberGame from '../mini-games/dice-number-game.vue'
+import FingerGuessingGame from '../mini-games/finger-guessing-game.vue'
+import MatchThreeGame from '../mini-games/match-three-game.vue'
 
 defineOptions({
-  name: 'MiniGames'
+  name: 'MiniGame'
 })
-const authStore = useAuthStore()
-interface Props {
-  /** The login module */
-  module?: UnionKey.MiniGameModule
-}
+const appStore = useAppStore()
 
-const props = defineProps<Props>()
+const authStore = useAuthStore()
+
 interface MiniGameModule {
   label: string
   component: Component
@@ -34,19 +31,18 @@ interface MiniGameModule {
 const moduleMap: Record<UnionKey.MiniGameModule, MiniGameModule> = {
   'dice-number': { label: 'FingerGuessing', component: DiceNumberGame },
   'finger-guessing': { label: 'FingerGuessing', component: FingerGuessingGame },
-  'match-three': { label: 'FingerGuessing', component: MatchThreeGame },
-  shop: { label: 'Shop', component: ShopItemsGame }
+  'match-three': { label: 'FingerGuessing', component: MatchThreeGame }
 }
 
-const activeModule = computed(() => moduleMap[props.module || 'finger-guess'])
+const activeModule = computed(() => moduleMap[appStore.currentMiniGame || 'finger-guess'])
 
 interface Emits {
-  (e: 'game-result', result: boolean): boolean
+  (e: 'result', result: boolean): boolean
 }
 const emit = defineEmits<Emits>()
 function gameResult(result: boolean) {
   setTimeout(() => {
-    emit('game-result', result)
+    emit('result', result)
   }, 100)
 }
 </script>

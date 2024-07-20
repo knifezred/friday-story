@@ -61,7 +61,7 @@ import { getLevelBorder } from '@renderer/utils/common'
 import { onMounted, ref } from 'vue'
 
 defineOptions({
-  name: 'ShopItemsGame'
+  name: 'ShopScene'
 })
 
 const shopItems = ref<Array<Dto.ShopGoodsFull>>([])
@@ -70,7 +70,7 @@ const appStore = useAppStore()
 const shopStore = useShopStore()
 const totalCoast = ref(0)
 interface Emits {
-  (e: 'game-result', result: boolean): boolean
+  (e: 'result', result: boolean): boolean
 }
 
 const emit = defineEmits<Emits>()
@@ -109,7 +109,7 @@ function checkout() {
     }
   })
   appStore.addMoney(-totalCoast.value)
-  emit('game-result', true)
+  emit('result', true)
 }
 
 onMounted(() => {

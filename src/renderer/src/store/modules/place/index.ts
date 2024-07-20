@@ -4,7 +4,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useAuthStore } from '../auth'
 
-export const useMapStore = defineStore(SetupStoreId.Map, () => {
+export const usePlaceStore = defineStore(SetupStoreId.Place, () => {
   const authStore = useAuthStore()
   const allMaps = ref<Array<Dto.MapItem>>(DefaultMaps)
   const currLevelMaps = ref<Array<Dto.MapItem>>([])
@@ -44,15 +44,15 @@ export const useMapStore = defineStore(SetupStoreId.Map, () => {
     }
   }
 
-  function reloadMap(jumpId: number | undefined, pid: number) {
+  function reloadMap(nextId: number | undefined, pid: number) {
     if (canJumpNext.value) {
-      currLevelMaps.value = allMaps.value.filter((x) => x.pid == jumpId)
-      if (jumpId != undefined && jumpId > 0) {
-        const upLevel = allMaps.value.filter((x) => x.id == jumpId)[0]
+      currLevelMaps.value = allMaps.value.filter((x) => x.pid == nextId)
+      if (nextId != undefined && nextId > 0) {
+        const upLevel = allMaps.value.filter((x) => x.id == nextId)[0]
         currLevelMaps.value.push({
           id: 0,
           pid: currLevelMaps.value[0].pid,
-          jumpId: upLevel.pid,
+          nextId: upLevel.pid,
           name: 'map.common.exit',
           title: 'map.common.exit.title',
           text: 'map.common.exit.text',
@@ -87,14 +87,14 @@ export const useMapStore = defineStore(SetupStoreId.Map, () => {
         map.cover = map.cover ? map.cover : '/static/' + map.name.replaceAll('.', '/') + '.jpeg'
       }
       if (map.id == id) {
-        if (map.jumpId != undefined) {
+        if (map.nextId != undefined) {
           currMap.value = map
         } else {
           currMap.value = allMaps.value.filter((x) => x.id == map.pid)[0]
         }
       }
     })
-    reloadMap(currMap.value.jumpId, currMap.value.pid)
+    reloadMap(currMap.value.nextId, currMap.value.pid)
     currMap.value = allMaps.value.filter((x) => x.id == id)[0]
     authStore.userInfo.archive.place = id
   }

@@ -135,10 +135,15 @@
     }
   },
   "map": {
-    "locked": {
-      "no_key": "没有钥匙",
-      "locked_door": "门已上锁",
-      "no_open": "暂未开放"
+    "action": {
+      "dice-number": "玩骰子",
+      "enter": "进入",
+      "finger-guessing": "石头剪刀布",
+      "goBack": "返回",
+      "knocked": "敲门",
+      "quit": "退出",
+      "wait": "等待",
+      "work": "工作"
     },
     "area": {
       "dongshan": {
@@ -225,11 +230,11 @@
     "common": {
       "exit": {
         "text": "",
-        "title": "退出"
+        "title": "返回"
       },
       "test": {
         "text": "",
-        "title": ""
+        "title": "测试"
       }
     },
     "country": {
@@ -237,6 +242,11 @@
         "text": "弗雷德共和国",
         "title": "弗雷德共和国"
       }
+    },
+    "locked": {
+      "locked_door": "门已上锁",
+      "no_key": "没有钥匙",
+      "no_open": "暂未开放"
     },
     "street": {
       "backstreet": {
@@ -248,6 +258,18 @@
         "title": "平安路"
       }
     }
+  },
+  "miniGame": {
+    "currentRound": "当前轮次",
+    "endGame": "结束",
+    "finger-guessing": "石头剪刀布",
+    "gameResult": {
+      "equal": "平局",
+      "youLose": "你输了",
+      "youWin": "你赢了"
+    },
+    "playAgain": "再玩一局",
+    "startGame": "开始游戏"
   },
   "page": {
     "about": {
