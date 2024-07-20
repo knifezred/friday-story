@@ -281,7 +281,7 @@ declare namespace Dto {
     type: PlotType
     cover: string
     text: string
-    scenes: Array<string>
+    nextScene: string
     conditions?: string | string[]
   }
 
@@ -304,7 +304,7 @@ declare namespace Dto {
     isDisabled: boolean
     isShow: boolean
     miniGame?: UnionKey.MiniGameModule | undefined
-    next?: UnionKey.MiniGameModule | string | undefined
+    next?: string | undefined
     actionType: UnionKey.SceneModule
     conditions?: string | string[]
   }

@@ -45,7 +45,6 @@ defineOptions({
 })
 const actionOptions = ref<Array<Dto.ActionOption>>([])
 const currentText = ref('')
-const scenes = ref<Array<Dto.GameScene>>([])
 const currentScene = ref<Dto.GameScene>({
   name: 'test',
   title: '',
@@ -57,14 +56,17 @@ const currentScene = ref<Dto.GameScene>({
 const appStore = useAppStore()
 const storyStore = useStoryStore()
 
+function nextScene(next: string) {
+  currentScene.value = storyStore.getStoryScene(next)
+  // 绑定按钮
+  actionOptions.value = storyStore.getOptions(currentScene.value.options)
+}
+
 function actionFunc(action: Dto.ActionOption) {
   if (action.actionType == 'story') {
     if (action.next != undefined && action.next.startsWith('scene')) {
-      scenes.value = storyStore.getStoryScenes([action.next])
-      currentScene.value = scenes.value[0]
+      nextScene(action.next)
       currentText.value = currentScene.value.text
-      // 绑定按钮
-      actionOptions.value = storyStore.getOptions(currentScene.value.options)
     }
   } else {
     nextText()
@@ -74,14 +76,12 @@ function actionFunc(action: Dto.ActionOption) {
 function nextText() {
   // plot text array
   if (actionOptions.value.length == 0) {
-    if (scenes.value[0].name == currentScene.value.name) {
+    if (currentScene.value.next != '') {
+      nextScene(currentScene.value.next)
+    } else {
       // end
       appStore.currentSceneType = 'map'
       window.$message?.info($t('stories.over'))
-    } else {
-      currentScene.value = scenes.value[0]
-      // 绑定按钮
-      actionOptions.value = storyStore.getOptions(currentScene.value.options)
     }
   }
   currentText.value = currentScene.value.text
@@ -93,9 +93,8 @@ watch(
     storyStore.setCurrentStory(appStore.currentStory)
     // 默认加载story，此处没有options
     currentScene.value.cover = storyStore.currentStory.cover
+    currentScene.value.next = storyStore.currentStory.nextScene
     currentText.value = storyStore.currentStory.text
-    // 加载第一个scene
-    scenes.value = storyStore.getStoryScenes(storyStore.currentStory.scenes)
   },
   { immediate: true }
 )

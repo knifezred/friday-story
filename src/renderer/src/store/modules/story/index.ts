@@ -10,16 +10,10 @@ export const useStoryStore = defineStore(SetupStoreId.Story, () => {
     type: 'main-line',
     cover: '',
     text: '',
-    scenes: []
+    nextScene: ''
   })
-  function getStoryScenes(sceneNames: string[]) {
-    const scenes: Array<Dto.GameScene> = []
-    DefaultScenes.forEach((scene) => {
-      if (sceneNames.indexOf(scene.name) > -1) {
-        scenes.push(scene)
-      }
-    })
-    return scenes
+  function getStoryScene(sceneName: string) {
+    return DefaultScenes.filter((x) => x.name == sceneName)[0]
   }
   function setCurrentStory(name: string) {
     currentStory.value = DefaultStories.filter((x) => x.name == name)[0]
@@ -48,5 +42,5 @@ export const useStoryStore = defineStore(SetupStoreId.Story, () => {
   }
   initStory()
 
-  return { currentStory, setCurrentStory, getStoryScenes, getOptions }
+  return { currentStory, setCurrentStory, getStoryScene, getOptions }
 })

@@ -4,7 +4,7 @@ export const DefaultStories: Array<Dto.StoryPlot> = [
     type: 'main-line',
     cover: '',
     text: '这是一个主线剧情',
-    scenes: ['scene.set_name']
+    nextScene: 'scene.set_name'
   }
 ]
 
@@ -19,6 +19,14 @@ export const DefaultScenes: Array<Dto.GameScene> = [
   },
   {
     name: 'scene.choose_id',
+    title: '',
+    cover: '',
+    next: 'scene.set_special',
+    options: [],
+    text: ''
+  },
+  {
+    name: 'scene.set_special',
     title: '',
     cover: '',
     next: '',
