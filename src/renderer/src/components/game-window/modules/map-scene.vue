@@ -38,7 +38,6 @@
 
 <script setup lang="ts">
 import { DefaultActions } from '@renderer/constants/data/action'
-import { useActionCondition } from '@renderer/hooks/business/action-condition'
 import { useAppStore } from '@renderer/store/modules/app'
 import { usePlaceStore } from '@renderer/store/modules/place'
 import { ref, watch } from 'vue'
@@ -50,7 +49,6 @@ const options = ref<Array<Dto.ActionOption>>([])
 const currentText = ref('')
 const appStore = useAppStore()
 const placeStore = usePlaceStore()
-const actionCondition = useActionCondition()
 interface Emits {
   (e: 'result', result: boolean): boolean
 }
