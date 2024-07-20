@@ -18,7 +18,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'country',
-    actions: []
+    options: []
   },
   {
     id: 2,
@@ -29,7 +29,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'city',
-    actions: []
+    options: []
   },
   {
     id: 3,
@@ -40,7 +40,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'area',
-    actions: []
+    options: []
   },
   {
     id: 4,
@@ -51,7 +51,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'street',
-    actions: []
+    options: []
   },
   {
     id: 5,
@@ -62,7 +62,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'building',
-    actions: []
+    options: []
   },
   {
     id: 6,
@@ -72,7 +72,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'room',
-    actions: []
+    options: []
   },
   {
     id: 7,
@@ -82,7 +82,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'room',
-    actions: []
+    options: []
   },
   {
     id: 8,
@@ -92,7 +92,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'room',
-    actions: []
+    options: []
   },
   {
     id: 9,
@@ -102,7 +102,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'room',
-    actions: []
+    options: []
   },
   {
     id: 10,
@@ -112,7 +112,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'room',
-    actions: []
+    options: []
   },
   {
     id: 11,
@@ -122,7 +122,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'room',
-    actions: []
+    options: []
   },
   {
     id: 12,
@@ -132,7 +132,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'room',
-    actions: []
+    options: []
   },
   {
     id: 13,
@@ -143,7 +143,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'room',
-    actions: []
+    options: []
   },
   {
     id: 14,
@@ -154,7 +154,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'building',
-    actions: [1, 2],
+    options: ['finger-guessing', 'dice-number'],
     isLocked: true,
     lockedReason: 'locked_door'
   },
@@ -166,7 +166,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'room',
-    actions: []
+    options: []
   },
   {
     id: 16,
@@ -176,7 +176,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'room',
-    actions: []
+    options: []
   },
   {
     id: 17,
@@ -186,7 +186,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'room',
-    actions: []
+    options: []
   },
   {
     id: 18,
@@ -196,7 +196,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'room',
-    actions: []
+    options: []
   },
   {
     id: 19,
@@ -206,7 +206,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'room',
-    actions: []
+    options: []
   },
   {
     id: 20,
@@ -217,7 +217,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'room',
-    actions: []
+    options: []
   },
   {
     id: 21,
@@ -227,7 +227,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '.png',
     level: 'building',
-    actions: [3]
+    options: ['shop', 'scene.start']
   },
   {
     id: 22,
@@ -237,7 +237,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'street',
-    actions: []
+    options: []
   },
   {
     id: 23,
@@ -247,7 +247,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'room',
-    actions: []
+    options: []
   },
   {
     id: 23,
@@ -257,7 +257,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'room',
-    actions: []
+    options: []
   },
   {
     id: 247,
@@ -267,7 +267,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'room',
-    actions: []
+    options: []
   },
   {
     id: 25,
@@ -277,7 +277,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'room',
-    actions: []
+    options: []
   },
   {
     id: 26,
@@ -287,7 +287,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'room',
-    actions: []
+    options: []
   },
   {
     id: 27,
@@ -297,7 +297,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'room',
-    actions: []
+    options: []
   },
   {
     id: 28,
@@ -307,7 +307,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'room',
-    actions: []
+    options: []
   },
   {
     id: 29,
@@ -317,7 +317,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'room',
-    actions: []
+    options: []
   },
   {
     id: 30,
@@ -327,6 +327,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '',
     level: 'room',
-    actions: []
+    options: []
   }
 ]

@@ -1,7 +1,11 @@
 <template>
   <NFlex vertical :size="0">
     <div
-      :style="'background-image: url(http://localhost:5175' + map.cover + ');padding-top: 56.25%;'"
+      :style="
+        'background-image: url(http://localhost:5175' +
+        currentScene.cover +
+        ');padding-top: 56.25%;'
+      "
       class="bg-repeat-round"></div>
     <n-card
       class="w-full bg-gray-8"
@@ -16,11 +20,9 @@
       <template #footer>
         <n-flex>
           <n-button
-            v-for="btn in actionButtons"
+            v-for="btn in actionOptions"
             :key="btn.id"
             :type="btn.type"
-            :is-disabled="btn.isDisabled"
-            :is-show="btn.isShow"
             class="color-white w-40"
             @click="actionFunc(btn)">
             <SvgIcon v-if="btn.icon != undefined" :icon="btn.icon" class="mr-1" />
@@ -33,59 +35,67 @@
 </template>
 
 <script setup lang="ts">
-import { DefaultActions } from '@renderer/constants/data/action'
+import { $t } from '@renderer/locales'
 import { useAppStore } from '@renderer/store/modules/app'
-import { useShopStore } from '@renderer/store/modules/shop'
+import { useStoryStore } from '@renderer/store/modules/story'
 import { ref, watch } from 'vue'
 
 defineOptions({
   name: 'UiScene'
 })
-const actionButtons = ref<Array<Dto.ActionButton>>([])
+const actionOptions = ref<Array<Dto.ActionOption>>([])
 const currentText = ref('')
-const miniGameModule = ref<UnionKey.MiniGameModule>('finger-guessing')
+const scenes = ref<Array<Dto.GameScene>>([])
+const currentScene = ref<Dto.GameScene>({
+  name: 'test',
+  title: '',
+  cover: '',
+  next: '',
+  options: [],
+  text: ''
+})
 const appStore = useAppStore()
-const { coastTime } = useAppStore()
-const shopStore = useShopStore()
-interface Props {
-  map: Dto.MapItem
-  value: boolean
-}
-const props = defineProps<Props>()
+const storyStore = useStoryStore()
 
-function actionFunc(action: Dto.ActionButton) {
-  if (action.miniGame != undefined) {
-    miniGameModule.value = action.miniGame
-    if (action.actionType == 'shop') {
-      shopStore.currentShop = props.map.name
+function actionFunc(action: Dto.ActionOption) {
+  if (action.actionType == 'story') {
+    if (action.next != undefined && action.next.startsWith('scene')) {
+      scenes.value = storyStore.getStoryScenes([action.next])
+      currentScene.value = scenes.value[0]
+      currentText.value = currentScene.value.text
+      // 绑定按钮
+      actionOptions.value = storyStore.getOptions(currentScene.value.options)
     }
   } else {
-    nextText(action)
-    coastTime(5)
+    nextText()
   }
 }
 
-function nextText(action: Dto.ActionButton) {
-  if (props.map.name == 'map.building.house_lin' && action.id == 5) {
-    currentText.value = '你敲了敲门，但没有人回应'
-  }
+function nextText() {
   // plot text array
+  if (actionOptions.value.length == 0) {
+    if (scenes.value[0].name == currentScene.value.name) {
+      // end
+      appStore.currentSceneType = 'map'
+      window.$message?.info($t('stories.over'))
+    } else {
+      currentScene.value = scenes.value[0]
+      // 绑定按钮
+      actionOptions.value = storyStore.getOptions(currentScene.value.options)
+    }
+  }
+  currentText.value = currentScene.value.text
 }
 
 watch(
-  [() => props.map],
+  [() => appStore.currentStory],
   () => {
-    // 默认文本
-    currentText.value = props.map.text
-    // 加载按钮
-    actionButtons.value = DefaultActions.filter((x) => props.map.actions.includes(x.id))
-    if (props.map.isLocked == true) {
-      currentText.value = 'map.locked.' + props.map.lockedReason
-      actionButtons.value.push(DefaultActions.filter((x) => x.id == 5)[0])
-    }
-    // 加载事件
-
-    // 加载NPC
+    storyStore.setCurrentStory(appStore.currentStory)
+    // 默认加载story，此处没有options
+    currentScene.value.cover = storyStore.currentStory.cover
+    currentText.value = storyStore.currentStory.text
+    // 加载第一个scene
+    scenes.value = storyStore.getStoryScenes(storyStore.currentStory.scenes)
   },
   { immediate: true }
 )

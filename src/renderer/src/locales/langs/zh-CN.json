@@ -101,7 +101,7 @@
         "title": "啤酒"
       },
       "coffee": {
-        "desc": "",
+        "desc": "一杯冰美式",
         "title": "咖啡"
       },
       "cola": {
@@ -109,27 +109,27 @@
         "title": "可口可乐"
       },
       "croissant": {
-        "desc": "",
+        "desc": "牛角包",
         "title": "牛角包"
       },
       "fired_eggs": {
-        "desc": "",
+        "desc": "煎蛋",
         "title": "煎蛋"
       },
       "fish": {
-        "desc": "",
+        "desc": "烤鱼",
         "title": "鱼"
       },
       "hamburger": {
-        "desc": "",
+        "desc": "汉堡",
         "title": "汉堡"
       },
       "milk": {
-        "desc": "",
+        "desc": "牛奶",
         "title": "牛奶"
       },
       "sandwich": {
-        "desc": "",
+        "desc": "三明治",
         "title": "三明治"
       }
     }
@@ -142,6 +142,7 @@
       "goBack": "返回",
       "knocked": "敲门",
       "quit": "退出",
+      "story_start": "创建角色",
       "wait": "等待",
       "work": "工作"
     },
@@ -229,11 +230,11 @@
     },
     "common": {
       "exit": {
-        "text": "",
+        "text": "退出",
         "title": "返回"
       },
       "test": {
-        "text": "",
+        "text": "测试",
         "title": "测试"
       }
     },
@@ -270,6 +271,9 @@
     },
     "playAgain": "再玩一局",
     "startGame": "开始游戏"
+  },
+  "option": {
+    "choose_id": "选择出身"
   },
   "page": {
     "about": {
@@ -406,6 +410,17 @@
     "setting_system": "通用",
     "setting_theme": "外观",
     "task": "任务"
+  },
+  "stories": {
+    "completed": "任务已完成",
+    "over": "任务已结束",
+    "scene": {
+      "set_name": {
+        "text": "设置姓名",
+        "title": "设置姓名"
+      }
+    },
+    "start": "第一个任务"
   },
   "system": {
     "title": "Friday Story"

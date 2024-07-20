@@ -143,6 +143,7 @@ declare namespace App {
         delete: string
         deleteSuccess: string
         edit: string
+        empty: string
         expandColumn: string
         index: string
         keywordSearch: string
@@ -221,48 +222,78 @@ declare namespace App {
         themeSchema: string
         unpin: string
       }
+      items: {
+        food: {
+          beer: {
+            desc: string
+            title: string
+          }
+          coffee: {
+            desc: string
+            title: string
+          }
+          cola: {
+            desc: string
+            title: string
+          }
+          croissant: {
+            desc: string
+            title: string
+          }
+          fired_eggs: {
+            desc: string
+            title: string
+          }
+          fish: {
+            desc: string
+            title: string
+          }
+          hamburger: {
+            desc: string
+            title: string
+          }
+          milk: {
+            desc: string
+            title: string
+          }
+          sandwich: {
+            desc: string
+            title: string
+          }
+        }
+      }
       map: {
-        common: {
-          exit: {
-            title: string
-          }
-        }
-        country: {
-          friday: {
-            title: string
-            text: string
-          }
-        }
-        city: {
-          boot: {
-            title: string
-            text: string
-          }
+        action: {
+          'dice-number': string
+          enter: string
+          'finger-guessing': string
+          goBack: string
+          knocked: string
+          quit: string
+          story_start: string
+          wait: string
+          work: string
         }
         area: {
           dongshan: {
-            title: string
             text: string
-          }
-        }
-        street: {
-          pingan: {
             title: string
-            text: string
           }
         }
         building: {
           demo: {
-            title: string
             text: string
+            title: string
           }
           happy_shop: {
-            title: string
             text: string
+            title: string
           }
           home: {
-            title: string
-            text: string
+            bathroom: {
+              text: string
+              title: string
+            }
             bedroom: {
               text: string
               title: string
@@ -291,10 +322,10 @@ declare namespace App {
               text: string
               title: string
             }
-          }
-          house_lin: {
             text: string
             title: string
+          }
+          house_lin: {
             bathroom: {
               text: string
               title: string
@@ -315,8 +346,62 @@ declare namespace App {
               text: string
               title: string
             }
+            text: string
+            title: string
           }
         }
+        city: {
+          boot: {
+            text: string
+            title: string
+          }
+        }
+        common: {
+          exit: {
+            text: string
+            title: string
+          }
+          test: {
+            text: string
+            title: string
+          }
+        }
+        country: {
+          friday: {
+            text: string
+            title: string
+          }
+        }
+        locked: {
+          locked_door: string
+          no_key: string
+          no_open: string
+        }
+        street: {
+          backstreet: {
+            text: string
+            title: string
+          }
+          pingan: {
+            text: string
+            title: string
+          }
+        }
+      }
+      miniGame: {
+        currentRound: string
+        endGame: string
+        'finger-guessing': string
+        gameResult: {
+          equal: string
+          youLose: string
+          youWin: string
+        }
+        playAgain: string
+        startGame: string
+      }
+      option: {
+        choose_id: string
       }
       page: {
         about: {
@@ -435,6 +520,17 @@ declare namespace App {
         logoutWithModalMsg: string
         refreshToken: string
         tokenExpired: string
+      }
+      stories: {
+        over: string
+        completed: string
+        scene: {
+          set_name: {
+            text: string
+            title: string
+          }
+        }
+        start: string
       }
       system: {
         title: string

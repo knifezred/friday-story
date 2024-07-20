@@ -57,7 +57,7 @@
           </n-gi>
         </n-grid>
         <n-scrollbar class="h-100vh" :distance="10">
-          <NFlex>
+          <NFlex v-if="appStore.currentSceneType == 'map'">
             <n-card
               v-for="item in mapStore.currLevelMaps"
               :key="item.id"
@@ -117,7 +117,7 @@ watch(
 )
 function mapFunc(map: Dto.MapItem) {
   beforeNextMap(map)
-  if (appStore.currentSceneType === 'map') {
+  if (appStore.currentSceneType == 'map') {
     if (map.nextId != undefined) {
       reloadMap(map.nextId, map.pid)
     } else {

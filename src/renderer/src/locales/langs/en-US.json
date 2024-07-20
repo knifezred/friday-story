@@ -15,6 +15,7 @@
     "delete": "Delete",
     "deleteSuccess": "Delete Success",
     "edit": "Edit",
+    "empty": "There's nothing here",
     "expandColumn": "Expand Column",
     "index": "Index",
     "keywordSearch": "Please enter keyword",
@@ -93,102 +94,186 @@
     "themeSchema": "Theme Schema",
     "unpin": "Unpin"
   },
+  "items": {
+    "food": {
+      "beer": {
+        "desc": "Fresh draft beer, a thousand cups without getting drunk",
+        "title": "Beer"
+      },
+      "coffee": {
+        "desc": "A glass of iced Americano",
+        "title": "Coffee"
+      },
+      "cola": {
+        "desc": "A bottle of carbonated beverage",
+        "title": "Coca Cola"
+      },
+      "croissant": {
+        "desc": "Croissant",
+        "title": "Croissant"
+      },
+      "fired_eggs": {
+        "desc": "Fried Eggs",
+        "title": "Fried Eggs"
+      },
+      "fish": {
+        "desc": "roast fish",
+        "title": "fish"
+      },
+      "hamburger": {
+        "desc": "hamburger",
+        "title": "hamburger"
+      },
+      "milk": {
+        "desc": "milk",
+        "title": "milk"
+      },
+      "sandwich": {
+        "desc": "Sandwich",
+        "title": "Sandwich"
+      }
+    }
+  },
   "map": {
-    "common": {
-      "exit": {
-        "title": ""
-      }
-    },
-    "country": {
-      "friday": {
-        "title": "",
-        "text": ""
-      }
-    },
-    "city": {
-      "boot": {
-        "title": "",
-        "text": ""
-      }
+    "action": {
+      "dice-number": "dice ",
+      "enter": "get into",
+      "finger-guessing": "Rock-paper-scissors",
+      "goBack": "return",
+      "knocked": "knock at the door",
+      "quit": "sign out",
+      "story_start": "Create a role",
+      "wait": "wait for",
+      "work": "work"
     },
     "area": {
       "dongshan": {
-        "title": "",
-        "text": ""
-      }
-    },
-    "street": {
-      "pingan": {
-        "title": "",
-        "text": ""
+        "text": "Dongshan District",
+        "title": "Dongshan District"
       }
     },
     "building": {
       "demo": {
-        "title": "",
-        "text": ""
+        "text": "test",
+        "title": "test"
       },
       "happy_shop": {
-        "title": "",
-        "text": ""
+        "text": "Happy Supermarket, a small supermarket on Ping'an Road where you can buy some daily necessities",
+        "title": "Happy Supermarket"
       },
       "home": {
-        "title": "",
-        "text": "",
+        "bathroom": {
+          "text": "TOILET",
+          "title": "TOILET"
+        },
         "bedroom": {
-          "text": "",
-          "title": ""
+          "text": "Master bedroom",
+          "title": "Master bedroom"
         },
         "door": {
-          "text": "",
-          "title": ""
+          "text": "gate",
+          "title": "gate"
         },
         "kitchen": {
-          "text": "",
-          "title": ""
+          "text": "kitchen",
+          "title": "kitchen"
         },
         "living_room": {
-          "text": "",
-          "title": ""
+          "text": "a living room",
+          "title": "a living room"
         },
         "room_cousin": {
-          "text": "",
-          "title": ""
+          "text": "Cousin's room",
+          "title": "Cousin's room"
         },
         "room_player": {
-          "text": "",
-          "title": ""
+          "text": "My bedroom",
+          "title": "My bedroom"
         },
         "room_sister": {
-          "text": "",
-          "title": ""
-        }
+          "text": "Sister's room",
+          "title": "Sister's room"
+        },
+        "text": "home",
+        "title": "home"
       },
       "house_lin": {
-        "text": "",
-        "title": "",
         "bathroom": {
-          "text": "",
-          "title": ""
+          "text": "TOILET",
+          "title": "TOILET"
         },
         "bedroom": {
-          "text": "",
-          "title": ""
+          "text": "Master bedroom",
+          "title": "Master bedroom"
         },
         "door": {
-          "text": "",
-          "title": ""
+          "text": "gate",
+          "title": "gate"
         },
         "kitchen": {
-          "text": "",
-          "title": ""
+          "text": "kitchen",
+          "title": "kitchen"
         },
         "living_room": {
-          "text": "",
-          "title": ""
-        }
+          "text": "a living room",
+          "title": "a living room"
+        },
+        "text": "Lin's house, a beautiful little villa",
+        "title": "neighbor"
+      }
+    },
+    "city": {
+      "boot": {
+        "text": "Bute City",
+        "title": "Bute City"
+      }
+    },
+    "common": {
+      "exit": {
+        "text": "sign out",
+        "title": "return"
+      },
+      "test": {
+        "text": "test",
+        "title": "test"
+      }
+    },
+    "country": {
+      "friday": {
+        "text": "Fred Republic",
+        "title": "Fred Republic"
+      }
+    },
+    "locked": {
+      "locked_door": "The door is locked",
+      "no_key": "No key",
+      "no_open": "Not yet open"
+    },
+    "street": {
+      "backstreet": {
+        "text": "Back St",
+        "title": "Back St"
+      },
+      "pingan": {
+        "text": "Ping'an Road",
+        "title": "Ping'an Road"
       }
     }
+  },
+  "miniGame": {
+    "currentRound": "Current round",
+    "endGame": "end",
+    "finger-guessing": "Rock-paper-scissors",
+    "gameResult": {
+      "equal": "it ends in a draw",
+      "youLose": "You lost",
+      "youWin": "You win"
+    },
+    "playAgain": "Play another round",
+    "startGame": "Start the game"
+  },
+  "option": {
+    "choose_id": "Choose Origin"
   },
   "page": {
     "about": {
@@ -314,7 +399,9 @@
     "500": "Server Error",
     "achievement": "achievement",
     "archive": "Archive",
+    "demo": "Demo",
     "home": "Home",
+    "inventory": "goods",
     "login": "Login",
     "personal": "Personal Center",
     "relationship": "Relationship",
@@ -322,8 +409,18 @@
     "setting_about": "About",
     "setting_system": "General",
     "setting_theme": "Appearance",
-    "task": "Task",
-    "demo": "Demo"
+    "task": "Task"
+  },
+  "stories": {
+    "completed": "Task completed",
+    "over": "The task has ended",
+    "scene": {
+      "set_name": {
+        "text": "Set Name",
+        "title": "Set Name"
+      }
+    },
+    "start": "The first task"
   },
   "system": {
     "title": "Friday Story"

@@ -1,4 +1,4 @@
-export const DefaultActions: Array<Dto.ActionButton> = [
+export const DefaultActions: Array<Dto.ActionOption> = [
   {
     id: 1,
     text: 'map.action.finger-guessing',
@@ -7,7 +7,8 @@ export const DefaultActions: Array<Dto.ActionButton> = [
     isDisabled: false,
     isShow: true,
     miniGame: 'finger-guessing',
-    actionType: 'mini-game'
+    actionType: 'mini-game',
+    name: 'finger-guessing'
   },
   {
     id: 2,
@@ -17,7 +18,8 @@ export const DefaultActions: Array<Dto.ActionButton> = [
     isDisabled: false,
     isShow: true,
     miniGame: 'dice-number',
-    actionType: 'mini-game'
+    actionType: 'mini-game',
+    name: 'dice-number'
   },
   {
     id: 3,
@@ -25,7 +27,8 @@ export const DefaultActions: Array<Dto.ActionButton> = [
     type: 'primary',
     isDisabled: false,
     isShow: true,
-    actionType: 'shop'
+    actionType: 'shop',
+    name: 'shop'
   },
   {
     id: 4,
@@ -33,7 +36,8 @@ export const DefaultActions: Array<Dto.ActionButton> = [
     type: 'primary',
     isDisabled: false,
     isShow: true,
-    actionType: 'map'
+    actionType: 'map',
+    name: 'work'
   },
   {
     id: 5,
@@ -41,6 +45,25 @@ export const DefaultActions: Array<Dto.ActionButton> = [
     type: 'primary',
     isDisabled: false,
     isShow: true,
-    actionType: 'map'
+    actionType: 'map',
+    name: 'knocked'
+  },
+  {
+    text: 'map.action.story_start',
+    type: 'primary',
+    isDisabled: false,
+    isShow: true,
+    next: 'start',
+    actionType: 'story',
+    name: 'scene.start'
+  },
+  {
+    name: 'option.choose_id',
+    text: 'option.choose_id',
+    type: 'primary',
+    isDisabled: false,
+    isShow: true,
+    actionType: 'story',
+    next: 'scene.choose_id'
   }
 ]

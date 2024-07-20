@@ -1,7 +1,7 @@
 <template>
   <n-grid :x-gap="12" :y-gap="12" :cols="4" layout-shift-disabled>
     <n-gi :span="4">
-      <n-scrollbar class="h-80vh pl-2">
+      <n-scrollbar class="h-80vh pl-2 pt-2">
         <n-flex class="ma-2">
           <n-card
             v-for="goods in shopItems"

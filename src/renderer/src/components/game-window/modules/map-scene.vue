@@ -20,7 +20,7 @@
       <template #footer>
         <n-flex>
           <n-button
-            v-for="btn in actionButtons"
+            v-for="btn in options"
             :key="btn.id"
             :type="btn.type"
             :is-disabled="btn.isDisabled"
@@ -45,7 +45,7 @@ import { ref, watch } from 'vue'
 defineOptions({
   name: 'MapScene'
 })
-const actionButtons = ref<Array<Dto.ActionButton>>([])
+const options = ref<Array<Dto.ActionOption>>([])
 const currentText = ref('')
 const appStore = useAppStore()
 const placeStore = usePlaceStore()
@@ -55,13 +55,17 @@ interface Emits {
 }
 defineEmits<Emits>()
 
-function actionFunc(action: Dto.ActionButton) {
+function actionFunc(action: Dto.ActionOption) {
   switch (action.actionType) {
     case 'map':
       nextText(action)
       break
     case 'mini-game':
       appStore.currentMiniGame = action.miniGame ?? 'finger-guessing'
+      appStore.currentSceneType = action.actionType
+      break
+    case 'story':
+      appStore.currentStory = action.next ?? 'start'
       appStore.currentSceneType = action.actionType
       break
     default:
@@ -71,8 +75,8 @@ function actionFunc(action: Dto.ActionButton) {
   }
 }
 
-function nextText(action: Dto.ActionButton) {
-  if (placeStore.currMap.name == 'map.building.house_lin' && action.id == 5) {
+function nextText(action: Dto.ActionOption) {
+  if (placeStore.currMap.name == 'map.building.house_lin' && action.name == 'knocked') {
     currentText.value = '你敲了敲门，但没有人回应'
   }
   // plot text array
@@ -84,10 +88,10 @@ watch(
     // 默认文本
     currentText.value = placeStore.currMap.text
     // 加载按钮
-    actionButtons.value = DefaultActions.filter((x) => placeStore.currMap.actions.includes(x.id))
+    options.value = DefaultActions.filter((x) => placeStore.currMap.options.includes(x.name))
     if (placeStore.currMap.isLocked == true) {
       currentText.value = 'map.locked.' + placeStore.currMap.lockedReason
-      actionButtons.value.push(DefaultActions.filter((x) => x.id == 5)[0])
+      options.value.push(DefaultActions.filter((x) => x.id == 5)[0])
     }
     // 加载事件
 

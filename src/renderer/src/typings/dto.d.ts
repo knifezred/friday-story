@@ -158,7 +158,7 @@ declare namespace Dto {
 
   type DbArchiveList = Array<DbArchive> | null
 
-  type Type = 'default' | 'primary' | 'info' | 'success' | 'warning' | 'error'
+  type Type = 'primary' | 'info' | 'success' | 'warning' | 'error' | 'default'
 
   type WeatherType = 'sun' | 'cloud'
 
@@ -173,17 +173,6 @@ declare namespace Dto {
     relationShip: []
     achievement: Array<number>
     taskStatus: []
-  }
-
-  interface ActionButton {
-    id: number
-    text: string
-    icon?: string | undefined
-    type: Type | undefined
-    isDisabled: boolean
-    isShow: boolean
-    miniGame?: UnionKey.MiniGameModule | undefined
-    actionType: UnionKey.SceneModule
   }
 
   type MapLevelType = 'room' | 'building' | 'street' | 'area' | 'city' | 'country'
@@ -204,7 +193,7 @@ declare namespace Dto {
     isShow?: boolean
     level: MapLevelType
     order?: number
-    actions: Array<number>
+    options: Array<string>
     isLocked?: boolean
     lockedReason?: MapLockedReasonType
   }
@@ -291,7 +280,7 @@ declare namespace Dto {
     name: string
     type: PlotType
     cover: string
-    text: string | string[]
+    text: string
     scenes: Array<string>
     conditions?: string | string[]
   }
@@ -300,17 +289,23 @@ declare namespace Dto {
     id?: number
     name: string
     title: string
+    text: string
     cover: string
     next: string
-    options: Array<StoryOption>
+    options: string[]
   }
-  interface StoryOption {
+
+  interface ActionOption {
     id?: number
     name: string
-    title: string
     text: string
-    icon?: string
-    next: string
+    icon?: string | undefined
+    type: Type | undefined
+    isDisabled: boolean
+    isShow: boolean
+    miniGame?: UnionKey.MiniGameModule | undefined
+    next?: UnionKey.MiniGameModule | string | undefined
+    actionType: UnionKey.SceneModule
     conditions?: string | string[]
   }
 }

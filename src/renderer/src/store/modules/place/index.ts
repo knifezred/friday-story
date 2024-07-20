@@ -16,7 +16,7 @@ export const usePlaceStore = defineStore(SetupStoreId.Place, () => {
     text: 'map.common.test.text',
     cover: '/static/map/common/exit.png',
     level: 'room',
-    actions: []
+    options: []
   })
   const canJumpNext = ref(true)
 
@@ -58,7 +58,7 @@ export const usePlaceStore = defineStore(SetupStoreId.Place, () => {
           text: 'map.common.exit.text',
           cover: '/static/map/common/exit.png',
           level: 'room',
-          actions: []
+          options: []
         })
       }
       if (currLevelMaps.value.length > 0) {
