@@ -22,30 +22,34 @@ export const usePlaceStore = defineStore(SetupStoreId.Place, () => {
   const canJumpNext = ref(true)
 
   function beforeNextMap(map: Dto.MapItem) {
-    let coastTime = 60 * 1000
-    if (map.level == 'room') {
-      coastTime = coastTime * 5
-    }
-    if (map.level == 'building') {
-      coastTime = coastTime * 15
-    }
-    if (map.level == 'area') {
-      coastTime = coastTime * 40
-    }
-    if (map.level == 'city') {
-      coastTime = coastTime * 60 * 2
-    }
-    if (map.level == 'country') {
-      coastTime = coastTime * 60 * 8
-    }
-    authStore.archivedData.worldTime += coastTime
     checkCondition(map)
-    if (map.isLocked != true) {
-      canJumpNext.value = true
+    if (map.id != currMap.value.id) {
+      let coastTime = 60 * 1000
+      if (map.level == 'room') {
+        coastTime = coastTime * 5
+      }
+      if (map.level == 'building') {
+        coastTime = coastTime * 15
+      }
+      if (map.level == 'area') {
+        coastTime = coastTime * 40
+      }
+      if (map.level == 'city') {
+        coastTime = coastTime * 60 * 2
+      }
+      if (map.level == 'country') {
+        coastTime = coastTime * 60 * 8
+      }
+      authStore.archivedData.worldTime += coastTime
+      currMap.value = map
+      if (map.isLocked != true) {
+        canJumpNext.value = true
+      } else {
+        canJumpNext.value = false
+      }
     } else {
       canJumpNext.value = false
     }
-    currMap.value = map
   }
 
   function checkCondition(map: Dto.MapItem) {

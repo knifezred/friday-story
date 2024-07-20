@@ -26,7 +26,7 @@ export function useActionCondition() {
   function lockedHours(betweens: string) {
     const hours = betweens.split('-')
     const hour = dayjs(authStore.archivedData.worldTime).get('hour')
-    if (hour > Number(hours[0]) || hour < Number(hours[1])) {
+    if (hour >= Number(hours[0]) || hour < Number(hours[1])) {
       return true
     } else {
       return false
