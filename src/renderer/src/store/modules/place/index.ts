@@ -23,7 +23,7 @@ export const usePlaceStore = defineStore(SetupStoreId.Place, () => {
 
   function beforeNextMap(map: Dto.MapItem) {
     checkCondition(map)
-    if (map.id != currMap.value.id) {
+    if (map.id != currMap.value.id || map.nextId != undefined) {
       let coastTime = 60 * 1000
       if (map.level == 'room') {
         coastTime = coastTime * 5
