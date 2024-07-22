@@ -7,7 +7,7 @@
         <n-flex>
           <n-card
             v-for="goods in shopItems"
-            :key="goods.id"
+            :key="goods.name"
             class="relative z-4 w-xs ma-1 shadow-primary shadow-op-30">
             <n-flex>
               <ImageIcon :src="goods.cover" class="size-18" :class="getLevelBorder(goods.level)" />
@@ -45,17 +45,17 @@ const { archivedData } = useAuthStore()
 
 onMounted(() => {
   shopItems.value = []
-  DefaultGameItems.filter((x) => archivedData.items.filter((p) => p.id == x.id).length > 0).forEach(
-    (item) => {
-      shopItems.value.push({
-        ...item,
-        title: item.title ?? '',
-        desc: item.desc ?? '',
-        cover: item.cover ?? '',
-        count: archivedData.items.filter((x) => x.id == item.id)[0].count
-      })
-    }
-  )
+  DefaultGameItems.filter(
+    (x) => archivedData.items.filter((p) => p.name == x.name).length > 0
+  ).forEach((item) => {
+    shopItems.value.push({
+      ...item,
+      title: item.title ?? '',
+      desc: item.desc ?? '',
+      cover: item.cover ?? '',
+      count: archivedData.items.filter((x) => x.name == item.name)[0].count
+    })
+  })
 })
 </script>
 

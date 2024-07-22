@@ -10,7 +10,7 @@ export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
   function ShopGoods() {
     const goodsList: Array<Dto.ShopGoods> = ShopGoodsRecord[currentShop.value]
     goodsList.forEach((goods) => {
-      const gameItem = DefaultGameItems.filter((x) => x.id == goods.id)[0]
+      const gameItem = DefaultGameItems.filter((x) => x.name == goods.name)[0]
       goods.name = gameItem.name
       goods.title = gameItem.title
       goods.desc = gameItem.desc

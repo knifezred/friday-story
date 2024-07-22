@@ -97,11 +97,12 @@ function removeToCart(goods: Dto.ShopGoodsFull) {
 function checkout() {
   shopItems.value.forEach((goods) => {
     if (goods.selectedCount > 0) {
-      if (authStore.archivedData.items.filter((x) => x.id == goods.id).length > 0) {
-        authStore.archivedData.items.filter((x) => x.id == goods.id)[0].count += goods.selectedCount
+      if (authStore.archivedData.items.filter((x) => x.name == goods.name).length > 0) {
+        authStore.archivedData.items.filter((x) => x.name == goods.name)[0].count +=
+          goods.selectedCount
       } else {
         authStore.archivedData.items.push({
-          id: goods.id,
+          name: goods.name,
           count: goods.selectedCount
         })
       }

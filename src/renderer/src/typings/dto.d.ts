@@ -171,7 +171,7 @@ declare namespace Dto {
     gold: number
     items: Array<ArchivedItem>
     relationShip: []
-    achievement: Array<number>
+    achievement: Array<string>
     taskStatus: []
   }
 
@@ -200,7 +200,6 @@ declare namespace Dto {
   }
 
   interface NpcInfo {
-    id: number
     name: string
     desc: string
     introduce: string
@@ -222,7 +221,6 @@ declare namespace Dto {
   type GameItemType = 'other' | 'food' | 'equipment' | 'task' | 'car'
 
   interface GameItem {
-    id: number
     name: string
     type: GameItemType
     level: LevelType
@@ -235,7 +233,6 @@ declare namespace Dto {
   }
 
   interface GameItemFull {
-    id: number
     name: string
     type: GameItemType
     level: LevelType
@@ -248,16 +245,15 @@ declare namespace Dto {
   }
 
   interface ArchivedItem {
-    id: number
+    name: string
     count: number
   }
 
   interface ShopGoods {
-    id: number
+    name: string
     price: number
     count: number
     selectedCount?: number
-    name?: string
     type?: GameItemType
     level?: LevelType
     title?: string
@@ -277,7 +273,6 @@ declare namespace Dto {
   type PlotType = 'main-line' | 'branch-line' | 'adventure'
 
   interface StoryPlot {
-    id?: number
     name: string
     type: PlotType
     cover: string
@@ -287,7 +282,6 @@ declare namespace Dto {
   }
 
   interface GameScene {
-    id?: number
     name: string
     title: string
     text: string | string[]
@@ -297,7 +291,6 @@ declare namespace Dto {
   }
 
   interface ActionOption {
-    id?: number
     name: string
     text: string
     type: UnionKey.SceneModule

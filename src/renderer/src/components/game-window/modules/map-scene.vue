@@ -21,7 +21,7 @@
         <n-flex>
           <n-button
             v-for="btn in actionStore.options"
-            :key="btn.id"
+            :key="btn.name"
             :type="btn.buttonType"
             :is-disabled="btn.isDisabled"
             :is-show="btn.isShow"

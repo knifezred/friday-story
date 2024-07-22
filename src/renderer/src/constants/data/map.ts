@@ -1,6 +1,3 @@
-// title=map.${name}.title
-// text=map.${name}.text
-// cover=/static/map/${name.replace('.','/')}.jpeg
 // ## 判断条件
 // 时间（间隔天数，星期几，几号，几月）
 // 位置（房间id）
@@ -228,7 +225,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     cover: '.png',
     level: 'building',
     options: ['shop', 'scene.start'],
-    conditions: 'lockedHours.22-9'
+    conditions: 'betweenHours.22-9'
   },
   {
     id: 22,

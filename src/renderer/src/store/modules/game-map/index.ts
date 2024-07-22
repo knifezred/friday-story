@@ -1,6 +1,6 @@
 import { DefaultMaps } from '@renderer/constants/data/map'
 import { SetupStoreId } from '@renderer/enums'
-import { useActionCondition } from '@renderer/hooks/business/action-condition'
+import { useCondition } from '@renderer/hooks/business/condition'
 import { localeText, prefixImage } from '@renderer/utils/common'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
@@ -54,12 +54,12 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
   }
 
   function checkCondition(map: Dto.MapItem) {
-    const actionCondition = useActionCondition()
+    const actionCondition = useCondition()
     if (map.conditions != undefined) {
       const conditions = map.conditions.split('|')
       conditions.forEach((condition) => {
-        if (condition.startsWith('lockedHours')) {
-          map.isLocked = actionCondition.lockedHours(condition.split('.')[1])
+        if (condition.startsWith('betweenHours')) {
+          map.isLocked = actionCondition.betweenHours(condition.split('.')[1])
           map.lockedReason = 'outTime'
         }
         if (condition.startsWith('hasItem')) {

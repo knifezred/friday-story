@@ -1,60 +1,51 @@
+// type+'.'+name
 export const DefaultGameItems: Array<Dto.GameItem> = [
   {
-    id: 1,
-    name: 'cola',
-    type: 'food',
-    level: 'SR'
-  },
-  {
-    id: 2,
     name: 'beer',
     type: 'food',
     level: 'SSR'
   },
   {
-    id: 3,
+    name: 'cola',
+    type: 'food',
+    level: 'SR'
+  },
+  {
     name: 'coffee',
     type: 'food',
     level: 'SR'
   },
   {
-    id: 4,
     name: 'croissant',
     type: 'food',
     level: 'R'
   },
   {
-    id: 5,
     name: 'fired_eggs',
     type: 'food',
     level: 'R'
   },
   {
-    id: 6,
     name: 'fish',
     type: 'food',
     level: 'N'
   },
   {
-    id: 7,
     name: 'hamburger',
     type: 'food',
     level: 'SR'
   },
   {
-    id: 8,
     name: 'milk',
     type: 'food',
     level: 'SSR'
   },
   {
-    id: 9,
     name: 'sandwich',
     type: 'food',
     level: 'SR'
   },
   {
-    id: 10,
     name: 'house_lin_key',
     type: 'task',
     level: 'SR'
@@ -66,61 +57,61 @@ export type ShopType = 'happy_shop' | 'walmart' | 'yong_hui'
 export const ShopGoodsRecord: Record<ShopType, Array<Dto.ShopGoods>> = {
   happy_shop: [
     {
-      id: 1,
+      name: 'beer',
       count: 10,
       price: 10
     },
     {
-      id: 2,
+      name: 'cola',
       count: 18,
       price: 20
     },
     {
-      id: 3,
+      name: 'coffee',
       count: 80,
       price: 40
     },
     {
-      id: 4,
+      name: 'croissant',
       count: 60,
       price: 50
     },
     {
-      id: 5,
+      name: 'fired_eggs',
       count: 150,
       price: 1000
     },
     {
-      id: 6,
+      name: 'fish',
       count: 20,
       price: 20
     },
     {
-      id: 7,
+      name: 'hamburger',
       count: 30,
       price: 20
     },
     {
-      id: 8,
+      name: 'milk',
       count: 105,
       price: 50
     },
     {
-      id: 9,
+      name: 'sandwich',
       count: 100,
       price: 110
     }
   ],
   walmart: [
     {
-      id: 1,
+      name: 'sandwich',
       count: 10,
       price: 10
     }
   ],
   yong_hui: [
     {
-      id: 1,
+      name: 'sandwich',
       count: 10,
       price: 10
     }
