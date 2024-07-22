@@ -1,7 +1,7 @@
 export const DefaultActions: Array<Dto.ActionOption> = [
   {
     id: 1,
-    text: 'map.action.finger-guessing',
+    text: 'option.finger-guessing',
     icon: 'fluent-emoji:victory-hand',
     type: 'primary',
     isDisabled: false,
@@ -12,7 +12,7 @@ export const DefaultActions: Array<Dto.ActionOption> = [
   },
   {
     id: 2,
-    text: 'map.action.dice-number',
+    text: 'option.dice-number',
     icon: 'streamline-emojis:game-dice',
     type: 'error',
     isDisabled: false,
@@ -23,7 +23,7 @@ export const DefaultActions: Array<Dto.ActionOption> = [
   },
   {
     id: 3,
-    text: 'map.action.enter',
+    text: 'option.enter',
     type: 'primary',
     isDisabled: false,
     isShow: true,
@@ -32,7 +32,7 @@ export const DefaultActions: Array<Dto.ActionOption> = [
   },
   {
     id: 4,
-    text: 'map.action.work',
+    text: 'option.work',
     type: 'primary',
     isDisabled: false,
     isShow: true,
@@ -41,7 +41,7 @@ export const DefaultActions: Array<Dto.ActionOption> = [
   },
   {
     id: 5,
-    text: 'map.action.knocked',
+    text: 'option.knocked',
     type: 'primary',
     isDisabled: false,
     isShow: true,
@@ -50,7 +50,7 @@ export const DefaultActions: Array<Dto.ActionOption> = [
     conditions: 'hasItem.10'
   },
   {
-    text: 'map.action.story_start',
+    text: 'option.story_start',
     type: 'primary',
     isDisabled: false,
     isShow: true,

@@ -281,7 +281,7 @@ declare namespace Dto {
     name: string
     type: PlotType
     cover: string
-    text: string
+    text: string | string[]
     nextScene: string
     conditions?: string
   }
@@ -290,7 +290,7 @@ declare namespace Dto {
     id?: number
     name: string
     title: string
-    text: string
+    text: string | string[]
     cover: string
     next: string
     options: string[]

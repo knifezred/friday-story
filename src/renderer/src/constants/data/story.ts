@@ -3,7 +3,7 @@ export const DefaultStories: Array<Dto.StoryPlot> = [
     name: 'start',
     type: 'main-line',
     cover: '',
-    text: '这是一个主线剧情',
+    text: ['这是一个主线剧情', '多段text测试'],
     nextScene: 'scene.set_name'
   }
 ]

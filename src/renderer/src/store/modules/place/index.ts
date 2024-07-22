@@ -1,6 +1,7 @@
 import { DefaultMaps } from '@renderer/constants/data/map'
 import { SetupStoreId } from '@renderer/enums'
 import { useActionCondition } from '@renderer/hooks/business/action-condition'
+import { localeText, prefixImage } from '@renderer/utils/common'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useAuthStore } from '../auth'
@@ -100,18 +101,13 @@ export const usePlaceStore = defineStore(SetupStoreId.Place, () => {
 
   function initMap(id: number) {
     allMaps.value.forEach((map) => {
+      let typeName = map.level + '.' + map.name
       if (map.level == 'room') {
-        map.name = 'map.building.' + map.name
-      } else {
-        map.name = 'map.' + map.level + '.' + map.name
+        typeName = 'building.' + map.name
       }
-      map.title = map.title ? map.title : map.name + '.title'
-      map.text = map.text ? map.text : map.name + '.text'
-      if (map.cover.startsWith('.')) {
-        map.cover = '/static/' + map.name.replaceAll('.', '/') + map.cover
-      } else {
-        map.cover = map.cover ? map.cover : '/static/' + map.name.replaceAll('.', '/') + '.jpeg'
-      }
+      map.text = localeText(map.text, typeName, 'map', 'text').toString()
+      map.title = localeText(map.title, typeName, 'map', 'title').toString()
+      map.cover = prefixImage(map.cover, typeName, 'map', '.jpeg')
       if (map.id == id) {
         if (map.nextId != undefined) {
           currMap.value = map

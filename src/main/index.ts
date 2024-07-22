@@ -7,7 +7,6 @@ import icon from '../../resources/icon.png?asset'
 import { useAutoUpdater } from './service/auto-update'
 import { closeExpressServer, createExpressServer } from './service/express-server'
 import { Settings } from './settings'
-import { listDir } from './utils/common'
 let httpServer
 let mainWindow: BrowserWindow
 function createWindow(): void {
@@ -121,9 +120,8 @@ ipcMain.handle('close-window', () => {
   mainWindow.close()
 })
 
-ipcMain.handle('list-static-files', () => {
-  const list = listDir()
-  return list
+ipcMain.handle('app-path', () => {
+  return app.getAppPath()
 })
 
 // In this file you can include the rest of your app"s specific main process

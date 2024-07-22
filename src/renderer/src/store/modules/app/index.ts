@@ -10,6 +10,7 @@ import { effectScope, nextTick, onScopeDispose, ref, watch } from 'vue'
 import { useAuthStore } from '../auth'
 import { useRouteStore } from '../route'
 import { useShopStore } from '../shop'
+import { useStoryStore } from '../story'
 import { useTabStore } from '../tab'
 import { useThemeStore } from '../theme'
 
@@ -18,6 +19,7 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
   const routeStore = useRouteStore()
   const tabStore = useTabStore()
   const authStore = useAuthStore()
+  const storyStore = useStoryStore()
   const shopStore = useShopStore()
   const scope = effectScope()
   const breakpoints = useBreakpoints(breakpointsTailwind)
@@ -109,6 +111,7 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
 
   function init() {
     setDayjsLocale(locale.value)
+    storyStore.initStory()
     shopStore.initShopItems()
   }
 

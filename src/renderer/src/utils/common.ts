@@ -108,3 +108,73 @@ export function getLevelBorder(level: Dto.LevelType) {
   }
   return borderColor + ' pa-2 b-2 rd-lg'
 }
+
+export function localeText(
+  text: string | string[] | undefined,
+  name: string,
+  prefix: string,
+  suffix: string
+) {
+  if (suffix != '') {
+    suffix = '.' + suffix
+  }
+  prefix = prefix + '.' + name
+  if (text == undefined) {
+    text = prefix + suffix
+  } else if (typeof text == 'string') {
+    if (text.startsWith('.')) {
+      text = prefix + text
+    } else if (text == '') {
+      text = prefix + suffix
+    }
+  } else if (text != undefined) {
+    //array
+    for (let index = 0; index < text.length; index++) {
+      if (text[index].startsWith('.')) {
+        text[index] = prefix + text[index]
+      } else if (text[index] == '') {
+        text[index] = prefix + suffix + index
+      }
+    }
+  }
+  return text
+}
+
+export function prefixImage(
+  text: string | undefined,
+  name: string,
+  prefix: string,
+  suffix: string
+) {
+  prefix = '/static/' + prefix + '/' + name.replaceAll('.', '/')
+  if (text == undefined) {
+    text = prefix + suffix
+  } else {
+    // 不以/开头加prefix
+    if (!text.startsWith('/')) {
+      text = prefix + text
+    }
+    // 不含.加suffix
+    if (text.indexOf('.') == -1) {
+      text = text + suffix
+    }
+  }
+  return text
+}
+
+export async function dynamicResource(filePath: string) {
+  const files = await window.api.listDir(filePath)
+  if (files.length == 0) {
+    return filePath
+  } else {
+    const randIndex = getRandomInt(0, files.length)
+    return files[randIndex]
+  }
+}
+
+export function getRandomInt(min: number, max: number) {
+  // 确保min小于max
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}

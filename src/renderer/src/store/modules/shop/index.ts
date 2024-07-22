@@ -1,5 +1,6 @@
 import { DefaultGameItems, ShopGoodsRecord } from '@renderer/constants/data/items'
 import { SetupStoreId } from '@renderer/enums'
+import { localeText, prefixImage } from '@renderer/utils/common'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
@@ -23,9 +24,9 @@ export const useShopStore = defineStore(SetupStoreId.Shop, () => {
 
   function initShopItems() {
     DefaultGameItems.forEach((item) => {
-      item.desc = 'items.' + item.type + '.' + item.name + '.desc'
-      item.title = 'items.' + item.type + '.' + item.name + '.title'
-      item.cover = '/static/items/' + item.type + '/' + item.name.replaceAll('.', '/') + '.png'
+      item.desc = localeText(item.desc, item.type + '.' + item.name, 'items', 'desc').toString()
+      item.title = localeText(item.title, item.type + '.' + item.name, 'items', 'title').toString()
+      item.cover = prefixImage(item.cover, item.name, 'items/' + item.type, '.png')
     })
   }
 

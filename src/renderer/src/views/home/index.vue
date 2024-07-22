@@ -90,7 +90,7 @@ import { useAppStore } from '@renderer/store/modules/app'
 import { useAuthStore } from '@renderer/store/modules/auth'
 import { usePlaceStore } from '@renderer/store/modules/place'
 import { formatTimestamp } from '@renderer/utils/common'
-import { onMounted, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 defineOptions({
   name: 'Home'
 })
@@ -128,11 +128,6 @@ function mapFunc(map: Dto.MapItem) {
     window.$message?.info('in mini game,please wait game ended')
   }
 }
-
-onMounted(() => {
-  // 初始化地图
-  mapStore.initMap(userInfo.archive.place)
-})
 
 // story 故事
 // plot 剧情

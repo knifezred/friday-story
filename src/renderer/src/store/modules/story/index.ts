@@ -1,6 +1,7 @@
 import { DefaultActions } from '@renderer/constants/data/action'
 import { DefaultScenes, DefaultStories } from '@renderer/constants/data/story'
 import { SetupStoreId } from '@renderer/enums'
+import { localeText, prefixImage } from '@renderer/utils/common'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
@@ -28,19 +29,19 @@ export const useStoryStore = defineStore(SetupStoreId.Story, () => {
     })
     return options
   }
+
   function initStory() {
     DefaultStories.forEach((item) => {
-      item.text = 'stories.' + item.name
-      item.cover = '/static/stories/' + item.name.replaceAll('.', '/') + '.jpeg'
+      item.text = localeText(item.text, item.name, 'stories', '')
+      item.cover = prefixImage(item.cover, item.name, 'stories', '')
     })
 
     DefaultScenes.forEach((item) => {
-      item.text = 'stories.' + item.name + '.text'
-      item.title = 'stories.' + item.name + '.title'
-      item.cover = '/static/stories/' + item.name.replaceAll('.', '/') + '.jpeg'
+      item.text = localeText(item.text, item.name, 'stories', 'text')
+      item.title = localeText(item.text, item.name, 'stories', 'title').toString()
+      item.cover = prefixImage(item.cover, item.name, 'stories', '')
     })
   }
-  initStory()
 
-  return { currentStory, setCurrentStory, getStoryScene, getOptions }
+  return { currentStory, setCurrentStory, getStoryScene, getOptions, initStory }
 })

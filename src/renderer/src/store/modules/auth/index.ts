@@ -11,10 +11,12 @@ import { useRouterPush } from '@renderer/hooks/common/router'
 import { $t } from '@renderer/locales'
 import { findArchive, updateArchive } from '@renderer/service/api/archive'
 import { localStg } from '@renderer/utils/storage'
+import { usePlaceStore } from '../place'
 export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   const router = useRouter()
   const route = useRoute()
   const routeStore = useRouteStore()
+  const placeStore = usePlaceStore()
   const { redirectFromLogin } = useRouterPush()
   const { loading: loginLoading, startLoading, endLoading } = useLoading()
 
@@ -110,6 +112,8 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
       archivedData.value = JSON.parse(userInfo.archive.data) as Dto.ArchivedData
       // 3. update store
       token.value = data.id == undefined ? '' : data.id.toString()
+      // 初始化地图
+      placeStore.initMap(userInfo.archive.place)
       return true
     }
 

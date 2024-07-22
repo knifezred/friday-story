@@ -135,17 +135,6 @@
     }
   },
   "map": {
-    "action": {
-      "dice-number": "玩骰子",
-      "enter": "进入",
-      "finger-guessing": "石头剪刀布",
-      "goBack": "返回",
-      "knocked": "敲门",
-      "quit": "退出",
-      "story_start": "创建角色",
-      "wait": "等待",
-      "work": "工作"
-    },
     "area": {
       "dongshan": {
         "text": "东山区",
@@ -274,6 +263,15 @@
     "startGame": "开始游戏"
   },
   "option": {
+    "dice-number": "玩骰子",
+    "enter": "进入",
+    "finger-guessing": "石头剪刀布",
+    "goBack": "返回",
+    "knocked": "敲门",
+    "quit": "退出",
+    "story_start": "创建角色",
+    "wait": "等待",
+    "work": "工作",
     "choose_id": "选择出身"
   },
   "page": {

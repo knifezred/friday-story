@@ -1,15 +1,7 @@
-import { app } from 'electron'
 import fs from 'fs'
 import path from 'node:path'
 
-export function listDir() {
-  const dirPath = path.join(app.getAppPath(), 'static')
-  const fileList = [] as Array<string>
-  traverseDir(dirPath, fileList)
-  return fileList
-}
-
-function traverseDir(dirPath, fileList: Array<string>) {
+export function traverseDir(dirPath, fileList: Array<string>) {
   fs.readdir(dirPath, (err, files) => {
     if (err) {
       console.error('Could not list the directory.', err)

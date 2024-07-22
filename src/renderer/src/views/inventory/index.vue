@@ -16,7 +16,7 @@
                   <LevelTag :level="goods.level" />
                   <n-tag :bordered="false" type="info">
                     {{ $t(goods.title) }}
-                    ({{ $t(goods.count.toString()) }})
+                    ({{ goods.count.toString() }})
                   </n-tag>
                 </n-p>
                 <n-p class="my-0"> </n-p>
