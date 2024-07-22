@@ -4,7 +4,7 @@ import { localeText, prefixImage } from '@renderer/utils/common'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
-export const useShopStore = defineStore(SetupStoreId.Shop, () => {
+export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
   const currentShop = ref('happy_shop')
 
   function ShopGoods() {

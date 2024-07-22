@@ -6,7 +6,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useAuthStore } from '../auth'
 
-export const usePlaceStore = defineStore(SetupStoreId.Place, () => {
+export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
   const authStore = useAuthStore()
   const allMaps = ref<Array<Dto.MapItem>>(DefaultMaps)
   const currLevelMaps = ref<Array<Dto.MapItem>>([])

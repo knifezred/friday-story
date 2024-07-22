@@ -3,7 +3,7 @@
     <div
       :style="
         'background-image: url(http://localhost:5175' +
-        placeStore.currMap.cover +
+        mapStore.currMap.cover +
         ');padding-top: 56.25%;'
       "
       class="bg-repeat-round"></div>
@@ -14,15 +14,15 @@
       style="border: 0; border-radius: 0">
       <n-scrollbar class="h-20vh" :distance="10" @click="nextText">
         <n-p class="text-xl color-success">
-          <TypedText :strings="$t(currentText)" />
+          <TypedText v-model:value="isTyped" :strings="$t(currentText)" />
         </n-p>
       </n-scrollbar>
       <template #footer>
         <n-flex>
           <n-button
-            v-for="btn in options"
+            v-for="btn in actionStore.options"
             :key="btn.id"
-            :type="btn.type"
+            :type="btn.buttonType"
             :is-disabled="btn.isDisabled"
             :is-show="btn.isShow"
             class="color-white w-40"
@@ -37,61 +37,60 @@
 </template>
 
 <script setup lang="ts">
-import { DefaultActions } from '@renderer/constants/data/action'
 import { useAppStore } from '@renderer/store/modules/app'
-import { usePlaceStore } from '@renderer/store/modules/place'
+import { useGameActionStore } from '@renderer/store/modules/game-action'
+import { useMapStore } from '@renderer/store/modules/game-map'
 import { ref, watch } from 'vue'
 
 defineOptions({
   name: 'MapScene'
 })
-const options = ref<Array<Dto.ActionOption>>([])
 const currentText = ref('')
+const isTyped = ref(false)
 const appStore = useAppStore()
-const placeStore = usePlaceStore()
+const mapStore = useMapStore()
+const actionStore = useGameActionStore()
 interface Emits {
   (e: 'result', result: boolean): boolean
 }
 defineEmits<Emits>()
 
 function actionFunc(action: Dto.ActionOption) {
-  switch (action.actionType) {
+  switch (action.type) {
     case 'map':
       nextText(action)
       break
     case 'mini-game':
       appStore.currentMiniGame = action.miniGame ?? 'finger-guessing'
-      appStore.currentSceneType = action.actionType
       break
     case 'story':
       appStore.currentStory = action.next ?? 'start'
-      appStore.currentSceneType = action.actionType
+      appStore.siderCollapse = true
       break
     default:
       nextText(action)
-      appStore.currentSceneType = action.actionType
       break
   }
+  appStore.currentSceneType = action.type
 }
 
 function nextText(action: Dto.ActionOption) {
-  if (placeStore.currMap.name == 'map.building.house_lin' && action.name == 'knocked') {
-    currentText.value = '你敲了敲门，但没有人回应'
+  if (isTyped.value) {
+    isTyped.value = false
+  } else {
+    isTyped.value = true
+    currentText.value = actionStore.executeAction(action)
   }
-  // plot text array
 }
 
 watch(
-  [() => placeStore.currMap],
+  [() => mapStore.currMap],
   () => {
     // 默认文本
-    currentText.value = placeStore.currMap.text
+    isTyped.value = true
+    currentText.value = mapStore.currMap.text
     // 加载按钮
-    options.value = DefaultActions.filter((x) => placeStore.currMap.options.includes(x.name))
-    if (placeStore.currMap.isLocked == true) {
-      currentText.value = 'map.locked.' + placeStore.currMap.lockedReason
-      options.value.push(DefaultActions.filter((x) => x.id == 5)[0])
-    }
+    actionStore.loadActionOptions(mapStore.currMap, null)
     // 加载事件
 
     // 加载NPC

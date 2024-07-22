@@ -88,16 +88,16 @@
 <script setup lang="ts">
 import { useAppStore } from '@renderer/store/modules/app'
 import { useAuthStore } from '@renderer/store/modules/auth'
-import { usePlaceStore } from '@renderer/store/modules/place'
+import { useMapStore } from '@renderer/store/modules/game-map'
 import { formatTimestamp } from '@renderer/utils/common'
 import { ref, watch } from 'vue'
 defineOptions({
   name: 'Home'
 })
 const appStore = useAppStore()
-const mapStore = usePlaceStore()
+const mapStore = useMapStore()
 const { addMoney, addGold } = useAppStore()
-const { reloadMap, beforeNextMap } = usePlaceStore()
+const { reloadMap, beforeNextMap } = useMapStore()
 const { userInfo, archivedData, isStaticSuper } = useAuthStore()
 
 const isShowMap = ref(false)

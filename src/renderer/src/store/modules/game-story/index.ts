@@ -5,7 +5,7 @@ import { localeText, prefixImage } from '@renderer/utils/common'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
-export const useStoryStore = defineStore(SetupStoreId.Story, () => {
+export const useStoryStore = defineStore(SetupStoreId.GameStory, () => {
   const currentStory = ref<Dto.StoryPlot>({
     name: 'none',
     type: 'main-line',

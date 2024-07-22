@@ -1,70 +1,51 @@
 export const DefaultActions: Array<Dto.ActionOption> = [
   {
-    id: 1,
+    name: 'finger-guessing',
     text: 'option.finger-guessing',
     icon: 'fluent-emoji:victory-hand',
-    type: 'primary',
-    isDisabled: false,
-    isShow: true,
+    buttonType: 'primary',
     miniGame: 'finger-guessing',
-    actionType: 'mini-game',
-    name: 'finger-guessing'
+    type: 'mini-game'
   },
   {
-    id: 2,
+    name: 'dice-number',
     text: 'option.dice-number',
     icon: 'streamline-emojis:game-dice',
-    type: 'error',
-    isDisabled: false,
-    isShow: true,
+    buttonType: 'error',
     miniGame: 'dice-number',
-    actionType: 'mini-game',
-    name: 'dice-number'
+    type: 'mini-game'
   },
   {
-    id: 3,
+    name: 'shop',
     text: 'option.enter',
-    type: 'primary',
-    isDisabled: false,
-    isShow: true,
-    actionType: 'shop',
-    name: 'shop'
+    buttonType: 'primary',
+    type: 'shop'
   },
   {
-    id: 4,
+    name: 'work',
     text: 'option.work',
-    type: 'primary',
-    isDisabled: false,
-    isShow: true,
-    actionType: 'map',
-    name: 'work'
+    buttonType: 'primary',
+    type: 'map'
   },
   {
-    id: 5,
-    text: 'option.knocked',
-    type: 'primary',
-    isDisabled: false,
-    isShow: true,
-    actionType: 'map',
     name: 'knocked',
+    text: 'option.knocked',
+    buttonType: 'primary',
+    type: 'map',
     conditions: 'hasItem.10'
   },
   {
+    name: 'scene.start',
     text: 'option.story_start',
-    type: 'primary',
-    isDisabled: false,
-    isShow: true,
     next: 'start',
-    actionType: 'story',
-    name: 'scene.start'
+    buttonType: 'primary',
+    type: 'story'
   },
   {
     name: 'option.choose_id',
     text: 'option.choose_id',
-    type: 'primary',
-    isDisabled: false,
-    isShow: true,
-    actionType: 'story',
-    next: 'scene.choose_id'
+    next: 'scene.choose_id',
+    buttonType: 'primary',
+    type: 'story'
   }
 ]

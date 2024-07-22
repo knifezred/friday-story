@@ -31,14 +31,14 @@ const typeWriter = () => {
   if (index.value < props.strings.length) {
     text.value += props.strings.charAt(index.value)
     index.value++
-    if (props.value) {
+    if (!props.value) {
       index.value = props.strings.length
       text.value = props.strings
     } else {
       setTimeout(typeWriter, props.speed)
     }
   } else if (index.value == props.strings.length) {
-    emit('update:value', true)
+    emit('update:value', false)
     if (props.loop) {
       setTimeout(() => {
         text.value = ''

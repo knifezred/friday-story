@@ -263,6 +263,7 @@
     "startGame": "开始游戏"
   },
   "option": {
+    "noReply": "什么都没发生",
     "dice-number": "玩骰子",
     "enter": "进入",
     "finger-guessing": "石头剪刀布",
@@ -400,7 +401,7 @@
     "archive": "角色存档",
     "demo": "Demo",
     "home": "首页",
-    "inventory": "物品",
+    "inventory": "背包",
     "login": "登录",
     "personal": "个人中心",
     "relationship": "关系",

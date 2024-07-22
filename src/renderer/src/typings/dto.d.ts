@@ -300,13 +300,13 @@ declare namespace Dto {
     id?: number
     name: string
     text: string
-    icon?: string | undefined
-    type: Type | undefined
-    isDisabled: boolean
-    isShow: boolean
-    miniGame?: UnionKey.MiniGameModule | undefined
-    next?: string | undefined
-    actionType: UnionKey.SceneModule
+    type: UnionKey.SceneModule
     conditions?: string
+    next?: string | undefined
+    miniGame?: UnionKey.MiniGameModule | undefined
+    icon?: string | undefined
+    buttonType?: Type | undefined
+    isDisabled?: boolean
+    isShow?: boolean
   }
 }

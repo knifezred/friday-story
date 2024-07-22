@@ -20,8 +20,8 @@
       :style="appStore.siderCollapse ? 'height:20.5vw' : 'height:18vw'"
       style="border: 0; border-radius: 0">
       <n-scrollbar class="h-20vh" :distance="10" @click="nextText">
-        <n-p class="text-xl color-success">
-          <TypedText v-model:value="isTypedSuccess" :strings="$t(currentText)" />
+        <n-p class="text-xl color-success select-none">
+          <TypedText v-model:value="isTyped" :strings="$t(currentText)" />
         </n-p>
       </n-scrollbar>
       <template #footer>
@@ -29,7 +29,7 @@
           <n-button
             v-for="btn in actionOptions"
             :key="btn.id"
-            :type="btn.type"
+            :type="btn.buttonType"
             class="color-white w-40"
             @click="actionFunc(btn)">
             <SvgIcon v-if="btn.icon != undefined" :icon="btn.icon" class="mr-1" />
@@ -44,7 +44,7 @@
 <script setup lang="ts">
 import { $t } from '@renderer/locales'
 import { useAppStore } from '@renderer/store/modules/app'
-import { useStoryStore } from '@renderer/store/modules/story'
+import { useStoryStore } from '@renderer/store/modules/game-story'
 import { dynamicResource } from '@renderer/utils/common'
 import { ref, watch } from 'vue'
 
@@ -57,7 +57,7 @@ const textIndex = ref(0)
 const totalTextCount = ref(1)
 const isFileExists = ref(false)
 const isVideo = ref(false)
-const isTypedSuccess = ref(false)
+const isTyped = ref(false)
 const currentText = ref('')
 const cover = ref<string>('')
 const currentScene = ref<Dto.GameScene>({
@@ -72,7 +72,7 @@ const appStore = useAppStore()
 const storyStore = useStoryStore()
 
 function bindText(text: string | string[]) {
-  isTypedSuccess.value = false
+  isTyped.value = true
   if (typeof text == 'string') {
     isArrayText.value = false
     totalTextCount.value = 1
@@ -108,9 +108,9 @@ async function nextScene(next: string) {
 }
 
 async function nextText() {
-  if (!isTypedSuccess.value) {
-    // 再次点击加速打字机效果
-    isTypedSuccess.value = true
+  if (isTyped.value) {
+    // 再次点击取消打字机效果
+    isTyped.value = false
   } else {
     if (isArrayText.value) {
       textIndex.value += 1
@@ -122,6 +122,7 @@ async function nextText() {
         } else {
           // end
           appStore.currentSceneType = 'map'
+          appStore.siderCollapse = false
           window.$message?.info($t('stories.over'))
         }
       }
@@ -131,7 +132,7 @@ async function nextText() {
 }
 
 async function actionFunc(action: Dto.ActionOption) {
-  if (action.actionType == 'story') {
+  if (action.type == 'story') {
     if (action.next != undefined && action.next.startsWith('scene')) {
       await nextScene(action.next)
     }
