@@ -167,7 +167,7 @@ export async function dynamicResource(filePath: string) {
   if (files.length == 0) {
     return filePath
   } else {
-    const randIndex = getRandomInt(0, files.length)
+    const randIndex = getRandomInt(0, files.length - 1)
     return files[randIndex]
   }
 }

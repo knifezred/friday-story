@@ -86,15 +86,10 @@ function bindText(text: string | string[]) {
 }
 
 async function dynamicCover() {
-  cover.value = currentScene.value.cover
   if (currentScene.value.cover.indexOf('.') == -1) {
     console.log(cover.value)
-    cover.value = await dynamicResource(cover.value)
-    if (cover.value == undefined) {
-      cover.value = currentScene.value.cover
-    }
+    cover.value = await dynamicResource(currentScene.value.cover)
   }
-
   if (cover.value.endsWith('.mp4')) {
     isVideo.value = true
   } else {
