@@ -21,7 +21,7 @@
       style="border: 0; border-radius: 0">
       <n-scrollbar class="h-20vh" :distance="10" @click="nextText">
         <n-p class="text-xl color-success">
-          <TypedText :strings="$t(currentText)" />
+          <TypedText v-model:value="isTypedSuccess" :strings="$t(currentText)" />
         </n-p>
       </n-scrollbar>
       <template #footer>
@@ -56,9 +56,10 @@ const isArrayText = ref(false)
 const textIndex = ref(0)
 const totalTextCount = ref(1)
 const isFileExists = ref(false)
+const isVideo = ref(false)
+const isTypedSuccess = ref(false)
 const currentText = ref('')
 const cover = ref<string>('')
-const isVideo = ref(false)
 const currentScene = ref<Dto.GameScene>({
   name: 'test',
   title: '',
@@ -71,6 +72,7 @@ const appStore = useAppStore()
 const storyStore = useStoryStore()
 
 function bindText(text: string | string[]) {
+  isTypedSuccess.value = false
   if (typeof text == 'string') {
     isArrayText.value = false
     totalTextCount.value = 1
@@ -111,21 +113,26 @@ async function nextScene(next: string) {
 }
 
 async function nextText() {
-  if (isArrayText.value) {
-    textIndex.value += 1
-  }
-  if (textIndex.value == totalTextCount.value || !isArrayText.value) {
-    if (actionOptions.value.length == 0) {
-      if (currentScene.value.next != '') {
-        await nextScene(currentScene.value.next)
-      } else {
-        // end
-        appStore.currentSceneType = 'map'
-        window.$message?.info($t('stories.over'))
+  if (!isTypedSuccess.value) {
+    // 再次点击加速打字机效果
+    isTypedSuccess.value = true
+  } else {
+    if (isArrayText.value) {
+      textIndex.value += 1
+    }
+    if (textIndex.value == totalTextCount.value || !isArrayText.value) {
+      if (actionOptions.value.length == 0) {
+        if (currentScene.value.next != '') {
+          await nextScene(currentScene.value.next)
+        } else {
+          // end
+          appStore.currentSceneType = 'map'
+          window.$message?.info($t('stories.over'))
+        }
       }
     }
+    bindText(currentScene.value.text)
   }
-  bindText(currentScene.value.text)
 }
 
 async function actionFunc(action: Dto.ActionOption) {
