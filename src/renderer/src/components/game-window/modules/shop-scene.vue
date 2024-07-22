@@ -5,7 +5,7 @@
         <n-flex class="ma-2">
           <n-card
             v-for="goods in shopItems"
-            :key="goods.id"
+            :key="goods.name"
             class="relative z-4 w-xs shadow-primary shadow-op-30">
             <n-flex>
               <n-grid y-gap="4" x-gap="2" :cols="3" class="mb-1">
@@ -47,7 +47,9 @@
       </n-scrollbar>
     </n-gi>
     <n-gi :span="4" class="text-center">
-      <n-button type="primary" class="w-sm" @click="checkout">结算（{{ totalCoast }}）</n-button>
+      <n-button type="primary" class="w-sm text-white" @click="checkout"
+        ><icon-solar:cart-large-3-bold-duotone class="size-18" /> （{{ totalCoast }}）</n-button
+      >
     </n-gi>
   </n-grid>
 </template>

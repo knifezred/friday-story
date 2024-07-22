@@ -25,7 +25,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   const userInfo: Dto.Auth.UserInfo = reactive(getUserInfo())
 
   const archivedData = ref<Dto.ArchivedData>({
-    worldTime: 1600000000,
+    worldTime: 1600000000000,
     weather: 'sun',
     money: 1000,
     gold: 1,
@@ -35,7 +35,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     taskStatus: []
   })
 
-  const startTime = ref(0)
+  const playTime = ref(Date.now())
   /** is super role in static route */
   const isStaticSuper = computed(() => {
     const { VITE_AUTH_ROUTE_MODE, VITE_STATIC_SUPER_ROLE } = import.meta.env
@@ -49,15 +49,14 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   /** Reset auth store */
   async function resetStore() {
     const authStore = useAuthStore()
-
-    clearAuthStorage()
-
-    authStore.$reset()
-    if (!route.meta.constant) {
-      router.push('/login')
-    }
-
-    routeStore.resetStore()
+    authStore.saveArchiveData().then(() => {
+      clearAuthStorage()
+      authStore.$reset()
+      if (!route.meta.constant) {
+        router.push('/login')
+      }
+      routeStore.resetStore()
+    })
   }
 
   /**
@@ -86,7 +85,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
         }
 
         if (routeStore.isInitAuthRoute) {
-          startTime.value = Date.now()
+          playTime.value = Date.now()
           window.$message?.success(
             $t('page.login.common.welcomeBack', { userName: userInfo.userName })
           )
@@ -121,6 +120,9 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   }
 
   async function saveArchiveData() {
+    userInfo.archive.totalTime = Math.floor(
+      userInfo.archive.totalTime + (Date.now() - playTime.value) / 1000
+    )
     userInfo.archive.data = JSON.stringify(archivedData.value)
     return await updateArchive(userInfo.archive)
   }
