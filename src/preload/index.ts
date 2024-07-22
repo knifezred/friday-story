@@ -25,6 +25,7 @@ const api = {
     } catch (error) {
       console.log(error)
     }
+    console.log(fileList)
     return fileList
   },
   isFileExist: (filePath: string) => {

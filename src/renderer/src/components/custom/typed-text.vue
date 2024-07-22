@@ -12,6 +12,7 @@ defineOptions({
 const text = ref('')
 const index = ref(0)
 interface Props {
+  value: boolean
   strings: string
   speed?: number
   loop?: boolean
@@ -20,17 +21,31 @@ const props = withDefaults(defineProps<Props>(), {
   speed: projectSetting.textSpeed,
   loop: false
 })
+
+interface Emits {
+  (e: 'update:value', result: boolean): boolean
+}
+const emit = defineEmits<Emits>()
+
 const typeWriter = () => {
   if (index.value < props.strings.length) {
     text.value += props.strings.charAt(index.value)
     index.value++
-    setTimeout(typeWriter, props.speed)
-  } else if (props.loop && index.value == props.strings.length) {
-    setTimeout(() => {
-      text.value = ''
-      index.value = 0
-      typeWriter()
-    }, 1000)
+    if (props.value) {
+      index.value = props.strings.length
+      text.value = props.strings
+    } else {
+      setTimeout(typeWriter, props.speed)
+    }
+  } else if (index.value == props.strings.length) {
+    emit('update:value', true)
+    if (props.loop) {
+      setTimeout(() => {
+        text.value = ''
+        index.value = 0
+        typeWriter()
+      }, 1000)
+    }
   }
 }
 

@@ -1,12 +1,17 @@
 <template>
   <NFlex vertical :size="0">
+    <video
+      v-if="isVideo"
+      :src="'http://localhost:5175' + cover"
+      autoplay
+      loop
+      class="h-56.25%"></video>
     <div
-      :style="
-        'background-image: url(http://localhost:5175' + currentCover + ');padding-top: 56.25%;'
-      "
+      v-else
+      :style="'background-image: url(http://localhost:5175' + cover + ');padding-top: 56.25%;'"
       class="bg-repeat-round">
       <p class="pt-12 pl-24 absolute-lt text-error">
-        {{ currentCover }}
+        {{ cover }}
       </p>
     </div>
     <n-card
@@ -52,11 +57,12 @@ const textIndex = ref(0)
 const totalTextCount = ref(1)
 const isFileExists = ref(false)
 const currentText = ref('')
-const currentCover = ref('')
+const cover = ref<string>('')
+const isVideo = ref(false)
 const currentScene = ref<Dto.GameScene>({
   name: 'test',
   title: '',
-  cover: '',
+  cover: '/static/stories/start',
   next: '',
   options: [],
   text: ''
@@ -64,44 +70,54 @@ const currentScene = ref<Dto.GameScene>({
 const appStore = useAppStore()
 const storyStore = useStoryStore()
 
-function bindText(scene: Dto.GameScene) {
-  if (typeof scene.text == 'string') {
+function bindText(text: string | string[]) {
+  if (typeof text == 'string') {
     isArrayText.value = false
     totalTextCount.value = 1
     textIndex.value = 0
-    currentText.value = scene.text
+    currentText.value = text
   } else {
     isArrayText.value = true
-    totalTextCount.value = scene.text.length
-    currentText.value = scene.text[textIndex.value]
+    totalTextCount.value = text.length
+    currentText.value = text[textIndex.value]
   }
 }
 
 async function dynamicCover() {
-  currentCover.value = currentScene.value.cover
+  cover.value = currentScene.value.cover
   if (currentScene.value.cover.indexOf('.') == -1) {
-    currentCover.value = await dynamicResource(currentScene.value.cover)
+    console.log(cover.value)
+    cover.value = await dynamicResource(cover.value)
+    if (cover.value == undefined) {
+      cover.value = currentScene.value.cover
+    }
   }
-  return currentCover.value
+
+  if (cover.value.endsWith('.mp4')) {
+    isVideo.value = true
+  } else {
+    isVideo.value = false
+  }
+  return cover.value
 }
 
-function nextScene(next: string) {
+async function nextScene(next: string) {
   currentScene.value = storyStore.getStoryScene(next)
-  dynamicCover()
-  bindText(currentScene.value)
+  await dynamicCover()
+  bindText(currentScene.value.text)
   // 绑定按钮
   actionOptions.value = storyStore.getOptions(currentScene.value.options)
   isFileExists.value = window.api.isFileExist(currentScene.value.cover)
 }
 
-function nextText() {
+async function nextText() {
   if (isArrayText.value) {
     textIndex.value += 1
   }
   if (textIndex.value == totalTextCount.value || !isArrayText.value) {
     if (actionOptions.value.length == 0) {
       if (currentScene.value.next != '') {
-        nextScene(currentScene.value.next)
+        await nextScene(currentScene.value.next)
       } else {
         // end
         appStore.currentSceneType = 'map'
@@ -109,16 +125,16 @@ function nextText() {
       }
     }
   }
-  bindText(currentScene.value)
+  bindText(currentScene.value.text)
 }
 
-function actionFunc(action: Dto.ActionOption) {
+async function actionFunc(action: Dto.ActionOption) {
   if (action.actionType == 'story') {
     if (action.next != undefined && action.next.startsWith('scene')) {
-      nextScene(action.next)
+      await nextScene(action.next)
     }
   } else {
-    nextText()
+    await nextText()
   }
 }
 
@@ -126,12 +142,11 @@ watch(
   [() => appStore.currentStory],
   async () => {
     storyStore.setCurrentStory(appStore.currentStory)
-    // 默认加载story，此处没有options
     currentScene.value.cover = storyStore.currentStory.cover
     await dynamicCover()
     currentScene.value.next = storyStore.currentStory.nextScene
     currentScene.value.text = storyStore.currentStory.text
-    bindText(currentScene.value)
+    bindText(currentScene.value.text)
   },
   { immediate: true }
 )
