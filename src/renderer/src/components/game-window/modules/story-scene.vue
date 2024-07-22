@@ -20,14 +20,14 @@
       :style="appStore.siderCollapse ? 'height:20.5vw' : 'height:18vw'"
       style="border: 0; border-radius: 0">
       <n-scrollbar class="h-20vh" :distance="10" @click="nextText">
-        <n-p class="text-xl color-success select-none">
+        <n-p class="text-xl color-success">
           <TypedText v-model:value="isTyped" :strings="$t(currentText)" />
         </n-p>
       </n-scrollbar>
       <template #footer>
         <n-flex>
           <n-button
-            v-for="btn in actionOptions"
+            v-for="btn in actionStore.options"
             :key="btn.id"
             :type="btn.buttonType"
             class="color-white w-40"
@@ -44,14 +44,15 @@
 <script setup lang="ts">
 import { $t } from '@renderer/locales'
 import { useAppStore } from '@renderer/store/modules/app'
+import { useGameActionStore } from '@renderer/store/modules/game-action'
 import { useStoryStore } from '@renderer/store/modules/game-story'
 import { dynamicResource } from '@renderer/utils/common'
 import { ref, watch } from 'vue'
 
 defineOptions({
-  name: 'UiScene'
+  name: 'StoryScene'
 })
-const actionOptions = ref<Array<Dto.ActionOption>>([])
+
 const isArrayText = ref(false)
 const textIndex = ref(0)
 const totalTextCount = ref(1)
@@ -69,6 +70,7 @@ const currentScene = ref<Dto.GameScene>({
   text: ''
 })
 const appStore = useAppStore()
+const actionStore = useGameActionStore()
 const storyStore = useStoryStore()
 
 function bindText(text: string | string[]) {
@@ -103,7 +105,7 @@ async function nextScene(next: string) {
   await dynamicCover()
   bindText(currentScene.value.text)
   // 绑定按钮
-  actionOptions.value = storyStore.getOptions(currentScene.value.options)
+  actionStore.loadActionOptions(null, currentScene.value)
   isFileExists.value = window.api.isFileExist(currentScene.value.cover)
 }
 
@@ -116,7 +118,7 @@ async function nextText() {
       textIndex.value += 1
     }
     if (textIndex.value == totalTextCount.value || !isArrayText.value) {
-      if (actionOptions.value.length == 0) {
+      if (actionStore.options.length == 0) {
         if (currentScene.value.next != '') {
           await nextScene(currentScene.value.next)
         } else {
@@ -149,6 +151,7 @@ watch(
     await dynamicCover()
     currentScene.value.next = storyStore.currentStory.nextScene
     currentScene.value.text = storyStore.currentStory.text
+    actionStore.loadActionOptions(null, currentScene.value)
     bindText(currentScene.value.text)
   },
   { immediate: true }

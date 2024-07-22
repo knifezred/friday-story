@@ -33,6 +33,7 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
   }
 
   function loadActionOptions(map: Dto.MapItem | null, scene: Dto.GameScene | null) {
+    options.value = []
     if (map != null) {
       if (map.options.length > 0) {
         options.value = DefaultActions.filter((x) => map.options.includes(x.name))
@@ -41,8 +42,10 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
         options.value.push(DefaultActions.filter((x) => x.name == 'knocked')[0])
       }
     }
-    if (scene != null && scene.options.length > 0) {
-      options.value = DefaultActions.filter((x) => scene.options.includes(x.name))
+    if (scene != null) {
+      if (scene.options.length > 0) {
+        options.value = DefaultActions.filter((x) => scene.options.includes(x.name))
+      }
     }
     return options
   }
