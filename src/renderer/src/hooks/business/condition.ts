@@ -1,8 +1,12 @@
+import { useAppStore } from '@renderer/store/modules/app'
 import { useAuthStore } from '@renderer/store/modules/auth'
+import { useMapStore } from '@renderer/store/modules/game-map'
 import dayjs from 'dayjs'
 
 export function useCondition() {
   const authStore = useAuthStore()
+  const appStore = useAppStore()
+  const mapStore = useMapStore()
 
   function hasAuth(codes: string | string[]) {
     if (!authStore.isLogin) {
@@ -16,6 +20,11 @@ export function useCondition() {
     return codes.some((code) => authStore.userInfo.buttons.includes(code))
   }
 
+  //是否拥有指定成就
+  function hasAchievement(achievement: string) {
+    return authStore.archivedData.achievement.includes(achievement)
+  }
+
   // 是否拥有指定物品
   function hasItem(names: string | string[]) {
     if (typeof names === 'string') {
@@ -24,6 +33,12 @@ export function useCondition() {
     return names.some((name) => authStore.archivedData.items.map((x) => x.name).includes(name))
   }
 
+  function hasLocked() {
+    if (appStore.currentSceneType == 'map') {
+      return mapStore.currMap.isLocked
+    }
+    return false
+  }
   // 是否在指定时间段内
   function betweenHours(betweens: string) {
     const hours = betweens.split('-')
@@ -35,7 +50,7 @@ export function useCondition() {
     }
   }
 
-  // 是否在指定的日
+  // 是否在指定的日期
   function inDays(days: string) {
     const day = days.split(',')
     const currentDay = dayjs(authStore.archivedData.worldTime).get('day')
@@ -53,10 +68,6 @@ export function useCondition() {
     }
     return false
   }
-  //是否拥有指定成就
-  function hasAchievement(achievement: string) {
-    return authStore.archivedData.achievement.includes(achievement)
-  }
 
   return {
     betweenHours,
@@ -64,6 +75,7 @@ export function useCondition() {
     inDays,
     inMons,
     hasItem,
-    hasAchievement
+    hasAchievement,
+    hasLocked
   }
 }

@@ -1,11 +1,10 @@
 import { DefaultActions } from '@renderer/constants/data/action'
 import { SetupStoreId } from '@renderer/enums'
+import { checkCondition } from '@renderer/utils/common'
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
-import { useMapStore } from '../game-map'
+import { ref, unref } from 'vue'
 
 export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
-  const mapStore = useMapStore()
   const currentAction = ref<Dto.ActionOption>({
     name: 'option.demo',
     text: 'option.demo',
@@ -14,13 +13,11 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
   const options = ref<Array<Dto.ActionOption>>([])
 
   function beforeExecute() {
-    if (
-      mapStore.currMap.name == 'map.building.house_lin' &&
-      currentAction.value.name == 'knocked'
-    ) {
-      return '你敲了敲门，但没有人回应'
-    }
     console.log('before execute')
+    const result = checkCondition(currentAction.value.condition)
+    if (result != '') {
+      return result
+    }
     return 'option.noReply'
   }
 
@@ -33,21 +30,22 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
   }
 
   function loadActionOptions(map: Dto.MapItem | null, scene: Dto.GameScene | null) {
-    options.value = []
+    let optionsNames: Array<string> = []
     if (map != null) {
-      if (map.options.length > 0) {
-        options.value = DefaultActions.filter((x) => map.options.includes(x.name))
-      }
-      if (map.isLocked == true) {
-        options.value.push(DefaultActions.filter((x) => x.name == 'knocked')[0])
+      optionsNames = unref(map.options)
+      if (optionsNames.length > 0) {
+        if (map.isLocked == true) {
+          optionsNames.push('knocked')
+          optionsNames = optionsNames.filter((x) => x != 'enter')
+        }
       }
     }
     if (scene != null) {
       if (scene.options.length > 0) {
-        options.value = DefaultActions.filter((x) => scene.options.includes(x.name))
+        optionsNames = unref(scene.options)
       }
     }
-    return options
+    options.value = DefaultActions.filter((x) => optionsNames.includes(x.name))
   }
 
   return { currentAction, options, beforeExecute, executeAction, loadActionOptions }

@@ -177,8 +177,6 @@ declare namespace Dto {
 
   type MapLevelType = 'room' | 'building' | 'street' | 'area' | 'city' | 'country'
 
-  type MapLockedReasonType = 'no_key' | 'locked_door' | 'no_open' | 'outTime'
-
   interface MapItem {
     id: number
     pid: number
@@ -186,7 +184,6 @@ declare namespace Dto {
     title: string
     text: string
     cover: string
-    video?: string
     nextId?: number
     icon?: string
     isDisabled?: boolean
@@ -195,28 +192,39 @@ declare namespace Dto {
     order?: number
     options: Array<string>
     isLocked?: boolean
-    conditions?: string
-    lockedReason?: MapLockedReasonType
+    condition?: ConditionModel
   }
 
   interface NpcInfo {
     name: string
-    desc: string
-    introduce: string
-    level: LevelType
-    avatar: string
-    staticPath: string
     age: number
     gender: UserGender | null
+    identity: NpcIdentity
+    level: LevelType
+    work: string
     relationship: Array<number>
-    relationshipWithPlayer: string
-    isLocked: boolean
+    username?: string
+    nickname?: string
+    desc?: string
+    introduce?: string
+    avatar?: string
+    isLocked?: boolean
   }
 
+  type NpcIdentity =
+    | 'stranger'
+    | 'friend'
+    | 'enemy'
+    | 'sister'
+    | 'cousin'
+    | 'mon'
+    | 'dad'
+    | 'son'
+    | 'daughter'
   type NpcList = CommonType.RecordNullable<NpcInfo>
 
   type ArchiveNpcRelationShip = CommonType.RecordNullable<
-    Pick<NpcInfo, 'id' | 'relationship', 'relationshipWithPlayer'>
+    Pick<NpcInfo, 'id' | 'relationship', 'identity'>
   >
   type GameItemType = 'other' | 'food' | 'equipment' | 'task' | 'car'
 
@@ -278,7 +286,7 @@ declare namespace Dto {
     cover: string
     text: string | string[]
     nextScene: string
-    conditions?: string
+    condition?: ConditionModel
   }
 
   interface GameScene {
@@ -294,12 +302,24 @@ declare namespace Dto {
     name: string
     text: string
     type: UnionKey.SceneModule
-    conditions?: string
+    condition?: ConditionModel
     next?: string | undefined
     miniGame?: UnionKey.MiniGameModule | undefined
     icon?: string | undefined
     buttonType?: Type | undefined
     isDisabled?: boolean
     isShow?: boolean
+  }
+
+  type ConditionType = 'and' | 'or' | 'not'
+  interface ConditionModel {
+    type: ConditionType
+    conditions: Condition[]
+  }
+  interface Condition {
+    type: string
+    value: string
+    result: boolean
+    text?: string
   }
 }

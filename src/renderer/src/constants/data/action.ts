@@ -16,10 +16,20 @@ export const DefaultActions: Array<Dto.ActionOption> = [
     type: 'mini-game'
   },
   {
-    name: 'shop',
+    name: 'enter',
     text: 'option.enter',
     buttonType: 'primary',
-    type: 'shop'
+    type: 'shop',
+    condition: {
+      type: 'and',
+      conditions: [
+        {
+          type: 'hasLocked',
+          value: 'map.isLocked',
+          result: false
+        }
+      ]
+    }
   },
   {
     name: 'work',
@@ -31,8 +41,7 @@ export const DefaultActions: Array<Dto.ActionOption> = [
     name: 'knocked',
     text: 'option.knocked',
     buttonType: 'primary',
-    type: 'map',
-    conditions: 'hasItem.10'
+    type: 'map'
   },
   {
     name: 'scene.start',

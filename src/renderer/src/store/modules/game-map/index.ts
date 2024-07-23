@@ -1,7 +1,6 @@
 import { DefaultMaps } from '@renderer/constants/data/map'
 import { SetupStoreId } from '@renderer/enums'
-import { useCondition } from '@renderer/hooks/business/condition'
-import { localeText, prefixImage } from '@renderer/utils/common'
+import { checkCondition, localeText, prefixImage } from '@renderer/utils/common'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useAuthStore } from '../auth'
@@ -23,7 +22,7 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
   const canJumpNext = ref(true)
 
   function beforeNextMap(map: Dto.MapItem) {
-    checkCondition(map)
+    checkConditions(map)
     if (map.id != currMap.value.id || map.nextId != undefined) {
       let coastTime = 60 * 1000
       if (map.level == 'room') {
@@ -53,22 +52,13 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     }
   }
 
-  function checkCondition(map: Dto.MapItem) {
-    const actionCondition = useCondition()
-    if (map.conditions != undefined) {
-      const conditions = map.conditions.split('|')
-      conditions.forEach((condition) => {
-        if (condition.startsWith('betweenHours')) {
-          map.isLocked = actionCondition.betweenHours(condition.split('.')[1])
-          map.lockedReason = 'outTime'
-        }
-        if (condition.startsWith('hasItem')) {
-          map.isLocked = !actionCondition.hasItem(condition.split('.')[1])
-          map.lockedReason = 'locked_door'
-        }
-      })
+  function checkConditions(map: Dto.MapItem) {
+    const resultText = checkCondition(map.condition)
+    if (resultText == '') {
+      map.isLocked = false
+    } else {
+      map.isLocked = true
     }
-    console.log(map.isLocked)
   }
 
   function reloadMap(nextId: number | undefined, pid: number) {
@@ -119,6 +109,7 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     reloadMap(currMap.value.nextId, currMap.value.pid)
     currMap.value = allMaps.value.filter((x) => x.id == id)[0]
     authStore.userInfo.archive.place = id
+    checkConditions(currMap.value)
   }
 
   return {

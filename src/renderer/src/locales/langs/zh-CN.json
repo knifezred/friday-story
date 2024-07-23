@@ -43,6 +43,10 @@
       "yes": "是"
     }
   },
+  "condition": {
+    "hasItemTrue": "你拥有 {itemName} !",
+    "hasItemFalse": "你没有 {itemName} !"
+  },
   "dataTable": {
     "itemCount": "共 {total} 条"
   },
@@ -132,6 +136,9 @@
         "desc": "三明治",
         "title": "三明治"
       }
+    },
+    "task": {
+      "house_lin_key": "林家大门钥匙"
     }
   },
   "map": {

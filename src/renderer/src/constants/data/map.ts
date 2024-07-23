@@ -152,8 +152,16 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     cover: '',
     level: 'building',
     options: ['finger-guessing', 'dice-number'],
-    isLocked: true,
-    conditions: 'hasItem.10'
+    condition: {
+      type: 'and',
+      conditions: [
+        {
+          type: 'hasItem',
+          value: 'task.house_lin_key',
+          result: true
+        }
+      ]
+    }
   },
   {
     id: 15,
@@ -224,8 +232,17 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     text: '',
     cover: '.png',
     level: 'building',
-    options: ['shop', 'scene.start'],
-    conditions: 'betweenHours.22-9'
+    options: ['enter', 'scene.start'],
+    condition: {
+      type: 'and',
+      conditions: [
+        {
+          type: 'betweenHours',
+          value: '22-9',
+          result: false
+        }
+      ]
+    }
   },
   {
     id: 22,

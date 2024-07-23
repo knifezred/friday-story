@@ -48,7 +48,7 @@
     </n-gi>
     <n-gi :span="4" class="text-center">
       <n-button type="primary" class="w-sm text-white" @click="checkout"
-        ><icon-solar:cart-large-3-bold-duotone class="size-18" /> （{{ totalCoast }}）</n-button
+        ><icon-solar:cart-large-3-bold-duotone class="size-8" /> （{{ totalCoast }}）</n-button
       >
     </n-gi>
   </n-grid>

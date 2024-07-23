@@ -1,3 +1,4 @@
+import { useCondition } from '@renderer/hooks/business/condition'
 import { $t } from '@renderer/locales'
 import dayjs from 'dayjs'
 
@@ -177,4 +178,33 @@ export function getRandomInt(min: number, max: number) {
   min = Math.ceil(min)
   max = Math.floor(max)
   return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+export function checkCondition(conditionModel: Dto.ConditionModel | undefined) {
+  let resultText = ''
+  if (conditionModel != undefined) {
+    const conditionHook = useCondition()
+    for (const condition of conditionModel.conditions) {
+      if (conditionHook[condition.type]) {
+        const result = conditionHook[condition.type](condition.value)
+        // 条件判定失败
+        if (result != condition.result) {
+          if (condition.text == undefined) {
+            condition.text = 'condition.' + condition.type + (result ? 'True' : 'False')
+          }
+          if (condition.type == 'hasItem') {
+            const itemName = 'items.' + condition.value
+            resultText = $t(condition.text as never, { itemName: $t(itemName as never) })
+          } else {
+            resultText = condition.text
+          }
+        }
+      }
+      // and模式下任意一个不满足就跳出
+      if (conditionModel.type == 'and' && resultText != '') {
+        return resultText
+      }
+    }
+  }
+  return resultText
 }

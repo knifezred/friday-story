@@ -116,8 +116,8 @@ watch(
   { immediate: true }
 )
 function mapFunc(map: Dto.MapItem) {
-  beforeNextMap(map)
   if (appStore.currentSceneType == 'map') {
+    beforeNextMap(map)
     if (map.nextId != undefined) {
       reloadMap(map.nextId, map.pid)
     } else {
@@ -128,7 +128,4 @@ function mapFunc(map: Dto.MapItem) {
     window.$message?.info('in mini game,please wait game ended')
   }
 }
-
-// story 故事
-// plot 剧情
 </script>
