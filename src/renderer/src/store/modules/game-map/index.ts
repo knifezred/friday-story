@@ -7,9 +7,9 @@ import { useAuthStore } from '../auth'
 
 export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
   const authStore = useAuthStore()
-  const allMaps = ref<Array<Dto.MapItem>>(DefaultMaps)
-  const currLevelMaps = ref<Array<Dto.MapItem>>([])
-  const currMap = ref<Dto.MapItem>({
+  const allMaps = ref<Array<Dto.MapItemFull>>([])
+  const currLevelMaps = ref<Array<Dto.MapItemFull>>([])
+  const currMap = ref<Dto.MapItemFull>({
     id: 0,
     pid: 0,
     name: 'test',
@@ -19,9 +19,9 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     level: 'room',
     options: []
   })
-  const canJumpNext = ref(true)
+  const canJumpNext = ref(false)
 
-  function beforeNextMap(map: Dto.MapItem) {
+  function beforeNextMap(map: Dto.MapItemFull) {
     checkConditions(map)
     if (map.id != currMap.value.id || map.nextId != undefined) {
       let coastTime = 60 * 1000
@@ -52,7 +52,7 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     }
   }
 
-  function checkConditions(map: Dto.MapItem) {
+  function checkConditions(map: Dto.MapItemFull) {
     const resultText = checkCondition(map.condition)
     if (resultText == '') {
       map.isLocked = false
@@ -90,22 +90,26 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
   }
 
   function initMap(id: number) {
-    allMaps.value.forEach((map) => {
+    for (const map of DefaultMaps) {
       let typeName = map.level + '.' + map.name
       if (map.level == 'room') {
         typeName = 'building.' + map.name
       }
-      map.text = localeText(map.text, typeName, 'map', 'text').toString()
-      map.title = localeText(map.title, typeName, 'map', 'title').toString()
-      map.cover = prefixImage(map.cover, typeName, 'map', '.jpeg')
+      const fullMap = {
+        ...map,
+        title: localeText('', typeName, 'map', 'title').toString(),
+        text: localeText('', typeName, 'map', 'text').toString(),
+        cover: prefixImage('', typeName, 'map', '.jpeg')
+      }
+      allMaps.value.push(fullMap)
       if (map.id == id) {
         if (map.nextId != undefined) {
-          currMap.value = map
+          currMap.value = fullMap
         } else {
           currMap.value = allMaps.value.filter((x) => x.id == map.pid)[0]
         }
       }
-    })
+    }
     reloadMap(currMap.value.nextId, currMap.value.pid)
     currMap.value = allMaps.value.filter((x) => x.id == id)[0]
     authStore.userInfo.archive.place = id

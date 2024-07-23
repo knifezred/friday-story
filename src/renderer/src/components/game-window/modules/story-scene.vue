@@ -29,7 +29,7 @@
           <n-button
             v-for="btn in actionStore.options"
             :key="btn.name"
-            :type="btn.buttonType"
+            :type="btn.buttonType ?? 'primary'"
             class="color-white w-40"
             @click="actionFunc(btn)">
             <SvgIcon v-if="btn.icon != undefined" :icon="btn.icon" class="mr-1" />
@@ -144,9 +144,8 @@ async function actionFunc(action: Dto.ActionOption) {
 }
 
 watch(
-  [() => appStore.currentStory],
+  [() => storyStore.currentStory],
   async () => {
-    storyStore.setCurrentStory(appStore.currentStory)
     currentScene.value.cover = storyStore.currentStory.cover
     await dynamicCover()
     currentScene.value.next = storyStore.currentStory.nextScene

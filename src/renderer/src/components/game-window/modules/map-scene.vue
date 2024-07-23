@@ -22,7 +22,7 @@
           <n-button
             v-for="btn in actionStore.options"
             :key="btn.name"
-            :type="btn.buttonType"
+            :type="btn.buttonType ?? 'primary'"
             :is-disabled="btn.isDisabled"
             :is-show="btn.isShow"
             class="color-white w-40"
@@ -39,7 +39,9 @@
 <script setup lang="ts">
 import { useAppStore } from '@renderer/store/modules/app'
 import { useGameActionStore } from '@renderer/store/modules/game-action'
+import { useGameItemStore } from '@renderer/store/modules/game-item'
 import { useMapStore } from '@renderer/store/modules/game-map'
+import { useStoryStore } from '@renderer/store/modules/game-story'
 import { ref, watch } from 'vue'
 
 defineOptions({
@@ -50,6 +52,8 @@ const isTyped = ref(false)
 const appStore = useAppStore()
 const mapStore = useMapStore()
 const actionStore = useGameActionStore()
+const itemStore = useGameItemStore()
+const storyStore = useStoryStore()
 interface Emits {
   (e: 'result', result: boolean): boolean
 }
@@ -64,8 +68,11 @@ function actionFunc(action: Dto.ActionOption) {
       appStore.currentMiniGame = action.miniGame ?? 'finger-guessing'
       break
     case 'story':
-      appStore.currentStory = action.next ?? 'start'
+      storyStore.setCurrentStory(action.next ?? 'start')
       appStore.siderCollapse = true
+      break
+    case 'shop':
+      itemStore.currentShop = action.next ?? 'happy_shop'
       break
     default:
       nextText(action)

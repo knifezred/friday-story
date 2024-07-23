@@ -421,6 +421,9 @@
   "stories": {
     "completed": "任务已完成",
     "over": "任务已结束",
+    "option": {
+      "start": "任务按钮"
+    },
     "scene": {
       "set_name": {
         "text": "设置姓名",

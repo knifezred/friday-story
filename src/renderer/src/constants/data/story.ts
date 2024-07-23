@@ -15,7 +15,14 @@ export const DefaultScenes: Array<Dto.GameScene> = [
     text: '',
     cover: '',
     next: '',
-    options: ['option.choose_id']
+    options: [
+      {
+        name: 'option.choose_id',
+        text: 'option.choose_id',
+        next: 'scene.choose_id',
+        type: 'story'
+      }
+    ]
   },
   {
     name: 'scene.choose_id',

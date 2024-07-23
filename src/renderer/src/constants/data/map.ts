@@ -11,9 +11,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     pid: 0,
     nextId: 1,
     name: 'friday',
-    title: '',
-    text: '',
-    cover: '',
     level: 'country',
     options: []
   },
@@ -22,9 +19,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     pid: 1,
     nextId: 2,
     name: 'boot',
-    title: '',
-    text: '',
-    cover: '',
     level: 'city',
     options: []
   },
@@ -33,9 +27,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     pid: 2,
     nextId: 3,
     name: 'dongshan',
-    title: '',
-    text: '',
-    cover: '',
     level: 'area',
     options: []
   },
@@ -44,9 +35,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     pid: 3,
     nextId: 4,
     name: 'pingan',
-    title: '',
-    text: '',
-    cover: '',
     level: 'street',
     options: []
   },
@@ -55,9 +43,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     pid: 4,
     nextId: 5,
     name: 'home',
-    title: '',
-    text: '',
-    cover: '',
     level: 'building',
     options: []
   },
@@ -65,9 +50,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 6,
     pid: 5,
     name: 'home.living_room',
-    title: '',
-    text: '',
-    cover: '',
     level: 'room',
     options: []
   },
@@ -75,9 +57,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 7,
     pid: 5,
     name: 'home.bedroom',
-    title: '',
-    text: '',
-    cover: '',
     level: 'room',
     options: []
   },
@@ -85,9 +64,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 8,
     pid: 5,
     name: 'home.room_player',
-    title: '',
-    text: '',
-    cover: '',
     level: 'room',
     options: []
   },
@@ -95,9 +71,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 9,
     pid: 5,
     name: 'home.room_sister',
-    title: '',
-    text: '',
-    cover: '',
     level: 'room',
     options: []
   },
@@ -105,9 +78,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 10,
     pid: 5,
     name: 'home.room_cousin',
-    title: '',
-    text: '',
-    cover: '',
     level: 'room',
     options: []
   },
@@ -115,9 +85,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 11,
     pid: 5,
     name: 'home.kitchen',
-    title: '',
-    text: '',
-    cover: '',
     level: 'room',
     options: []
   },
@@ -125,9 +92,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 12,
     pid: 5,
     name: 'home.bathroom',
-    title: '',
-    text: '',
-    cover: '',
     level: 'room',
     options: []
   },
@@ -136,9 +100,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     pid: 5,
     nextId: 4,
     name: 'home.door',
-    title: '',
-    text: '',
-    cover: '',
     level: 'room',
     options: []
   },
@@ -147,11 +108,44 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     pid: 4,
     nextId: 14,
     name: 'house_lin',
-    title: '',
-    text: '',
-    cover: '',
     level: 'building',
-    options: ['finger-guessing', 'dice-number'],
+    options: [
+      {
+        name: 'map.next',
+        condition: {
+          type: 'and',
+          conditions: [
+            {
+              type: 'betweenHours',
+              value: '0-8',
+              result: false
+            },
+            {
+              type: 'hasItem',
+              value: 'task.house_lin_key',
+              result: true
+            }
+          ]
+        },
+        text: 'option.enter',
+        type: 'map'
+      },
+      {
+        name: 'finger-guessing',
+        text: 'option.finger-guessing',
+        icon: 'fluent-emoji:victory-hand',
+        miniGame: 'finger-guessing',
+        type: 'mini-game'
+      },
+      {
+        name: 'dice-number',
+        text: 'option.dice-number',
+        icon: 'streamline-emojis:game-dice',
+        buttonType: 'error',
+        miniGame: 'dice-number',
+        type: 'mini-game'
+      }
+    ],
     condition: {
       type: 'and',
       conditions: [
@@ -167,9 +161,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 15,
     pid: 14,
     name: 'house_lin.living_room',
-    title: '',
-    text: '',
-    cover: '',
     level: 'room',
     options: []
   },
@@ -177,9 +168,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 16,
     pid: 14,
     name: 'house_lin.bedroom',
-    title: '',
-    text: '',
-    cover: '',
     level: 'room',
     options: []
   },
@@ -187,9 +175,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 17,
     pid: 14,
     name: 'house_lin.kitchen',
-    title: '',
-    text: '',
-    cover: '',
     level: 'room',
     options: []
   },
@@ -197,9 +182,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 18,
     pid: 14,
     name: 'house_lin.lin_room',
-    title: '',
-    text: '',
-    cover: '',
     level: 'room',
     options: []
   },
@@ -207,9 +189,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 19,
     pid: 14,
     name: 'house_lin.bathroom',
-    title: '',
-    text: '',
-    cover: '',
     level: 'room',
     options: []
   },
@@ -218,9 +197,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     pid: 14,
     nextId: 4,
     name: 'house_lin.door',
-    title: '',
-    text: '',
-    cover: '',
     level: 'room',
     options: []
   },
@@ -228,11 +204,31 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 21,
     pid: 4,
     name: 'happy_shop',
-    title: '',
-    text: '',
-    cover: '.png',
     level: 'building',
-    options: ['enter', 'scene.start'],
+    options: [
+      {
+        name: 'shop.enter',
+        next: 'happy_shop',
+        text: 'option.enter',
+        type: 'shop',
+        condition: {
+          type: 'and',
+          conditions: [
+            {
+              type: 'betweenHours',
+              value: '22-9',
+              result: false
+            }
+          ]
+        }
+      },
+      {
+        name: 'test.button',
+        next: 'start',
+        text: 'stories.start',
+        type: 'story'
+      }
+    ],
     condition: {
       type: 'and',
       conditions: [
@@ -248,9 +244,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 22,
     pid: 3,
     name: 'backstreet',
-    title: '',
-    text: '',
-    cover: '',
     level: 'street',
     options: []
   },
@@ -258,9 +251,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 23,
     pid: 3,
     name: 'demo',
-    title: '',
-    text: '',
-    cover: '',
     level: 'room',
     options: []
   },
@@ -268,9 +258,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 23,
     pid: 3,
     name: 'demo',
-    title: '',
-    text: '',
-    cover: '',
     level: 'room',
     options: []
   },
@@ -278,9 +265,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 247,
     pid: 3,
     name: 'demo',
-    title: '',
-    text: '',
-    cover: '',
     level: 'room',
     options: []
   },
@@ -288,9 +272,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 25,
     pid: 3,
     name: 'demo',
-    title: '',
-    text: '',
-    cover: '',
     level: 'room',
     options: []
   },
@@ -298,9 +279,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 26,
     pid: 3,
     name: 'demo',
-    title: '',
-    text: '',
-    cover: '',
     level: 'room',
     options: []
   },
@@ -308,9 +286,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 27,
     pid: 3,
     name: 'demo',
-    title: '',
-    text: '',
-    cover: '',
     level: 'room',
     options: []
   },
@@ -318,9 +293,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 28,
     pid: 3,
     name: 'demo',
-    title: '',
-    text: '',
-    cover: '',
     level: 'room',
     options: []
   },
@@ -328,9 +300,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 29,
     pid: 3,
     name: 'demo',
-    title: '',
-    text: '',
-    cover: '',
     level: 'room',
     options: []
   },
@@ -338,9 +307,6 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     id: 30,
     pid: 3,
     name: 'demo',
-    title: '',
-    text: '',
-    cover: '',
     level: 'room',
     options: []
   }

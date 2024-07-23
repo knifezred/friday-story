@@ -5,8 +5,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
-  const currentShop = ref('happy_shop')
-
+  const currentShop = ref('')
   function ShopGoods() {
     const goodsList: Array<Dto.ShopGoods> = ShopGoodsRecord[currentShop.value]
     goodsList.forEach((goods) => {

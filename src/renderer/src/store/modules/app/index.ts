@@ -49,7 +49,6 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
   // custom start
   const currentSceneType = ref<UnionKey.SceneModule>('map')
   const currentMiniGame = ref<UnionKey.MiniGameModule>('finger-guessing')
-  const currentStory = ref('')
   const fromMoney = ref(0)
   const fromGold = ref(0)
   function addMoney(money: number) {
@@ -202,7 +201,6 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
     addGold,
     coastTime,
     currentSceneType,
-    currentMiniGame,
-    currentStory
+    currentMiniGame
   }
 })

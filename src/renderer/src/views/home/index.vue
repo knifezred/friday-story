@@ -115,7 +115,7 @@ watch(
   },
   { immediate: true }
 )
-function mapFunc(map: Dto.MapItem) {
+function mapFunc(map: Dto.MapItemFull) {
   if (appStore.currentSceneType == 'map') {
     beforeNextMap(map)
     if (map.nextId != undefined) {

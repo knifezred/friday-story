@@ -181,18 +181,21 @@ declare namespace Dto {
     id: number
     pid: number
     name: string
-    title: string
-    text: string
-    cover: string
     nextId?: number
     icon?: string
     isDisabled?: boolean
     isShow?: boolean
     level: MapLevelType
     order?: number
-    options: Array<string>
+    options: Array<ActionOption>
     isLocked?: boolean
     condition?: ConditionModel
+  }
+
+  interface MapItemFull extends MapItem {
+    title: string
+    text: string
+    cover: string
   }
 
   interface NpcInfo {
@@ -224,7 +227,7 @@ declare namespace Dto {
   type NpcList = CommonType.RecordNullable<NpcInfo>
 
   type ArchiveNpcRelationShip = CommonType.RecordNullable<
-    Pick<NpcInfo, 'id' | 'relationship', 'identity'>
+    Pick<NpcInfo, 'id' | 'relationship' | 'identity'>
   >
   type GameItemType = 'other' | 'food' | 'equipment' | 'task' | 'car'
 
@@ -295,7 +298,7 @@ declare namespace Dto {
     text: string | string[]
     cover: string
     next: string
-    options: string[]
+    options: Array<ActionOption>
   }
 
   interface ActionOption {
@@ -311,7 +314,9 @@ declare namespace Dto {
     isShow?: boolean
   }
 
-  type ConditionType = 'and' | 'or' | 'not'
+  type MapActionOption = Pick<ActionOption, 'name' | 'condition'>
+
+  type ConditionType = 'and' | 'or'
   interface ConditionModel {
     type: ConditionType
     conditions: Condition[]
