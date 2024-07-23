@@ -60,33 +60,36 @@ interface Emits {
 defineEmits<Emits>()
 
 function actionFunc(action: Dto.ActionOption) {
-  switch (action.type) {
-    case 'map':
-      nextText(action)
-      break
-    case 'mini-game':
-      appStore.currentMiniGame = action.miniGame ?? 'finger-guessing'
-      break
-    case 'story':
-      storyStore.setCurrentStory(action.next ?? 'start')
-      appStore.siderCollapse = true
-      break
-    case 'shop':
-      itemStore.currentShop = action.next ?? 'happy_shop'
-      break
-    default:
-      nextText(action)
-      break
-  }
-  appStore.currentSceneType = action.type
-}
-
-function nextText(action: Dto.ActionOption) {
-  if (isTyped.value) {
-    isTyped.value = false
+  const checkInfo = actionStore.beforeExecute(action)
+  if (actionStore.currentAction.canExecute) {
+    switch (action.type) {
+      case 'map':
+        nextText()
+        break
+      case 'mini-game':
+        appStore.currentMiniGame = action.miniGame ?? 'finger-guessing'
+        break
+      case 'story':
+        storyStore.setCurrentStory(action.next ?? 'start')
+        appStore.siderCollapse = true
+        break
+      case 'shop':
+        itemStore.currentShop = action.next ?? 'happy_shop'
+        break
+      default:
+        nextText()
+        break
+    }
+    appStore.currentSceneType = action.type
   } else {
     isTyped.value = true
-    currentText.value = actionStore.executeAction(action)
+    currentText.value = checkInfo
+  }
+}
+
+function nextText() {
+  if (isTyped.value) {
+    isTyped.value = false
   }
 }
 

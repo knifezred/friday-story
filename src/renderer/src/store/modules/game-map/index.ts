@@ -19,7 +19,7 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     level: 'room',
     options: []
   })
-  const canJumpNext = ref(false)
+  const canJumpNext = ref(true)
 
   function beforeNextMap(map: Dto.MapItemFull) {
     checkConditions(map)

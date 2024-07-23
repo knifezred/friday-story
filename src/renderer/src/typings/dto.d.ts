@@ -264,8 +264,8 @@ declare namespace Dto {
     name: string
     price: number
     count: number
+    type: GameItemType
     selectedCount?: number
-    type?: GameItemType
     level?: LevelType
     title?: string
     desc?: string
@@ -312,6 +312,7 @@ declare namespace Dto {
     buttonType?: Type | undefined
     isDisabled?: boolean
     isShow?: boolean
+    canExecute?: boolean
   }
 
   type MapActionOption = Pick<ActionOption, 'name' | 'condition'>

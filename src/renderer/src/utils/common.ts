@@ -192,12 +192,7 @@ export function checkCondition(conditionModel: Dto.ConditionModel | undefined) {
           if (condition.text == undefined) {
             condition.text = 'condition.' + condition.type + (result ? 'True' : 'False')
           }
-          if (condition.type == 'hasItem') {
-            const itemName = 'items.' + condition.value
-            resultText = $t(condition.text as never, { itemName: $t(itemName as never) })
-          } else {
-            resultText = condition.text
-          }
+          resultText = $t(condition.text as never, { value: $t(condition.value as never) })
         }
       }
       // and模式下任意一个不满足就跳出

@@ -44,8 +44,9 @@
     }
   },
   "condition": {
-    "hasItemTrue": "你拥有 {itemName} !",
-    "hasItemFalse": "你没有 {itemName} !"
+    "hasItemTrue": "你拥有 {value} !",
+    "hasItemFalse": "你没有 {value} !",
+    "openHour": "营业时间：{value}"
   },
   "dataTable": {
     "itemCount": "共 {total} 条"
@@ -166,9 +167,9 @@
           "text": "主卧",
           "title": "主卧"
         },
-        "door": {
-          "text": "大门",
-          "title": "大门"
+        "backyard": {
+          "text": "后院",
+          "title": "后院"
         },
         "kitchen": {
           "text": "厨房",

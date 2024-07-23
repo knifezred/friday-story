@@ -12,19 +12,26 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
   })
   const options = ref<Array<Dto.ActionOption>>([])
 
-  function beforeExecute() {
+  function beforeExecute(action: Dto.ActionOption) {
+    currentAction.value = action
     console.log('before execute')
     const result = checkCondition(currentAction.value.condition)
     if (result != '') {
+      currentAction.value.canExecute = false
       return result
+    } else {
+      currentAction.value.canExecute = true
     }
-    return 'option.noReply'
+    return ''
   }
 
   function executeAction(action: Dto.ActionOption) {
     let result = action.text
     currentAction.value = action
-    result = beforeExecute()
+    result = beforeExecute(currentAction.value)
+    if (result == '') {
+      currentAction.value.canExecute = true
+    }
     console.log(action)
     return result
   }

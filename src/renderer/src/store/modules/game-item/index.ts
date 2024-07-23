@@ -9,6 +9,9 @@ export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
   function ShopGoods() {
     const goodsList: Array<Dto.ShopGoods> = ShopGoodsRecord[currentShop.value]
     goodsList.forEach((goods) => {
+      if (goods.name.indexOf('.') == -1) {
+        goods.name = goods.type + '.' + goods.name
+      }
       const gameItem = DefaultGameItems.filter((x) => x.name == goods.name)[0]
       goods.name = gameItem.name
       goods.title = gameItem.title
@@ -23,9 +26,10 @@ export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
 
   function initShopItems() {
     DefaultGameItems.forEach((item) => {
-      item.desc = localeText(item.desc, item.type + '.' + item.name, 'items', 'desc').toString()
-      item.title = localeText(item.title, item.type + '.' + item.name, 'items', 'title').toString()
-      item.cover = prefixImage(item.cover, item.name, 'items/' + item.type, '.png')
+      item.name = item.type + '.' + item.name
+      item.desc = localeText(item.desc, item.name, 'items', 'desc').toString()
+      item.title = localeText(item.title, item.name, 'items', 'title').toString()
+      item.cover = prefixImage(item.cover, item.name, 'items', '.png')
     })
   }
 

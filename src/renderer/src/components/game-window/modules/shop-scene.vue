@@ -98,13 +98,13 @@ function removeToCart(goods: Dto.ShopGoodsFull) {
 
 function checkout() {
   shopItems.value.forEach((goods) => {
-    const tName = goods.type + '.' + goods.name
     if (goods.selectedCount > 0) {
-      if (authStore.archivedData.items.filter((x) => x.name == tName).length > 0) {
-        authStore.archivedData.items.filter((x) => x.name == tName)[0].count += goods.selectedCount
+      if (authStore.archivedData.items.filter((x) => x.name == goods.name).length > 0) {
+        authStore.archivedData.items.filter((x) => x.name == goods.name)[0].count +=
+          goods.selectedCount
       } else {
         authStore.archivedData.items.push({
-          name: tName,
+          name: goods.name,
           count: goods.selectedCount
         })
       }

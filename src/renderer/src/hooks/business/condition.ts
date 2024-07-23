@@ -28,9 +28,11 @@ export function useCondition() {
   // 是否拥有指定物品
   function hasItem(names: string | string[]) {
     if (typeof names === 'string') {
-      return authStore.archivedData.items.filter((x) => x.name == names).length > 0
+      return authStore.archivedData.items.filter((x) => 'items.' + x.name == names).length > 0
     }
-    return names.some((name) => authStore.archivedData.items.map((x) => x.name).includes(name))
+    return names.some((name) =>
+      authStore.archivedData.items.map((x) => 'items.' + x.name).includes(name)
+    )
   }
 
   function hasLocked() {
@@ -42,11 +44,23 @@ export function useCondition() {
   // 是否在指定时间段内
   function betweenHours(betweens: string) {
     const hours = betweens.split('-')
+    const minHour = Number(hours[0])
+    const maxHour = Number(hours[1])
     const hour = dayjs(authStore.archivedData.worldTime).get('hour')
-    if (hour >= Number(hours[0]) || hour < Number(hours[1])) {
-      return true
+    if (minHour > maxHour) {
+      // 跨天
+      if (hour >= maxHour || hour < minHour) {
+        return true
+      } else {
+        return false
+      }
     } else {
-      return false
+      // 不跨天
+      if (hour >= minHour && hour < maxHour) {
+        return true
+      } else {
+        return false
+      }
     }
   }
 

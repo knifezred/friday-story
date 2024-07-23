@@ -98,8 +98,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     id: 13,
     pid: 5,
-    nextId: 4,
-    name: 'home.door',
+    name: 'home.backyard',
     level: 'room',
     options: []
   },
@@ -117,12 +116,12 @@ export const DefaultMaps: Array<Dto.MapItem> = [
           conditions: [
             {
               type: 'betweenHours',
-              value: '0-8',
+              value: '24-8',
               result: false
             },
             {
               type: 'hasItem',
-              value: 'task.house_lin_key',
+              value: 'items.task.house_lin_key',
               result: true
             }
           ]
@@ -151,7 +150,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
       conditions: [
         {
           type: 'hasItem',
-          value: 'task.house_lin_key',
+          value: 'items.task.house_lin_key',
           result: true
         }
       ]
@@ -216,8 +215,9 @@ export const DefaultMaps: Array<Dto.MapItem> = [
           conditions: [
             {
               type: 'betweenHours',
-              value: '22-9',
-              result: false
+              value: '9-23',
+              text: 'condition.openHour',
+              result: true
             }
           ]
         }
