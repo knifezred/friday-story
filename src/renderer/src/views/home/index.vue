@@ -117,8 +117,7 @@ watch(
 )
 function mapFunc(map: Dto.MapItemFull) {
   if (appStore.currentSceneType == 'map') {
-    beforeNextMap(map)
-    if (map.nextId != undefined) {
+    if (map.id == 0) {
       reloadMap(map.nextId, map.pid)
     } else {
       userInfo.archive.place = map.id

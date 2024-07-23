@@ -41,7 +41,9 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
     if (map != null) {
       if (map.nextId != undefined) {
         if (!optionExists('map.next', map.options)) {
-          options.value.push(getOptionByName('map.next', DefaultActions))
+          const defaultMapNext = getOptionByName('map.next', DefaultActions)
+          defaultMapNext.next = map.nextId.toString()
+          options.value.push(defaultMapNext)
         }
       }
       for (const option of map.options) {

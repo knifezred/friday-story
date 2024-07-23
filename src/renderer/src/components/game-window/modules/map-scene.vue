@@ -65,6 +65,7 @@ function actionFunc(action: Dto.ActionOption) {
     switch (action.type) {
       case 'map':
         nextText()
+        mapStore.nextMap(action.next)
         break
       case 'mini-game':
         appStore.currentMiniGame = action.miniGame ?? 'finger-guessing'

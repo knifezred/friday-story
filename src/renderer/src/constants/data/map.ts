@@ -112,12 +112,12 @@ export const DefaultMaps: Array<Dto.MapItem> = [
       {
         name: 'map.next',
         condition: {
-          type: 'and',
+          type: 'or',
           conditions: [
             {
               type: 'betweenHours',
-              value: '24-8',
-              result: false
+              value: '8-23',
+              result: true
             },
             {
               type: 'hasItem',
@@ -127,6 +127,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
           ]
         },
         text: 'option.enter',
+        next: '14',
         type: 'map'
       },
       {
@@ -145,16 +146,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
         type: 'mini-game'
       }
     ],
-    condition: {
-      type: 'and',
-      conditions: [
-        {
-          type: 'hasItem',
-          value: 'items.task.house_lin_key',
-          result: true
-        }
-      ]
-    }
+    isLocked: true
   },
   {
     id: 15,

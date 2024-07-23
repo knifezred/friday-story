@@ -37,7 +37,7 @@ export function useCondition() {
 
   function hasLocked() {
     if (appStore.currentSceneType == 'map') {
-      return mapStore.currMap.isLocked
+      return mapStore.currMap.isLocked == true
     }
     return false
   }

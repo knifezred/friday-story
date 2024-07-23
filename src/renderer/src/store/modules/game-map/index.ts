@@ -52,6 +52,15 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     }
   }
 
+  function nextMap(nextId: string | undefined) {
+    if (nextId != undefined) {
+      const nextMapId = Number(nextId)
+      const nextMap = allMaps.value.filter((x) => x.id == nextMapId)[0]
+      beforeNextMap(nextMap)
+      reloadMap(nextMapId, currMap.value.pid)
+    }
+  }
+
   function checkConditions(map: Dto.MapItemFull) {
     const resultText = checkCondition(map.condition)
     if (resultText == '') {
@@ -122,6 +131,7 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     currMap,
     initMap,
     reloadMap,
-    beforeNextMap
+    beforeNextMap,
+    nextMap
   }
 })
