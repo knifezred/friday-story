@@ -192,7 +192,11 @@ export function checkCondition(conditionModel: Dto.ConditionModel | undefined) {
           if (condition.text == undefined) {
             condition.text = 'condition.' + condition.type + (result ? 'True' : 'False')
           }
-          resultText = $t(condition.text as never, { value: $t(condition.value as never) })
+          let i18nValue = condition.value
+          if (condition.type == 'hasItem') {
+            i18nValue = 'items.' + condition.value + '.title'
+          }
+          resultText = $t(condition.text as never, { value: $t(i18nValue as never) })
         } else {
           // or模式任意一个成功就返回成功
           if (conditionModel.type == 'or') {

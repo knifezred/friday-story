@@ -99,6 +99,7 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
   }
 
   function initMap(id: number) {
+    allMaps.value = []
     for (const map of DefaultMaps) {
       let typeName = map.level + '.' + map.name
       if (map.level == 'room') {

@@ -121,7 +121,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
             },
             {
               type: 'hasItem',
-              value: 'items.task.house_lin_key',
+              value: 'task.house_lin_key',
               result: true
             }
           ]

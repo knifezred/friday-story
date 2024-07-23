@@ -120,11 +120,13 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   }
 
   async function saveArchiveData() {
-    userInfo.archive.totalTime = Math.floor(
-      userInfo.archive.totalTime + (Date.now() - playTime.value) / 1000
-    )
-    userInfo.archive.data = JSON.stringify(archivedData.value)
-    return await updateArchive(userInfo.archive)
+    if (isLogin.value) {
+      userInfo.archive.totalTime = Math.floor(
+        userInfo.archive.totalTime + (Date.now() - playTime.value) / 1000
+      )
+      userInfo.archive.data = JSON.stringify(archivedData.value)
+      await updateArchive(userInfo.archive)
+    }
   }
 
   return {

@@ -28,11 +28,9 @@ export function useCondition() {
   // 是否拥有指定物品
   function hasItem(names: string | string[]) {
     if (typeof names === 'string') {
-      return authStore.archivedData.items.filter((x) => 'items.' + x.name == names).length > 0
+      return authStore.archivedData.items.filter((x) => x.name == names).length > 0
     }
-    return names.some((name) =>
-      authStore.archivedData.items.map((x) => 'items.' + x.name).includes(name)
-    )
+    return names.some((name) => authStore.archivedData.items.map((x) => x.name).includes(name))
   }
 
   function hasLocked() {
