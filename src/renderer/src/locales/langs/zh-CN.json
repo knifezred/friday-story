@@ -139,7 +139,10 @@
       }
     },
     "task": {
-      "house_lin_key": "林家大门钥匙"
+      "house_lin_key": {
+        "desc": "林家大门钥匙",
+        "title": "林家大门钥匙"
+      }
     }
   },
   "map": {

@@ -120,6 +120,7 @@ function mapFunc(map: Dto.MapItemFull) {
     if (map.id == 0) {
       reloadMap(map.nextId, map.pid)
     } else {
+      beforeNextMap(map)
       userInfo.archive.place = map.id
       mapStore.currMap = map
     }

@@ -109,6 +109,12 @@ export const ShopGoodsRecord: Record<ShopType, Array<Dto.ShopGoods>> = {
       count: 100,
       price: 110,
       type: 'food'
+    },
+    {
+      name: 'house_lin_key',
+      count: 1,
+      price: 800,
+      type: 'task'
     }
   ],
   walmart: [
