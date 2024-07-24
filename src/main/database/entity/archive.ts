@@ -17,8 +17,8 @@ export class Archive {
   @Column({ type: 'integer' })
   totalTime?: number
 
-  @Column({ type: 'integer' })
-  place!: number
+  @Column({ type: 'varchar', length: 255 })
+  place!: string
 
   @Column({ type: 'text' })
   data!: string

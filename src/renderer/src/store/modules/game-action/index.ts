@@ -39,15 +39,17 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
   function loadActionOptions(map: Dto.MapItemFull | null, scene: Dto.GameScene | null) {
     options.value = []
     if (map != null) {
-      if (map.nextId != undefined) {
+      if (map.next != undefined) {
         if (!optionExists('map.next', map.options)) {
           const defaultMapNext = getOptionByName('map.next', DefaultActions)
-          defaultMapNext.next = map.nextId.toString()
+          defaultMapNext.next = map.next
           options.value.push(defaultMapNext)
         }
       }
-      for (const option of map.options) {
-        options.value.push(option)
+      if (map.options != undefined) {
+        for (const option of map.options) {
+          options.value.push(option)
+        }
       }
     }
     if (scene != null) {
@@ -63,7 +65,10 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
     return list.filter((x) => x.name == name)[0]
   }
 
-  function optionExists(name: string, list: Array<Dto.ActionOption>) {
+  function optionExists(name: string, list: Array<Dto.ActionOption> | undefined) {
+    if (list == undefined) {
+      return false
+    }
     return list.filter((x) => x.name == name).length > 0
   }
 

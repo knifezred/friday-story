@@ -2,6 +2,7 @@
 import { useRouterPush } from '@renderer/hooks/common/router'
 import { $t } from '@renderer/locales'
 import { createArchive } from '@renderer/service/api/archive'
+import projectSetting from '@renderer/settings/projectSetting'
 import { useAuthStore } from '@renderer/store/modules/auth'
 import { reactive } from 'vue'
 
@@ -17,7 +18,7 @@ const model: Dto.DbArchive = reactive({
   saveTime: 0,
   cover: 'avatar/man-001.svg',
   data: JSON.stringify(authStore.archivedData),
-  place: 6
+  place: projectSetting.defaultPlace
 })
 function handleSubmit() {
   model.saveTime = Date.now()

@@ -1,17 +1,17 @@
-import { DefaultMaps } from '@renderer/constants/data/map'
 import { SetupStoreId } from '@renderer/enums'
-import { checkCondition, localeText, prefixImage } from '@renderer/utils/common'
+import { checkCondition } from '@renderer/utils/common'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useAuthStore } from '../auth'
+import { getDefaultMaps } from './shared'
 
 export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
   const authStore = useAuthStore()
   const allMaps = ref<Array<Dto.MapItemFull>>([])
   const currLevelMaps = ref<Array<Dto.MapItemFull>>([])
   const currMap = ref<Dto.MapItemFull>({
-    id: 0,
-    pid: 0,
+    id: '',
+    pid: 'root',
     name: 'test',
     title: 'map.common.test.title',
     text: 'map.common.test.text',
@@ -23,7 +23,7 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
 
   function beforeNextMap(map: Dto.MapItemFull) {
     checkConditions(map)
-    if (map.id != currMap.value.id || map.nextId != undefined) {
+    if (map.id != currMap.value.id || map.next != undefined) {
       let coastTime = 60 * 1000
       if (map.level == 'room') {
         coastTime = coastTime * 5
@@ -52,12 +52,12 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     }
   }
 
-  function nextMap(nextId: string | undefined) {
-    if (nextId != undefined) {
-      const nextMapId = Number(nextId)
-      const nextMap = allMaps.value.filter((x) => x.id == nextMapId)[0]
+  function nextMap(next: string | undefined) {
+    debugger
+    if (next != undefined) {
+      const nextMap = allMaps.value.filter((x) => x.id == next)[0]
       beforeNextMap(nextMap)
-      reloadMap(nextMapId, currMap.value.pid)
+      reloadMap(next, currMap.value.pid)
     }
   }
 
@@ -70,15 +70,15 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     }
   }
 
-  function reloadMap(nextId: number | undefined, pid: number) {
+  function reloadMap(next: string | undefined, pid: string) {
     if (canJumpNext.value) {
-      currLevelMaps.value = allMaps.value.filter((x) => x.pid == nextId)
-      if (nextId != undefined && nextId > 0) {
-        const upLevel = allMaps.value.filter((x) => x.id == nextId)[0]
+      currLevelMaps.value = allMaps.value.filter((x) => x.pid == next)
+      if (next != undefined && next != '') {
+        const upLevel = allMaps.value.filter((x) => x.id == next)[0]
         currLevelMaps.value.push({
-          id: 0,
+          id: 'default.exit',
           pid: currLevelMaps.value[0].pid,
-          nextId: upLevel.pid,
+          next: upLevel.pid,
           name: 'map.common.exit',
           title: 'map.common.exit.title',
           text: 'map.common.exit.text',
@@ -98,29 +98,18 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     authStore.userInfo.archive.place = currMap.value.id
   }
 
-  function initMap(id: number) {
-    allMaps.value = []
-    for (const map of DefaultMaps) {
-      let typeName = map.level + '.' + map.name
-      if (map.level == 'room') {
-        typeName = 'building.' + map.name
-      }
-      const fullMap = {
-        ...map,
-        title: localeText('', typeName, 'map', 'title').toString(),
-        text: localeText('', typeName, 'map', 'text').toString(),
-        cover: prefixImage('', typeName, 'map', '.jpeg')
-      }
-      allMaps.value.push(fullMap)
-      if (map.id == id) {
-        if (map.nextId != undefined) {
-          currMap.value = fullMap
-        } else {
-          currMap.value = allMaps.value.filter((x) => x.id == map.pid)[0]
-        }
+  function initMap(id: string) {
+    allMaps.value = getDefaultMaps()
+    const map = allMaps.value.filter((x) => x.id == id)[0]
+    if (map.id == id) {
+      if (map.next != undefined) {
+        currMap.value = map
+      } else {
+        currMap.value = allMaps.value.filter((x) => x.id == map.pid)[0]
       }
     }
-    reloadMap(currMap.value.nextId, currMap.value.pid)
+    reloadMap(currMap.value.next, currMap.value.pid)
+    // 再次绑定
     currMap.value = allMaps.value.filter((x) => x.id == id)[0]
     authStore.userInfo.archive.place = id
     checkConditions(currMap.value)

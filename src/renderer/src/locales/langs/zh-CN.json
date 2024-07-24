@@ -139,7 +139,7 @@
       }
     },
     "task": {
-      "house_lin_key": {
+      "lin_home_key": {
         "desc": "可以打开邻居家的大门",
         "title": "林家大门钥匙"
       }
@@ -147,7 +147,7 @@
   },
   "map": {
     "area": {
-      "dongshan": {
+      "dongShan": {
         "text": "东山区",
         "title": "东山区"
       }
@@ -163,6 +163,8 @@
         "manager": "店长李四"
       },
       "home": {
+        "text": "家",
+        "title": "家",
         "bathroom": {
           "text": "卫生间",
           "title": "卫生间"
@@ -183,22 +185,20 @@
           "text": "客厅",
           "title": "客厅"
         },
-        "room_cousin": {
+        "cousin_room": {
           "text": "表妹房间",
           "title": "表妹房间"
         },
-        "room_player": {
+        "plyer_room": {
           "text": "我的卧室",
           "title": "我的卧室"
         },
-        "room_sister": {
+        "sister_room": {
           "text": "姐姐房间",
           "title": "姐姐房间"
-        },
-        "text": "家",
-        "title": "家"
+        }
       },
-      "house_lin": {
+      "lin_home": {
         "bathroom": {
           "text": "卫生间",
           "title": "卫生间"
@@ -256,11 +256,14 @@
         "text": "后街",
         "title": "后街"
       },
-      "pingan": {
+      "pingAn": {
         "text": "平安路",
         "title": "平安路"
       }
     }
+  },
+  "message": {
+    "notEnoughMoney": "余额不足"
   },
   "miniGame": {
     "currentRound": "当前轮次",

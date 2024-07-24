@@ -73,9 +73,7 @@
                 <icon-solar:user-bold-duotone
                   v-if="item.id == mapStore.currMap.id"
                   class="color-primary" />
-                <icon-solar:exit-line-duotone
-                  v-if="item.nextId != undefined"
-                  class="color-primary" />
+                <icon-solar:exit-line-duotone v-if="item.next != undefined" class="color-primary" />
               </template>
             </n-card>
           </NFlex>
@@ -117,8 +115,8 @@ watch(
 )
 function mapFunc(map: Dto.MapItemFull) {
   if (appStore.currentSceneType == 'map') {
-    if (map.id == 0) {
-      reloadMap(map.nextId, map.pid)
+    if (map.id == 'default.exit') {
+      reloadMap(map.next, map.pid)
     } else {
       beforeNextMap(map)
       userInfo.archive.place = map.id

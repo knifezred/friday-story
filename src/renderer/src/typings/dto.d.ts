@@ -152,7 +152,7 @@ declare namespace Dto {
     cover: string
     saveTime: number
     totalTime: number
-    place: number
+    place: string
     data: string
   }
 
@@ -177,25 +177,43 @@ declare namespace Dto {
 
   type MapLevelType = 'room' | 'building' | 'street' | 'area' | 'city' | 'country'
 
-  interface MapItem {
-    id: number
-    pid: number
+  type TreeBase = {
+    id: string
+    pid: string
     name: string
-    nextId?: number
+    children: TreeBase[]
+  }
+
+  interface MapItem {
+    name: string
+    next?: string
     icon?: string
     isDisabled?: boolean
     isShow?: boolean
     level: MapLevelType
     order?: number
-    options: Array<ActionOption>
+    options?: Array<ActionOption>
     isLocked?: boolean
     condition?: ConditionModel
+    children?: Array<MapItem>
   }
 
-  interface MapItemFull extends MapItem {
+  interface MapItemFull {
+    id: string
+    pid: string
+    name: string
+    next?: string
     title: string
     text: string
     cover: string
+    icon?: string
+    isDisabled?: boolean
+    isShow?: boolean
+    level: MapLevelType
+    order?: number
+    options: Array<ActionOption> | undefined
+    isLocked?: boolean
+    condition?: ConditionModel
   }
 
   interface NpcInfo {

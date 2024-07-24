@@ -46,7 +46,7 @@ export const DefaultGameItems: Array<Dto.GameItem> = [
     level: 'SR'
   },
   {
-    name: 'house_lin_key',
+    name: 'lin_home_key',
     type: 'task',
     level: 'SR'
   }
@@ -112,7 +112,7 @@ export const ShopGoodsRecord: Record<ShopType, Dto.ShopEntity> = {
         type: 'food'
       },
       {
-        name: 'house_lin_key',
+        name: 'lin_home_key',
         count: 1,
         price: 800,
         type: 'task'

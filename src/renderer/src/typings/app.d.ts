@@ -125,8 +125,10 @@ declare namespace App {
       invalid: string
     }
 
+    // route: Record<I18nRouteKey, string>
     type Schema = {
       route: Record<I18nRouteKey, string>
+
       common: {
         action: string
         add: string
@@ -170,6 +172,11 @@ declare namespace App {
           no: string
           yes: string
         }
+      }
+      condition: {
+        hasItemTrue: string
+        hasItemFalse: string
+        openHour: string
       }
       dataTable: {
         itemCount: string
@@ -261,21 +268,16 @@ declare namespace App {
             title: string
           }
         }
+        task: {
+          lin_home_key: {
+            desc: string
+            title: string
+          }
+        }
       }
       map: {
-        action: {
-          'dice-number': string
-          enter: string
-          'finger-guessing': string
-          goBack: string
-          knocked: string
-          quit: string
-          story_start: string
-          wait: string
-          work: string
-        }
         area: {
-          dongshan: {
+          dongShan: {
             text: string
             title: string
           }
@@ -288,6 +290,7 @@ declare namespace App {
           happy_shop: {
             text: string
             title: string
+            manager: string
           }
           home: {
             bathroom: {
@@ -298,7 +301,7 @@ declare namespace App {
               text: string
               title: string
             }
-            door: {
+            backyard: {
               text: string
               title: string
             }
@@ -310,22 +313,22 @@ declare namespace App {
               text: string
               title: string
             }
-            room_cousin: {
+            cousin_room: {
               text: string
               title: string
             }
-            room_player: {
+            plyer_room: {
               text: string
               title: string
             }
-            room_sister: {
+            sister_room: {
               text: string
               title: string
             }
             text: string
             title: string
           }
-          house_lin: {
+          lin_home: {
             bathroom: {
               text: string
               title: string
@@ -375,6 +378,7 @@ declare namespace App {
         locked: {
           locked_door: string
           no_key: string
+          outTime: string
           no_open: string
         }
         street: {
@@ -382,11 +386,14 @@ declare namespace App {
             text: string
             title: string
           }
-          pingan: {
+          pingAn: {
             text: string
             title: string
           }
         }
+      }
+      message: {
+        notEnoughMoney: string
       }
       miniGame: {
         currentRound: string
@@ -401,6 +408,16 @@ declare namespace App {
         startGame: string
       }
       option: {
+        noReply: string
+        'dice-number': string
+        enter: string
+        'finger-guessing': string
+        goBack: string
+        knocked: string
+        quit: string
+        story_start: string
+        wait: string
+        work: string
         choose_id: string
       }
       page: {
@@ -522,8 +539,11 @@ declare namespace App {
         tokenExpired: string
       }
       stories: {
-        over: string
         completed: string
+        over: string
+        option: {
+          start: string
+        }
         scene: {
           set_name: {
             text: string
@@ -621,6 +641,7 @@ declare namespace App {
         }
       }
     }
+
     type GetI18nKey<
       T extends Record<string, unknown>,
       K extends keyof T = keyof T

@@ -1,4 +1,5 @@
 export default {
   textSpeed: 50,
-  isAuth: true
+  isAuth: true,
+  defaultPlace: 'room.home.living_room'
 }

@@ -135,21 +135,10 @@
     }
   },
   "map": {
-    "action": {
-      "dice-number": "dice ",
-      "enter": "get into",
-      "finger-guessing": "Rock-paper-scissors",
-      "goBack": "return",
-      "knocked": "knock at the door",
-      "quit": "sign out",
-      "story_start": "Create a role",
-      "wait": "wait for",
-      "work": "work"
-    },
     "area": {
-      "dongshan": {
-        "text": "Dongshan District",
-        "title": "Dongshan District"
+      "dongShan": {
+        "text": "dongShan District",
+        "title": "dongShan District"
       }
     },
     "building": {
@@ -170,34 +159,34 @@
           "text": "Master bedroom",
           "title": "Master bedroom"
         },
-        "door": {
-          "text": "gate",
-          "title": "gate"
+        "backyard": {
+          "text": "Backyard",
+          "title": "Backyard"
         },
         "kitchen": {
-          "text": "kitchen",
-          "title": "kitchen"
+          "text": "Kitchen",
+          "title": "Kitchen"
         },
         "living_room": {
           "text": "a living room",
           "title": "a living room"
         },
-        "room_cousin": {
+        "cousin_room": {
           "text": "Cousin's room",
           "title": "Cousin's room"
         },
-        "room_player": {
+        "plyer_room": {
           "text": "My bedroom",
           "title": "My bedroom"
         },
-        "room_sister": {
+        "sister_room": {
           "text": "Sister's room",
           "title": "Sister's room"
         },
-        "text": "home",
-        "title": "home"
+        "text": "Home",
+        "title": "Home"
       },
-      "house_lin": {
+      "lin_home": {
         "bathroom": {
           "text": "TOILET",
           "title": "TOILET"
@@ -254,7 +243,7 @@
         "text": "Back St",
         "title": "Back St"
       },
-      "pingan": {
+      "pingAn": {
         "text": "Ping'an Road",
         "title": "Ping'an Road"
       }
