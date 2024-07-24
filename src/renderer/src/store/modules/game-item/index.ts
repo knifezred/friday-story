@@ -6,9 +6,15 @@ import { ref } from 'vue'
 
 export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
   const currentShop = ref('')
-  function ShopGoods() {
-    const goodsList: Array<Dto.ShopGoods> = ShopGoodsRecord[currentShop.value]
-    goodsList.forEach((goods) => {
+  const currentShopInfo = ref<Dto.ShopEntity>({
+    name: '',
+    manager: '',
+    money: 0,
+    goods: []
+  })
+  function currentShopGoods() {
+    currentShopInfo.value = ShopGoodsRecord[currentShop.value]
+    currentShopInfo.value.goods.forEach((goods) => {
       if (goods.name.indexOf('.') == -1) {
         goods.name = goods.type + '.' + goods.name
       }
@@ -21,7 +27,7 @@ export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
       goods.type = gameItem.type
       goods.selectedCount = 0
     })
-    return goodsList
+    return currentShopInfo.value.goods
   }
 
   function initShopItems() {
@@ -33,5 +39,5 @@ export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
     })
   }
 
-  return { currentShop, ShopGoods, initShopItems }
+  return { currentShop, currentShopInfo, currentShopGoods, initShopItems }
 })

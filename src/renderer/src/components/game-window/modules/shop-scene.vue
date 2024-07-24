@@ -1,7 +1,24 @@
 <template>
   <n-grid :x-gap="12" :y-gap="12" :cols="4" layout-shift-disabled>
+    <n-gi :span="1" class="text-center">
+      <n-p class="pt-4">
+        <n-tag :bordered="false" type="success">
+          {{ $t(gameItemStore.currentShopInfo.manager) }}: {{ gameItemStore.currentShopInfo.money }}
+        </n-tag>
+      </n-p>
+    </n-gi>
+    <n-gi :span="2" class="text-center">
+      <n-h1 class="text-primary-500 mb-0"> {{ $t(gameItemStore.currentShopInfo.name) }}</n-h1>
+    </n-gi>
+    <n-gi :span="1" class="text-center">
+      <n-p class="pt-4">
+        <n-tag :bordered="false" type="success">
+          {{ authStore.userInfo.userName }}: {{ authStore.archivedData.money }}
+        </n-tag>
+      </n-p>
+    </n-gi>
     <n-gi :span="4">
-      <n-scrollbar class="h-80vh pl-2 pt-2">
+      <n-scrollbar class="h-78vh pl-2 pt-2">
         <n-flex class="ma-2">
           <n-card
             v-for="goods in shopItems"
@@ -113,7 +130,7 @@ function checkout() {
 
 onMounted(() => {
   appStore.siderCollapse = true
-  gameItemStore.ShopGoods().forEach((goods) => {
+  gameItemStore.currentShopGoods().forEach((goods) => {
     shopItems.value.push({
       ...goods,
       name: goods.name ?? '',

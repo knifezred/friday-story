@@ -280,6 +280,13 @@ declare namespace Dto {
     selectedCount: number
   }
 
+  interface ShopEntity {
+    name: string
+    manager: string
+    money: number
+    goods: Array<ShopGoods>
+  }
+
   // 主线 支线 奇遇
   type PlotType = 'main-line' | 'branch-line' | 'adventure'
 

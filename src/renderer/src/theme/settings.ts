@@ -1,11 +1,11 @@
 /** Default theme settings */
 export const themeSettings: App.Theme.ThemeSetting = {
-  themeScheme: 'light',
+  themeScheme: 'dark',
   grayScale: false,
   recommendColor: true,
   themeColor: '#646cff',
   otherColor: {
-    info: '#c3d94e',
+    info: '#8cc265',
     success: '#40c057',
     warning: '#fab005',
     error: '#fa5252'
