@@ -1,7 +1,7 @@
 <template>
-  <n-tag :type="levelType" strong :bordered="false" class="w-10 text-center mr-1">
+  <n-avatar :round="round" :class="bgColor">
     {{ level == undefined ? '???' : level }}
-  </n-tag>
+  </n-avatar>
 </template>
 
 <script setup lang="ts">
@@ -12,26 +12,27 @@ defineOptions({
 })
 interface Props {
   level?: Dto.LevelType | undefined
+  round: boolean
 }
-type Type = 'default' | 'success' | 'error' | 'primary' | 'info' | 'warning' | undefined
-const { level } = defineProps<Props>()
-const levelType = ref<Type>('success')
-
+const { level } = withDefaults(defineProps<Props>(), {
+  round: true
+})
+const bgColor = ref('bg-gray')
 onMounted(() => {
   if (level == undefined) {
-    levelType.value = 'default'
+    bgColor.value = 'bg-gray'
   }
   if (level == 'SSR') {
-    levelType.value = 'error'
+    bgColor.value = 'bg-error'
   }
   if (level == 'SR') {
-    levelType.value = 'warning'
+    bgColor.value = 'bg-warning'
   }
   if (level == 'R') {
-    levelType.value = 'info'
+    bgColor.value = 'bg-info'
   }
   if (level == 'N') {
-    levelType.value = 'success'
+    bgColor.value = 'bg-success'
   }
 })
 </script>

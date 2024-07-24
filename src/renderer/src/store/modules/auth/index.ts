@@ -9,7 +9,7 @@ import useLoading from '@renderer/packages/hooks/use-loading'
 
 import { useRouterPush } from '@renderer/hooks/common/router'
 import { $t } from '@renderer/locales'
-import { findArchive, updateArchive } from '@renderer/service/api/archive'
+import { createArchive, findArchive, updateArchive } from '@renderer/service/api/archive'
 import { localStg } from '@renderer/utils/storage'
 import { useMapStore } from '../game-map'
 export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
@@ -49,7 +49,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   /** Reset auth store */
   async function resetStore() {
     const authStore = useAuthStore()
-    authStore.saveArchiveData().then(() => {
+    authStore.saveArchiveData(false).then(() => {
       clearAuthStorage()
       authStore.$reset()
       if (!route.meta.constant) {
@@ -119,13 +119,19 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     return false
   }
 
-  async function saveArchiveData() {
+  async function saveArchiveData(isNew: boolean) {
     if (isLogin.value) {
       userInfo.archive.totalTime = Math.floor(
         userInfo.archive.totalTime + (Date.now() - playTime.value) / 1000
       )
+      userInfo.archive.saveTime = Date.now()
       userInfo.archive.data = JSON.stringify(archivedData.value)
-      await updateArchive(userInfo.archive)
+      if (isNew) {
+        userInfo.archive.id = undefined
+        await createArchive(userInfo.archive)
+      } else {
+        await updateArchive(userInfo.archive)
+      }
     }
   }
 

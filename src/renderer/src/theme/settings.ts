@@ -5,12 +5,12 @@ export const themeSettings: App.Theme.ThemeSetting = {
   recommendColor: true,
   themeColor: '#646cff',
   otherColor: {
-    info: '#228be6',
+    info: '#c3d94e',
     success: '#40c057',
     warning: '#fab005',
     error: '#fa5252'
   },
-  isInfoFollowPrimary: true,
+  isInfoFollowPrimary: false,
   layout: {
     mode: 'vertical-mix',
     scrollMode: 'content'

@@ -7,7 +7,7 @@ defineOptions({
 })
 const authStore = useAuthStore()
 function closeWindow() {
-  authStore.saveArchiveData().then(() => {
+  authStore.saveArchiveData(false).then(() => {
     window.electron.ipcRenderer.invoke('close-window')
   })
 }

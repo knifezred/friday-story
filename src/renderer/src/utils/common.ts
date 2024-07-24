@@ -93,21 +93,21 @@ export function listAllStaticFiles() {
   return window.electron.ipcRenderer.invoke('list-static-files')
 }
 
-export function getLevelBorder(level: Dto.LevelType) {
-  let borderColor = 'border-primary'
+export function getLevelType(level: Dto.LevelType) {
+  let type: Dto.Type = 'primary'
   if (level == 'SSR') {
-    borderColor = 'border-error'
+    type = 'error'
   }
   if (level == 'SR') {
-    borderColor = 'border-warning'
+    type = 'warning'
   }
   if (level == 'R') {
-    borderColor = 'border-info'
+    type = 'info'
   }
   if (level == 'N') {
-    borderColor = 'border-success'
+    type = 'success'
   }
-  return borderColor + ' pa-2 b-2 rd-lg'
+  return type
 }
 
 export function localeText(

@@ -1,5 +1,5 @@
 <template>
-  <n-grid :x-gap="12" :y-gap="12" :cols="4" layout-shift-disabled class="text-center">
+  <n-grid :x-gap="12" :y-gap="12" :cols="4" layout-shift-disabled>
     <n-gi :span="4">
       <n-empty v-if="shopItems.length == 0" size="large" :description="$t('common.empty')">
       </n-empty>
@@ -9,20 +9,26 @@
             v-for="goods in shopItems"
             :key="goods.name"
             class="relative z-4 w-xs ma-1 shadow-primary shadow-op-30">
-            <n-flex>
-              <ImageIcon :src="goods.cover" class="size-18" :class="getLevelBorder(goods.level)" />
-              <n-flex vertical class="pl-1 text-left">
-                <n-p class="my-0">
-                  <LevelTag :level="goods.level" />
-                  <n-tag :bordered="false" type="info">
-                    {{ $t(goods.title) }}
-                    ({{ goods.count.toString() }})
-                  </n-tag>
-                </n-p>
-                <n-p class="my-0"> </n-p>
-                <n-p class="my-0"> {{ $t(goods.desc) }}</n-p>
-              </n-flex>
-            </n-flex>
+            <n-thing>
+              <template #avatar>
+                <ImageIcon :src="goods.cover" class="size-18" />
+              </template>
+              <template #header>
+                <span class="text-4 text-info-500">
+                  {{ $t(goods.title) }}
+                  ({{ goods.count.toString() }})
+                </span>
+              </template>
+              <template #header-extra>
+                <LevelTag :level="goods.level" />
+              </template>
+              <template #description>
+                <n-p class="my-1"> {{ $t(goods.desc) }}</n-p>
+              </template>
+              <template #action>
+                <n-flex justify="space-around"> </n-flex>
+              </template>
+            </n-thing>
           </n-card>
         </n-flex>
       </n-scrollbar>
@@ -33,7 +39,6 @@
 <script setup lang="ts">
 import { DefaultGameItems } from '@renderer/constants/data/items'
 import { useAuthStore } from '@renderer/store/modules/auth'
-import { getLevelBorder } from '@renderer/utils/common'
 import { onMounted, ref } from 'vue'
 
 defineOptions({

@@ -13,7 +13,7 @@
       :style="appStore.siderCollapse ? 'height:20.5vw' : 'height:18vw'"
       style="border: 0; border-radius: 0">
       <n-scrollbar class="h-20vh" :distance="10" @click="nextText">
-        <n-p class="text-xl color-success">
+        <n-p class="text-xl text-info">
           <TypedText v-model:value="isTyped" :strings="$t(currentText)" />
         </n-p>
       </n-scrollbar>

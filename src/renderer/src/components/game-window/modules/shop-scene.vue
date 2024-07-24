@@ -6,50 +6,46 @@
           <n-card
             v-for="goods in shopItems"
             :key="goods.name"
-            class="relative z-4 w-xs shadow-primary shadow-op-30">
-            <n-flex>
-              <n-grid y-gap="4" x-gap="2" :cols="3" class="mb-1">
-                <n-gi>
-                  <n-badge :value="goods.selectedCount">
-                    <ImageIcon
-                      :src="goods.cover"
-                      class="size-18"
-                      :class="getLevelBorder(goods.level)" />
-                  </n-badge>
-                </n-gi>
-                <n-gi class="pl-4">
-                  <LevelTag :level="goods.level" />
-                  <n-tag type="info" :bordered="false" class="mt-2 w-10">
-                    <template #icon>
-                      <icon-local-money />
-                    </template>
-                  </n-tag>
-                </n-gi>
-                <n-gi>
-                  <span class="mt-0.5 block"> {{ $t(goods.title) }}</span>
-
-                  <span class="mt-4 block"> {{ $t(goods.price.toString()) }}</span>
-                </n-gi>
-              </n-grid>
-            </n-flex>
-            <n-p class="my-1"> {{ $t(goods.desc) }}</n-p>
-            <template #action>
-              <n-flex justify="space-around">
-                <n-button :disabled="goods.selectedCount == 0" @click="removeToCart(goods)">
-                  -1
-                </n-button>
-                <span class="mt-2">{{ goods.count }}</span>
-                <n-button :disabled="goods.count == 0" @click="addToCart(goods)">+1</n-button>
-              </n-flex>
-            </template>
+            class="relative z-4 w-92 shadow-primary shadow-op-30">
+            <n-thing>
+              <template #avatar>
+                <n-badge :value="goods.selectedCount">
+                  <ImageIcon :src="goods.cover" class="size-18" />
+                </n-badge>
+              </template>
+              <template #header>
+                <span class="text-4 text-info-500"> {{ $t(goods.title) }}</span>
+              </template>
+              <template #header-extra>
+                <LevelTag :level="goods.level" />
+              </template>
+              <template #description>
+                <n-tag type="info" :bordered="false">
+                  <template #icon>
+                    <icon-local-money />
+                  </template>
+                  {{ $t(goods.price.toString()) }}
+                </n-tag>
+              </template>
+              <n-p class="text-info">{{ $t(goods.desc) }} </n-p>
+              <template #action>
+                <n-flex justify="space-around">
+                  <n-button :disabled="goods.selectedCount == 0" @click="removeToCart(goods)">
+                    -1
+                  </n-button>
+                  <span class="mt-2">{{ goods.count }}</span>
+                  <n-button :disabled="goods.count == 0" @click="addToCart(goods)">+1</n-button>
+                </n-flex>
+              </template>
+            </n-thing>
           </n-card>
         </n-flex>
       </n-scrollbar>
     </n-gi>
     <n-gi :span="4" class="text-center">
-      <n-button type="primary" class="w-sm text-white" @click="checkout"
-        ><icon-solar:cart-large-3-bold-duotone class="size-8" /> （{{ totalCoast }}）</n-button
-      >
+      <n-button type="primary" class="w-sm text-white" @click="checkout">
+        <icon-solar:cart-large-3-bold-duotone class="size-8" /> （{{ totalCoast }}）
+      </n-button>
     </n-gi>
   </n-grid>
 </template>
@@ -59,7 +55,6 @@ import { $t } from '@renderer/locales'
 import { useAppStore } from '@renderer/store/modules/app'
 import { useAuthStore } from '@renderer/store/modules/auth'
 import { useGameItemStore } from '@renderer/store/modules/game-item'
-import { getLevelBorder } from '@renderer/utils/common'
 import { onMounted, ref } from 'vue'
 
 defineOptions({
@@ -112,10 +107,12 @@ function checkout() {
     }
   })
   appStore.addMoney(-totalCoast.value)
+  appStore.siderCollapse = false
   emit('result', true)
 }
 
 onMounted(() => {
+  appStore.siderCollapse = true
   gameItemStore.ShopGoods().forEach((goods) => {
     shopItems.value.push({
       ...goods,
