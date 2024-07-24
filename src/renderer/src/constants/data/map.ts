@@ -70,7 +70,19 @@ export const DefaultMaps: Array<Dto.MapItem> = [
                       { name: 'lin_home.kitchen', level: 'room' },
                       { name: 'lin_home.lin_room', level: 'room' },
                       { name: 'lin_home.bathroom', level: 'room' },
-                      { name: 'lin_home.door', level: 'room', next: 'building.lin_home' }
+                      {
+                        name: 'lin_home.door',
+                        level: 'room',
+                        next: 'building.lin_home',
+                        options: [
+                          {
+                            name: 'map.next',
+                            text: 'option.goOut',
+                            next: 'building.lin_home',
+                            type: 'map'
+                          }
+                        ]
+                      }
                     ]
                   },
                   {

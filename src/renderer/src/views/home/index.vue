@@ -95,7 +95,7 @@ defineOptions({
 const appStore = useAppStore()
 const mapStore = useMapStore()
 const { addMoney, addGold } = useAppStore()
-const { reloadMap, beforeNextMap } = useMapStore()
+const { nextMap, beforeNextMap } = useMapStore()
 const { userInfo, archivedData, isStaticSuper } = useAuthStore()
 
 const isShowMap = ref(false)
@@ -115,10 +115,10 @@ watch(
 )
 function mapFunc(map: Dto.MapItemFull) {
   if (appStore.currentSceneType == 'map') {
+    beforeNextMap(map)
     if (map.id == 'default.exit') {
-      reloadMap(map.next, map.pid)
+      nextMap(map.next, map.pid)
     } else {
-      beforeNextMap(map)
       userInfo.archive.place = map.id
       mapStore.currMap = map
     }

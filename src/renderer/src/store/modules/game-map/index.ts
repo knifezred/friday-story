@@ -25,20 +25,24 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     checkConditions(map)
     if (map.id != currMap.value.id || map.next != undefined) {
       let coastTime = 60 * 1000
-      if (map.level == 'room') {
-        coastTime = coastTime * 5
-      }
-      if (map.level == 'building') {
-        coastTime = coastTime * 15
-      }
-      if (map.level == 'area') {
-        coastTime = coastTime * 40
-      }
-      if (map.level == 'city') {
-        coastTime = coastTime * 60 * 2
-      }
-      if (map.level == 'country') {
-        coastTime = coastTime * 60 * 8
+      switch (map.level) {
+        case 'country':
+          coastTime = coastTime * 60 * 4
+          break
+        case 'city':
+          coastTime = coastTime * 60
+          break
+        case 'area':
+          coastTime = coastTime * 30
+          break
+        case 'building':
+          coastTime = coastTime * 20
+          break
+        case 'room':
+          coastTime = coastTime * 10
+          break
+        default:
+          break
       }
       authStore.archivedData.worldTime += coastTime
       currMap.value = map
@@ -52,15 +56,6 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     }
   }
 
-  function nextMap(next: string | undefined) {
-    debugger
-    if (next != undefined) {
-      const nextMap = allMaps.value.filter((x) => x.id == next)[0]
-      beforeNextMap(nextMap)
-      reloadMap(next, currMap.value.pid)
-    }
-  }
-
   function checkConditions(map: Dto.MapItemFull) {
     const resultText = checkCondition(map.condition)
     if (resultText == '') {
@@ -70,11 +65,12 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     }
   }
 
-  function reloadMap(next: string | undefined, pid: string) {
+  function nextMap(next: string | undefined, pid: string) {
+    debugger
     if (canJumpNext.value) {
       const nextMap = allMaps.value.filter((x) => x.id == next)[0]
       currLevelMaps.value = allMaps.value.filter((x) => x.pid == nextMap.pid)
-      if (next != undefined && next != '') {
+      if (next != undefined && next != '' && nextMap.pid != 'root') {
         currLevelMaps.value.push({
           id: 'default.exit',
           pid: currLevelMaps.value[0].pid,
@@ -108,7 +104,7 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
         currMap.value = allMaps.value.filter((x) => x.id == map.pid)[0]
       }
     }
-    reloadMap(currMap.value.next, currMap.value.pid)
+    nextMap(currMap.value.next, currMap.value.pid)
     // 再次绑定
     currMap.value = allMaps.value.filter((x) => x.id == id)[0]
     authStore.userInfo.archive.place = id
@@ -120,8 +116,7 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     currLevelMaps,
     currMap,
     initMap,
-    reloadMap,
-    beforeNextMap,
-    nextMap
+    nextMap,
+    beforeNextMap
   }
 })

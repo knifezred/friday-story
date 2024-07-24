@@ -60,8 +60,9 @@
       </n-scrollbar>
     </n-gi>
     <n-gi :span="4" class="text-center">
-      <n-button type="primary" class="w-sm text-white" @click="checkout">
-        <icon-solar:cart-large-3-bold-duotone class="size-8" /> （{{ totalCoast }}）
+      <n-button type="primary" class="w-48 h-12" @click="checkout">
+        <icon-solar:cart-large-3-bold-duotone class="size-8 color-white" />
+        （{{ totalCoast }}）
       </n-button>
     </n-gi>
   </n-grid>

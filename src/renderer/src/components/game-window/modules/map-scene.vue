@@ -18,14 +18,16 @@
         </n-p>
       </n-scrollbar>
       <template #footer>
-        <n-flex>
+        <n-flex justify="right">
           <n-button
             v-for="btn in actionStore.options"
             :key="btn.name"
             :type="btn.buttonType ?? 'primary'"
             :is-disabled="btn.isDisabled"
             :is-show="btn.isShow"
-            class="color-white w-40"
+            secondary
+            strong
+            class="w-42"
             @click="actionFunc(btn)">
             <SvgIcon v-if="btn.icon != undefined" :icon="btn.icon" class="mr-1" />
             {{ $t(btn.text) }}
@@ -65,7 +67,7 @@ function actionFunc(action: Dto.ActionOption) {
     switch (action.type) {
       case 'map':
         nextText()
-        mapStore.nextMap(action.next)
+        mapStore.nextMap(action.next, action.next ?? 'root')
         break
       case 'mini-game':
         appStore.currentMiniGame = action.miniGame ?? 'finger-guessing'
