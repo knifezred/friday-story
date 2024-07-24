@@ -47,7 +47,7 @@ function flattenTree(tree) {
     if (node.children != undefined && node.children.length > 0) {
       result.push({
         ...fullMap,
-        next: node.id
+        next: node.children[0].id
       })
     } else {
       result.push({

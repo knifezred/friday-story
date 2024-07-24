@@ -72,13 +72,13 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
 
   function reloadMap(next: string | undefined, pid: string) {
     if (canJumpNext.value) {
-      currLevelMaps.value = allMaps.value.filter((x) => x.pid == next)
+      const nextMap = allMaps.value.filter((x) => x.id == next)[0]
+      currLevelMaps.value = allMaps.value.filter((x) => x.pid == nextMap.pid)
       if (next != undefined && next != '') {
-        const upLevel = allMaps.value.filter((x) => x.id == next)[0]
         currLevelMaps.value.push({
           id: 'default.exit',
           pid: currLevelMaps.value[0].pid,
-          next: upLevel.pid,
+          next: nextMap.pid,
           name: 'map.common.exit',
           title: 'map.common.exit.title',
           text: 'map.common.exit.text',

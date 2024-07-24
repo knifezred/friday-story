@@ -44,7 +44,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
                           ]
                         },
                         text: 'option.enter',
-                        next: 'building.lin_home',
+                        next: 'room.lin_home.living_room',
                         type: 'map'
                       },
                       {
@@ -79,9 +79,9 @@ export const DefaultMaps: Array<Dto.MapItem> = [
                     options: [
                       {
                         name: 'shop.enter',
-                        next: 'building.happy_shop',
-                        text: 'option.enter',
                         type: 'shop',
+                        next: 'happy_shop',
+                        text: 'option.enter',
                         condition: {
                           type: 'and',
                           conditions: [
