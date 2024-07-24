@@ -66,7 +66,6 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
   }
 
   function nextMap(next: string | undefined, pid: string) {
-    debugger
     if (canJumpNext.value) {
       const nextMap = allMaps.value.filter((x) => x.id == next)[0]
       currLevelMaps.value = allMaps.value.filter((x) => x.pid == nextMap.pid)

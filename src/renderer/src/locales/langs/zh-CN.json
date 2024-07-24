@@ -221,6 +221,18 @@
         },
         "text": "林的家，一座漂亮的小别墅",
         "title": "邻居"
+      },
+      "centerPark": {
+        "text": "中心公园",
+        "title": "中心公园"
+      },
+      "metro": {
+        "text": "地铁",
+        "title": "地铁"
+      },
+      "metroCenterPark": {
+        "text": "地铁",
+        "title": "地铁"
       }
     },
     "city": {
@@ -259,6 +271,10 @@
       "pingAn": {
         "text": "平安路",
         "title": "平安路"
+      },
+      "kaiYuan": {
+        "text": "开元大道",
+        "title": "开元大道"
       }
     }
   },

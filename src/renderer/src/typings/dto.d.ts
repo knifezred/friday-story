@@ -175,7 +175,7 @@ declare namespace Dto {
     taskStatus: []
   }
 
-  type MapLevelType = 'room' | 'building' | 'street' | 'area' | 'city' | 'country'
+  type MapLevelType = 'room' | 'building' | 'street' | 'area' | 'city' | 'country' | 'metro'
 
   type TreeBase = {
     id: string

@@ -114,11 +114,21 @@ export const DefaultMaps: Array<Dto.MapItem> = [
                     }
                   }
                 ]
+              },
+              { name: 'backstreet', level: 'street' },
+              {
+                name: 'kaiYuan',
+                level: 'street',
+                children: [
+                  {
+                    name: 'centerPark',
+                    level: 'building'
+                  },
+                  { name: 'metroCenterPark', level: 'building' }
+                ]
               }
             ]
-          },
-          { name: 'backstreet', level: 'street' },
-          { name: 'metro', level: 'building' }
+          }
         ]
       }
     ]
