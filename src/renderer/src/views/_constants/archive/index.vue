@@ -1,10 +1,10 @@
 <template>
   <n-flex vertical :size="24">
     <n-flex v-if="showNewButton" justify="right" class="pr-24 py-4">
-      <n-button type="success" @click="saveNewArchive(true)">
+      <n-button type="success" :loading="loading" @click="saveNewArchive(true)">
         {{ $t('common.add') + $t('route.archive') }}
       </n-button>
-      <n-button type="primary" @click="saveNewArchive(false)">
+      <n-button type="primary" :loading="loading" @click="saveNewArchive(false)">
         {{ $t('common.save') + $t('route.archive') }}
       </n-button>
     </n-flex>
@@ -60,6 +60,7 @@ import { onMounted, ref } from 'vue'
 const authStore = useAuthStore()
 const showNewButton = ref(false)
 const archives = ref([] as Dto.DbArchiveList)
+const loading = ref(false)
 function archiveList() {
   fetchArchiveList().then((res) => {
     if (authStore.isLogin) {
@@ -81,7 +82,9 @@ function loadGame(archive: Dto.DbArchive) {
 
 function deleteSelectArchive(id: number | undefined) {
   if (id != undefined) {
+    loading.value = true
     authStore.deleteArchiveData(id).then(() => {
+      loading.value = false
       archiveList()
     })
   }

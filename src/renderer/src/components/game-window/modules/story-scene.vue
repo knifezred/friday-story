@@ -30,7 +30,7 @@
             v-for="btn in actionStore.options"
             :key="btn.name"
             :type="btn.buttonType ?? 'primary'"
-            class="color-white w-40"
+            class="w-40"
             @click="actionFunc(btn)">
             <SvgIcon v-if="btn.icon != undefined" :icon="btn.icon" class="mr-1" />
             {{ $t(btn.text) }}

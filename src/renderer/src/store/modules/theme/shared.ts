@@ -258,7 +258,14 @@ export function getNaiveTheme(colors: App.Theme.ThemeColor, recommended = false)
       borderRadius: '6px'
     },
     Button: {
-      textColor: '#ffffff'
+      textColorPrimary: '#fff',
+      textColorHoverPrimary: '#fff',
+      textColorSuccess: '#fff',
+      textColorHoverSuccess: '#fff',
+      textColorError: '#fff',
+      textColorHoverError: '#fff',
+      textColorWarning: '#fff',
+      textColorHoverWarning: '#fff'
     }
   }
 

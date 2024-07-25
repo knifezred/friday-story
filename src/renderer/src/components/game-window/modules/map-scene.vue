@@ -25,8 +25,6 @@
             :type="btn.buttonType ?? 'primary'"
             :is-disabled="btn.isDisabled"
             :is-show="btn.isShow"
-            secondary
-            strong
             class="w-42"
             @click="actionFunc(btn)">
             <SvgIcon v-if="btn.icon != undefined" :icon="btn.icon" class="mr-1" />
