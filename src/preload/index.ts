@@ -1,3 +1,4 @@
+import { electronAPI } from '@electron-toolkit/preload'
 import { contextBridge, ipcRenderer } from 'electron'
 import fs from 'fs'
 import path from 'path'
@@ -45,15 +46,14 @@ const api = {
 // just add to the DOM global.
 if (process.contextIsolated) {
   try {
-    // contextBridge.exposeInMainWorld('electronAPI', electronAPI)
+    contextBridge.exposeInMainWorld('electron', electronAPI)
     contextBridge.exposeInMainWorld('api', api)
-    console.log('process.contextIsolated')
   } catch (error) {
     console.error(error)
   }
 } else {
   // @ts-ignore (define in dts)
-  // window.electron = electronAPI
+  window.electron = electronAPI
   // @ts-ignore (define in dts)
   window.api = api
 }
