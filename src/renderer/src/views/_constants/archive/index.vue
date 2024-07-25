@@ -1,29 +1,39 @@
 <template>
   <n-flex vertical :size="24">
-    <n-flex v-if="showNewButton" justify="left" class="pa-4">
-      <n-button type="success" @click="saveNewArchive">
+    <n-flex v-if="showNewButton" justify="right" class="pr-24 py-4">
+      <n-button type="success" @click="saveNewArchive(true)">
         {{ $t('common.add') + $t('route.archive') }}
       </n-button>
+      <n-button type="primary" @click="saveNewArchive(false)">
+        {{ $t('common.save') + $t('route.archive') }}
+      </n-button>
     </n-flex>
-    <n-flex v-if="archives && archives.length > 0" class="pa-4">
+    <n-flex v-if="archives && archives.length > 0" class="pa-8">
       <NCard
         v-for="archive in archives"
         :key="archive.id"
         :bordered="false"
-        class="relative w-76 rd-12px shadow-primary shadow-op-30">
+        class="relative w-80 rd-12px shadow-primary shadow-op-30">
         <n-thing>
           <template #avatar>
             <image-icon :src="'/static/imgs/' + archive.cover" class="size-24" />
           </template>
-          <template #header> {{ archive.name }} </template>
+          <template #header>
+            <n-p class="text-info"> {{ archive.name }}</n-p>
+          </template>
+          <template #header-extra>
+            <icon-pajamas:status-active
+              v-if="archive.id == authStore.userInfo.archive.id"
+              class="color-success-600" />
+          </template>
           <template #description>
-            <n-p>
+            <n-p class="text-info">
               {{ $t('page.archive.playTime') + ': ' + formatSeconds(archive.totalTime) }}
             </n-p>
+            <n-p class="text-info">
+              {{ $t('page.archive.saveTime') + ': ' + formatTimestamp(archive.saveTime) }}
+            </n-p>
           </template>
-          <n-tag :bordered="false" type="warning">
-            {{ $t('page.archive.saveTime') + ': ' + formatTimestamp(archive.saveTime) }}
-          </n-tag>
           <template #action>
             <n-flex justify="space-around">
               <n-button type="primary" @click="loadGame(archive)">{{
@@ -42,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { deleteArchive, fetchArchiveList } from '@renderer/service/api/archive'
+import { fetchArchiveList } from '@renderer/service/api/archive'
 import { useAuthStore } from '@renderer/store/modules/auth'
 import { formatSeconds, formatTimestamp } from '@renderer/utils/common'
 import { onMounted, ref } from 'vue'
@@ -59,8 +69,8 @@ function archiveList() {
     }
   })
 }
-function saveNewArchive() {
-  authStore.saveArchiveData(true).then(() => {
+function saveNewArchive(isNew: boolean) {
+  authStore.saveArchiveData(isNew).then(() => {
     archiveList()
   })
 }
@@ -71,7 +81,7 @@ function loadGame(archive: Dto.DbArchive) {
 
 function deleteSelectArchive(id: number | undefined) {
   if (id != undefined) {
-    deleteArchive(id).then(() => {
+    authStore.deleteArchiveData(id).then(() => {
       archiveList()
     })
   }

@@ -9,8 +9,13 @@ import useLoading from '@renderer/packages/hooks/use-loading'
 
 import { useRouterPush } from '@renderer/hooks/common/router'
 import { $t } from '@renderer/locales'
-import { createArchive, findArchive, updateArchive } from '@renderer/service/api/archive'
-import { createStorage, fetchStorageListByKey } from '@renderer/service/api/storage'
+import {
+  createArchive,
+  deleteArchive,
+  findArchive,
+  updateArchive
+} from '@renderer/service/api/archive'
+import { createStorage, deleteStorage, fetchStorageListByKey } from '@renderer/service/api/storage'
 import { localStg } from '@renderer/utils/storage'
 import { useMapStore } from '../game-map'
 export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
@@ -131,6 +136,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
         const searchKey = userInfo.archive.id + '.'
         userInfo.archive.id = undefined
         const newArchive = await createArchive(userInfo.archive)
+        userInfo.archive.id = newArchive.data?.id
         const storages = await fetchStorageListByKey(searchKey + '%')
         if (storages.data != null && typeof storages.data != 'string') {
           for (const storage of storages.data) {
@@ -145,6 +151,17 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     }
   }
 
+  async function deleteArchiveData(id: number) {
+    const isDel = await deleteArchive(id)
+    if (isDel) {
+      const storages = await fetchStorageListByKey(id + '.%')
+      if (storages.data != null && typeof storages.data != 'string') {
+        const ids = storages.data.map((x) => x.id ?? 0)
+        await deleteStorage(ids)
+      }
+    }
+  }
+
   return {
     token,
     userInfo,
@@ -154,6 +171,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     loginLoading,
     login,
     saveArchiveData,
+    deleteArchiveData,
     resetStore
   }
 })

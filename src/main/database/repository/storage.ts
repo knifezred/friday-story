@@ -9,7 +9,7 @@ export function initStorageApi(server) {
     try {
       const options = {
         where: {
-          key: Like(req.body.key)
+          key: req.body.key.indexOf('%') > -1 ? Like(req.body.key) : req.body.key
         }
       }
       const result = await repository.find(options)
