@@ -25,9 +25,13 @@
             :type="btn.buttonType ?? 'primary'"
             :is-disabled="btn.isDisabled"
             :is-show="btn.isShow"
+            strong
+            secondary
             class="w-42"
             @click="actionFunc(btn)">
-            <SvgIcon v-if="btn.icon != undefined" :icon="btn.icon" class="mr-1" />
+            <template #icon>
+              <SvgIcon v-if="btn.icon != undefined" :icon="btn.icon" class="mr-1" />
+            </template>
             {{ $t(btn.text) }}
           </n-button>
         </n-flex>

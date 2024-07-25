@@ -256,16 +256,6 @@ export function getNaiveTheme(colors: App.Theme.ThemeColor, recommended = false)
     },
     Tag: {
       borderRadius: '6px'
-    },
-    Button: {
-      textColorPrimary: '#fff',
-      textColorHoverPrimary: '#fff',
-      textColorSuccess: '#fff',
-      textColorHoverSuccess: '#fff',
-      textColorError: '#fff',
-      textColorHoverError: '#fff',
-      textColorWarning: '#fff',
-      textColorHoverWarning: '#fff'
     }
   }
 

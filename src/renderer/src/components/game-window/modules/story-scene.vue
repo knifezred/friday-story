@@ -31,8 +31,12 @@
             :key="btn.name"
             :type="btn.buttonType ?? 'primary'"
             class="w-40"
+            strong
+            secondary
             @click="actionFunc(btn)">
-            <SvgIcon v-if="btn.icon != undefined" :icon="btn.icon" class="mr-1" />
+            <template #icon>
+              <SvgIcon v-if="btn.icon != undefined" :icon="btn.icon" class="mr-1" />
+            </template>
             {{ $t(btn.text) }}
           </n-button>
         </n-flex>
