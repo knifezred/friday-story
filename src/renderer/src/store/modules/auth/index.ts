@@ -10,6 +10,7 @@ import useLoading from '@renderer/packages/hooks/use-loading'
 import { useRouterPush } from '@renderer/hooks/common/router'
 import { $t } from '@renderer/locales'
 import { createArchive, findArchive, updateArchive } from '@renderer/service/api/archive'
+import { createStorage, fetchStorageListByKey } from '@renderer/service/api/storage'
 import { localStg } from '@renderer/utils/storage'
 import { useMapStore } from '../game-map'
 export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
@@ -127,8 +128,17 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
       userInfo.archive.saveTime = Date.now()
       userInfo.archive.data = JSON.stringify(archivedData.value)
       if (isNew) {
+        const searchKey = userInfo.archive.id + '.'
         userInfo.archive.id = undefined
-        await createArchive(userInfo.archive)
+        const newArchive = await createArchive(userInfo.archive)
+        const storages = await fetchStorageListByKey(searchKey + '%')
+        if (storages.data != null && typeof storages.data != 'string') {
+          for (const storage of storages.data) {
+            storage.key = storage.key.replace(searchKey, newArchive.data?.id + '.')
+            storage.id = undefined
+            createStorage(storage)
+          }
+        }
       } else {
         await updateArchive(userInfo.archive)
       }

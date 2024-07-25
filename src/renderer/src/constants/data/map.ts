@@ -68,7 +68,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
                       { name: 'lin_home.living_room', level: 'room' },
                       { name: 'lin_home.bedroom', level: 'room' },
                       { name: 'lin_home.kitchen', level: 'room' },
-                      { name: 'lin_home.lin_room', level: 'room' },
+                      { name: 'lin_home.sec_room', level: 'room' },
                       { name: 'lin_home.bathroom', level: 'room' },
                       {
                         name: 'lin_home.door',

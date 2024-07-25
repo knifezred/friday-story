@@ -1,20 +1,33 @@
 import { DefaultGameItems, ShopGoodsRecord } from '@renderer/constants/data/items'
 import { SetupStoreId } from '@renderer/enums'
+import { createStorage, findStorage, updateStorage } from '@renderer/service/api/storage'
 import { localeText, prefixImage } from '@renderer/utils/common'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import { useAuthStore } from '../auth'
 
 export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
   const currentShop = ref('')
-  const currentShopInfo = ref<Dto.ShopEntity>({
+  const currentShopEntity = ref<Dto.ShopEntity>({
     name: '',
     manager: '',
     money: 0,
     goods: []
   })
-  function currentShopGoods() {
-    currentShopInfo.value = ShopGoodsRecord[currentShop.value]
-    currentShopInfo.value.goods.forEach((goods) => {
+  const isUpdate = ref(false)
+  const authStore = useAuthStore()
+  async function currentShopGoods() {
+    // 分存档保存
+    const searchKey = authStore.userInfo.archive.id + '.shop.' + currentShop.value
+    const shopEntity = await findStorage(searchKey)
+    if (shopEntity.data != null && typeof shopEntity.data != 'string') {
+      currentShopEntity.value = JSON.parse(shopEntity.data.value)
+      isUpdate.value = true
+    } else {
+      currentShopEntity.value = ShopGoodsRecord[currentShop.value]
+      isUpdate.value = false
+    }
+    currentShopEntity.value.goods.forEach((goods) => {
       if (goods.name.indexOf('.') == -1) {
         goods.name = goods.type + '.' + goods.name
       }
@@ -27,7 +40,7 @@ export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
       goods.type = gameItem.type
       goods.selectedCount = 0
     })
-    return currentShopInfo.value.goods
+    return currentShopEntity.value.goods
   }
 
   function initShopItems() {
@@ -39,5 +52,21 @@ export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
     })
   }
 
-  return { currentShop, currentShopInfo, currentShopGoods, initShopItems }
+  function deal(totalMoney: number) {
+    currentShopEntity.value.money += totalMoney
+    const searchKey = authStore.userInfo.archive.id + '.shop.' + currentShop.value
+    if (isUpdate.value) {
+      updateStorage({
+        key: searchKey,
+        value: JSON.stringify(currentShopEntity.value)
+      })
+    } else {
+      createStorage({
+        key: searchKey,
+        value: JSON.stringify(currentShopEntity.value)
+      })
+    }
+  }
+
+  return { currentShop, currentShopEntity, currentShopGoods, initShopItems, deal }
 })

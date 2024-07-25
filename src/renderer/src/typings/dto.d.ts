@@ -146,6 +146,8 @@ declare namespace Dto {
     updatedTime?: number
   }
 
+  type DbStorageList = Array<DbStorage> | null
+
   type DbArchive = {
     id?: number
     name: string
@@ -231,6 +233,19 @@ declare namespace Dto {
     avatar?: string
     isLocked?: boolean
   }
+  type MinNpc = Pick<
+    NpcInfo,
+    'name' | 'age' | 'gender' | 'identity' | 'level' | 'work' | 'relationship'
+  >
+
+  interface NpcFull extends MinNpc {
+    username: string
+    nickname: string
+    desc: string
+    introduce: string
+    avatar: string
+    isLocked: boolean
+  }
 
   type NpcIdentity =
     | 'stranger'
@@ -242,7 +257,7 @@ declare namespace Dto {
     | 'dad'
     | 'son'
     | 'daughter'
-  type NpcList = CommonType.RecordNullable<NpcInfo>
+  type NpcList = Array<NpcInfo>
 
   type ArchiveNpcRelationShip = CommonType.RecordNullable<
     Pick<NpcInfo, 'id' | 'relationship' | 'identity'>

@@ -1,4 +1,4 @@
-import { useCondition } from '@renderer/hooks/business/condition'
+import { useCondition } from '@renderer/hooks/game/condition'
 import { $t } from '@renderer/locales'
 import dayjs from 'dayjs'
 

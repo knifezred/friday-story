@@ -3,12 +3,13 @@
     <n-gi :span="1" class="text-center">
       <n-p class="pt-4">
         <n-tag :bordered="false" type="success">
-          {{ $t(gameItemStore.currentShopInfo.manager) }}: {{ gameItemStore.currentShopInfo.money }}
+          {{ $t(gameItemStore.currentShopEntity.manager) }}:
+          {{ gameItemStore.currentShopEntity.money }}
         </n-tag>
       </n-p>
     </n-gi>
     <n-gi :span="2" class="text-center">
-      <n-h1 class="text-primary-500 mb-0"> {{ $t(gameItemStore.currentShopInfo.name) }}</n-h1>
+      <n-h1 class="text-primary-500 mb-0"> {{ $t(gameItemStore.currentShopEntity.name) }}</n-h1>
     </n-gi>
     <n-gi :span="1" class="text-center">
       <n-p class="pt-4">
@@ -121,17 +122,20 @@ function checkout() {
           count: goods.selectedCount
         })
       }
+      gameItemStore.currentShopEntity.goods.filter((x) => x.name == goods.name)[0].count =
+        goods.count
       goods.selectedCount = 0
     }
   })
+  gameItemStore.deal(totalCoast.value)
   appStore.addMoney(-totalCoast.value)
   appStore.siderCollapse = false
   emit('result', true)
 }
 
-onMounted(() => {
+onMounted(async () => {
   appStore.siderCollapse = true
-  gameItemStore.currentShopGoods().forEach((goods) => {
+  ;(await gameItemStore.currentShopGoods()).forEach((goods) => {
     shopItems.value.push({
       ...goods,
       name: goods.name ?? '',

@@ -13,7 +13,7 @@
     <NFlex>
       <NCard
         v-for="item in npcItems"
-        :key="item.id"
+        :key="item.name"
         class="relative z-4 w-100 shadow-primary shadow-op-30"
         :class="item.isLocked ? 'grayscale-100' : ''">
         <n-flex v-if="item.isLocked">
@@ -82,16 +82,15 @@
 </template>
 
 <script setup lang="ts">
-import { DefaultNpcInfoList } from '@renderer/constants/data/npc'
 import { onMounted, ref } from 'vue'
 defineOptions({
   name: 'Relationship'
 })
 const relationLevel = ref(5)
-const npcItems = ref<Array<Dto.NpcInfo>>()
+const npcItems = ref<Array<Dto.NpcFull>>()
 // N R SR SSR
 onMounted(() => {
-  npcItems.value = DefaultNpcInfoList
+  // npcItems.value = DefaultNpcInfoList
 })
 </script>
 
