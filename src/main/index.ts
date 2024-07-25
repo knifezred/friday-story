@@ -14,7 +14,7 @@ function createWindow(): void {
   mainWindow = new BrowserWindow({
     width: 1600,
     height: 900,
-    title: Settings.AppTitle + ' v' + app.getVersion(),
+    title: Settings.AppTitle,
     show: false,
     frame: false,
     resizable: false,

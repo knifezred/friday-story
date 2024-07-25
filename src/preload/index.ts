@@ -1,4 +1,3 @@
-import { electronAPI } from '@electron-toolkit/preload'
 import { contextBridge, ipcRenderer } from 'electron'
 import fs from 'fs'
 import path from 'path'
@@ -30,9 +29,12 @@ const api = {
   },
   isFileExist: (filePath: string) => {
     try {
-      fs.accessSync(filePath, fs.constants.F_OK)
+      const dirPath = __dirname
+      const staticPath = path.join(dirPath.replace('\\out\\preload', ''), filePath)
+      fs.accessSync(staticPath, fs.constants.F_OK)
       return true
     } catch (error) {
+      console.log(error)
       return false
     }
   }
@@ -43,14 +45,15 @@ const api = {
 // just add to the DOM global.
 if (process.contextIsolated) {
   try {
-    contextBridge.exposeInMainWorld('electron', electronAPI)
+    // contextBridge.exposeInMainWorld('electronAPI', electronAPI)
     contextBridge.exposeInMainWorld('api', api)
+    console.log('process.contextIsolated')
   } catch (error) {
     console.error(error)
   }
 } else {
   // @ts-ignore (define in dts)
-  window.electron = electronAPI
+  // window.electron = electronAPI
   // @ts-ignore (define in dts)
   window.api = api
 }

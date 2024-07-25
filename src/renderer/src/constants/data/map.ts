@@ -124,13 +124,27 @@ export const DefaultMaps: Array<Dto.MapItem> = [
                     name: 'centerPark',
                     level: 'building'
                   },
-                  { name: 'metroCenterPark', level: 'building' }
+                  {
+                    name: 'oGenPlaza',
+                    level: 'building'
+                  }
                 ]
               }
             ]
           }
         ]
       }
+    ]
+  }
+]
+
+export const MetroMap: Array<Dto.MapItem> = [
+  {
+    name: 'line1',
+    level: 'metro',
+    children: [
+      { name: 'centerPark', level: 'metro', next: 'building.centerPark' },
+      { name: 'centerPark', level: 'metro', next: 'building.' }
     ]
   }
 ]

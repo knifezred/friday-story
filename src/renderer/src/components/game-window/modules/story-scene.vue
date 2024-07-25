@@ -56,7 +56,6 @@ defineOptions({
 const isArrayText = ref(false)
 const textIndex = ref(0)
 const totalTextCount = ref(1)
-const isFileExists = ref(false)
 const isVideo = ref(false)
 const isTyped = ref(false)
 const currentText = ref('')
@@ -106,7 +105,6 @@ async function nextScene(next: string) {
   bindText(currentScene.value.text)
   // 绑定按钮
   actionStore.loadActionOptions(null, currentScene.value)
-  isFileExists.value = window.api.isFileExist(currentScene.value.cover)
 }
 
 async function nextText() {

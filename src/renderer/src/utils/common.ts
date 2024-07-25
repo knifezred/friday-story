@@ -160,6 +160,7 @@ export function prefixImage(
       text = text + suffix
     }
   }
+  text = coverWithDefault(text)
   return text
 }
 
@@ -171,6 +172,13 @@ export async function dynamicResource(filePath: string) {
     const randIndex = getRandomInt(0, files.length - 1)
     return files[randIndex]
   }
+}
+
+export function coverWithDefault(filePath: string) {
+  if (window.api.isFileExist(filePath)) {
+    return filePath
+  }
+  return '/static/imgs/t' + getRandomInt(0, 7) + '.webp'
 }
 
 export function getRandomInt(min: number, max: number) {

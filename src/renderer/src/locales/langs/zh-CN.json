@@ -44,8 +44,8 @@
     }
   },
   "condition": {
-    "hasItemTrue": "你拥有 {value} !",
     "hasItemFalse": "你没有 {value} !",
+    "hasItemTrue": "你拥有 {value} !",
     "openHour": "营业时间：{value}"
   },
   "dataTable": {
@@ -153,18 +153,24 @@
       }
     },
     "building": {
+      "centerPark": {
+        "text": "中心公园",
+        "title": "中心公园"
+      },
       "demo": {
         "text": "测试",
         "title": "测试"
       },
       "happy_shop": {
+        "manager": "店长李四",
         "text": "开心超市，平安路上一家小超市，可以购买一些日用品",
-        "title": "开心超市",
-        "manager": "店长李四"
+        "title": "开心超市"
       },
       "home": {
-        "text": "家",
-        "title": "家",
+        "backyard": {
+          "text": "后院",
+          "title": "后院"
+        },
         "bathroom": {
           "text": "卫生间",
           "title": "卫生间"
@@ -173,9 +179,9 @@
           "text": "主卧",
           "title": "主卧"
         },
-        "backyard": {
-          "text": "后院",
-          "title": "后院"
+        "cousin_room": {
+          "text": "表妹房间",
+          "title": "表妹房间"
         },
         "kitchen": {
           "text": "厨房",
@@ -185,10 +191,6 @@
           "text": "客厅",
           "title": "客厅"
         },
-        "cousin_room": {
-          "text": "表妹房间",
-          "title": "表妹房间"
-        },
         "plyer_room": {
           "text": "我的卧室",
           "title": "我的卧室"
@@ -196,7 +198,9 @@
         "sister_room": {
           "text": "姐姐房间",
           "title": "姐姐房间"
-        }
+        },
+        "text": "家",
+        "title": "家"
       },
       "lin_home": {
         "bathroom": {
@@ -226,10 +230,6 @@
         "text": "林的家，一座漂亮的小别墅",
         "title": "邻居"
       },
-      "centerPark": {
-        "text": "中心公园",
-        "title": "中心公园"
-      },
       "metro": {
         "text": "地铁",
         "title": "地铁"
@@ -237,6 +237,10 @@
       "metroCenterPark": {
         "text": "地铁",
         "title": "地铁"
+      },
+      "oGenPlaza": {
+        "text": "欧金广场,东山区最大的商场",
+        "title": "欧金广场"
       }
     },
     "city": {
@@ -264,21 +268,21 @@
     "locked": {
       "locked_door": "门已上锁",
       "no_key": "门已上锁，没有钥匙",
-      "outTime": "已关门，请过一段时间再来",
-      "no_open": "暂未开放"
+      "no_open": "暂未开放",
+      "outTime": "已关门，请过一段时间再来"
     },
     "street": {
       "backstreet": {
         "text": "后街",
         "title": "后街"
       },
-      "pingAn": {
-        "text": "平安路",
-        "title": "平安路"
-      },
       "kaiYuan": {
         "text": "开元大道",
         "title": "开元大道"
+      },
+      "pingAn": {
+        "text": "平安路",
+        "title": "平安路"
       }
     }
   },
@@ -298,18 +302,18 @@
     "startGame": "开始游戏"
   },
   "option": {
-    "noReply": "什么都没发生",
+    "choose_id": "选择出身",
     "dice-number": "玩骰子",
     "enter": "进入",
     "finger-guessing": "石头剪刀布",
     "goBack": "返回",
+    "goOut": "出去",
     "knocked": "敲门",
+    "noReply": "什么都没发生",
     "quit": "退出",
     "story_start": "创建角色",
     "wait": "等待",
-    "work": "工作",
-    "choose_id": "选择出身",
-    "goOut": "出去"
+    "work": "工作"
   },
   "page": {
     "about": {
@@ -449,10 +453,10 @@
   },
   "stories": {
     "completed": "任务已完成",
-    "over": "任务已结束",
     "option": {
       "start": "任务按钮"
     },
+    "over": "任务已结束",
     "scene": {
       "set_name": {
         "text": "设置姓名",
