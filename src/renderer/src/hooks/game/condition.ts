@@ -39,22 +39,26 @@ export function useCondition() {
     }
     return false
   }
-  // 是否在指定时间段内
-  function betweenHours(betweens: string) {
-    const hours = betweens.split('-')
-    const minHour = Number(hours[0])
-    const maxHour = Number(hours[1])
-    const hour = dayjs(authStore.archivedData.worldTime).get('hour')
-    if (minHour > maxHour) {
+
+  function inTime(betweens: string) {
+    const times = betweens.split('-')
+    const [hours, minutes] = times[0].split(':').map(Number)
+    const startTime = hours * 60 + minutes
+    const [endHours, endMinutes] = times[1].split(':').map(Number)
+    const endTime = endHours * 60 + endMinutes
+    const currentHour = dayjs(authStore.archivedData.worldTime).get('hour')
+    const currentMinute = dayjs(authStore.archivedData.worldTime).get('minute')
+    const currentTime = currentHour * 60 + currentMinute
+    if (startTime > endTime) {
       // 跨天
-      if (hour >= maxHour || hour < minHour) {
+      if (currentTime >= endTime || currentTime < startTime) {
         return true
       } else {
         return false
       }
     } else {
       // 不跨天
-      if (hour >= minHour && hour < maxHour) {
+      if (currentTime >= startTime && currentTime < endTime) {
         return true
       } else {
         return false
@@ -62,32 +66,38 @@ export function useCondition() {
     }
   }
 
+  function inHour(hours: string) {
+    return inSpecifiedTime(hours, 'hour')
+  }
+
   // 是否在指定的日期
   function inDays(days: string) {
-    const day = days.split(',')
-    const currentDay = dayjs(authStore.archivedData.worldTime).get('day')
-    if (day.includes(currentDay.toString())) {
-      return true
-    }
-    return false
+    return inSpecifiedTime(days, 'day')
   }
+
   // 是否在指定月份
   function inMons(months: string) {
-    const monthsList = months.split(',')
-    const currentMonth = dayjs(authStore.archivedData.worldTime).get('month')
-    if (monthsList.includes(currentMonth.toString())) {
+    return inSpecifiedTime(months, 'month')
+  }
+
+  // 是否在指定时间段内
+  function inSpecifiedTime(time: string, type: 'day' | 'month' | 'hour') {
+    const times = time.split(',')
+    const current = dayjs(authStore.archivedData.worldTime).get(type).toString()
+    if (times.includes(current)) {
       return true
     }
     return false
   }
 
   return {
-    betweenHours,
     hasAuth,
-    inDays,
-    inMons,
     hasItem,
     hasAchievement,
-    hasLocked
+    hasLocked,
+    inTime,
+    inHour,
+    inDays,
+    inMons
   }
 }

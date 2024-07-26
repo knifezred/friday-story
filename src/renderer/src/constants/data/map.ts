@@ -39,7 +39,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
                         condition: {
                           type: 'or',
                           conditions: [
-                            { type: 'betweenHours', value: '8-23', result: true },
+                            { type: 'inTime', value: '8:00-23:00', result: true },
                             { type: 'hasItem', value: 'task.lin_home_key', result: true }
                           ]
                         },
@@ -98,8 +98,8 @@ export const DefaultMaps: Array<Dto.MapItem> = [
                           type: 'and',
                           conditions: [
                             {
-                              type: 'betweenHours',
-                              value: '9-23',
+                              type: 'inTime',
+                              value: '09:00-23:00',
                               text: 'condition.openHour',
                               result: true
                             }
@@ -107,11 +107,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
                         }
                       },
                       { name: 'test.button', next: 'start', text: 'stories.start', type: 'story' }
-                    ],
-                    condition: {
-                      type: 'and',
-                      conditions: [{ type: 'betweenHours', value: '22-9', result: false }]
-                    }
+                    ]
                   }
                 ]
               },
