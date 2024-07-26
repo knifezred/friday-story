@@ -19,6 +19,16 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     level: 'room',
     options: []
   })
+  const parentMap = ref<Dto.MapItemFull>({
+    id: 'map.parent',
+    pid: 'root',
+    name: 'map.common.exit',
+    title: 'map.common.exit.title',
+    text: 'map.common.exit.text',
+    cover: '/static/map/common/exit.png',
+    level: 'room',
+    options: []
+  })
   const canJumpNext = ref(true)
 
   function beforeNextMap(map: Dto.MapItemFull) {
@@ -70,17 +80,9 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
       const nextMap = allMaps.value.filter((x) => x.id == next)[0]
       currLevelMaps.value = allMaps.value.filter((x) => x.pid == nextMap.pid)
       if (next != undefined && next != '' && nextMap.pid != 'root') {
-        currLevelMaps.value.push({
-          id: 'default.exit',
-          pid: currLevelMaps.value[0].pid,
-          next: nextMap.pid,
-          name: 'map.common.exit',
-          title: 'map.common.exit.title',
-          text: 'map.common.exit.text',
-          cover: '/static/map/common/exit.png',
-          level: 'room',
-          options: []
-        })
+        parentMap.value.pid = currLevelMaps.value[0].pid
+        parentMap.value.next = nextMap.pid
+        parentMap.value.title = allMaps.value.filter((x) => x.id == nextMap.pid)[0].title
       }
       if (currLevelMaps.value.length > 0) {
         if (currLevelMaps.value.filter((x) => x.id == pid).length > 0) {
@@ -89,8 +91,8 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
           currMap.value = currLevelMaps.value[0]
         }
       }
+      authStore.userInfo.archive.place = currMap.value.id
     }
-    authStore.userInfo.archive.place = currMap.value.id
   }
 
   function initMap(id: string) {
@@ -114,6 +116,7 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     allMaps,
     currLevelMaps,
     currMap,
+    parentMap,
     initMap,
     nextMap,
     beforeNextMap
