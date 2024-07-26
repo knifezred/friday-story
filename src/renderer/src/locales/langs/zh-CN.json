@@ -451,6 +451,12 @@
     "setting_theme": "外观",
     "task": "任务"
   },
+  "setting": {
+    "general": {
+      "lang": "语言",
+      "volume": "音量"
+    }
+  },
   "stories": {
     "completed": "任务已完成",
     "option": {

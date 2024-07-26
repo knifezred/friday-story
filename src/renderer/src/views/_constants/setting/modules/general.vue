@@ -1,22 +1,24 @@
 <template>
   <NFlex>
-    <NCard :bordered="false" class="w-full">
-      <n-grid x-gap="12" :cols="4">
+    <NCard :bordered="false" class="w-full v-middle">
+      <n-grid x-gap="12" y-gap="24" :cols="4">
         <n-gi></n-gi>
-        <n-gi>
-          <n-h4 class="!my-1">
-            {{ $t('icon.lang') }}
-          </n-h4>
+        <n-gi span="2">
+          <n-form label-placement="left" label-width="220" label-align="left" size="large">
+            <n-form-item :label="$t('setting.general.lang')" path="langValue">
+              <n-select
+                v-model:value="appStore.locale"
+                :options="appStore.localeOptions"
+                label-field="label"
+                value-field="key"
+                @update:value="appStore.changeLocale(appStore.locale)" />
+            </n-form-item>
+            <n-form-item :label="$t('setting.general.volume')" path="volumeValue">
+              <n-slider v-model:value="volume" :step="10" />
+            </n-form-item>
+          </n-form>
         </n-gi>
-        <n-gi>
-          <n-select
-            v-model:value="appStore.locale"
-            :options="appStore.localeOptions"
-            label-field="label"
-            value-field="key"
-            @update:value="appStore.changeLocale(appStore.locale)" />
-        </n-gi>
-        <n-gi></n-gi>
+        <n-gi> </n-gi>
       </n-grid>
     </NCard>
   </NFlex>
@@ -24,7 +26,8 @@
 
 <script setup lang="ts">
 import { useAppStore } from '@renderer/store/modules/app'
-
+import { ref } from 'vue'
+const volume = ref(50)
 const appStore = useAppStore()
 </script>
 
