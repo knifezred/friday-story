@@ -217,7 +217,7 @@ function getNaiveThemeColors(colors: App.Theme.ThemeColor, recommended = false) 
   const colorActions: NaiveColorAction[] = [
     { scene: '', handler: (color) => color },
     { scene: 'Suppl', handler: (color) => color },
-    { scene: 'Hover', handler: (color) => getPaletteColorByNumber(color, 500, recommended) },
+    { scene: 'Hover', handler: (color) => getPaletteColorByNumber(color, 600, recommended) },
     { scene: 'Pressed', handler: (color) => getPaletteColorByNumber(color, 700, recommended) },
     { scene: 'Active', handler: (color) => addColorAlpha(color, 0.1) }
   ]
@@ -256,6 +256,20 @@ export function getNaiveTheme(colors: App.Theme.ThemeColor, recommended = false)
     },
     Tag: {
       borderRadius: '6px'
+    },
+    Button: {
+      textColorPrimary: '#edf2ff',
+      textColorHoverPrimary: '#edf2ff',
+      textColorPressedPrimary: '#edf2ff',
+      textColorSuccess: '#edf2ff',
+      textColorHoverSuccess: '#edf2ff',
+      textColorPressedSuccess: '#edf2ff',
+      textColorWarning: '#edf2ff',
+      textColorHoverWarning: '#edf2ff',
+      textColorPressedWarning: '#edf2ff',
+      textColorError: '#edf2ff',
+      textColorHoverError: '#edf2ff',
+      textColorPressedError: '#edf2ff'
     }
   }
 

@@ -14,7 +14,7 @@
                 <ImageIcon :src="goods.cover" class="size-18" />
               </template>
               <template #header>
-                <span class="text-4 text-info-500">
+                <span class="text-4 text-info">
                   {{ $t(goods.title) }}
                   ({{ goods.count.toString() }})
                 </span>
@@ -23,7 +23,7 @@
                 <LevelTag :level="goods.level" />
               </template>
               <template #description>
-                <n-p class="my-1"> {{ $t(goods.desc) }}</n-p>
+                <n-p class="my-1 text-info-600"> {{ $t(goods.desc) }}</n-p>
               </template>
               <template #action>
                 <n-flex justify="space-around"> </n-flex>

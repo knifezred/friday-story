@@ -32,7 +32,7 @@
                 </n-badge>
               </template>
               <template #header>
-                <span class="text-4 text-info-500"> {{ $t(goods.title) }}</span>
+                <span class="text-4 text-info"> {{ $t(goods.title) }}</span>
               </template>
               <template #header-extra>
                 <LevelTag :level="goods.level" />
@@ -45,7 +45,7 @@
                   {{ $t(goods.price.toString()) }}
                 </n-tag>
               </template>
-              <n-p class="text-info">{{ $t(goods.desc) }} </n-p>
+              <n-p class="text-info-600">{{ $t(goods.desc) }} </n-p>
               <template #action>
                 <n-flex justify="space-around">
                   <n-button :disabled="goods.selectedCount == 0" @click="removeToCart(goods)">
