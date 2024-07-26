@@ -1,15 +1,23 @@
 // ## 判断条件// 时间（间隔天数，星期几，几号，几月）// 位置（房间id）// 角色属性// 人物关系// 配置
 export const DefaultMaps: Array<Dto.MapItem> = [
   {
-    name: 'friday',
+    name: 'island',
     level: 'country',
     children: [
       {
-        name: 'boot',
+        name: 'osaka',
+        level: 'city'
+      },
+      {
+        name: 'sapporo',
+        level: 'city'
+      },
+      {
+        name: 'sendai',
         level: 'city',
         children: [
           {
-            name: 'dongShan',
+            name: 'taiBai',
             level: 'area',
             children: [
               {
@@ -127,8 +135,48 @@ export const DefaultMaps: Array<Dto.MapItem> = [
                 ]
               }
             ]
+          },
+          {
+            name: 'quan',
+            level: 'area'
+          },
+          {
+            name: 'qingYe',
+            level: 'area'
+          },
+          {
+            name: 'ruoLin',
+            level: 'area'
+          },
+          {
+            name: 'gongYe',
+            level: 'area'
           }
         ]
+      },
+      {
+        name: 'nagoya',
+        level: 'city'
+      },
+      {
+        name: 'fukuoka',
+        level: 'city'
+      },
+      {
+        name: 'tokyo',
+        level: 'city'
+      },
+      {
+        name: 'yokohama',
+        level: 'city'
+      },
+      {
+        name: 'kobe',
+        level: 'city'
+      },
+      {
+        name: 'kawasaki',
+        level: 'city'
       }
     ]
   }
@@ -138,9 +186,6 @@ export const MetroMap: Array<Dto.MapItem> = [
   {
     name: 'line1',
     level: 'metro',
-    children: [
-      { name: 'centerPark', level: 'metro', next: 'building.centerPark' },
-      { name: 'centerPark', level: 'metro', next: 'building.' }
-    ]
+    children: [{ name: 'centerPark', level: 'metro', next: 'building.centerPark' }]
   }
 ]

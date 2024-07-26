@@ -45,10 +45,10 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
         case 'area':
           coastTime = coastTime * 30
           break
-        case 'building':
-          coastTime = coastTime * 20
+        case 'street':
+          coastTime = coastTime * 15
           break
-        case 'room':
+        case 'building':
           coastTime = coastTime * 10
           break
         default:
@@ -79,10 +79,11 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     if (canJumpNext.value) {
       const nextMap = allMaps.value.filter((x) => x.id == next)[0]
       currLevelMaps.value = allMaps.value.filter((x) => x.pid == nextMap.pid)
-      if (next != undefined && next != '' && nextMap.pid != 'root') {
+      if (next != undefined && next != '') {
         parentMap.value.pid = currLevelMaps.value[0].pid
         parentMap.value.next = nextMap.pid
         parentMap.value.title = allMaps.value.filter((x) => x.id == nextMap.pid)[0].title
+        parentMap.value.level = nextMap.level
       }
       if (currLevelMaps.value.length > 0) {
         if (currLevelMaps.value.filter((x) => x.id == pid).length > 0) {

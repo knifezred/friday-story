@@ -147,9 +147,25 @@
   },
   "map": {
     "area": {
-      "dongShan": {
-        "text": "东山区",
-        "title": "东山区"
+      "taiBai": {
+        "text": "太白区",
+        "title": "太白区"
+      },
+      "quan": {
+        "text": "泉区",
+        "title": "泉区"
+      },
+      "qingYe": {
+        "text": "青叶区",
+        "title": "青叶区"
+      },
+      "ruoLin": {
+        "text": "若林区",
+        "title": "若林区"
+      },
+      "gongYe": {
+        "text": "宫野区",
+        "title": "宫野区"
       }
     },
     "building": {
@@ -244,9 +260,41 @@
       }
     },
     "city": {
-      "boot": {
-        "text": "布特城",
-        "title": "布特城"
+      "tokyo": {
+        "text": "冬京是樱岛国的政治、经济中心，也是国际大都市。这里高楼林立，交通便捷，是科技创新和金融服务的聚集地。冬京拥有世界级的购物中心、娱乐场所和美食街，是购物和娱乐的天堂。",
+        "title": "冬京"
+      },
+      "osaka": {
+        "text": "大板",
+        "title": "大板"
+      },
+      "yokohama": {
+        "text": "恒滨",
+        "title": "恒滨"
+      },
+      "nagoya": {
+        "text": "明谷乌",
+        "title": "明谷乌"
+      },
+      "sapporo": {
+        "text": "札荒位于北方，风光优美，独具魅力，也是著名的旅游胜地",
+        "title": "札荒"
+      },
+      "fukuoka": {
+        "text": "富冈",
+        "title": "富冈"
+      },
+      "kobe": {
+        "text": "深扈",
+        "title": "深扈"
+      },
+      "kawasaki": {
+        "text": "一座重工业大城",
+        "title": "川奇"
+      },
+      "sendai": {
+        "text": "咸台位于樱岛的东北方向，学术氛围浓厚",
+        "title": "咸台"
       }
     },
     "common": {
@@ -260,9 +308,9 @@
       }
     },
     "country": {
-      "friday": {
-        "text": "弗雷德共和国",
-        "title": "弗雷德共和国"
+      "island": {
+        "text": "樱岛国",
+        "title": "樱岛国"
       }
     },
     "locked": {
