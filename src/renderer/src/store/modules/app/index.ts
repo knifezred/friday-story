@@ -51,6 +51,8 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
   const currentMiniGame = ref<UnionKey.MiniGameModule>('finger-guessing')
   const fromMoney = ref(0)
   const fromGold = ref(0)
+  const music = ref('/static/music/default.mp3')
+  const volume = ref(30)
   function addMoney(money: number) {
     fromMoney.value = authStore.archivedData.money
     authStore.archivedData.money = authStore.archivedData.money + money
@@ -61,6 +63,10 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
   }
   function coastTime(minutes: number) {
     authStore.archivedData.worldTime += minutes * 60 * 1000
+  }
+
+  function changeMusic(src: string) {
+    music.value = src
   }
   // custom end
   /**
@@ -201,6 +207,9 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
     addGold,
     coastTime,
     currentSceneType,
-    currentMiniGame
+    currentMiniGame,
+    changeMusic,
+    music,
+    volume
   }
 })

@@ -14,7 +14,7 @@
                 @update:value="appStore.changeLocale(appStore.locale)" />
             </n-form-item>
             <n-form-item :label="$t('setting.general.volume')" path="volumeValue">
-              <n-slider v-model:value="volume" :step="10" />
+              <n-slider v-model:value="appStore.volume" :step="10" />
             </n-form-item>
           </n-form>
         </n-gi>
@@ -26,8 +26,6 @@
 
 <script setup lang="ts">
 import { useAppStore } from '@renderer/store/modules/app'
-import { ref } from 'vue'
-const volume = ref(50)
 const appStore = useAppStore()
 </script>
 

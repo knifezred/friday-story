@@ -7,6 +7,12 @@
     class="h-full select-none">
     <AppProvider>
       <RouterView class="bg-layout"></RouterView>
+
+      <audio
+        :src="staticPath(appStore.music)"
+        :volume="appStore.volume / 100"
+        autoplay
+        loop></audio>
     </AppProvider>
   </NConfigProvider>
 </template>
@@ -16,6 +22,7 @@ import { computed, onMounted, onUnmounted } from 'vue'
 import { naiveDateLocales, naiveLocales } from './locales/naive'
 import { useAppStore } from './store/modules/app'
 import { useThemeStore } from './store/modules/theme'
+import { staticPath } from './utils/common'
 
 defineOptions({
   name: 'App'
