@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import projectSetting from '@renderer/settings/projectSetting'
+import { projectSetting } from '@renderer/settings/projectSetting'
 import { ref, watch } from 'vue'
 
 defineOptions({

@@ -2,7 +2,7 @@
 import { useRouterPush } from '@renderer/hooks/common/router'
 import { $t } from '@renderer/locales'
 import { createArchive } from '@renderer/service/api/archive'
-import projectSetting from '@renderer/settings/projectSetting'
+import { projectSetting } from '@renderer/settings/projectSetting'
 import { useAuthStore } from '@renderer/store/modules/auth'
 import { reactive } from 'vue'
 

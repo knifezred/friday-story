@@ -101,6 +101,13 @@ declare namespace App {
 
     /** The global dropdown key */
     type DropdownKey = 'closeCurrent' | 'closeOther' | 'closeLeft' | 'closeRight' | 'closeAll'
+
+    interface ProjectSetting {
+      textSpeed: number
+      volume: number
+      defaultPlace: string
+      isAuth: boolean
+    }
   }
 
   /**
