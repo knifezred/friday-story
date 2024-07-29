@@ -103,7 +103,7 @@ defineOptions({
 const appStore = useAppStore()
 const mapStore = useMapStore()
 const { addMoney, addGold } = useAppStore()
-const { nextMap, beforeNextMap } = useMapStore()
+const { nextMap } = useMapStore()
 const { userInfo, archivedData, isStaticSuper } = useAuthStore()
 
 const isShowMap = ref(false)
