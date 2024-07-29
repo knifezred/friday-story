@@ -36,7 +36,7 @@ declare namespace StorageType {
     backupThemeSettingBeforeIsMobile: {
       layout: UnionKey.ThemeLayoutMode
       siderCollapse: boolean
-    },
-    projectSettings:ProjectS
+    }
+    projectSettings: App.Global.ProjectSetting
   }
 }

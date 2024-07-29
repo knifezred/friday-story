@@ -9,8 +9,8 @@
       <RouterView class="bg-layout"></RouterView>
 
       <audio
-        :src="staticPath(appStore.music)"
-        :volume="appStore.volume / 100"
+        :src="staticPath(appStore.projectSettings.bgMusic)"
+        :volume="appStore.projectSettings.volume / 100"
         autoplay
         loop></audio>
     </AppProvider>

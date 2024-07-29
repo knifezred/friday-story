@@ -14,7 +14,7 @@
                 @update:value="appStore.changeLocale(appStore.locale)" />
             </n-form-item>
             <n-form-item :label="$t('setting.general.volume')" path="volumeValue">
-              <n-slider v-model:value="appStore.volume" :step="10" />
+              <n-slider v-model:value="appStore.projectSettings.volume" :step="10" />
             </n-form-item>
           </n-form>
         </n-gi>

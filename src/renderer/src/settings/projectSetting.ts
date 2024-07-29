@@ -1,6 +1,7 @@
 export const projectSetting: App.Global.ProjectSetting = {
-  textSpeed: 50,
   isAuth: true,
-  defaultPlace: 'room.home.living_room',
-  volume: 30
+  textSpeed: 50,
+  volume: 30,
+  bgMusic: '/static/music/default.mp3',
+  defaultPlace: 'room.home.living_room'
 }

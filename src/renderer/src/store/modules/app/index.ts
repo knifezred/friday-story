@@ -13,6 +13,7 @@ import { useStoryStore } from '../game-story'
 import { useRouteStore } from '../route'
 import { useTabStore } from '../tab'
 import { useThemeStore } from '../theme'
+import { initProjectSettings } from './shared'
 
 export const useAppStore = defineStore(SetupStoreId.App, () => {
   const themeStore = useThemeStore()
@@ -47,12 +48,11 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
   const isMobile = breakpoints.smaller('sm')
 
   // custom start
+  const projectSettings = ref<App.Global.ProjectSetting>(initProjectSettings())
   const currentSceneType = ref<UnionKey.SceneModule>('map')
   const currentMiniGame = ref<UnionKey.MiniGameModule>('finger-guessing')
   const fromMoney = ref(0)
   const fromGold = ref(0)
-  const music = ref('/static/music/default.mp3')
-  const volume = ref(30)
   function addMoney(money: number) {
     fromMoney.value = authStore.archivedData.money
     authStore.archivedData.money = authStore.archivedData.money + money
@@ -66,7 +66,11 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
   }
 
   function changeMusic(src: string) {
-    music.value = src
+    projectSettings.value.bgMusic = src
+  }
+
+  function cacheProjectSettings() {
+    localStg.set('projectSettings', projectSettings.value)
   }
   // custom end
   /**
@@ -170,6 +174,7 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
 
   // cache mixSiderFixed
   useEventListener(window, 'beforeunload', () => {
+    cacheProjectSettings()
     localStg.set('mixSiderFixed', mixSiderFixed.value ? 'Y' : 'N')
   })
 
@@ -208,8 +213,7 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
     coastTime,
     currentSceneType,
     currentMiniGame,
-    changeMusic,
-    music,
-    volume
+    projectSettings,
+    changeMusic
   }
 })

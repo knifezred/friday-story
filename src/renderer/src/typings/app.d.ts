@@ -103,10 +103,11 @@ declare namespace App {
     type DropdownKey = 'closeCurrent' | 'closeOther' | 'closeLeft' | 'closeRight' | 'closeAll'
 
     interface ProjectSetting {
+      isAuth: boolean
       textSpeed: number
       volume: number
+      bgMusic: string
       defaultPlace: string
-      isAuth: boolean
     }
   }
 
