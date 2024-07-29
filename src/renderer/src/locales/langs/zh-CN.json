@@ -257,6 +257,14 @@
       "oGenPlaza": {
         "text": "欧金广场,东山区最大的商场",
         "title": "欧金广场"
+      },
+      "darkHouse": {
+        "title": "小黑屋",
+        "text": "一个寒冷的小黑屋",
+        "begin": {
+          "title": "小黑屋",
+          "text": "一个寒冷的小黑屋"
+        }
       }
     },
     "city": {

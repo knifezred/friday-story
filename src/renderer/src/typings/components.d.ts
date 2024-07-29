@@ -121,6 +121,7 @@ declare module 'vue' {
     SystemLogo: typeof import('./../components/common/system-logo.vue')['default']
     TableColumnSetting: typeof import('./../components/advanced/table-column-setting.vue')['default']
     TableHeaderOperation: typeof import('./../components/advanced/table-header-operation.vue')['default']
+    TextScene: typeof import('./../components/game-window/modules/text-scene.vue')['default']
     ThemeSchemaSwitch: typeof import('./../components/common/theme-schema-switch.vue')['default']
     TypedText: typeof import('./../components/custom/typed-text.vue')['default']
     Versions: typeof import('./../components/Versions.vue')['default']

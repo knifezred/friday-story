@@ -68,12 +68,13 @@ interface Emits {
 defineEmits<Emits>()
 
 function actionFunc(action: Dto.ActionOption) {
-  const checkInfo = actionStore.beforeExecute(action)
+  const checkInfo = actionStore.executeAction(action)
   if (actionStore.currentAction.canExecute) {
     switch (action.type) {
       case 'map':
         nextText()
-        mapStore.nextMap(action.next, action.next ?? 'root')
+        mapStore.currMap.isLocked = false
+        mapStore.nextMap(action.next, mapStore.currMap)
         break
       case 'mini-game':
         appStore.currentMiniGame = action.miniGame ?? 'finger-guessing'

@@ -179,6 +179,17 @@ export const DefaultMaps: Array<Dto.MapItem> = [
         level: 'city'
       }
     ]
+  },
+  {
+    name: 'darkHouse',
+    level: 'building',
+    isLocked: true,
+    children: [
+      {
+        name: 'darkHouse.begin',
+        level: 'room'
+      }
+    ]
   }
 ]
 

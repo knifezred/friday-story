@@ -123,9 +123,8 @@ watch(
 )
 function mapFunc(map: Dto.MapItemFull) {
   if (appStore.currentSceneType == 'map') {
-    beforeNextMap(map)
     if (map.id == 'map.parent') {
-      nextMap(map.next, map.pid)
+      nextMap(map.next, map)
     } else {
       userInfo.archive.place = map.id
       mapStore.currMap = map
