@@ -1,5 +1,6 @@
 import { useCondition } from '@renderer/hooks/game/condition'
 import { $t } from '@renderer/locales'
+import { projectSetting } from '@renderer/settings/projectSetting'
 import dayjs from 'dayjs'
 
 /**
@@ -60,7 +61,7 @@ export function toggleHtmlClass(className: string) {
 }
 
 export function staticPath(src: string) {
-  return 'http://localhost:5175' + src
+  return projectSetting.localhost + src
 }
 
 // 格式化时间戳

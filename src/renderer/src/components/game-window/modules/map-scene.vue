@@ -2,7 +2,8 @@
   <NFlex vertical :size="0">
     <div
       :style="
-        'background-image: url(http://localhost:5175' +
+        'background-image: url(' +
+        appStore.projectSettings.localhost +
         mapStore.currMap.cover +
         ');padding-top: 56.25%;'
       "

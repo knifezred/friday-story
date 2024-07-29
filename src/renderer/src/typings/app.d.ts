@@ -108,6 +108,7 @@ declare namespace App {
       volume: number
       bgMusic: string
       defaultPlace: string
+      localhost: string
     }
   }
 

@@ -2,13 +2,18 @@
   <NFlex vertical :size="0">
     <video
       v-if="isVideo"
-      :src="'http://localhost:5175' + cover"
+      :src="appStore.projectSettings.localhost + cover"
       autoplay
       loop
       class="h-56.25%"></video>
     <div
       v-else
-      :style="'background-image: url(http://localhost:5175' + cover + ');padding-top: 56.25%;'"
+      :style="
+        'background-image: url(' +
+        appStore.projectSettings.localhost +
+        cover +
+        ');padding-top: 56.25%;'
+      "
       class="bg-repeat-round">
       <p class="pt-12 pl-24 absolute-lt text-error">
         {{ cover }}
