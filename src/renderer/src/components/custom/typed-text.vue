@@ -9,6 +9,7 @@ import { ref, watch } from 'vue'
 defineOptions({
   name: 'TypedText'
 })
+
 const text = ref('')
 const index = ref(0)
 interface Props {

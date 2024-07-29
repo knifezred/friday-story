@@ -41,7 +41,7 @@
           <LevelTag level="R" />
         </template>
         <n-p class="text-center">
-          <icon-local-logo class="size-32" />
+          <icon-local-logo class="size-32 p-1" />
         </n-p>
         <n-p>
           <n-icon v-for="index in totalStar" :key="index">

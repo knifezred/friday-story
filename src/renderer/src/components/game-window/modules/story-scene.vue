@@ -21,7 +21,10 @@
       style="border: 0; border-radius: 0">
       <n-scrollbar class="h-20vh" :distance="10" @click="nextText">
         <n-p class="text-xl color-success">
-          <TypedText v-model:value="isTyped" :strings="$t(currentText)" />
+          <TypedText
+            v-model:value="isTyped"
+            :speed="appStore.projectSettings.textSpeed"
+            :strings="$t(currentText)" />
         </n-p>
       </n-scrollbar>
       <template #footer>
