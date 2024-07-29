@@ -2,6 +2,12 @@
 
 An Electron application with Vue and TypeScript for QSP Game.
 
+## 已实现功能
+
+- 存档模块
+- 地图模块
+- 故事模块
+
 ## 页面预览
 
 ![登录页](project/1722248365465.png)
