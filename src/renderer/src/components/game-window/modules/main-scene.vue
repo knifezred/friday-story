@@ -15,9 +15,9 @@
         ');padding-top: 56.25%;'
       "
       class="bg-repeat-round">
-      <p class="pt-12 pl-24 absolute-lt text-error">
+      <!-- <p class="pt-12 pl-24 absolute-lt text-error">
         {{ cover }}
-      </p>
+      </p> -->
     </div>
     <n-card
       class="bg-gray-8"

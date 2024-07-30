@@ -263,7 +263,7 @@ declare namespace Dto {
   type ArchiveNpcRelationShip = CommonType.RecordNullable<
     Pick<NpcInfo, 'id' | 'relationship' | 'identity'>
   >
-  type GameItemType = 'other' | 'food' | 'equipment' | 'task' | 'car'
+  type GameItemType = 'other' | 'food' | 'equipment' | 'task' | 'car' | 'material'
 
   interface GameItem {
     name: string

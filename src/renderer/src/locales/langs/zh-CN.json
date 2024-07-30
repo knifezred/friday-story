@@ -396,7 +396,9 @@
     "pickWood": "搜刮木材",
     "pickWoodInfo": "四处转了转，捡到了一些木材",
     "cutTree": "伐木",
-    "cutTreeInfo": "伐木中... ..."
+    "cutTreeInfo": "伐木中... ...",
+    "explore": "探索",
+    "exploreInfo": "你在屋内东翻西找、找到了一些看起来有用的东西"
   },
   "page": {
     "about": {

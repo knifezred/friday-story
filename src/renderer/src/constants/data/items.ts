@@ -1,60 +1,14 @@
+import { FoodGameItems } from './items/foods'
+import { MaterialGameItems } from './items/material'
+import { OtherGameItems } from './items/other'
+import { TaskGameItems } from './items/task'
+
 // type+'.'+name
 export const DefaultGameItems: Array<Dto.GameItem> = [
-  {
-    name: 'beer',
-    type: 'food',
-    level: 'SSR'
-  },
-  {
-    name: 'cola',
-    type: 'food',
-    level: 'SR'
-  },
-  {
-    name: 'coffee',
-    type: 'food',
-    level: 'SR'
-  },
-  {
-    name: 'croissant',
-    type: 'food',
-    level: 'R'
-  },
-  {
-    name: 'fired_eggs',
-    type: 'food',
-    level: 'R'
-  },
-  {
-    name: 'fish',
-    type: 'food',
-    level: 'N'
-  },
-  {
-    name: 'hamburger',
-    type: 'food',
-    level: 'SR'
-  },
-  {
-    name: 'milk',
-    type: 'food',
-    level: 'SSR'
-  },
-  {
-    name: 'sandwich',
-    type: 'food',
-    level: 'SR'
-  },
-  {
-    name: 'lin_home_key',
-    type: 'task',
-    level: 'SR'
-  },
-  {
-    name: 'wood',
-    type: 'other',
-    level: 'N'
-  }
+  ...FoodGameItems,
+  ...OtherGameItems,
+  ...MaterialGameItems,
+  ...TaskGameItems
 ]
 
 export type ShopType = 'happy_shop' | 'walmart' | 'yong_hui'
