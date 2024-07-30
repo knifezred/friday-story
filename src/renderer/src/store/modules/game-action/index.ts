@@ -73,7 +73,10 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
           resMsg = [action.text + 'Info']
           break
       }
-      executeEffects(action.effect)
+      const effectResults = executeEffects(action.effect)
+      for (const r of effectResults) {
+        resMsg.push(r)
+      }
     } else {
       resMsg = [result]
     }

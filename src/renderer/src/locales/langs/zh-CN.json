@@ -49,6 +49,9 @@
     "hasItemTrue": "你拥有 {value} !",
     "openHour": "营业时间：{value}"
   },
+  "effect": {
+    "addItemTrue": "获得了 {value} !"
+  },
   "dataTable": {
     "itemCount": "共 {total} 条"
   },
@@ -334,6 +337,10 @@
       "island": {
         "text": "樱岛国",
         "title": "樱岛国"
+      },
+      "aDarkRoom": {
+        "text": "达克木",
+        "title": "达克木"
       }
     },
     "locked": {

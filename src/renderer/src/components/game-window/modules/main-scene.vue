@@ -72,7 +72,6 @@ defineOptions({
   name: 'StoryScene'
 })
 
-const isArrayText = ref(false)
 const textIndex = ref(0)
 const totalTextCount = ref(1)
 const isVideo = ref(false)
@@ -94,18 +93,11 @@ const itemStore = useGameItemStore()
 const storyStore = useStoryStore()
 const themeStore = useThemeStore()
 
-function bindText(text: string | string[]) {
+function bindText(text: string[]) {
   isTyped.value = true
-  if (typeof text == 'string') {
-    isArrayText.value = false
-    totalTextCount.value = 1
-    textIndex.value = 0
-    currentText.value = text
-  } else {
-    isArrayText.value = true
-    totalTextCount.value = text.length
-    currentText.value = text[textIndex.value]
-  }
+  totalTextCount.value = text.length
+  textIndex.value = 0
+  currentText.value = text[textIndex.value]
 }
 
 async function dynamicCover() {
@@ -136,7 +128,7 @@ async function nextText() {
     // 再次点击取消打字机效果
     isTyped.value = false
   } else {
-    if (textIndex.value == totalTextCount.value - 1 || !isArrayText.value) {
+    if (textIndex.value == totalTextCount.value - 1) {
       actionStore.loadActionOptions(currentScene.value.options, null)
       if (actionStore.options.length == 0) {
         if (currentScene.value.next != '') {
@@ -147,10 +139,9 @@ async function nextText() {
           appStore.siderCollapse = false
         }
       }
-    }
-    if (isArrayText.value && textIndex.value < totalTextCount.value - 1) {
+    } else if (textIndex.value < totalTextCount.value - 1) {
       textIndex.value += 1
-      bindText(currentScene.value.text)
+      currentText.value = currentScene.value.text[textIndex.value]
     }
   }
 }
@@ -160,7 +151,6 @@ async function actionFunc(action: Dto.ActionOption) {
   action.isDisabled = true
   action.loading = true
   currentScene.value.text = actionStore.executeAction(action)
-  textIndex.value = 0
   bindText(currentScene.value.text)
   if (actionStore.currentAction.canExecute) {
     switch (action.type) {

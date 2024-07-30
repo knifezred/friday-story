@@ -16,6 +16,10 @@ export function useActionEffect() {
         count: Number(count)
       })
     }
+    return {
+      name: name,
+      count: Number(count)
+    }
   }
 
   return {

@@ -193,7 +193,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     ]
   },
   {
-    name: 'darkRoom',
+    name: 'aDarkRoom',
     level: 'country',
     isLocked: true,
     children: [
@@ -210,6 +210,21 @@ export const DefaultMaps: Array<Dto.MapItem> = [
                 next: 'dark_house_start',
                 text: 'stories.dark_house_start',
                 type: 'story'
+              },
+              {
+                name: 'option.explore',
+                text: 'option.explore',
+                type: 'map',
+                effect: {
+                  type: 'all',
+                  effects: [
+                    {
+                      type: 'addItem',
+                      value: 'other.wood,5',
+                      result: true
+                    }
+                  ]
+                }
               },
               {
                 name: 'option.addWood',

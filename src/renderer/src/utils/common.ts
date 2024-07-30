@@ -224,7 +224,7 @@ export function checkCondition(conditionModel: Dto.ConditionModel | undefined) {
 }
 
 export function executeEffects(effectModel: Dto.ActionEffectModel | undefined) {
-  let resultText = ''
+  const resultText: string[] = []
   if (effectModel != undefined) {
     const effectHook = useActionEffect()
     // 默认是全部都生效
@@ -242,8 +242,14 @@ export function executeEffects(effectModel: Dto.ActionEffectModel | undefined) {
         let i18nValue = effect.value
         if (effect.type == 'addItem') {
           i18nValue = 'items.' + effect.value.split(',')[0] + '.title'
+          resultText.push(
+            $t(effect.text as never, {
+              value: $t(i18nValue as never) + 'x' + effect.value.split(',')[1]
+            })
+          )
+        } else {
+          resultText.push($t(effect.text as never, { value: $t(i18nValue as never) }))
         }
-        resultText = $t(effect.text as never, { value: $t(i18nValue as never) })
       }
     }
   }
