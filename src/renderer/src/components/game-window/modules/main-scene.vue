@@ -20,9 +20,13 @@
       </p>
     </div>
     <n-card
-      class="w-full bg-gray-8"
+      class="bg-gray-8"
       :class="!appStore.siderCollapse ? 'pos-relative bg-op-1' : 'pos-fixed bottom-0 bg-op-50'"
-      :style="appStore.siderCollapse ? 'height:20.5vw' : 'height:18vw'"
+      :style="
+        appStore.siderCollapse
+          ? 'height:20.5vw;width:calc(100% - ' + themeStore.sider.mixCollapsedWidth + 'px);'
+          : 'height:18vw;'
+      "
       style="border: 0; border-radius: 0">
       <n-scrollbar class="h-20vh" :distance="10" @click="nextText">
         <n-p class="text-xl color-success">
@@ -33,20 +37,20 @@
         </n-p>
       </n-scrollbar>
       <template #footer>
-        <n-flex>
-          <n-button
-            v-for="btn in actionStore.options"
-            :key="btn.name"
-            :type="btn.buttonType ?? 'primary'"
-            class="min-w-42"
-            :class="{ buttonLoading: btn.loading }"
-            :disabled="btn.isDisabled"
-            @click="actionFunc(btn)">
-            <template #icon>
-              <SvgIcon v-if="btn.icon != undefined" :icon="btn.icon" class="mr-1" />
-            </template>
-            {{ $t(btn.text) }}
-          </n-button>
+        <n-flex justify="end">
+          <template v-for="btn in actionStore.options" :key="btn.name">
+            <n-button
+              :type="btn.buttonType ?? 'primary'"
+              :disabled="btn.isDisabled || btn.locked"
+              class="min-w-42"
+              :class="{ buttonLoading: btn.loading }"
+              @click="actionFunc(btn)">
+              <template #icon>
+                <SvgIcon v-if="btn.icon != undefined" :icon="btn.icon" class="mr-1" />
+              </template>
+              {{ btn.locked == true ? '???' : $t(btn.text) }}
+            </n-button>
+          </template>
         </n-flex>
       </template>
     </n-card>
@@ -57,7 +61,10 @@
 import { $t } from '@renderer/locales'
 import { useAppStore } from '@renderer/store/modules/app'
 import { useGameActionStore } from '@renderer/store/modules/game-action'
+import { useGameItemStore } from '@renderer/store/modules/game-item'
+import { useMapStore } from '@renderer/store/modules/game-map'
 import { useStoryStore } from '@renderer/store/modules/game-story'
+import { useThemeStore } from '@renderer/store/modules/theme'
 import { dynamicResource } from '@renderer/utils/common'
 import { ref, watch } from 'vue'
 
@@ -78,11 +85,14 @@ const currentScene = ref<Dto.GameScene>({
   cover: '/static/stories/start',
   next: '',
   options: [],
-  text: ''
+  text: []
 })
 const appStore = useAppStore()
 const actionStore = useGameActionStore()
+const mapStore = useMapStore()
+const itemStore = useGameItemStore()
 const storyStore = useStoryStore()
+const themeStore = useThemeStore()
 
 function bindText(text: string | string[]) {
   isTyped.value = true
@@ -102,6 +112,8 @@ async function dynamicCover() {
   if (currentScene.value.cover.indexOf('.') == -1) {
     console.log(cover.value)
     cover.value = await dynamicResource(currentScene.value.cover)
+  } else {
+    cover.value = currentScene.value.cover
   }
   if (cover.value.endsWith('.mp4')) {
     isVideo.value = true
@@ -133,7 +145,6 @@ async function nextText() {
           // end
           appStore.currentSceneType = 'map'
           appStore.siderCollapse = false
-          window.$message?.info($t('stories.over'))
         }
       }
     }
@@ -144,40 +155,87 @@ async function nextText() {
   }
 }
 
+// 按钮点击事件
 async function actionFunc(action: Dto.ActionOption) {
   action.isDisabled = true
   action.loading = true
   currentScene.value.text = actionStore.executeAction(action)
   textIndex.value = 0
   bindText(currentScene.value.text)
-  if (action.type == 'story') {
-    if (action.next != undefined && action.next.startsWith('scene')) {
-      await nextScene(action.next)
-    } else {
-      await nextText()
+  if (actionStore.currentAction.canExecute) {
+    switch (action.type) {
+      case 'map':
+        mapStore.currMap.isLocked = false
+        if (action.next != undefined) {
+          mapStore.nextMap(action.next, mapStore.currMap)
+        }
+        break
+      case 'mini-game':
+        appStore.currentMiniGame = action.miniGame ?? 'finger-guessing'
+        break
+      case 'shop':
+        itemStore.currentShop = action.next ?? 'happy_shop'
+        break
+      case 'story':
+        storyStore.setCurrentStory(action.next ?? 'start')
+        appStore.siderCollapse = true
+        if (action.next != undefined && action.next.startsWith('scene')) {
+          await nextScene(action.next)
+        } else {
+          await nextText()
+        }
+        break
+      default:
+        nextText()
+        break
     }
-  } else {
-    await nextText()
+    appStore.currentSceneType = action.type
   }
   setTimeout(() => {
     action.isDisabled = false
     action.loading = false
   }, 3000)
 }
-
+// 加载场景
+async function loadCurrentScene(options, cover: string, next: string | undefined, text: string[]) {
+  currentScene.value.options = options ?? []
+  currentScene.value.cover = cover
+  await dynamicCover()
+  currentScene.value.next = next ?? ''
+  currentScene.value.text = text
+  if (appStore.currentSceneType == 'map') {
+    actionStore.loadActionOptions(currentScene.value.options, next)
+  } else {
+    actionStore.loadActionOptions(currentScene.value.options, null)
+  }
+  bindText(currentScene.value.text)
+}
 watch(
   [() => storyStore.currentStory],
   async () => {
-    currentScene.value.options = storyStore.currentStory.options ?? []
-    currentScene.value.cover = storyStore.currentStory.cover
-    await dynamicCover()
-    currentScene.value.next = storyStore.currentStory.nextScene
-    currentScene.value.text = storyStore.currentStory.text
-    actionStore.loadActionOptions(undefined, null)
-    if (typeof currentScene.value.text == 'string') {
-      actionStore.loadActionOptions(currentScene.value.options, null)
+    if (appStore.currentSceneType == 'story') {
+      await loadCurrentScene(
+        storyStore.currentStory.options,
+        storyStore.currentStory.cover,
+        storyStore.currentStory.nextScene,
+        storyStore.currentStory.text
+      )
     }
-    bindText(currentScene.value.text)
+  },
+  { immediate: true }
+)
+
+watch(
+  [() => mapStore.currMap],
+  async () => {
+    if (appStore.currentSceneType == 'map') {
+      await loadCurrentScene(
+        mapStore.currMap.options,
+        mapStore.currMap.cover,
+        mapStore.currMap.next,
+        [mapStore.currMap.text]
+      )
+    }
   },
   { immediate: true }
 )

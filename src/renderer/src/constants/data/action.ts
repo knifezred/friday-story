@@ -4,16 +4,19 @@ export const DefaultActions: Array<Dto.ActionOption> = [
     text: 'option.enter',
     buttonType: 'primary',
     type: 'map',
-    condition: {
-      type: 'and',
-      conditions: [
-        {
-          type: 'hasLocked',
-          value: 'map.isLocked',
-          result: false
-        }
-      ]
-    }
+    condition: [
+      {
+        type: 'and',
+        conditions: [
+          {
+            type: 'hasLocked',
+            value: 'map.isLocked',
+            result: false
+          }
+        ],
+        for: 'execute'
+      }
+    ]
   },
   {
     name: 'knocked',

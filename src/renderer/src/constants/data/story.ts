@@ -16,7 +16,20 @@ export const DefaultStories: Array<Dto.StoryPlot> = [
       {
         name: 'option.addWood',
         text: 'option.addWood',
-        type: 'story'
+        type: 'story',
+        condition: [
+          {
+            type: 'and',
+            for: 'load',
+            conditions: [
+              {
+                type: 'hasItem',
+                value: 'other.wood',
+                result: true
+              }
+            ]
+          }
+        ]
       },
       {
         name: 'option.pickWood',
@@ -41,7 +54,7 @@ export const DefaultScenes: Array<Dto.GameScene> = [
   {
     name: 'scene.set_name',
     title: 'title',
-    text: '',
+    text: [],
     cover: '',
     next: '',
     options: [
@@ -59,7 +72,7 @@ export const DefaultScenes: Array<Dto.GameScene> = [
     cover: '',
     next: 'scene.set_special',
     options: [],
-    text: ''
+    text: []
   },
   {
     name: 'scene.set_special',
@@ -67,12 +80,12 @@ export const DefaultScenes: Array<Dto.GameScene> = [
     cover: '',
     next: '',
     options: [],
-    text: ''
+    text: []
   },
   {
     name: 'scene.makeRoomHot',
     title: '',
-    text: '',
+    text: [],
     cover: '',
     next: '',
     options: [

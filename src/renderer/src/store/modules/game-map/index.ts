@@ -84,7 +84,7 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
         next = map.next
       }
       const nextMap = allMaps.value.filter((x) => x.id == next)[0]
-      currLevelMaps.value = allMaps.value.filter((x) => x.pid == nextMap.pid)
+      currLevelMaps.value = allMaps.value.filter((x) => x.pid == nextMap.pid && x.isLocked != true)
       if (next != undefined && next != '') {
         parentMap.value.pid = currLevelMaps.value[0].pid
         parentMap.value.next = nextMap.pid
@@ -114,7 +114,7 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
         currMap.value = allMaps.value.filter((x) => x.id == map.pid)[0]
       }
     }
-    nextMap(currMap.value.next, currMap.value.pid)
+    nextMap(currMap.value.next, currMap.value)
     // 再次绑定
     currMap.value = allMaps.value.filter((x) => x.id == id)[0]
     authStore.userInfo.archive.place = id

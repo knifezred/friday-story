@@ -10,7 +10,7 @@ export const useStoryStore = defineStore(SetupStoreId.GameStory, () => {
     name: 'none',
     type: 'main-line',
     cover: '',
-    text: '',
+    text: [],
     nextScene: ''
   })
   function getStoryScene(sceneName: string) {
@@ -32,12 +32,20 @@ export const useStoryStore = defineStore(SetupStoreId.GameStory, () => {
 
   function initStory() {
     DefaultStories.forEach((item) => {
-      item.text = localeText(item.text, item.name, 'stories', '')
+      let localizationText = localeText(item.text, item.name, 'stories', '')
+      if (typeof localizationText == 'string') {
+        localizationText = [localizationText]
+      }
+      item.text = localizationText
       item.cover = prefixImage(item.cover, item.name, 'stories', '')
     })
 
     DefaultScenes.forEach((item) => {
-      item.text = localeText(item.text, item.name, 'stories', 'text')
+      let localizationText = localeText(item.text, item.name, 'stories', 'text')
+      if (typeof localizationText == 'string') {
+        localizationText = [localizationText]
+      }
+      item.text = localizationText
       item.title = localeText(item.text, item.name, 'stories', 'title').toString()
       item.cover = prefixImage(item.cover, item.name, 'stories', '')
     })

@@ -11,10 +11,9 @@
 import { useAuthStore } from '@renderer/store/modules/auth'
 import type { Component } from 'vue'
 import { computed } from 'vue'
-import MapScene from './modules/map-scene.vue'
+import MainScene from './modules/main-scene.vue'
 import MiniGame from './modules/mini-game.vue'
 import ShopScene from './modules/shop-scene.vue'
-import StoryScene from './modules/story-scene.vue'
 
 defineOptions({
   name: 'GameWindow'
@@ -31,10 +30,10 @@ interface SceneModule {
 }
 
 const moduleMap: Record<UnionKey.SceneModule, SceneModule> = {
-  map: { label: 'map', component: MapScene },
-  'mini-game': { label: 'miniGame', component: MiniGame },
+  map: { label: 'map', component: MainScene },
+  story: { label: 'story', component: MainScene },
   shop: { label: 'shop', component: ShopScene },
-  story: { label: 'story', component: StoryScene }
+  'mini-game': { label: 'miniGame', component: MiniGame }
 }
 
 const activeModule = computed(() => moduleMap[props.value || 'map'])

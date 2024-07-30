@@ -44,6 +44,7 @@
     }
   },
   "condition": {
+    "hasLockedTrue": "前面的区域以后再来探索吧",
     "hasItemFalse": "你没有 {value} !",
     "hasItemTrue": "你拥有 {value} !",
     "openHour": "营业时间：{value}"
@@ -265,12 +266,20 @@
         "title": "欧金广场"
       },
       "darkHouse": {
-        "title": "小黑屋",
-        "text": "一个寒冷的小黑屋",
+        "title": "破木屋",
+        "text": "一个寒冷的破木屋",
         "begin": {
-          "title": "小黑屋",
-          "text": "一个寒冷的小黑屋"
+          "title": "破木屋",
+          "text": "一个寒冷的破木屋"
+        },
+        "room1": {
+          "title": "上锁的房间",
+          "text": "一个上锁的房间，如果有撬棍或者钥匙也许能够打开"
         }
+      },
+      "mistyForest": {
+        "title": "迷雾森林",
+        "text": "被迷雾包围的森林、建议只在外围搜集木材"
       }
     },
     "city": {
@@ -377,7 +386,10 @@
     "wait": "等待",
     "work": "工作",
     "addWood": "添柴",
-    "pickWood": "搜刮木材"
+    "pickWood": "搜刮木材",
+    "pickWoodInfo": "四处转了转，捡到了一些木材",
+    "cutTree": "伐木",
+    "cutTreeInfo": "伐木中... ..."
   },
   "page": {
     "about": {

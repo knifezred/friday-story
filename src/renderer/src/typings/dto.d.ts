@@ -328,7 +328,7 @@ declare namespace Dto {
     name: string
     type: PlotType
     cover: string
-    text: string | string[]
+    text: string[]
     nextScene: string
     condition?: ConditionModel
     options?: Array<ActionOption>
@@ -337,7 +337,7 @@ declare namespace Dto {
   interface GameScene {
     name: string
     title: string
-    text: string | string[]
+    text: string[]
     cover: string
     next: string
     options: Array<ActionOption>
@@ -347,7 +347,7 @@ declare namespace Dto {
     name: string
     text: string
     type: UnionKey.SceneModule
-    condition?: ConditionModel
+    condition?: ConditionModel[]
     effect?: ActionEffectModel
     next?: string | undefined
     miniGame?: UnionKey.MiniGameModule | undefined
@@ -355,7 +355,7 @@ declare namespace Dto {
     buttonType?: Type | undefined
     isDisabled?: boolean
     loading?: boolean
-    isShow?: boolean
+    locked?: boolean
     canExecute?: boolean
   }
 
@@ -364,6 +364,7 @@ declare namespace Dto {
   type ConditionType = 'and' | 'or'
   interface ConditionModel {
     type: ConditionType
+    for: 'execute' | 'load'
     conditions: Condition[]
   }
   interface Condition {

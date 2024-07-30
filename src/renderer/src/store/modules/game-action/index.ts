@@ -16,15 +16,20 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
 
   const appStore = useAppStore()
   const authStore = useAuthStore()
+
   function beforeExecute(action: Dto.ActionOption) {
     currentAction.value = action
     console.log('before execute')
-    const result = checkCondition(currentAction.value.condition)
-    if (result != '') {
-      currentAction.value.canExecute = false
-      return result
-    } else {
-      currentAction.value.canExecute = true
+    if (currentAction.value.condition != undefined) {
+      const result = checkCondition(
+        currentAction.value.condition.filter((x) => x.for == 'execute')[0]
+      )
+      if (result != '') {
+        currentAction.value.canExecute = false
+        return result
+      } else {
+        currentAction.value.canExecute = true
+      }
     }
     return ''
   }
@@ -65,7 +70,7 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
           break
 
         default:
-          resMsg = [action.text]
+          resMsg = [action.text + 'Info']
           break
       }
       executeEffects(action.effect)
@@ -90,6 +95,14 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
     }
     if (optionList != undefined) {
       for (const option of optionList) {
+        if (option.condition != undefined) {
+          const res = checkCondition(option.condition.filter((x) => x.for == 'load')[0])
+          if (res != '') {
+            option.locked = true
+          } else {
+            option.locked = false
+          }
+        }
         options.value.push(option)
       }
     }

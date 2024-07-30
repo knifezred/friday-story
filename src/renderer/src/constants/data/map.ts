@@ -3,6 +3,7 @@ export const DefaultMaps: Array<Dto.MapItem> = [
   {
     name: 'island',
     level: 'country',
+    isLocked: true,
     children: [
       {
         name: 'osaka',
@@ -44,13 +45,16 @@ export const DefaultMaps: Array<Dto.MapItem> = [
                     options: [
                       {
                         name: 'map.next',
-                        condition: {
-                          type: 'or',
-                          conditions: [
-                            { type: 'inTime', value: '8:00-23:00', result: true },
-                            { type: 'hasItem', value: 'task.lin_home_key', result: true }
-                          ]
-                        },
+                        condition: [
+                          {
+                            type: 'or',
+                            conditions: [
+                              { type: 'inTime', value: '8:00-23:00', result: true },
+                              { type: 'hasItem', value: 'task.lin_home_key', result: true }
+                            ],
+                            for: 'execute'
+                          }
+                        ],
                         text: 'option.enter',
                         next: 'room.lin_home.living_room',
                         type: 'map'
@@ -102,17 +106,20 @@ export const DefaultMaps: Array<Dto.MapItem> = [
                         type: 'shop',
                         next: 'happy_shop',
                         text: 'option.enter',
-                        condition: {
-                          type: 'and',
-                          conditions: [
-                            {
-                              type: 'inTime',
-                              value: '09:00-23:00',
-                              text: 'condition.openHour',
-                              result: true
-                            }
-                          ]
-                        }
+                        condition: [
+                          {
+                            type: 'and',
+                            conditions: [
+                              {
+                                type: 'inTime',
+                                value: '09:00-23:00',
+                                text: 'condition.openHour',
+                                result: true
+                              }
+                            ],
+                            for: 'execute'
+                          }
+                        ]
                       },
                       {
                         name: 'test.button',
@@ -186,19 +193,83 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     ]
   },
   {
-    name: 'darkHouse',
-    level: 'building',
+    name: 'darkRoom',
+    level: 'country',
     isLocked: true,
     children: [
       {
-        name: 'darkHouse.begin',
-        level: 'room',
+        name: 'darkHouse',
+        level: 'building',
+        children: [
+          {
+            name: 'darkHouse.begin',
+            level: 'room',
+            options: [
+              {
+                name: 'test.button',
+                next: 'dark_house_start',
+                text: 'stories.dark_house_start',
+                type: 'story'
+              },
+              {
+                name: 'option.addWood',
+                text: 'option.addWood',
+                type: 'map',
+                condition: [
+                  {
+                    type: 'and',
+                    for: 'load',
+                    conditions: [
+                      {
+                        type: 'hasItem',
+                        value: 'other.wood',
+                        result: true
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                name: 'option.pickWood',
+                text: 'option.pickWood',
+                type: 'map',
+                effect: {
+                  type: 'all',
+                  effects: [
+                    {
+                      type: 'addItem',
+                      value: 'other.wood,5',
+                      result: true
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            name: 'darkHouse.room1',
+            level: 'room'
+          }
+        ]
+      },
+      {
+        name: 'mistyForest',
+        level: 'building',
         options: [
           {
-            name: 'test.button',
-            next: 'dark_house_start',
-            text: 'stories.dark_house_start',
-            type: 'story'
+            name: 'option.cutTree',
+            text: 'option.cutTree',
+            type: 'map',
+            effect: {
+              type: 'all',
+              effects: [
+                {
+                  type: 'addItem',
+                  value: 'other.wood,10',
+                  result: true
+                }
+              ]
+            }
           }
         ]
       }
