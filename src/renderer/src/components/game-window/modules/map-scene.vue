@@ -32,6 +32,8 @@
             strong
             secondary
             class="min-w-42"
+            :class="{ buttonLoading: btn.loading }"
+            :disabled="btn.isDisabled"
             @click="actionFunc(btn)">
             <template #icon>
               <SvgIcon v-if="btn.icon != undefined" :icon="btn.icon" class="mr-1" />
@@ -68,6 +70,8 @@ interface Emits {
 defineEmits<Emits>()
 
 function actionFunc(action: Dto.ActionOption) {
+  action.isDisabled = true
+  action.loading = true
   const checkInfo = actionStore.executeAction(action)
   if (actionStore.currentAction.canExecute) {
     switch (action.type) {
@@ -95,6 +99,10 @@ function actionFunc(action: Dto.ActionOption) {
     isTyped.value = true
     currentText.value = checkInfo
   }
+  setTimeout(() => {
+    action.isDisabled = false
+    action.loading = false
+  }, 3000)
 }
 
 function nextText() {

@@ -42,14 +42,14 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
     next: string | undefined | null
   ) {
     options.value = []
-    if (optionList != undefined) {
-      if (next != undefined && next != null) {
-        if (!optionExists('map.next', optionList)) {
-          const defaultMapNext = getOptionByName('map.next', DefaultActions)
-          defaultMapNext.next = next
-          options.value.push(defaultMapNext)
-        }
+    if (next != undefined && next != null) {
+      if (!optionExists('map.next', optionList)) {
+        const defaultMapNext = getOptionByName('map.next', DefaultActions)
+        defaultMapNext.next = next
+        options.value.push(defaultMapNext)
       }
+    }
+    if (optionList != undefined) {
       for (const option of optionList) {
         options.value.push(option)
       }
