@@ -10,7 +10,7 @@ export const DefaultStories: Array<Dto.StoryPlot> = [
     name: 'dark_house_start',
     type: 'main-line',
     cover: '',
-    text: ['房间寒冷刺骨', '火堆熄灭了'],
+    text: ['房间寒冷刺骨', '火堆快熄灭了'],
     nextScene: 'scene.makeRoomHot',
     options: [
       {
@@ -20,7 +20,7 @@ export const DefaultStories: Array<Dto.StoryPlot> = [
       },
       {
         name: 'option.pickWood',
-        text: '搜刮',
+        text: 'option.pickWood',
         type: 'story',
         effect: {
           type: 'all',
