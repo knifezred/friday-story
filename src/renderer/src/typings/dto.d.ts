@@ -189,6 +189,7 @@ declare namespace Dto {
   interface MapItem {
     name: string
     next?: string
+    story?: string
     icon?: string
     isDisabled?: boolean
     isShow?: boolean
@@ -330,6 +331,7 @@ declare namespace Dto {
     text: string | string[]
     nextScene: string
     condition?: ConditionModel
+    options?: Array<ActionOption>
   }
 
   interface GameScene {
@@ -351,6 +353,7 @@ declare namespace Dto {
     icon?: string | undefined
     buttonType?: Type | undefined
     isDisabled?: boolean
+    loading?: boolean
     isShow?: boolean
     canExecute?: boolean
   }

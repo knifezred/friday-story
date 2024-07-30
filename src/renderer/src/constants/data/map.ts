@@ -114,7 +114,12 @@ export const DefaultMaps: Array<Dto.MapItem> = [
                           ]
                         }
                       },
-                      { name: 'test.button', next: 'start', text: 'stories.start', type: 'story' }
+                      {
+                        name: 'test.button',
+                        next: 'main_start',
+                        text: 'stories.start',
+                        type: 'story'
+                      }
                     ]
                   }
                 ]
@@ -187,7 +192,15 @@ export const DefaultMaps: Array<Dto.MapItem> = [
     children: [
       {
         name: 'darkHouse.begin',
-        level: 'room'
+        level: 'room',
+        options: [
+          {
+            name: 'test.button',
+            next: 'dark_house_start',
+            text: 'stories.dark_house_start',
+            type: 'story'
+          }
+        ]
       }
     ]
   }

@@ -31,7 +31,7 @@
             :is-show="btn.isShow"
             strong
             secondary
-            class="w-42"
+            class="min-w-42"
             @click="actionFunc(btn)">
             <template #icon>
               <SvgIcon v-if="btn.icon != undefined" :icon="btn.icon" class="mr-1" />
@@ -110,7 +110,7 @@ watch(
     isTyped.value = true
     currentText.value = mapStore.currMap.text
     // 加载按钮
-    actionStore.loadActionOptions(mapStore.currMap, null)
+    actionStore.loadActionOptions(mapStore.currMap.options, mapStore.currMap.next)
     // 加载事件
 
     // 加载NPC

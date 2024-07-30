@@ -35,10 +35,12 @@
       <template #footer>
         <n-flex>
           <n-button
-            v-for="btn in actionStore.options"
+            v-for="btn in options"
             :key="btn.name"
             :type="btn.buttonType ?? 'primary'"
-            class="w-40"
+            class="min-w-42"
+            :class="{ buttonLoading: btn.loading }"
+            :disabled="btn.isDisabled"
             @click="actionFunc(btn)">
             <template #icon>
               <SvgIcon v-if="btn.icon != undefined" :icon="btn.icon" class="mr-1" />
@@ -78,6 +80,7 @@ const currentScene = ref<Dto.GameScene>({
   options: [],
   text: ''
 })
+const options = ref<Array<Dto.ActionOption>>([])
 const appStore = useAppStore()
 const actionStore = useGameActionStore()
 const storyStore = useStoryStore()
@@ -114,7 +117,7 @@ async function nextScene(next: string) {
   await dynamicCover()
   bindText(currentScene.value.text)
   // 绑定按钮
-  actionStore.loadActionOptions(null, currentScene.value)
+  options.value = actionStore.loadActionOptions(currentScene.value.options, null)
 }
 
 async function nextText() {
@@ -122,11 +125,11 @@ async function nextText() {
     // 再次点击取消打字机效果
     isTyped.value = false
   } else {
-    if (isArrayText.value) {
-      textIndex.value += 1
-    }
-    if (textIndex.value == totalTextCount.value || !isArrayText.value) {
-      if (actionStore.options.length == 0) {
+    if (textIndex.value == totalTextCount.value - 1 || !isArrayText.value) {
+      options.value = []
+      options.value = actionStore.loadActionOptions(currentScene.value.options, null)
+      console.log(options.value)
+      if (options.value.length == 0) {
         if (currentScene.value.next != '') {
           await nextScene(currentScene.value.next)
         } else {
@@ -137,11 +140,18 @@ async function nextText() {
         }
       }
     }
-    bindText(currentScene.value.text)
+    if (isArrayText.value && textIndex.value < totalTextCount.value - 1) {
+      textIndex.value += 1
+      bindText(currentScene.value.text)
+    }
   }
 }
 
 async function actionFunc(action: Dto.ActionOption) {
+  action.isDisabled = true
+  action.loading = true
+  const checkInfo = actionStore.executeAction(action)
+  currentText.value = checkInfo
   if (action.type == 'story') {
     if (action.next != undefined && action.next.startsWith('scene')) {
       await nextScene(action.next)
@@ -149,20 +159,48 @@ async function actionFunc(action: Dto.ActionOption) {
   } else {
     await nextText()
   }
+  setTimeout(() => {
+    action.isDisabled = false
+    action.loading = false
+  }, 3000)
 }
 
 watch(
   [() => storyStore.currentStory],
   async () => {
+    currentScene.value.options = storyStore.currentStory.options ?? []
     currentScene.value.cover = storyStore.currentStory.cover
     await dynamicCover()
     currentScene.value.next = storyStore.currentStory.nextScene
     currentScene.value.text = storyStore.currentStory.text
-    actionStore.loadActionOptions(null, currentScene.value)
+    if (typeof currentScene.value.text == 'string') {
+      options.value = actionStore.loadActionOptions(currentScene.value.options, null)
+    }
     bindText(currentScene.value.text)
   },
   { immediate: true }
 )
 </script>
 
-<style scoped></style>
+<style lang="css">
+.buttonLoading {
+  background-image: linear-gradient(to right, var(--n-color-hover), var(--n-color-hover));
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  animation: bgColorWidthTransition 3s forwards; /* 使用forwards保持动画结束时的状态 */
+}
+
+/* 定义从右向左消失的动画 */
+@keyframes slideOut {
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes bgColorWidthTransition {
+  to {
+    background-size: 0% 100%;
+  }
+}
+</style>

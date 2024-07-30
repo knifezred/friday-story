@@ -31,34 +31,30 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
     result = beforeExecute(currentAction.value)
     if (result == '') {
       currentAction.value.canExecute = true
+      result = action.text
     }
     console.log(action)
     return result
   }
 
-  function loadActionOptions(map: Dto.MapItemFull | null, scene: Dto.GameScene | null) {
+  function loadActionOptions(
+    optionList: Dto.ActionOption[] | undefined,
+    next: string | undefined | null
+  ) {
     options.value = []
-    if (map != null) {
-      if (map.next != undefined) {
-        if (!optionExists('map.next', map.options)) {
+    if (optionList != undefined) {
+      if (next != undefined && next != null) {
+        if (!optionExists('map.next', optionList)) {
           const defaultMapNext = getOptionByName('map.next', DefaultActions)
-          defaultMapNext.next = map.next
+          defaultMapNext.next = next
           options.value.push(defaultMapNext)
         }
       }
-      if (map.options != undefined) {
-        for (const option of map.options) {
-          options.value.push(option)
-        }
+      for (const option of optionList) {
+        options.value.push(option)
       }
     }
-    if (scene != null) {
-      if (scene.options.length > 0) {
-        for (const option of scene.options) {
-          options.value.push(option)
-        }
-      }
-    }
+    return options.value
   }
 
   function getOptionByName(name: string, list: Array<Dto.ActionOption>) {

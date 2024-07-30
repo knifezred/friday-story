@@ -1,10 +1,24 @@
 export const DefaultStories: Array<Dto.StoryPlot> = [
   {
-    name: 'start',
+    name: 'main_start',
     type: 'main-line',
     cover: '',
     text: ['这是一个主线剧情', '多段text测试'],
     nextScene: 'scene.set_name'
+  },
+  {
+    name: 'dark_house_start',
+    type: 'main-line',
+    cover: '',
+    text: ['房间寒冷刺骨', '火堆熄灭了'],
+    nextScene: 'scene.makeRoomHot',
+    options: [
+      {
+        name: 'option.addWood',
+        text: 'option.addWood',
+        type: 'story'
+      }
+    ]
   }
 ]
 
@@ -39,5 +53,19 @@ export const DefaultScenes: Array<Dto.GameScene> = [
     next: '',
     options: [],
     text: ''
+  },
+  {
+    name: 'scene.makeRoomHot',
+    title: '',
+    text: '',
+    cover: '',
+    next: '',
+    options: [
+      {
+        name: 'option.addWood',
+        text: 'option.addWood.ok',
+        type: 'story'
+      }
+    ]
   }
 ]
