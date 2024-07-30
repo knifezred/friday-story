@@ -17,6 +17,21 @@ export const DefaultStories: Array<Dto.StoryPlot> = [
         name: 'option.addWood',
         text: 'option.addWood',
         type: 'story'
+      },
+      {
+        name: 'option.pickWood',
+        text: '搜刮',
+        type: 'story',
+        effect: {
+          type: 'all',
+          effects: [
+            {
+              type: 'addItem',
+              value: 'other.wood,5',
+              result: true
+            }
+          ]
+        }
       }
     ]
   }

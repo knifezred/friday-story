@@ -162,6 +162,9 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     }
   }
 
+  function useItem(name: string, count: number) {
+    archivedData.value.items.filter((x) => x.name == name)[0].count -= count
+  }
   return {
     token,
     userInfo,
@@ -172,6 +175,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     login,
     saveArchiveData,
     deleteArchiveData,
-    resetStore
+    resetStore,
+    useItem
   }
 })

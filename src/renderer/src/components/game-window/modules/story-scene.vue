@@ -35,7 +35,7 @@
       <template #footer>
         <n-flex>
           <n-button
-            v-for="btn in options"
+            v-for="btn in actionStore.options"
             :key="btn.name"
             :type="btn.buttonType ?? 'primary'"
             class="min-w-42"
@@ -80,7 +80,6 @@ const currentScene = ref<Dto.GameScene>({
   options: [],
   text: ''
 })
-const options = ref<Array<Dto.ActionOption>>([])
 const appStore = useAppStore()
 const actionStore = useGameActionStore()
 const storyStore = useStoryStore()
@@ -117,7 +116,7 @@ async function nextScene(next: string) {
   await dynamicCover()
   bindText(currentScene.value.text)
   // 绑定按钮
-  options.value = actionStore.loadActionOptions(currentScene.value.options, null)
+  actionStore.loadActionOptions(currentScene.value.options, null)
 }
 
 async function nextText() {
@@ -126,10 +125,8 @@ async function nextText() {
     isTyped.value = false
   } else {
     if (textIndex.value == totalTextCount.value - 1 || !isArrayText.value) {
-      options.value = []
-      options.value = actionStore.loadActionOptions(currentScene.value.options, null)
-      console.log(options.value)
-      if (options.value.length == 0) {
+      actionStore.loadActionOptions(currentScene.value.options, null)
+      if (actionStore.options.length == 0) {
         if (currentScene.value.next != '') {
           await nextScene(currentScene.value.next)
         } else {
@@ -150,11 +147,14 @@ async function nextText() {
 async function actionFunc(action: Dto.ActionOption) {
   action.isDisabled = true
   action.loading = true
-  const checkInfo = actionStore.executeAction(action)
-  currentText.value = checkInfo
+  currentScene.value.text = actionStore.executeAction(action)
+  textIndex.value = 0
+  bindText(currentScene.value.text)
   if (action.type == 'story') {
     if (action.next != undefined && action.next.startsWith('scene')) {
       await nextScene(action.next)
+    } else {
+      await nextText()
     }
   } else {
     await nextText()
@@ -173,8 +173,9 @@ watch(
     await dynamicCover()
     currentScene.value.next = storyStore.currentStory.nextScene
     currentScene.value.text = storyStore.currentStory.text
+    actionStore.loadActionOptions(undefined, null)
     if (typeof currentScene.value.text == 'string') {
-      options.value = actionStore.loadActionOptions(currentScene.value.options, null)
+      actionStore.loadActionOptions(currentScene.value.options, null)
     }
     bindText(currentScene.value.text)
   },

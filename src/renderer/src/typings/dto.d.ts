@@ -348,6 +348,7 @@ declare namespace Dto {
     text: string
     type: UnionKey.SceneModule
     condition?: ConditionModel
+    effect?: ActionEffectModel
     next?: string | undefined
     miniGame?: UnionKey.MiniGameModule | undefined
     icon?: string | undefined
@@ -366,6 +367,18 @@ declare namespace Dto {
     conditions: Condition[]
   }
   interface Condition {
+    type: string
+    value: string
+    result: boolean
+    text?: string
+  }
+
+  type ActionEffectType = 'all' | 'single'
+  interface ActionEffectModel {
+    type: ActionEffectType
+    effects: ActionEffect[]
+  }
+  interface ActionEffect {
     type: string
     value: string
     result: boolean

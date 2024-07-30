@@ -1,3 +1,4 @@
+import { useActionEffect } from '@renderer/hooks/game/action-effect'
 import { useCondition } from '@renderer/hooks/game/condition'
 import { $t } from '@renderer/locales'
 import { projectSetting } from '@renderer/settings/projectSetting'
@@ -216,6 +217,33 @@ export function checkCondition(conditionModel: Dto.ConditionModel | undefined) {
       // and模式下任意一个不满足就跳出
       if (conditionModel.type == 'and' && resultText != '') {
         return resultText
+      }
+    }
+  }
+  return resultText
+}
+
+export function executeEffects(effectModel: Dto.ActionEffectModel | undefined) {
+  let resultText = ''
+  if (effectModel != undefined) {
+    const effectHook = useActionEffect()
+    // 默认是全部都生效
+    let effects = effectModel.effects
+    // single 随机取一个效果
+    if (effectModel.type == 'single') {
+      effects = [effects[getRandomInt(0, effects.length - 1)]]
+    }
+    for (const effect of effects) {
+      if (effectHook[effect.type]) {
+        const result = effectHook[effect.type](effect.value)
+        if (effect.text == undefined) {
+          effect.text = 'effect.' + effect.type + (result ? 'True' : 'False')
+        }
+        let i18nValue = effect.value
+        if (effect.type == 'addItem') {
+          i18nValue = 'items.' + effect.value.split(',')[0] + '.title'
+        }
+        resultText = $t(effect.text as never, { value: $t(i18nValue as never) })
       }
     }
   }

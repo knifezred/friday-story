@@ -1,8 +1,10 @@
 import { DefaultActions } from '@renderer/constants/data/action'
 import { SetupStoreId } from '@renderer/enums'
-import { checkCondition } from '@renderer/utils/common'
+import { checkCondition, executeEffects } from '@renderer/utils/common'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import { useAppStore } from '../app'
+import { useAuthStore } from '../auth'
 
 export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
   const currentAction = ref<Dto.ActionOption>({
@@ -12,6 +14,8 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
   })
   const options = ref<Array<Dto.ActionOption>>([])
 
+  const appStore = useAppStore()
+  const authStore = useAuthStore()
   function beforeExecute(action: Dto.ActionOption) {
     currentAction.value = action
     console.log('before execute')
@@ -26,15 +30,49 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
   }
 
   function executeAction(action: Dto.ActionOption) {
+    let resMsg: string[] = []
     let result = action.text
     currentAction.value = action
     result = beforeExecute(currentAction.value)
     if (result == '') {
       currentAction.value.canExecute = true
-      result = action.text
+      // 执行动作
+      switch (action.name) {
+        case 'option.addWood':
+          if (authStore.archivedData.items.filter((x) => x.name == 'other.wood').length > 0) {
+            authStore.useItem('other.wood', 1)
+            appStore.temperature += 5
+
+            if (appStore.temperature < 0) {
+              resMsg = ['火堆冒出火苗']
+              resMsg.push('屋内依旧很寒冷')
+            }
+            if (appStore.temperature > 1 && appStore.temperature < 10) {
+              resMsg = ['火堆很温暖']
+              resMsg.push('屋内稍微暖和一些')
+            }
+            if (appStore.temperature > 10 && appStore.temperature < 30) {
+              resMsg = ['火烧的很旺']
+              resMsg.push('屋内温度很宜人')
+            }
+            if (appStore.temperature > 30 && appStore.temperature < 40) {
+              resMsg = ['火有点大了']
+              resMsg.push('屋内有点热')
+            }
+          } else {
+            resMsg = ['你没有木头']
+          }
+          break
+
+        default:
+          resMsg = [action.text]
+          break
+      }
+      executeEffects(action.effect)
+    } else {
+      resMsg = [result]
     }
-    console.log(action)
-    return result
+    return resMsg
   }
 
   function loadActionOptions(
@@ -42,6 +80,7 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
     next: string | undefined | null
   ) {
     options.value = []
+    console.log(appStore.currentSceneType)
     if (next != undefined && next != null) {
       if (!optionExists('map.next', optionList)) {
         const defaultMapNext = getOptionByName('map.next', DefaultActions)

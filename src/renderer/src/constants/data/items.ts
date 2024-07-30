@@ -49,6 +49,11 @@ export const DefaultGameItems: Array<Dto.GameItem> = [
     name: 'lin_home_key',
     type: 'task',
     level: 'SR'
+  },
+  {
+    name: 'wood',
+    type: 'other',
+    level: 'N'
   }
 ]
 

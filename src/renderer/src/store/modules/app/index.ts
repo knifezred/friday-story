@@ -51,6 +51,7 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
   const projectSettings = ref<App.Global.ProjectSetting>(initProjectSettings())
   const currentSceneType = ref<UnionKey.SceneModule>('map')
   const currentMiniGame = ref<UnionKey.MiniGameModule>('finger-guessing')
+  const temperature = ref(-18.0)
   const fromMoney = ref(0)
   const fromGold = ref(0)
   function addMoney(money: number) {
@@ -214,6 +215,7 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
     currentSceneType,
     currentMiniGame,
     projectSettings,
-    changeMusic
+    changeMusic,
+    temperature
   }
 })

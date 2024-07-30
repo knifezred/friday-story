@@ -97,7 +97,7 @@ function actionFunc(action: Dto.ActionOption) {
     appStore.currentSceneType = action.type
   } else {
     isTyped.value = true
-    currentText.value = checkInfo
+    currentText.value = checkInfo[0]
   }
   setTimeout(() => {
     action.isDisabled = false
