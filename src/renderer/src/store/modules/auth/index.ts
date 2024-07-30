@@ -161,9 +161,21 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
       }
     }
   }
-
+  function hasItem(name: string, count: number) {
+    if (archivedData.value.items.filter((x) => x.name == name).length > 0) {
+      const item = archivedData.value.items.filter((x) => x.name == name)[0]
+      return item.count - count >= 0
+    }
+    return false
+  }
   function useItem(name: string, count: number) {
-    archivedData.value.items.filter((x) => x.name == name)[0].count -= count
+    let result = 'option.itemUseSuccess'
+    if (hasItem(name, count)) {
+      archivedData.value.items.filter((x) => x.name == name)[0].count -= count
+    } else {
+      result = $t('option.itemNotEnough', { value: $t(('items.' + name + '.title') as never) })
+    }
+    return result
   }
   return {
     token,
@@ -176,6 +188,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     saveArchiveData,
     deleteArchiveData,
     resetStore,
+    hasItem,
     useItem
   }
 })

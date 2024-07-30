@@ -19,7 +19,6 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
 
   function beforeExecute(action: Dto.ActionOption) {
     currentAction.value = action
-    console.log('before execute')
     if (currentAction.value.condition != undefined) {
       const result = checkCondition(
         currentAction.value.condition.filter((x) => x.for == 'execute')[0]
@@ -44,29 +43,29 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
       // 执行动作
       switch (action.name) {
         case 'option.addWood':
-          if (authStore.archivedData.items.filter((x) => x.name == 'material.wood').length > 0) {
-            authStore.useItem('material.wood', 1)
-            appStore.temperature += 5
-
-            if (appStore.temperature < 0) {
+          result = authStore.useItem('material.wood', 1)
+          if (result.includes('Success')) {
+            appStore.roomTemperature += 5
+            if (appStore.roomTemperature < 0) {
               resMsg = ['火堆冒出火苗']
               resMsg.push('屋内依旧很寒冷')
             }
-            if (appStore.temperature > 1 && appStore.temperature < 10) {
-              resMsg = ['火堆很温暖']
+            if (appStore.roomTemperature > 1 && appStore.roomTemperature < 10) {
+              resMsg = ['火堆大了一点']
               resMsg.push('屋内稍微暖和一些')
             }
-            if (appStore.temperature > 10 && appStore.temperature < 30) {
+            if (appStore.roomTemperature > 10 && appStore.roomTemperature < 30) {
               resMsg = ['火烧的很旺']
               resMsg.push('屋内温度很宜人')
             }
-            if (appStore.temperature > 30 && appStore.temperature < 40) {
+            if (appStore.roomTemperature > 30 && appStore.roomTemperature < 40) {
               resMsg = ['火有点大了']
               resMsg.push('屋内有点热')
             }
           } else {
-            resMsg = ['你没有木头']
+            resMsg.push(result)
           }
+
           break
 
         default:
@@ -88,7 +87,6 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
     next: string | undefined | null
   ) {
     options.value = []
-    console.log(appStore.currentSceneType)
     if (next != undefined && next != null) {
       if (!optionExists('map.next', optionList)) {
         const defaultMapNext = getOptionByName('map.next', DefaultActions)

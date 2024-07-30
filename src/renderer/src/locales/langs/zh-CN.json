@@ -398,7 +398,9 @@
     "cutTree": "伐木",
     "cutTreeInfo": "伐木中... ...",
     "explore": "探索",
-    "exploreInfo": "你在屋内东翻西找、找到了一些看起来有用的东西"
+    "exploreInfo": "你在屋内东翻西找、找到了一些看起来有用的东西",
+    "itemNotEnough": "你没有足够的{value}！",
+    "itemUseSuccess": "物品使用成功"
   },
   "page": {
     "about": {

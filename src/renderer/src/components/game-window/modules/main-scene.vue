@@ -97,7 +97,9 @@ function bindText(text: string[]) {
   isTyped.value = true
   totalTextCount.value = text.length
   textIndex.value = 0
-  currentText.value = text[textIndex.value]
+  if (text.length > textIndex.value) {
+    currentText.value = text[textIndex.value]
+  }
 }
 
 async function dynamicCover() {
@@ -141,7 +143,11 @@ async function nextText() {
       }
     } else if (textIndex.value < totalTextCount.value - 1) {
       textIndex.value += 1
-      currentText.value = currentScene.value.text[textIndex.value]
+      if (textIndex.value >= currentScene.value.text.length) {
+        bindText(currentScene.value.text)
+      } else {
+        currentText.value = currentScene.value.text[textIndex.value]
+      }
     }
   }
 }

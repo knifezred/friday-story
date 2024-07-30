@@ -44,21 +44,6 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                     ]
                   }
                 ]
-              },
-              {
-                name: 'option.pickWood',
-                text: 'option.pickWood',
-                type: 'map',
-                effect: {
-                  type: 'all',
-                  effects: [
-                    {
-                      type: 'addItem',
-                      value: 'material.wood,5',
-                      result: true
-                    }
-                  ]
-                }
               }
             ]
           },

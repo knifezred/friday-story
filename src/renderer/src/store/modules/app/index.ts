@@ -52,6 +52,7 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
   const currentSceneType = ref<UnionKey.SceneModule>('map')
   const currentMiniGame = ref<UnionKey.MiniGameModule>('finger-guessing')
   const temperature = ref(-18.0)
+  const roomTemperature = ref(0.0)
   const fromMoney = ref(0)
   const fromGold = ref(0)
   function addMoney(money: number) {
@@ -216,6 +217,7 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
     currentMiniGame,
     projectSettings,
     changeMusic,
-    temperature
+    temperature,
+    roomTemperature
   }
 })

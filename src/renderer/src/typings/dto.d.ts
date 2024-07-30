@@ -191,7 +191,7 @@ declare namespace Dto {
     next?: string
     story?: string
     icon?: string
-    text: string[]
+    text?: string[]
     isDisabled?: boolean
     isShow?: boolean
     level: MapLevelType

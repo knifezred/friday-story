@@ -16,6 +16,7 @@
             <SvgIcon
               icon="meteocons:clear-day-fill"
               class="text-icon-xl inline-block mx-1 v-bottom" />
+            {{ appStore.temperature }}°
           </n-tag>
         </n-divider>
         <n-grid x-gap="12" y-gap="8" :cols="2">
