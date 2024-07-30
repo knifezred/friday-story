@@ -44,8 +44,8 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
       // 执行动作
       switch (action.name) {
         case 'option.addWood':
-          if (authStore.archivedData.items.filter((x) => x.name == 'other.wood').length > 0) {
-            authStore.useItem('other.wood', 1)
+          if (authStore.archivedData.items.filter((x) => x.name == 'material.wood').length > 0) {
+            authStore.useItem('material.wood', 1)
             appStore.temperature += 5
 
             if (appStore.temperature < 0) {

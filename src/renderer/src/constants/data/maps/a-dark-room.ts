@@ -21,7 +21,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                   effects: [
                     {
                       type: 'addItem',
-                      value: 'other.wood,5',
+                      value: 'material.wood,5',
                       result: true
                     }
                   ]
@@ -38,7 +38,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                     conditions: [
                       {
                         type: 'hasItem',
-                        value: 'other.wood',
+                        value: 'material.wood',
                         result: true
                       }
                     ]
@@ -54,7 +54,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                   effects: [
                     {
                       type: 'addItem',
-                      value: 'other.wood,5',
+                      value: 'material.wood,5',
                       result: true
                     }
                   ]
@@ -81,7 +81,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
               effects: [
                 {
                   type: 'addItem',
-                  value: 'other.wood,10',
+                  value: 'material.wood,10',
                   result: true
                 }
               ]

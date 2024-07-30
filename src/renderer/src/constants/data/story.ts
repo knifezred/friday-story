@@ -27,7 +27,7 @@ export const DefaultStories: Array<Dto.StoryPlot> = [
             conditions: [
               {
                 type: 'hasItem',
-                value: 'other.wood',
+                value: 'material.wood',
                 result: true
               }
             ]
@@ -43,7 +43,7 @@ export const DefaultStories: Array<Dto.StoryPlot> = [
           effects: [
             {
               type: 'addItem',
-              value: 'other.wood,5',
+              value: 'material.wood,5',
               result: true
             }
           ]
