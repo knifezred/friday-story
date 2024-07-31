@@ -216,7 +216,7 @@ declare namespace Dto {
     level: MapLevelType
     order?: number
     options: Array<ActionOption> | undefined
-    isLocked?: boolean
+    isLocked?: boolean //锁门
     condition?: ConditionModel
   }
 
@@ -359,8 +359,6 @@ declare namespace Dto {
     locked?: boolean
     canExecute?: boolean
   }
-
-  type MapActionOption = Pick<ActionOption, 'name' | 'condition'>
 
   type ConditionType = 'and' | 'or'
   interface ConditionModel {

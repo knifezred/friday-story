@@ -49,7 +49,8 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
           },
           {
             name: 'darkHouse.room1',
-            level: 'room'
+            level: 'room',
+            isShow: false
           }
         ]
       },

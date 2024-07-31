@@ -1,9 +1,10 @@
 import { useAuthStore } from '@renderer/store/modules/auth'
+import { useMapStore } from '@renderer/store/modules/game-map'
 
 export function useActionEffect() {
   const authStore = useAuthStore()
   // const appStore = useAppStore()
-  // const mapStore = useMapStore()
+  const mapStore = useMapStore()
 
   // 添加指定物品
   function addItem(value: string) {
@@ -22,7 +23,13 @@ export function useActionEffect() {
     }
   }
 
+  // 解锁地图
+  function unlockMap(value: string) {
+    mapStore.allMaps.filter((x) => x.name == value)[0].isShow = true
+  }
+
   return {
-    addItem
+    addItem,
+    unlockMap
   }
 }

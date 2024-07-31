@@ -67,24 +67,27 @@
         </n-tag>
         <n-scrollbar class="h-100vh" :distance="10">
           <NFlex v-if="appStore.currentSceneType == 'map'" class="pl-2">
-            <n-card
-              v-for="item in mapStore.currLevelMaps"
-              :key="item.id"
-              :title="$t(item.title)"
-              class="w-31% text-center cursor-pointer map-card"
-              size="small"
-              hoverable
-              @click="mapFunc(item)">
-              <template #cover>
-                <image-icon :src="item.cover" />
-              </template>
-              <template #header-extra>
-                <icon-solar:user-bold-duotone
-                  v-if="item.id == mapStore.currMap.id"
-                  class="color-primary" />
-                <icon-solar:exit-line-duotone v-if="item.next != undefined" class="color-primary" />
-              </template>
-            </n-card>
+            <template v-for="item in mapStore.currLevelMaps" :key="item.id">
+              <n-card
+                v-if="item.isShow"
+                :title="$t(item.title)"
+                class="w-31% text-center cursor-pointer map-card"
+                size="small"
+                hoverable
+                @click="mapFunc(item)">
+                <template #cover>
+                  <image-icon :src="item.cover" />
+                </template>
+                <template #header-extra>
+                  <icon-solar:user-bold-duotone
+                    v-if="item.id == mapStore.currMap.id"
+                    class="color-primary" />
+                  <icon-solar:exit-line-duotone
+                    v-if="item.next != undefined"
+                    class="color-primary" />
+                </template>
+              </n-card>
+            </template>
           </NFlex>
         </n-scrollbar>
       </NFlex>

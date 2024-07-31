@@ -118,7 +118,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
       // 3. update store
       token.value = data.id == undefined ? '' : data.id.toString()
       // 初始化地图
-      mapStore.initMap(userInfo.archive.place)
+      await mapStore.initMap(userInfo.archive.place)
       return true
     }
 
@@ -132,6 +132,8 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
       )
       userInfo.archive.saveTime = Date.now()
       userInfo.archive.data = JSON.stringify(archivedData.value)
+      // 保存当前存档数据
+      await mapStore.updateMapStorage()
       if (isNew) {
         const searchKey = userInfo.archive.id + '.'
         userInfo.archive.id = undefined

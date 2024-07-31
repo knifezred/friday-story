@@ -1,4 +1,5 @@
 import { SetupStoreId } from '@renderer/enums'
+import { createStorage, findStorage, updateStorage } from '@renderer/service/api/storage'
 import { checkCondition } from '@renderer/utils/common'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
@@ -104,8 +105,8 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     }
   }
 
-  function initMap(id: string) {
-    allMaps.value = getDefaultMaps()
+  async function initMap(id: string) {
+    allMaps.value = await getDefaultMaps(authStore.userInfo.archive.id)
     const map = allMaps.value.filter((x) => x.id == id)[0]
     if (map.id == id) {
       if (map.next != undefined) {
@@ -121,6 +122,24 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     checkConditions(currMap.value)
   }
 
+  async function updateMapStorage() {
+    if (authStore.userInfo.archive.id != undefined) {
+      const searchKey = authStore.userInfo.archive.id + '.map'
+      const mapStorage = await findStorage(searchKey)
+      if (mapStorage.data != null && typeof mapStorage.data != 'string') {
+        mapStorage.data.value = JSON.stringify(allMaps.value)
+        mapStorage.data.updatedTime = Date.now()
+        updateStorage(mapStorage.data)
+      } else {
+        createStorage({
+          value: JSON.stringify(allMaps.value),
+          key: searchKey,
+          createdTime: Date.now(),
+          updatedTime: Date.now()
+        })
+      }
+    }
+  }
   return {
     allMaps,
     currLevelMaps,
@@ -128,6 +147,7 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     parentMap,
     initMap,
     nextMap,
-    beforeNextMap
+    beforeNextMap,
+    updateMapStorage
   }
 })

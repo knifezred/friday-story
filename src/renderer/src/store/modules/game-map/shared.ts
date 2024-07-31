@@ -1,7 +1,15 @@
 import { DefaultMaps } from '@renderer/constants/data/map'
+import { findStorage } from '@renderer/service/api/storage'
 import { localeText, prefixImage } from '@renderer/utils/common'
 
-export function getDefaultMaps() {
+export async function getDefaultMaps(id: number | undefined) {
+  if (id != undefined) {
+    const searchKey = id + '.map'
+    const mapStorage = await findStorage(searchKey)
+    if (mapStorage.data != null && typeof mapStorage.data != 'string') {
+      return JSON.parse(mapStorage.data.value) as Array<Dto.MapItemFull>
+    }
+  }
   return flattenTree(generateIdAndPid(DefaultMaps, 'root'))
 }
 
@@ -39,7 +47,7 @@ function flattenTree(tree) {
       options: node.options,
       icon: node.icon,
       isDisabled: node.isDisabled,
-      isShow: node.isShow,
+      isShow: node.isShow != false,
       order: node.order,
       isLocked: node.isLocked,
       condition: node.condition
