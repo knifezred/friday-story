@@ -369,8 +369,10 @@ declare namespace Dto {
   interface Condition {
     type: string
     value: string
-    result: boolean
+    result?: boolean
     text?: string
+    success?: string
+    failure?: string
   }
 
   type ActionEffectType = 'all' | 'single'
@@ -381,7 +383,9 @@ declare namespace Dto {
   interface ActionEffect {
     type: string
     value: string
-    result: boolean
+    result?: boolean
     text?: string
+    success?: string
+    failure?: string
   }
 }

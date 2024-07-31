@@ -16,19 +16,30 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                 name: 'option.explore',
                 text: 'option.explore',
                 type: 'map',
+                condition: [
+                  {
+                    type: 'and',
+                    for: 'execute',
+                    conditions: [
+                      {
+                        type: 'maxOptionNum',
+                        value: 'option.explore,1',
+                        failure: '什么也没有发现'
+                      }
+                    ]
+                  }
+                ],
                 effect: {
                   type: 'all',
                   effects: [
                     {
                       type: 'addItem',
-                      value: 'material.wood,5',
-                      result: true
+                      value: 'material.wood,5'
                     },
                     {
                       type: 'unlockMap',
                       value: 'room.darkHouse.roomWork',
-                      text: '你发现了工作台',
-                      result: true
+                      text: '你发现了工作台'
                     }
                   ]
                 }
@@ -44,8 +55,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                     conditions: [
                       {
                         type: 'hasItem',
-                        value: 'material.wood',
-                        result: true
+                        value: 'material.wood'
                       }
                     ]
                   }
@@ -73,8 +83,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
               effects: [
                 {
                   type: 'addItem',
-                  value: 'material.wood,10',
-                  result: true
+                  value: 'material.wood,10'
                 }
               ]
             }

@@ -10,10 +10,18 @@ export function checkCondition(conditionModel: Dto.ConditionModel | undefined) {
     for (const condition of conditionModel.conditions) {
       if (conditionHook[condition.type]) {
         const result = conditionHook[condition.type](condition.value)
+        if (condition.result == undefined) {
+          // 默认验证条件为true
+          condition.result = true
+        }
         // 条件判定失败
         if (result != condition.result) {
-          if (condition.text == undefined) {
-            condition.text = 'condition.' + condition.type + (result ? 'True' : 'False')
+          if (condition.failure == undefined) {
+            if (condition.text == undefined) {
+              condition.text = 'condition.' + condition.type + (result ? 'True' : 'False')
+            }
+          } else {
+            condition.text = condition.failure
           }
           let i18nValue = condition.value
           if (condition.type == 'hasItem') {
@@ -49,8 +57,12 @@ export function executeEffects(effectModel: Dto.ActionEffectModel | undefined) {
     for (const effect of effects) {
       if (effectHook[effect.type]) {
         const result = effectHook[effect.type](effect.value)
-        if (effect.text == undefined) {
-          effect.text = 'effect.' + effect.type + (result ? 'True' : 'False')
+        if (effect.failure == undefined) {
+          if (effect.text == undefined) {
+            effect.text = 'effect.' + effect.type + (result ? 'True' : 'False')
+          }
+        } else {
+          effect.text = effect.failure
         }
         let i18nValue = effect.value
         if (effect.type == 'addItem') {

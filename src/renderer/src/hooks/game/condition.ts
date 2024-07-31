@@ -90,6 +90,17 @@ export function useCondition() {
     return false
   }
 
+  function minOptionNum(value: string) {
+    const { 0: name, 1: num } = value.split(',')
+    const count = appStore.getOptionExecuteNum(name)
+    return count >= Number(num)
+  }
+  function maxOptionNum(value: string) {
+    const { 0: name, 1: num } = value.split(',')
+    const count = appStore.getOptionExecuteNum(name)
+    return count < Number(num)
+  }
+
   return {
     hasAuth,
     hasItem,
@@ -98,6 +109,8 @@ export function useCondition() {
     inTime,
     inHour,
     inDays,
-    inMons
+    inMons,
+    minOptionNum,
+    maxOptionNum
   }
 }

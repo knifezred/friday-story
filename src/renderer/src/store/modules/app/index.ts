@@ -55,6 +55,7 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
   const roomTemperature = ref(0.0)
   const fromMoney = ref(0)
   const fromGold = ref(0)
+  const optionExecuteNumbers = ref<Array<Game.ActionOption.ActionExecuteNumber>>([])
   function addMoney(money: number) {
     fromMoney.value = authStore.archivedData.money
     authStore.archivedData.money = authStore.archivedData.money + money
@@ -73,6 +74,27 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
 
   function cacheProjectSettings() {
     localStg.set('projectSettings', projectSettings.value)
+  }
+
+  function countOptionExecute(name: string) {
+    const option = optionExecuteNumbers.value.filter((x) => x.name == name)
+    if (option.length > 0) {
+      option[0].num += 1
+    } else {
+      optionExecuteNumbers.value.push({
+        name,
+        num: 1
+      })
+    }
+  }
+
+  function getOptionExecuteNum(name) {
+    const option = optionExecuteNumbers.value.filter((x) => x.name == name)
+    if (option.length > 0) {
+      return option[0].num
+    } else {
+      return 0
+    }
   }
   // custom end
   /**
@@ -218,6 +240,8 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
     projectSettings,
     changeMusic,
     temperature,
-    roomTemperature
+    roomTemperature,
+    countOptionExecute,
+    getOptionExecuteNum
   }
 })

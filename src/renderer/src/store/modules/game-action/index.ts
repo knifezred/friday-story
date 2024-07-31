@@ -83,7 +83,7 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
         resMsg.push(r)
       }
     } else {
-      resMsg = [result]
+      resMsg.push(result)
     }
     return resMsg
   }

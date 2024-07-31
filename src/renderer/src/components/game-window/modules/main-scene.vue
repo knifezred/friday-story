@@ -163,13 +163,12 @@ async function actionFunc(action: Dto.ActionOption) {
   totalTextCount.value = currentScene.value.text.length
   actionStore.loadActionOptions(currentScene.value.options, currentScene.value.next)
   if (actionStore.currentAction.canExecute) {
+    appStore.countOptionExecute(action.name)
     switch (action.type) {
       case 'map':
         mapStore.currMap.isLocked = false
         if (action.next != undefined && action.next != '') {
           mapStore.nextMap(action.next, mapStore.currMap)
-        } else {
-          nextText()
         }
         break
       case 'mini-game':
@@ -193,6 +192,7 @@ async function actionFunc(action: Dto.ActionOption) {
     }
     appStore.currentSceneType = action.type
   }
+  nextText()
   setTimeout(() => {
     action.isDisabled = false
     action.loading = false

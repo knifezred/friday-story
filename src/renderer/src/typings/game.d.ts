@@ -10,4 +10,10 @@ declare namespace Game {
       | 'warmest'
       | 'hot'
   }
+  namespace ActionOption {
+    interface ActionExecuteNumber {
+      name: string
+      num: number
+    }
+  }
 }

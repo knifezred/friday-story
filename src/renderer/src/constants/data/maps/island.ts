@@ -48,8 +48,8 @@ export const IslandMaps: Array<Dto.MapItem> = [
                           {
                             type: 'or',
                             conditions: [
-                              { type: 'inTime', value: '8:00-23:00', result: true },
-                              { type: 'hasItem', value: 'task.lin_home_key', result: true }
+                              { type: 'inTime', value: '8:00-23:00' },
+                              { type: 'hasItem', value: 'task.lin_home_key' }
                             ],
                             for: 'execute'
                           }
@@ -111,8 +111,7 @@ export const IslandMaps: Array<Dto.MapItem> = [
                               {
                                 type: 'inTime',
                                 value: '09:00-23:00',
-                                text: 'condition.openHour',
-                                result: true
+                                text: 'condition.openHour'
                               }
                             ],
                             for: 'execute'
