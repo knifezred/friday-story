@@ -52,6 +52,18 @@
   "effect": {
     "addItemTrue": "获得了 {value} !"
   },
+  "env": {
+    "temperature": {
+      "coldest": "极寒",
+      "colder": "刺骨",
+      "cold": "微冷",
+      "suitable": "宜人",
+      "warm": "温暖",
+      "warmer": "温热",
+      "warmest": "燥热",
+      "hot": "酷热"
+    }
+  },
   "dataTable": {
     "itemCount": "共 {total} 条"
   },
@@ -269,11 +281,11 @@
         "title": "欧金广场"
       },
       "darkHouse": {
-        "title": "破木屋",
-        "text": "一个寒冷的破木屋",
+        "title": "木屋",
+        "text": "一座木屋",
         "begin": {
-          "title": "破木屋",
-          "text": "一个寒冷的破木屋"
+          "title": "漏风的房间",
+          "text": "一个{roomTemperature}的房间，添柴时小心别把屋子烧了"
         },
         "room1": {
           "title": "上锁的房间",
@@ -339,7 +351,7 @@
         "title": "樱岛国"
       },
       "aDarkRoom": {
-        "text": "达克木",
+        "text": "复刻小黑屋的文字冒险游戏",
         "title": "达克木"
       }
     },

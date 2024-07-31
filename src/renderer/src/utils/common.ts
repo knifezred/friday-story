@@ -1,5 +1,3 @@
-import { useActionEffect } from '@renderer/hooks/game/action-effect'
-import { useCondition } from '@renderer/hooks/game/condition'
 import { $t } from '@renderer/locales'
 import { projectSetting } from '@renderer/settings/projectSetting'
 import dayjs from 'dayjs'
@@ -171,7 +169,7 @@ export async function dynamicResource(filePath: string) {
   if (files.length == 0) {
     return filePath
   } else {
-    const randIndex = getRandomInt(0, files.length - 1)
+    const randIndex = randomInt(0, files.length - 1)
     return files[randIndex]
   }
 }
@@ -180,78 +178,39 @@ export function coverWithDefault(filePath: string) {
   if (window.api.isFileExist(filePath)) {
     return filePath
   }
-  return '/static/imgs/t' + getRandomInt(0, 7) + '.webp'
+  return '/static/imgs/t' + randomInt(0, 7) + '.webp'
 }
 
-export function getRandomInt(min: number, max: number) {
+export function randomInt(min: number, max: number) {
   // 确保min小于max
   min = Math.ceil(min)
   max = Math.floor(max)
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
-export function checkCondition(conditionModel: Dto.ConditionModel | undefined) {
-  let resultText = ''
-  if (conditionModel != undefined) {
-    const conditionHook = useCondition()
-    for (const condition of conditionModel.conditions) {
-      if (conditionHook[condition.type]) {
-        const result = conditionHook[condition.type](condition.value)
-        // 条件判定失败
-        if (result != condition.result) {
-          if (condition.text == undefined) {
-            condition.text = 'condition.' + condition.type + (result ? 'True' : 'False')
-          }
-          let i18nValue = condition.value
-          if (condition.type == 'hasItem') {
-            i18nValue = 'items.' + condition.value + '.title'
-          }
-          resultText = $t(condition.text as never, { value: $t(i18nValue as never) })
-        } else {
-          // or模式任意一个成功就返回成功
-          if (conditionModel.type == 'or') {
-            return ''
-          }
-        }
-      }
-      // and模式下任意一个不满足就跳出
-      if (conditionModel.type == 'and' && resultText != '') {
-        return resultText
-      }
-    }
+export function roomTemperature(temperature: number) {
+  // 刺骨 冰冷 寒冷 微冷 宜人 温暖 温热 燥热 酷热
+  let result: Game.Env.TemperatureType = 'coldest'
+  if (temperature >= -30 && temperature < -15) {
+    result = 'colder'
   }
-  return resultText
-}
-
-export function executeEffects(effectModel: Dto.ActionEffectModel | undefined) {
-  const resultText: string[] = []
-  if (effectModel != undefined) {
-    const effectHook = useActionEffect()
-    // 默认是全部都生效
-    let effects = effectModel.effects
-    // single 随机取一个效果
-    if (effectModel.type == 'single') {
-      effects = [effects[getRandomInt(0, effects.length - 1)]]
-    }
-    for (const effect of effects) {
-      if (effectHook[effect.type]) {
-        const result = effectHook[effect.type](effect.value)
-        if (effect.text == undefined) {
-          effect.text = 'effect.' + effect.type + (result ? 'True' : 'False')
-        }
-        let i18nValue = effect.value
-        if (effect.type == 'addItem') {
-          i18nValue = 'items.' + effect.value.split(',')[0] + '.title'
-          resultText.push(
-            $t(effect.text as never, {
-              value: $t(i18nValue as never) + 'x' + effect.value.split(',')[1]
-            })
-          )
-        } else {
-          resultText.push($t(effect.text as never, { value: $t(i18nValue as never) }))
-        }
-      }
-    }
+  if (temperature >= -15 && temperature < 5) {
+    result = 'cold'
   }
-  return resultText
+  if (temperature >= 5 && temperature < 15) {
+    result = 'suitable'
+  }
+  if (temperature >= 15 && temperature < 20) {
+    result = 'warm'
+  }
+  if (temperature >= 20 && temperature < 30) {
+    result = 'warmer'
+  }
+  if (temperature >= 30 && temperature < 40) {
+    result = 'warmest'
+  }
+  if (temperature >= 40) {
+    result = 'hot'
+  }
+  return $t(('env.temperature.' + result) as never)
 }

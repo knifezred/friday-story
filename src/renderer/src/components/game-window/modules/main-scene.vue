@@ -131,7 +131,6 @@ async function nextText() {
     isTyped.value = false
   } else {
     if (textIndex.value == totalTextCount.value - 1) {
-      actionStore.loadActionOptions(currentScene.value.options, currentScene.value.next)
       if (actionStore.options.length == 0) {
         if (currentScene.value.next != '') {
           await nextScene(currentScene.value.next)
@@ -157,14 +156,20 @@ async function nextText() {
 async function actionFunc(action: Dto.ActionOption) {
   action.isDisabled = true
   action.loading = true
-  currentScene.value.text = actionStore.executeAction(action)
-  bindText(currentScene.value.text)
+  const executeResult = actionStore.executeAction(action)
+  for (const re of executeResult) {
+    currentScene.value.text.push(re)
+  }
+  totalTextCount.value = currentScene.value.text.length
+  actionStore.loadActionOptions(currentScene.value.options, currentScene.value.next)
   if (actionStore.currentAction.canExecute) {
     switch (action.type) {
       case 'map':
         mapStore.currMap.isLocked = false
-        if (action.next != undefined) {
+        if (action.next != undefined && action.next != '') {
           mapStore.nextMap(action.next, mapStore.currMap)
+        } else {
+          nextText()
         }
         break
       case 'mini-game':

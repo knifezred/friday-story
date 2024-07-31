@@ -1,10 +1,13 @@
 import { DefaultActions } from '@renderer/constants/data/action'
 import { SetupStoreId } from '@renderer/enums'
-import { checkCondition, executeEffects } from '@renderer/utils/common'
+import { $t } from '@renderer/locales'
+import { roomTemperature } from '@renderer/utils/common'
+import { checkCondition, executeEffects } from '@renderer/utils/game'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useAppStore } from '../app'
 import { useAuthStore } from '../auth'
+import { useMapStore } from '../game-map'
 
 export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
   const currentAction = ref<Dto.ActionOption>({
@@ -16,6 +19,8 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
 
   const appStore = useAppStore()
   const authStore = useAuthStore()
+
+  const mapStore = useMapStore()
 
   function beforeExecute(action: Dto.ActionOption) {
     currentAction.value = action
@@ -46,22 +51,23 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
           result = authStore.useItem('material.wood', 1)
           if (result.includes('Success')) {
             appStore.roomTemperature += 5
-            if (appStore.roomTemperature < 0) {
-              resMsg = ['火堆冒出火苗']
-              resMsg.push('屋内依旧很寒冷')
+            if (appStore.roomTemperature <= 0) {
+              resMsg.push('火堆冒出火苗')
             }
-            if (appStore.roomTemperature > 1 && appStore.roomTemperature < 10) {
-              resMsg = ['火堆大了一点']
-              resMsg.push('屋内稍微暖和一些')
+            if (appStore.roomTemperature >= 1 && appStore.roomTemperature < 10) {
+              resMsg.push('火堆大了一点')
             }
-            if (appStore.roomTemperature > 10 && appStore.roomTemperature < 30) {
-              resMsg = ['火烧的很旺']
-              resMsg.push('屋内温度很宜人')
+            if (appStore.roomTemperature >= 10 && appStore.roomTemperature < 30) {
+              resMsg.push('火烧的很旺')
             }
-            if (appStore.roomTemperature > 30 && appStore.roomTemperature < 40) {
-              resMsg = ['火有点大了']
-              resMsg.push('屋内有点热')
+            if (appStore.roomTemperature >= 30 && appStore.roomTemperature < 40) {
+              resMsg.push('火有点大了')
             }
+            resMsg.push(
+              $t(mapStore.currMap.text as never, {
+                roomTemperature: roomTemperature(appStore.roomTemperature)
+              })
+            )
           } else {
             resMsg.push(result)
           }

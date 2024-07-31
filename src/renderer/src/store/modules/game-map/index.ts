@@ -1,6 +1,6 @@
 import { SetupStoreId } from '@renderer/enums'
 import { createStorage, findStorage, updateStorage } from '@renderer/service/api/storage'
-import { checkCondition } from '@renderer/utils/common'
+import { checkCondition } from '@renderer/utils/game'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useAuthStore } from '../auth'
