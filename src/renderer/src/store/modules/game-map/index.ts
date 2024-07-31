@@ -140,6 +140,25 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
       }
     }
   }
+
+  function findMap(id: string) {
+    const map = allMaps.value.filter((x) => x.id == id)
+    if (map.length > 0) {
+      return map[0]
+    } else {
+      return undefined
+    }
+  }
+
+  function setMap(map: Dto.MapItemFull) {
+    const filterMap = allMaps.value.filter((x) => x.id == map.id)
+    if (filterMap.length > 0) {
+      filterMap[0] = map
+      return true
+    } else {
+      return false
+    }
+  }
   return {
     allMaps,
     currLevelMaps,
@@ -148,6 +167,8 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     initMap,
     nextMap,
     beforeNextMap,
-    updateMapStorage
+    updateMapStorage,
+    findMap,
+    setMap
   }
 })

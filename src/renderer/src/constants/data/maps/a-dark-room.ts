@@ -23,6 +23,12 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                       type: 'addItem',
                       value: 'material.wood,5',
                       result: true
+                    },
+                    {
+                      type: 'unlockMap',
+                      value: 'room.darkHouse.roomWork',
+                      text: '你发现了工作台',
+                      result: true
                     }
                   ]
                 }
@@ -48,7 +54,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
             ]
           },
           {
-            name: 'darkHouse.room1',
+            name: 'darkHouse.roomWork',
             level: 'room',
             isShow: false
           }

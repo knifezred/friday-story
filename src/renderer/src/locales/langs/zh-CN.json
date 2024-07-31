@@ -287,9 +287,9 @@
           "title": "漏风的房间",
           "text": "一个{roomTemperature}的房间，添柴时小心别把屋子烧了"
         },
-        "room1": {
-          "title": "上锁的房间",
-          "text": "一个上锁的房间，如果有撬棍或者钥匙也许能够打开"
+        "roomWork": {
+          "title": "工作台",
+          "text": "一个简易工作台，可以制作一些粗糙的工具"
         }
       },
       "mistyForest": {

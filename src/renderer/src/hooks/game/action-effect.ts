@@ -25,7 +25,12 @@ export function useActionEffect() {
 
   // 解锁地图
   function unlockMap(value: string) {
-    mapStore.allMaps.filter((x) => x.name == value)[0].isShow = true
+    const map = mapStore.findMap(value)
+    if (map != undefined) {
+      map.isShow = true
+      return true
+    }
+    return false
   }
 
   return {
