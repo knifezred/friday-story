@@ -122,7 +122,7 @@ async function nextScene(next: string) {
   await dynamicCover()
   bindText(currentScene.value.text)
   // 绑定按钮
-  actionStore.loadActionOptions(currentScene.value.options, null)
+  actionStore.loadActionOptions(currentScene.value.options, currentScene.value.next)
 }
 
 async function nextText() {
@@ -131,7 +131,7 @@ async function nextText() {
     isTyped.value = false
   } else {
     if (textIndex.value == totalTextCount.value - 1) {
-      actionStore.loadActionOptions(currentScene.value.options, null)
+      actionStore.loadActionOptions(currentScene.value.options, currentScene.value.next)
       if (actionStore.options.length == 0) {
         if (currentScene.value.next != '') {
           await nextScene(currentScene.value.next)
@@ -146,6 +146,7 @@ async function nextText() {
       if (textIndex.value >= currentScene.value.text.length) {
         bindText(currentScene.value.text)
       } else {
+        isTyped.value = true
         currentText.value = currentScene.value.text[textIndex.value]
       }
     }
@@ -194,18 +195,28 @@ async function actionFunc(action: Dto.ActionOption) {
 }
 // 加载场景
 async function loadCurrentScene(options, cover: string, next: string | undefined, text: string[]) {
-  currentScene.value.options = options ?? []
-  currentScene.value.cover = cover
-  await dynamicCover()
-  currentScene.value.next = next ?? ''
-  currentScene.value.text = text
-  if (appStore.currentSceneType == 'map') {
-    actionStore.loadActionOptions(currentScene.value.options, next)
-  } else {
-    actionStore.loadActionOptions(currentScene.value.options, null)
+  currentScene.value = {
+    name: 'current',
+    title: '',
+    text: text,
+    cover: cover,
+    next: next ?? '',
+    options: options ?? undefined
   }
+  await dynamicCover()
+  actionStore.loadActionOptions(currentScene.value.options, next)
   bindText(currentScene.value.text)
 }
+
+watch([() => isTyped.value], () => {
+  // 自动跳转下一段话
+  if (isTyped.value == false) {
+    setTimeout(() => {
+      nextText()
+    }, 500)
+  }
+})
+
 watch(
   [() => storyStore.currentStory],
   async () => {

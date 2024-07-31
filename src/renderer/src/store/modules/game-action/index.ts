@@ -82,13 +82,10 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
     return resMsg
   }
 
-  function loadActionOptions(
-    optionList: Dto.ActionOption[] | undefined,
-    next: string | undefined | null
-  ) {
+  function loadActionOptions(optionList: Dto.ActionOption[] | undefined, next: string | undefined) {
     options.value = []
-    if (next != undefined && next != null) {
-      if (!optionExists('map.next', optionList)) {
+    if (next != undefined && next != '') {
+      if (!optionExists('map.next', optionList) && appStore.currentSceneType == 'map') {
         const defaultMapNext = getOptionByName('map.next', DefaultActions)
         defaultMapNext.next = next
         options.value.push(defaultMapNext)
