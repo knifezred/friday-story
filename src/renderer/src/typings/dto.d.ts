@@ -218,6 +218,7 @@ declare namespace Dto {
     options: Array<ActionOption> | undefined
     isLocked?: boolean //锁门
     condition?: ConditionModel
+    temperature?: number
   }
 
   interface NpcInfo {
@@ -371,7 +372,6 @@ declare namespace Dto {
     value: string
     result?: boolean
     text?: string
-    success?: string
     failure?: string
   }
 
@@ -385,7 +385,6 @@ declare namespace Dto {
     value: string
     result?: boolean
     text?: string
-    success?: string
     failure?: string
   }
 }

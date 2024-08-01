@@ -48,11 +48,17 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
   const isMobile = breakpoints.smaller('sm')
 
   // custom start
+  const langParams = ref<Game.Env.LangParams>({
+    roomEnv: 'coldest',
+    playerName: '',
+    npc1: '',
+    npc2: '',
+    value: ''
+  })
   const projectSettings = ref<App.Global.ProjectSetting>(initProjectSettings())
   const currentSceneType = ref<UnionKey.SceneModule>('map')
   const currentMiniGame = ref<UnionKey.MiniGameModule>('finger-guessing')
   const temperature = ref(-18.0)
-  const roomTemperature = ref(0.0)
   const fromMoney = ref(0)
   const fromGold = ref(0)
   const optionExecuteNumbers = ref<Array<Game.ActionOption.ActionExecuteNumber>>([])
@@ -240,7 +246,7 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
     projectSettings,
     changeMusic,
     temperature,
-    roomTemperature,
+    langParams,
     countOptionExecute,
     getOptionExecuteNum
   }

@@ -1,12 +1,15 @@
 import { SetupStoreId } from '@renderer/enums'
+import { checkCondition } from '@renderer/hooks/game/index'
 import { createStorage, findStorage, updateStorage } from '@renderer/service/api/storage'
-import { checkCondition } from '@renderer/utils/game'
+import { roomTemperature } from '@renderer/utils/common'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import { useAppStore } from '../app'
 import { useAuthStore } from '../auth'
 import { getDefaultMaps } from './shared'
 
 export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
+  const appStore = useAppStore()
   const authStore = useAuthStore()
   const allMaps = ref<Array<Dto.MapItemFull>>([])
   const currLevelMaps = ref<Array<Dto.MapItemFull>>([])
@@ -100,6 +103,11 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
         } else {
           currMap.value = currLevelMaps.value[0]
         }
+        if (currMap.value.temperature == undefined) {
+          currMap.value.temperature = appStore.temperature
+        }
+        // 记录房间环境温度
+        appStore.langParams.roomEnv = roomTemperature(currMap.value.temperature)
       }
       authStore.userInfo.archive.place = currMap.value.id
     }

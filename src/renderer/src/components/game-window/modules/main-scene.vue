@@ -33,7 +33,7 @@
           <TypedText
             v-model:value="isTyped"
             :speed="appStore.projectSettings.textSpeed"
-            :strings="$t(currentText)" />
+            :strings="$t(currentText, appStore.langParams)" />
         </n-p>
       </n-scrollbar>
       <template #footer>
@@ -44,7 +44,7 @@
               :disabled="btn.isDisabled || btn.locked"
               class="min-w-42"
               :class="{ buttonLoading: btn.loading }"
-              @click="actionFunc(btn)">
+              @click="executeOption(btn)">
               <template #icon>
                 <SvgIcon v-if="btn.icon != undefined" :icon="btn.icon" class="mr-1" />
               </template>
@@ -153,7 +153,7 @@ async function nextText() {
 }
 
 // 按钮点击事件
-async function actionFunc(action: Dto.ActionOption) {
+async function executeOption(action: Dto.ActionOption) {
   action.isDisabled = true
   action.loading = true
   const executeResult = actionStore.executeAction(action)
@@ -163,6 +163,7 @@ async function actionFunc(action: Dto.ActionOption) {
   totalTextCount.value = currentScene.value.text.length
   actionStore.loadActionOptions(currentScene.value.options, currentScene.value.next)
   if (actionStore.currentAction.canExecute) {
+    // action计数
     appStore.countOptionExecute(action.name)
     switch (action.type) {
       case 'map':

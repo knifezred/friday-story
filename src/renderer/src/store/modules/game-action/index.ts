@@ -1,8 +1,6 @@
 import { DefaultActions } from '@renderer/constants/data/action'
 import { SetupStoreId } from '@renderer/enums'
-import { $t } from '@renderer/locales'
-import { roomTemperature } from '@renderer/utils/common'
-import { checkCondition, executeEffects } from '@renderer/utils/game'
+import { checkCondition, executeEffects } from '@renderer/hooks/game/index'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useAppStore } from '../app'
@@ -49,25 +47,21 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
       switch (action.name) {
         case 'option.addWood':
           result = authStore.useItem('material.wood', 1)
-          if (result.includes('Success')) {
-            appStore.roomTemperature += 5
-            if (appStore.roomTemperature <= 0) {
+          if (result.includes('Success') && mapStore.currMap.temperature != undefined) {
+            mapStore.currMap.temperature += 5
+            if (mapStore.currMap.temperature <= 0) {
               resMsg.push('火堆冒出火苗')
             }
-            if (appStore.roomTemperature >= 1 && appStore.roomTemperature < 10) {
+            if (mapStore.currMap.temperature >= 1 && mapStore.currMap.temperature < 10) {
               resMsg.push('火堆大了一点')
             }
-            if (appStore.roomTemperature >= 10 && appStore.roomTemperature < 30) {
+            if (mapStore.currMap.temperature >= 10 && mapStore.currMap.temperature < 30) {
               resMsg.push('火烧的很旺')
             }
-            if (appStore.roomTemperature >= 30 && appStore.roomTemperature < 40) {
+            if (mapStore.currMap.temperature >= 30 && mapStore.currMap.temperature < 40) {
               resMsg.push('火有点大了')
             }
-            resMsg.push(
-              $t(mapStore.currMap.text as never, {
-                roomTemperature: roomTemperature(appStore.roomTemperature)
-              })
-            )
+            resMsg.push(mapStore.currMap.text)
           } else {
             resMsg.push(result)
           }

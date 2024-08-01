@@ -285,7 +285,7 @@
         "text": "一座木屋",
         "begin": {
           "title": "漏风的房间",
-          "text": "一个{roomTemperature}的房间，添柴时小心别把屋子烧了"
+          "text": "一个{roomEnv}的房间，添柴时小心别把屋子烧了"
         },
         "roomWork": {
           "title": "工作台",

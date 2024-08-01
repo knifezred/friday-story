@@ -1,7 +1,7 @@
 import { useActionEffect } from '@renderer/hooks/game/action-effect'
 import { useCondition } from '@renderer/hooks/game/condition'
 import { $t } from '@renderer/locales'
-import { randomInt } from './common'
+import { randomInt } from '@renderer/utils/common'
 
 export function checkCondition(conditionModel: Dto.ConditionModel | undefined) {
   let resultText = ''
@@ -67,11 +67,12 @@ export function executeEffects(effectModel: Dto.ActionEffectModel | undefined) {
         let i18nValue = effect.value
         if (effect.type == 'addItem') {
           i18nValue = 'items.' + effect.value.split(',')[0] + '.title'
-          resultText.push(
-            $t(effect.text as never, {
-              value: $t(i18nValue as never) + ' X ' + effect.value.split(',')[1]
-            })
-          )
+          tipsGetItem(i18nValue, effect.value.split(',')[1])
+          // resultText.push(
+          //   $t(effect.text as never, {
+          //     value: $t(i18nValue as never) + ' X ' + effect.value.split(',')[1]
+          //   })
+          // )
         } else {
           resultText.push($t(effect.text as never, { value: $t(i18nValue as never) }))
         }
@@ -79,4 +80,8 @@ export function executeEffects(effectModel: Dto.ActionEffectModel | undefined) {
     }
   }
   return resultText
+}
+
+function tipsGetItem(text: string, num: string) {
+  window.$message?.success($t(text as never) + ' X ' + num)
 }
