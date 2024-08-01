@@ -33,7 +33,7 @@
           <TypedText
             v-model:value="isTyped"
             :speed="appStore.projectSettings.textSpeed"
-            :strings="$t(currentText, appStore.langParams)" />
+            :strings="$t(currentText, gameStore.langParams)" />
         </n-p>
       </n-scrollbar>
       <template #footer>
@@ -61,6 +61,7 @@
 <script setup lang="ts">
 import { $t } from '@renderer/locales'
 import { useAppStore } from '@renderer/store/modules/app'
+import { useGameStore } from '@renderer/store/modules/game'
 import { useGameActionStore } from '@renderer/store/modules/game-action'
 import { useGameItemStore } from '@renderer/store/modules/game-item'
 import { useMapStore } from '@renderer/store/modules/game-map'
@@ -89,6 +90,7 @@ const currentScene = ref<Dto.GameScene>({
 })
 const appStore = useAppStore()
 const actionStore = useGameActionStore()
+const gameStore = useGameStore()
 const mapStore = useMapStore()
 const itemStore = useGameItemStore()
 const storyStore = useStoryStore()
@@ -137,7 +139,7 @@ async function nextText() {
           await nextScene(currentScene.value.next)
         } else {
           // end
-          appStore.currentSceneType = 'map'
+          gameStore.currentSceneType = 'map'
           appStore.siderCollapse = false
         }
       }
@@ -164,7 +166,7 @@ async function executeOption(action: Dto.ActionOption) {
   loadOptions(currentScene.value.options, currentScene.value.next)
   if (actionStore.currentAction.canExecute) {
     // action计数
-    appStore.countOptionExecute(action.name)
+    gameStore.countOptionExecute(action.name)
     switch (action.type) {
       case 'map':
         mapStore.currMap.isLocked = false
@@ -173,7 +175,7 @@ async function executeOption(action: Dto.ActionOption) {
         }
         break
       case 'mini-game':
-        appStore.currentMiniGame = action.miniGame ?? 'finger-guessing'
+        gameStore.currentMiniGame = action.miniGame ?? 'finger-guessing'
         break
       case 'shop':
         itemStore.currentShop = action.next ?? 'happy_shop'
@@ -191,7 +193,7 @@ async function executeOption(action: Dto.ActionOption) {
         nextText()
         break
     }
-    appStore.currentSceneType = action.type
+    gameStore.currentSceneType = action.type
   }
   nextText()
   setTimeout(() => {
@@ -234,7 +236,7 @@ watch([() => isTyped.value], () => {
 watch(
   [() => storyStore.currentStory],
   async () => {
-    if (appStore.currentSceneType == 'story') {
+    if (gameStore.currentSceneType == 'story') {
       await loadCurrentScene(
         storyStore.currentStory.options,
         storyStore.currentStory.cover,
@@ -249,7 +251,7 @@ watch(
 watch(
   [() => mapStore.currMap],
   async () => {
-    if (appStore.currentSceneType == 'map') {
+    if (gameStore.currentSceneType == 'map') {
       await loadCurrentScene(
         mapStore.currMap.options,
         mapStore.currMap.cover,

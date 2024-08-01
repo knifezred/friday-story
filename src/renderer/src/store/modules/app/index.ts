@@ -7,7 +7,6 @@ import { localStg } from '@renderer/utils/storage'
 import { breakpointsTailwind, useBreakpoints, useEventListener, useTitle } from '@vueuse/core'
 import { defineStore } from 'pinia'
 import { effectScope, nextTick, onScopeDispose, ref, watch } from 'vue'
-import { useAuthStore } from '../auth'
 import { useGameItemStore } from '../game-item'
 import { useStoryStore } from '../game-story'
 import { useRouteStore } from '../route'
@@ -19,7 +18,6 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
   const themeStore = useThemeStore()
   const routeStore = useRouteStore()
   const tabStore = useTabStore()
-  const authStore = useAuthStore()
   const storyStore = useStoryStore()
   const gameItemStore = useGameItemStore()
   const scope = effectScope()
@@ -47,65 +45,16 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
   /** Is mobile layout */
   const isMobile = breakpoints.smaller('sm')
 
-  // custom start
   const messagePlacement = ref<
     'top' | 'bottom' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
   >('top')
-  const langParams = ref<Game.Env.LangParams>({
-    roomEnv: 'coldest',
-    playerName: '',
-    npc1: '',
-    npc2: '',
-    value: ''
-  })
-  const projectSettings = ref<App.Global.ProjectSetting>(initProjectSettings())
-  const currentSceneType = ref<UnionKey.SceneModule>('map')
-  const currentMiniGame = ref<UnionKey.MiniGameModule>('finger-guessing')
-  const temperature = ref(-18.0)
-  const fromMoney = ref(0)
-  const fromGold = ref(0)
-  const optionExecuteNumbers = ref<Array<Game.ActionOption.ActionExecuteNumber>>([])
-  function addMoney(money: number) {
-    fromMoney.value = authStore.archivedData.money
-    authStore.archivedData.money = authStore.archivedData.money + money
-  }
-  function addGold(gold: number) {
-    fromGold.value = authStore.archivedData.gold
-    authStore.archivedData.gold = authStore.archivedData.gold + gold
-  }
-  function coastTime(minutes: number) {
-    authStore.archivedData.worldTime += minutes * 60 * 1000
-  }
 
-  function changeMusic(src: string) {
-    projectSettings.value.bgMusic = src
-  }
+  const projectSettings = ref<App.Global.ProjectSetting>(initProjectSettings())
 
   function cacheProjectSettings() {
     localStg.set('projectSettings', projectSettings.value)
   }
 
-  function countOptionExecute(name: string) {
-    const option = optionExecuteNumbers.value.filter((x) => x.name == name)
-    if (option.length > 0) {
-      option[0].num += 1
-    } else {
-      optionExecuteNumbers.value.push({
-        name,
-        num: 1
-      })
-    }
-  }
-
-  function getOptionExecuteNum(name) {
-    const option = optionExecuteNumbers.value.filter((x) => x.name == name)
-    if (option.length > 0) {
-      return option[0].num
-    } else {
-      return 0
-    }
-  }
-  // custom end
   /**
    * Reload page
    *
@@ -239,19 +188,7 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
     mixSiderFixed,
     setMixSiderFixed,
     toggleMixSiderFixed,
-    fromMoney,
-    fromGold,
-    addMoney,
-    addGold,
-    coastTime,
-    currentSceneType,
-    currentMiniGame,
     projectSettings,
-    changeMusic,
-    temperature,
-    langParams,
-    countOptionExecute,
-    getOptionExecuteNum,
     messagePlacement
   }
 })

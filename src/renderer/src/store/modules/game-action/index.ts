@@ -3,7 +3,7 @@ import { SetupStoreId } from '@renderer/enums'
 import { checkCondition, executeEffects } from '@renderer/hooks/game/index'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { useAppStore } from '../app'
+import { useGameStore } from '../game'
 import { useMapStore } from '../game-map'
 
 export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
@@ -14,32 +14,35 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
   })
   const options = ref<Array<Dto.ActionOption>>([])
 
-  const appStore = useAppStore()
+  const gameStore = useGameStore()
 
   const mapStore = useMapStore()
 
   function beforeExecute(action: Dto.ActionOption) {
     currentAction.value = action
+    let result: Dto.ConditionResult = {
+      success: true,
+      text: ''
+    }
     if (currentAction.value.condition != undefined) {
-      const result = checkCondition(
-        currentAction.value.condition.filter((x) => x.for == 'execute')[0]
-      )
-      if (result.success) {
-        currentAction.value.canExecute = true
-      } else {
-        currentAction.value.canExecute = false
-        return result.text
+      const executeCondition = currentAction.value.condition.filter((x) => x.for == 'execute')[0]
+      if (executeCondition != undefined) {
+        result = checkCondition(executeCondition)
+        if (result.success) {
+          currentAction.value.canExecute = true
+        } else {
+          currentAction.value.canExecute = false
+        }
       }
     }
-    return ''
+    return result
   }
 
   function executeAction(action: Dto.ActionOption) {
     const resMsg: string[] = []
-    let result = action.text
     currentAction.value = action
-    result = beforeExecute(currentAction.value)
-    if (result == '') {
+    const executeResult = beforeExecute(currentAction.value)
+    if (executeResult.success) {
       currentAction.value.canExecute = true
       // 执行动作
       const effectResults = executeEffects(action.effect)
@@ -64,15 +67,16 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
             }
             resMsg.push(mapStore.currMap.text)
           } else {
-            resMsg.push(result)
+            resMsg.push(executeResult.text)
           }
           break
 
         default:
+          resMsg.push(mapStore.currMap.text)
           break
       }
     } else {
-      resMsg.push(result)
+      resMsg.push(executeResult.text)
     }
     if (resMsg.length == 0) {
       resMsg.push('message.' + action.text + 'Info')
@@ -84,7 +88,7 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
     const checkInfos: string[] = []
     options.value = []
     if (next != undefined && next != '') {
-      if (!optionExists('map.next', optionList) && appStore.currentSceneType == 'map') {
+      if (!optionExists('map.next', optionList) && gameStore.currentSceneType == 'map') {
         const defaultMapNext = getOptionByName('map.next', DefaultActions)
         defaultMapNext.next = next
         options.value.push(defaultMapNext)

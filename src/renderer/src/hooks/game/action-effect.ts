@@ -1,11 +1,11 @@
-import { useAppStore } from '@renderer/store/modules/app'
 import { useAuthStore } from '@renderer/store/modules/auth'
+import { useGameStore } from '@renderer/store/modules/game'
 import { useMapStore } from '@renderer/store/modules/game-map'
 import { roomTemperature } from '@renderer/utils/common'
 
 export function useActionEffect() {
   const authStore = useAuthStore()
-  const appStore = useAppStore()
+  const gameStore = useGameStore()
   const mapStore = useMapStore()
 
   // 添加指定物品
@@ -56,7 +56,7 @@ export function useActionEffect() {
     } else {
       if (mapStore.currMap.temperature != undefined) {
         mapStore.currMap.temperature = mapStore.currMap.temperature + Number(value)
-        appStore.langParams.roomEnv = roomTemperature(mapStore.currMap.temperature)
+        gameStore.langParams.roomEnv = roomTemperature(mapStore.currMap.temperature)
         return true
       }
     }

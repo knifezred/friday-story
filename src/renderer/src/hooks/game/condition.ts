@@ -1,12 +1,12 @@
-import { useAppStore } from '@renderer/store/modules/app'
 import { useAuthStore } from '@renderer/store/modules/auth'
+import { useGameStore } from '@renderer/store/modules/game'
 import { useMapStore } from '@renderer/store/modules/game-map'
 import dayjs from 'dayjs'
 
 export function useCondition() {
   const authStore = useAuthStore()
-  const appStore = useAppStore()
   const mapStore = useMapStore()
+  const gameStore = useGameStore()
 
   function hasAuth(codes: string | string[]) {
     if (!authStore.isLogin) {
@@ -40,7 +40,7 @@ export function useCondition() {
   }
 
   function hasLocked() {
-    if (appStore.currentSceneType == 'map') {
+    if (gameStore.currentSceneType == 'map') {
       return mapStore.currMap.isLocked == true
     }
     return false
@@ -98,13 +98,13 @@ export function useCondition() {
 
   function minOptionNum(value: string) {
     const { 0: name, 1: num } = value.split(',')
-    const count = appStore.getOptionExecuteNum(name)
+    const count = gameStore.getOptionExecuteNum(name)
     return count >= Number(num)
   }
 
   function maxOptionNum(value: string) {
     const { 0: name, 1: num } = value.split(',')
-    const count = appStore.getOptionExecuteNum(name)
+    const count = gameStore.getOptionExecuteNum(name)
     return count < Number(num)
   }
 

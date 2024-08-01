@@ -6,7 +6,7 @@
     :min="splitSize"
     :max="splitSize">
     <template #1>
-      <GameWindow v-model:value="appStore.currentSceneType" />
+      <GameWindow v-model:value="gameStore.currentSceneType" />
     </template>
     <template #2>
       <NFlex v-if="isShowMap" vertical class="pa-2 text-center">
@@ -16,7 +16,7 @@
             <SvgIcon
               icon="meteocons:clear-day-fill"
               class="text-icon-xl inline-block mx-1 v-bottom" />
-            {{ appStore.temperature }}°
+            {{ gameStore.temperature }}°
           </n-tag>
         </n-divider>
         <n-grid x-gap="12" y-gap="8" :cols="2">
@@ -27,7 +27,7 @@
               </template>
               <n-number-animation
                 show-separator
-                :from="appStore.fromMoney"
+                :from="gameStore.fromMoney"
                 :to="archivedData.money" />
               <ButtonIcon
                 v-if="isStaticSuper"
@@ -45,7 +45,7 @@
               </template>
               <n-number-animation
                 show-separator
-                :from="appStore.fromGold"
+                :from="gameStore.fromGold"
                 :to="archivedData.gold" />
               <ButtonIcon
                 v-if="isStaticSuper"
@@ -66,7 +66,7 @@
           {{ $t(mapStore.parentMap.title) }}
         </n-tag>
         <n-scrollbar class="h-100vh" :distance="10">
-          <NFlex v-if="appStore.currentSceneType == 'map'" class="pl-2">
+          <NFlex v-if="gameStore.currentSceneType == 'map'" class="pl-2">
             <template v-for="item in mapStore.currLevelMaps" :key="item.id">
               <n-card
                 v-if="item.isShow"
@@ -98,6 +98,7 @@
 <script setup lang="ts">
 import { useAppStore } from '@renderer/store/modules/app'
 import { useAuthStore } from '@renderer/store/modules/auth'
+import { useGameStore } from '@renderer/store/modules/game'
 import { useMapStore } from '@renderer/store/modules/game-map'
 import { formatTimestamp } from '@renderer/utils/common'
 import { ref, watch } from 'vue'
@@ -106,7 +107,8 @@ defineOptions({
 })
 const appStore = useAppStore()
 const mapStore = useMapStore()
-const { addMoney, addGold } = useAppStore()
+const gameStore = useGameStore()
+const { addMoney, addGold } = useGameStore()
 const { nextMap } = useMapStore()
 const { userInfo, archivedData, isStaticSuper } = useAuthStore()
 
@@ -126,7 +128,7 @@ watch(
   { immediate: true }
 )
 function mapFunc(map: Dto.MapItemFull) {
-  if (appStore.currentSceneType == 'map') {
+  if (gameStore.currentSceneType == 'map') {
     if (map.id == 'map.parent') {
       nextMap(map.next, map)
     } else {

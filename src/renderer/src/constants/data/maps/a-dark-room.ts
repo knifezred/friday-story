@@ -69,6 +69,16 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                         result: false
                       }
                     ]
+                  },
+                  {
+                    type: 'and',
+                    for: 'execute',
+                    conditions: [
+                      {
+                        type: 'hasItem',
+                        value: 'material.wood,1'
+                      }
+                    ]
                   }
                 ],
                 effect: {
