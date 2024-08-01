@@ -156,7 +156,19 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
               {
                 name: 'option.repair',
                 text: 'option.repair',
-                type: 'map'
+                type: 'map',
+                condition: [
+                  {
+                    type: 'and',
+                    for: 'show',
+                    conditions: [
+                      {
+                        type: 'checkFlag',
+                        value: 'room.darkHouse.roomWork.unlock,1'
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           }

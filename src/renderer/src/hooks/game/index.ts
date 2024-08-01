@@ -1,6 +1,7 @@
 import { useActionEffect } from '@renderer/hooks/game/action-effect'
 import { useCondition } from '@renderer/hooks/game/condition'
 import { $t } from '@renderer/locales'
+import { useAppStore } from '@renderer/store/modules/app'
 import { randomInt } from '@renderer/utils/common'
 
 export function checkCondition(conditionModel: Dto.ConditionModel | undefined) {
@@ -109,10 +110,12 @@ function rebuildVal1(value: string, type: string) {
 }
 
 function notificationResult(text: string) {
-  window.$notification?.create({
-    title: text,
-    type: 'success',
-    duration: 2000,
-    closable: false
+  const appStore = useAppStore()
+  appStore.messagePlacement = 'top-right'
+  window.$message?.success(text, {
+    duration: 2000
   })
+  setTimeout(() => {
+    appStore.messagePlacement = 'top'
+  }, 3000)
 }

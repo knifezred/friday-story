@@ -48,6 +48,9 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
   const isMobile = breakpoints.smaller('sm')
 
   // custom start
+  const messagePlacement = ref<
+    'top' | 'bottom' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
+  >('top')
   const langParams = ref<Game.Env.LangParams>({
     roomEnv: 'coldest',
     playerName: '',
@@ -248,6 +251,7 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
     temperature,
     langParams,
     countOptionExecute,
-    getOptionExecuteNum
+    getOptionExecuteNum,
+    messagePlacement
   }
 })

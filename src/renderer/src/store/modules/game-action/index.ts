@@ -4,7 +4,6 @@ import { checkCondition, executeEffects } from '@renderer/hooks/game/index'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useAppStore } from '../app'
-import { useAuthStore } from '../auth'
 import { useMapStore } from '../game-map'
 
 export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
@@ -16,7 +15,6 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
   const options = ref<Array<Dto.ActionOption>>([])
 
   const appStore = useAppStore()
-  const authStore = useAuthStore()
 
   const mapStore = useMapStore()
 
