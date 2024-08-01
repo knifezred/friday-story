@@ -44,10 +44,13 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
     if (result == '') {
       currentAction.value.canExecute = true
       // 执行动作
+      const effectResults = executeEffects(action.effect)
+      for (const r of effectResults) {
+        resMsg.push(r)
+      }
       switch (action.name) {
         case 'option.addWood':
-          result = authStore.useItem('material.wood', 1)
-          if (result.includes('Success') && mapStore.currMap.temperature != undefined) {
+          if (mapStore.currMap.temperature != undefined) {
             mapStore.currMap.temperature += 5
             if (mapStore.currMap.temperature <= 0) {
               resMsg.push('火堆冒出火苗')
@@ -65,21 +68,16 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
           } else {
             resMsg.push(result)
           }
-
           break
 
         default:
           break
       }
-      const effectResults = executeEffects(action.effect)
-      for (const r of effectResults) {
-        resMsg.push(r)
-      }
     } else {
       resMsg.push(result)
     }
     if (resMsg.length == 0) {
-      resMsg.push(action.text + 'Info')
+      resMsg.push('message.' + action.text + 'Info')
     }
     return resMsg
   }

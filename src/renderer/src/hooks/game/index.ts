@@ -27,11 +27,14 @@ export function checkCondition(conditionModel: Dto.ConditionModel | undefined) {
           } else {
             checkResult.text = condition.failure
           }
-          let i18nValue = condition.value
-          if (condition.type == 'hasItem') {
-            i18nValue = 'items.' + condition.value + '.title'
+          let val1 = condition.value
+          let val2 = ''
+          if (val1.includes(',')) {
+            val1 = condition.value.split(',')[0]
+            val2 = condition.value.split(',')[1]
           }
-          checkResult.text = $t(checkResult.text as never, { value: $t(i18nValue as never) })
+          val1 = rebuildVal1(val1, condition.type)
+          checkResult.text = $t(checkResult.text as never, { item: $t(val1 as never), value: val2 })
           checkResult.success = false
         } else {
           checkResult.success = true
@@ -77,15 +80,17 @@ export function executeEffects(effectModel: Dto.ActionEffectModel | undefined) {
           }
         }
 
-        let i18nValue = effect.value
-        if (effect.type == 'addItem') {
-          i18nValue = 'items.' + effect.value.split(',')[0] + '.title'
-          tipsAddItem(i18nValue, effect.value.split(',')[1])
-        } else if (effect.type == 'useItem') {
-          i18nValue = 'items.' + effect.value.split(',')[0] + '.title'
-          tipsUseItem(i18nValue, effect.value.split(',')[1])
+        let val1 = effect.value
+        let val2 = ''
+        if (val1.includes(',')) {
+          val1 = effect.value.split(',')[0]
+          val2 = effect.value.split(',')[1]
+        }
+        val1 = rebuildVal1(val1, effect.type)
+        if (effect.notification != true) {
+          resultText.push($t(tempText as never, { item: $t(val1 as never), value: val2 }))
         } else {
-          resultText.push($t(tempText as never, { value: $t(i18nValue as never) }))
+          notificationResult($t(tempText as never, { item: $t(val1 as never), value: val2 }))
         }
       }
     }
@@ -93,9 +98,21 @@ export function executeEffects(effectModel: Dto.ActionEffectModel | undefined) {
   return resultText
 }
 
-function tipsAddItem(text: string, num: string) {
-  window.$message?.info($t(text as never) + ' x ' + num)
+function rebuildVal1(value: string, type: string) {
+  if (type.includes('Item')) {
+    value = 'items.' + value + '.title'
+  }
+  if (type.includes('Map')) {
+    value = 'map.' + value.replace('room.', 'building.') + '.title'
+  }
+  return value
 }
-function tipsUseItem(text: string, num: string) {
-  window.$message?.info($t(text as never) + ' - ' + num)
+
+function notificationResult(text: string) {
+  window.$notification?.create({
+    title: text,
+    type: 'success',
+    duration: 2000,
+    closable: false
+  })
 }

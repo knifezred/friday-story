@@ -173,13 +173,12 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   }
 
   function useItem(name: string, count: number) {
-    let result = 'option.itemUseSuccess'
     if (hasItem(name, count)) {
       archivedData.value.items.filter((x) => x.name == name)[0].count -= count
+      return true
     } else {
-      result = $t('option.itemNotEnough', { value: $t(('items.' + name + '.title') as never) })
+      return false
     }
-    return result
   }
 
   function checkFlag(flag: string, value: string) {

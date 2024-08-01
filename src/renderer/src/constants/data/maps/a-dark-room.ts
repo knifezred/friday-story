@@ -24,7 +24,17 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                       {
                         type: 'maxOptionNum',
                         value: 'option.explore,1',
-                        failure: '什么也没有发现'
+                        failure: 'message.nothingFound'
+                      }
+                    ]
+                  },
+                  {
+                    type: 'and',
+                    for: 'show',
+                    conditions: [
+                      {
+                        type: 'maxOptionNum',
+                        value: 'option.explore,1'
                       }
                     ]
                   }
@@ -39,7 +49,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                     {
                       type: 'unlockMap',
                       value: 'room.darkHouse.roomWork',
-                      success: '你发现了工作台'
+                      success: 'message.findMap'
                     }
                   ]
                 }
@@ -54,12 +64,26 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                     for: 'show',
                     conditions: [
                       {
-                        type: 'hasItem',
-                        value: 'material.wood'
+                        type: 'maxOptionNum',
+                        value: 'option.explore,1',
+                        result: false
                       }
                     ]
                   }
-                ]
+                ],
+                effect: {
+                  type: 'all',
+                  effects: [
+                    {
+                      type: 'useItem',
+                      value: 'material.wood,1'
+                    },
+                    {
+                      type: 'changeRoomTemperature',
+                      value: '5'
+                    }
+                  ]
+                }
               }
             ]
           },
@@ -69,8 +93,8 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
             isShow: false,
             options: [
               {
-                name: 'option.fixed',
-                text: 'option.fixed',
+                name: 'option.fix',
+                text: 'option.fix',
                 type: 'map',
                 condition: [
                   {
@@ -91,8 +115,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                     conditions: [
                       {
                         type: 'hasItem',
-                        value: 'material.wood,3',
-                        failure: '木头不足,你需要3根木头来修理工作台'
+                        value: 'material.wood,3'
                       }
                     ]
                   }

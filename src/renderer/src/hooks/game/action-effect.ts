@@ -43,10 +43,25 @@ export function useActionEffect() {
     return authStore.useItem(key, Number(num))
   }
 
+  function changeRoomTemperature(value: string) {
+    if (value.includes(',')) {
+      const { 0: key, 1: num } = value.split(',')
+      const map = mapStore.findMap(key)
+      if (map != undefined) {
+        map.temperature = Number(num)
+        return true
+      }
+      return false
+    } else {
+      return (mapStore.currMap.temperature = Number(value))
+    }
+  }
+
   return {
     addFlag,
     addItem,
     useItem,
-    unlockMap
+    unlockMap,
+    changeRoomTemperature
   }
 }

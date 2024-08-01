@@ -399,5 +399,6 @@ declare namespace Dto {
     text?: string
     success?: string
     failure?: string
+    notification?: boolean
   }
 }

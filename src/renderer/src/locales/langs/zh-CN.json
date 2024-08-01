@@ -45,12 +45,15 @@
   },
   "condition": {
     "hasLockedTrue": "前面的区域以后再来探索吧",
-    "hasItemFalse": "你没有 {value} !",
-    "hasItemTrue": "你拥有 {value} !",
-    "openHour": "营业时间：{value}"
+    "hasItemTrue": "你拥有 {item} !",
+    "hasItemFalse": "你没有足够的{item},至少需要{value} x {item} !",
+    "openHour": "营业时间：{item}"
   },
   "effect": {
-    "addItemTrue": "获得了 {value} !"
+    "addItemTrue": "获得了 {item}+{value} !",
+    "useItemTrue": "{item} - {value}",
+    "useItemFalse": "你没有足够的{item},至少需要{item} x {value} !",
+    "unlockMapTrue": "解锁了{item}"
   },
   "env": {
     "temperature": {
@@ -377,7 +380,15 @@
     }
   },
   "message": {
-    "notEnoughMoney": "余额不足"
+    "notEnoughMoney": "余额不足",
+    "nothingHappened": "什么也没有发生",
+    "nothingFound": "一无所获",
+    "findMap": "发现了{item}",
+    "option": {
+      "exploreInfo": "你在屋内东翻西找、找到了一些看起来有用的东西",
+      "pickWoodInfo": "四处转了转，捡到了一些木材",
+      "cutTreeInfo": "伐木中... ..."
+    }
   },
   "miniGame": {
     "currentRound": "当前轮次",
@@ -399,20 +410,17 @@
     "goBack": "返回",
     "goOut": "出去",
     "knocked": "敲门",
-    "noReply": "什么都没发生",
     "quit": "退出",
-    "story_start": "创建角色",
     "wait": "等待",
     "work": "工作",
-    "addWood": "添柴",
+    "addWood": "添加木柴",
     "pickWood": "搜刮木材",
-    "pickWoodInfo": "四处转了转，捡到了一些木材",
     "cutTree": "伐木",
-    "cutTreeInfo": "伐木中... ...",
     "explore": "探索",
-    "exploreInfo": "你在屋内东翻西找、找到了一些看起来有用的东西",
-    "itemNotEnough": "你没有足够的{value}！",
-    "itemUseSuccess": "物品使用成功"
+    "fix": "修复",
+    "make": "制造",
+    "repair": "修理",
+    "story_start": "创建角色"
   },
   "page": {
     "about": {

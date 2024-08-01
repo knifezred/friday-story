@@ -403,6 +403,8 @@ declare namespace App {
       }
       message: {
         notEnoughMoney: string
+        addItemSuccess: string
+        useItemSuccess: string
       }
       miniGame: {
         currentRound: string
@@ -428,7 +430,6 @@ declare namespace App {
         wait: string
         work: string
         choose_id: string
-        itemNotEnough: string
       }
       page: {
         about: {
