@@ -428,6 +428,7 @@ declare namespace App {
         wait: string
         work: string
         choose_id: string
+        itemNotEnough: string
       }
       page: {
         about: {

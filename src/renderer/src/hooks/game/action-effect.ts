@@ -38,9 +38,15 @@ export function useActionEffect() {
     return authStore.addFlag(key, flagValue)
   }
 
+  function useItem(value: string) {
+    const { 0: key, 1: num } = value.split(',')
+    return authStore.useItem(key, Number(num))
+  }
+
   return {
-    addItem,
     addFlag,
+    addItem,
+    useItem,
     unlockMap
   }
 }

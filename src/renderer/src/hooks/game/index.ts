@@ -21,7 +21,8 @@ export function checkCondition(conditionModel: Dto.ConditionModel | undefined) {
         if (result != condition.result) {
           if (condition.failure == undefined) {
             if (condition.text == undefined) {
-              checkResult.text = 'condition.' + condition.type + (result ? 'True' : 'False')
+              checkResult.text =
+                'condition.' + condition.type + (result != condition.result ? 'True' : 'False')
             }
           } else {
             checkResult.text = condition.failure
@@ -65,33 +66,24 @@ export function executeEffects(effectModel: Dto.ActionEffectModel | undefined) {
     for (const effect of effects) {
       if (effectHook[effect.type]) {
         const result = effectHook[effect.type](effect.value)
-        let tempText = ''
-        if (result) {
-          if (effect.success == undefined) {
-            if (effect.text == undefined) {
-              tempText = 'effect.' + effect.type + 'True'
-            }
+
+        let tempText: string | undefined = ''
+        tempText = result ? effect.success : effect.failure
+        if (tempText == undefined) {
+          if (effect.text == undefined) {
+            tempText = 'effect.' + effect.type + (result ? 'True' : 'False')
           } else {
-            tempText = effect.success
-          }
-        } else {
-          if (effect.failure == undefined) {
-            if (effect.text == undefined) {
-              tempText = 'effect.' + effect.type + 'False'
-            }
-          } else {
-            tempText = effect.failure
+            tempText = effect.text
           }
         }
+
         let i18nValue = effect.value
         if (effect.type == 'addItem') {
           i18nValue = 'items.' + effect.value.split(',')[0] + '.title'
-          tipsGetItem(i18nValue, effect.value.split(',')[1])
-          // resultText.push(
-          //   $t(effect.text as never, {
-          //     value: $t(i18nValue as never) + ' X ' + effect.value.split(',')[1]
-          //   })
-          // )
+          tipsAddItem(i18nValue, effect.value.split(',')[1])
+        } else if (effect.type == 'useItem') {
+          i18nValue = 'items.' + effect.value.split(',')[0] + '.title'
+          tipsUseItem(i18nValue, effect.value.split(',')[1])
         } else {
           resultText.push($t(tempText as never, { value: $t(i18nValue as never) }))
         }
@@ -101,6 +93,9 @@ export function executeEffects(effectModel: Dto.ActionEffectModel | undefined) {
   return resultText
 }
 
-function tipsGetItem(text: string, num: string) {
-  window.$message?.success($t(text as never) + ' X ' + num)
+function tipsAddItem(text: string, num: string) {
+  window.$message?.info($t(text as never) + ' x ' + num)
+}
+function tipsUseItem(text: string, num: string) {
+  window.$message?.info($t(text as never) + ' - ' + num)
 }

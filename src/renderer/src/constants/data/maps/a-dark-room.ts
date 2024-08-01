@@ -39,7 +39,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                     {
                       type: 'unlockMap',
                       value: 'room.darkHouse.roomWork',
-                      text: '你发现了工作台'
+                      success: '你发现了工作台'
                     }
                   ]
                 }
@@ -70,7 +70,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
             options: [
               {
                 name: 'option.fixed',
-                text: 'option.make',
+                text: 'option.fixed',
                 type: 'map',
                 condition: [
                   {
@@ -102,8 +102,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                   effects: [
                     {
                       type: 'useItem',
-                      value: 'material.wood,3',
-                      success: ''
+                      value: 'material.wood,3'
                     },
                     {
                       type: 'addFlag',
@@ -125,17 +124,6 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                       {
                         type: 'checkFlag',
                         value: 'room.darkHouse.roomWork.unlock,1'
-                      }
-                    ]
-                  },
-                  {
-                    type: 'and',
-                    for: 'execute',
-                    conditions: [
-                      {
-                        type: 'hasItem',
-                        value: 'material.wood,3',
-                        failure: '木头不足'
                       }
                     ]
                   }
