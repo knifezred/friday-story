@@ -166,15 +166,21 @@ declare namespace Dto {
 
   type LevelType = 'N' | 'R' | 'SR' | 'SSR'
 
+  type KeyValuePair = {
+    key: string
+    value: string
+  }
+
   interface ArchivedData {
     worldTime: number
     weather: WeatherType
     money: number
     gold: number
     items: Array<ArchivedItem>
-    relationShip: []
+    relationShip: Array<KeyValuePair>
     achievement: Array<string>
-    taskStatus: []
+    taskStatus: Array<KeyValuePair>
+    flags: Array<KeyValuePair>
   }
 
   type MapLevelType = 'room' | 'building' | 'street' | 'area' | 'city' | 'country' | 'metro'
@@ -356,15 +362,16 @@ declare namespace Dto {
     icon?: string | undefined
     buttonType?: Type | undefined
     isDisabled?: boolean
-    loading?: boolean
     locked?: boolean
+    isShow?: boolean
+    loading?: boolean
     canExecute?: boolean
   }
 
   type ConditionType = 'and' | 'or'
   interface ConditionModel {
     type: ConditionType
-    for: 'execute' | 'load'
+    for: 'execute' | 'lock' | 'show'
     conditions: Condition[]
   }
   interface Condition {
@@ -372,9 +379,14 @@ declare namespace Dto {
     value: string
     result?: boolean
     text?: string
+    success?: string
     failure?: string
   }
 
+  type ConditionResult = {
+    success: boolean
+    text: string
+  }
   type ActionEffectType = 'all' | 'single'
   interface ActionEffectModel {
     type: ActionEffectType
@@ -385,6 +397,7 @@ declare namespace Dto {
     value: string
     result?: boolean
     text?: string
+    success?: string
     failure?: string
   }
 }

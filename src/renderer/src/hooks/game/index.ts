@@ -4,7 +4,10 @@ import { $t } from '@renderer/locales'
 import { randomInt } from '@renderer/utils/common'
 
 export function checkCondition(conditionModel: Dto.ConditionModel | undefined) {
-  let resultText = ''
+  const checkResult: Dto.ConditionResult = {
+    success: true,
+    text: ''
+  }
   if (conditionModel != undefined) {
     const conditionHook = useCondition()
     for (const condition of conditionModel.conditions) {
@@ -18,30 +21,35 @@ export function checkCondition(conditionModel: Dto.ConditionModel | undefined) {
         if (result != condition.result) {
           if (condition.failure == undefined) {
             if (condition.text == undefined) {
-              condition.text = 'condition.' + condition.type + (result ? 'True' : 'False')
+              checkResult.text = 'condition.' + condition.type + (result ? 'True' : 'False')
             }
           } else {
-            condition.text = condition.failure
+            checkResult.text = condition.failure
           }
           let i18nValue = condition.value
           if (condition.type == 'hasItem') {
             i18nValue = 'items.' + condition.value + '.title'
           }
-          resultText = $t(condition.text as never, { value: $t(i18nValue as never) })
+          checkResult.text = $t(checkResult.text as never, { value: $t(i18nValue as never) })
+          checkResult.success = false
         } else {
+          checkResult.success = true
+          if (condition.success != undefined) {
+            checkResult.text = condition.success
+          }
           // or模式任意一个成功就返回成功
           if (conditionModel.type == 'or') {
-            return ''
+            return checkResult
           }
         }
       }
       // and模式下任意一个不满足就跳出
-      if (conditionModel.type == 'and' && resultText != '') {
-        return resultText
+      if (conditionModel.type == 'and' && !checkResult.success) {
+        return checkResult
       }
     }
   }
-  return resultText
+  return checkResult
 }
 
 export function executeEffects(effectModel: Dto.ActionEffectModel | undefined) {
@@ -57,12 +65,23 @@ export function executeEffects(effectModel: Dto.ActionEffectModel | undefined) {
     for (const effect of effects) {
       if (effectHook[effect.type]) {
         const result = effectHook[effect.type](effect.value)
-        if (effect.failure == undefined) {
-          if (effect.text == undefined) {
-            effect.text = 'effect.' + effect.type + (result ? 'True' : 'False')
+        let tempText = ''
+        if (result) {
+          if (effect.success == undefined) {
+            if (effect.text == undefined) {
+              tempText = 'effect.' + effect.type + 'True'
+            }
+          } else {
+            tempText = effect.success
           }
         } else {
-          effect.text = effect.failure
+          if (effect.failure == undefined) {
+            if (effect.text == undefined) {
+              tempText = 'effect.' + effect.type + 'False'
+            }
+          } else {
+            tempText = effect.failure
+          }
         }
         let i18nValue = effect.value
         if (effect.type == 'addItem') {
@@ -74,7 +93,7 @@ export function executeEffects(effectModel: Dto.ActionEffectModel | undefined) {
           //   })
           // )
         } else {
-          resultText.push($t(effect.text as never, { value: $t(i18nValue as never) }))
+          resultText.push($t(tempText as never, { value: $t(i18nValue as never) }))
         }
       }
     }

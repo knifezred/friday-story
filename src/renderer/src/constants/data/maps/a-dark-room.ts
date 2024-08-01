@@ -51,7 +51,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                 condition: [
                   {
                     type: 'and',
-                    for: 'load',
+                    for: 'show',
                     conditions: [
                       {
                         type: 'hasItem',
@@ -66,7 +66,87 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
           {
             name: 'darkHouse.roomWork',
             level: 'room',
-            isShow: false
+            isShow: false,
+            options: [
+              {
+                name: 'option.fixed',
+                text: 'option.make',
+                type: 'map',
+                condition: [
+                  {
+                    type: 'and',
+                    for: 'show',
+                    conditions: [
+                      {
+                        type: 'checkFlag',
+                        value: 'room.darkHouse.roomWork.unlock,1',
+                        success: '你需要3根木头来修理工作台',
+                        result: false
+                      }
+                    ]
+                  },
+                  {
+                    type: 'and',
+                    for: 'execute',
+                    conditions: [
+                      {
+                        type: 'hasItem',
+                        value: 'material.wood,3',
+                        failure: '木头不足,你需要3根木头来修理工作台'
+                      }
+                    ]
+                  }
+                ],
+                effect: {
+                  type: 'all',
+                  effects: [
+                    {
+                      type: 'useItem',
+                      value: 'material.wood,3',
+                      success: ''
+                    },
+                    {
+                      type: 'addFlag',
+                      value: 'room.darkHouse.roomWork.unlock,1',
+                      success: '工作台已解锁'
+                    }
+                  ]
+                }
+              },
+              {
+                name: 'option.make',
+                text: 'option.make',
+                type: 'map',
+                condition: [
+                  {
+                    type: 'and',
+                    for: 'show',
+                    conditions: [
+                      {
+                        type: 'checkFlag',
+                        value: 'room.darkHouse.roomWork.unlock,1'
+                      }
+                    ]
+                  },
+                  {
+                    type: 'and',
+                    for: 'execute',
+                    conditions: [
+                      {
+                        type: 'hasItem',
+                        value: 'material.wood,3',
+                        failure: '木头不足'
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                name: 'option.repair',
+                text: 'option.repair',
+                type: 'map'
+              }
+            ]
           }
         ]
       },

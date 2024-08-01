@@ -26,18 +26,18 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
       const result = checkCondition(
         currentAction.value.condition.filter((x) => x.for == 'execute')[0]
       )
-      if (result != '') {
-        currentAction.value.canExecute = false
-        return result
-      } else {
+      if (result.success) {
         currentAction.value.canExecute = true
+      } else {
+        currentAction.value.canExecute = false
+        return result.text
       }
     }
     return ''
   }
 
   function executeAction(action: Dto.ActionOption) {
-    let resMsg: string[] = []
+    const resMsg: string[] = []
     let result = action.text
     currentAction.value = action
     result = beforeExecute(currentAction.value)
@@ -69,7 +69,6 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
           break
 
         default:
-          resMsg = [action.text + 'Info']
           break
       }
       const effectResults = executeEffects(action.effect)
@@ -79,10 +78,14 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
     } else {
       resMsg.push(result)
     }
+    if (resMsg.length == 0) {
+      resMsg.push(action.text + 'Info')
+    }
     return resMsg
   }
 
   function loadActionOptions(optionList: Dto.ActionOption[] | undefined, next: string | undefined) {
+    const checkInfos: string[] = []
     options.value = []
     if (next != undefined && next != '') {
       if (!optionExists('map.next', optionList) && appStore.currentSceneType == 'map') {
@@ -94,17 +97,28 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
     if (optionList != undefined) {
       for (const option of optionList) {
         if (option.condition != undefined) {
-          const res = checkCondition(option.condition.filter((x) => x.for == 'load')[0])
-          if (res != '') {
-            option.locked = true
-          } else {
-            option.locked = false
+          // todo check message
+          const lockedConditions = option.condition.filter((x) => x.for == 'lock')
+          for (const lockCondition of lockedConditions) {
+            const res = checkCondition(lockCondition)
+            option.locked = !res.success
+            if (res.success && res.text != '') {
+              checkInfos.push(res.text)
+            }
+          }
+          const showConditions = option.condition.filter((x) => x.for == 'show')
+          for (const showCondition of showConditions) {
+            const res = checkCondition(showCondition)
+            option.isShow = res.success
+            if (res.success && res.text != '') {
+              checkInfos.push(res.text)
+            }
           }
         }
         options.value.push(option)
       }
     }
-    return options.value
+    return checkInfos
   }
 
   function getOptionByName(name: string, list: Array<Dto.ActionOption>) {

@@ -38,7 +38,8 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     items: [],
     relationShip: [],
     achievement: [],
-    taskStatus: []
+    taskStatus: [],
+    flags: []
   })
 
   const playTime = ref(Date.now())
@@ -170,6 +171,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     }
     return false
   }
+
   function useItem(name: string, count: number) {
     let result = 'option.itemUseSuccess'
     if (hasItem(name, count)) {
@@ -179,6 +181,34 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     }
     return result
   }
+
+  function checkFlag(flag: string, value: string) {
+    if (archivedData.value.flags == undefined) {
+      archivedData.value.flags = []
+    }
+    const flags = archivedData.value.flags.filter((x) => x.key == flag)
+    if (flags.length > 0) {
+      return flags[0].value == value
+    } else {
+      return false
+    }
+  }
+  function addFlag(flag: string, value: string) {
+    if (archivedData.value.flags == undefined) {
+      archivedData.value.flags = []
+    }
+    const flags = archivedData.value.flags.filter((x) => x.key == flag)
+    if (flags.length > 0) {
+      flags[0].value = value
+    } else {
+      archivedData.value.flags.push({
+        key: flag,
+        value
+      })
+    }
+    return true
+  }
+
   return {
     token,
     userInfo,
@@ -191,6 +221,8 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     deleteArchiveData,
     resetStore,
     hasItem,
-    useItem
+    useItem,
+    checkFlag,
+    addFlag
   }
 })

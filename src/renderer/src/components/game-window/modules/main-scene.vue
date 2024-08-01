@@ -40,6 +40,7 @@
         <n-flex justify="end">
           <template v-for="btn in actionStore.options" :key="btn.name">
             <n-button
+              v-if="btn.isShow != false"
               :type="btn.buttonType ?? 'primary'"
               :disabled="btn.isDisabled || btn.locked"
               class="min-w-42"
@@ -122,7 +123,7 @@ async function nextScene(next: string) {
   await dynamicCover()
   bindText(currentScene.value.text)
   // 绑定按钮
-  actionStore.loadActionOptions(currentScene.value.options, currentScene.value.next)
+  loadOptions(currentScene.value.options, currentScene.value.next)
 }
 
 async function nextText() {
@@ -160,8 +161,7 @@ async function executeOption(action: Dto.ActionOption) {
   for (const re of executeResult) {
     currentScene.value.text.push(re)
   }
-  totalTextCount.value = currentScene.value.text.length
-  actionStore.loadActionOptions(currentScene.value.options, currentScene.value.next)
+  loadOptions(currentScene.value.options, currentScene.value.next)
   if (actionStore.currentAction.canExecute) {
     // action计数
     appStore.countOptionExecute(action.name)
@@ -210,8 +210,17 @@ async function loadCurrentScene(options, cover: string, next: string | undefined
     options: options ?? undefined
   }
   await dynamicCover()
-  actionStore.loadActionOptions(currentScene.value.options, next)
+  loadOptions(currentScene.value.options, next)
   bindText(currentScene.value.text)
+}
+
+function loadOptions(options: Array<Dto.ActionOption>, next: string | undefined) {
+  const infos = actionStore.loadActionOptions(options, next)
+  for (const info of infos) {
+    currentScene.value.text.push(info)
+  }
+  totalTextCount.value = currentScene.value.text.length
+  // nextText()
 }
 
 watch([() => isTyped.value], () => {

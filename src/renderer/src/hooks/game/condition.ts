@@ -26,11 +26,17 @@ export function useCondition() {
   }
 
   // 是否拥有指定物品
-  function hasItem(names: string | string[]) {
-    if (typeof names === 'string') {
-      return authStore.archivedData.items.filter((x) => x.name == names).length > 0
+  function hasItem(value: string) {
+    const { 0: name, 1: num } = value.split(',')
+    const item = authStore.archivedData.items.filter((x) => x.name == name)[0]
+    if (item == undefined) {
+      return false
     }
-    return names.some((name) => authStore.archivedData.items.map((x) => x.name).includes(name))
+    if (num == undefined) {
+      return item.count > 0
+    } else {
+      return item.count >= Number(num)
+    }
   }
 
   function hasLocked() {
@@ -95,10 +101,16 @@ export function useCondition() {
     const count = appStore.getOptionExecuteNum(name)
     return count >= Number(num)
   }
+
   function maxOptionNum(value: string) {
     const { 0: name, 1: num } = value.split(',')
     const count = appStore.getOptionExecuteNum(name)
     return count < Number(num)
+  }
+
+  function checkFlag(flag: string) {
+    const { 0: key, 1: value } = flag.split(',')
+    return authStore.checkFlag(key, value)
   }
 
   return {
@@ -111,6 +123,7 @@ export function useCondition() {
     inDays,
     inMons,
     minOptionNum,
-    maxOptionNum
+    maxOptionNum,
+    checkFlag
   }
 }
