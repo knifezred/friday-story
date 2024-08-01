@@ -22,7 +22,7 @@ export function checkCondition(conditionModel: Dto.ConditionModel | undefined) {
           if (condition.failure == undefined) {
             if (condition.text == undefined) {
               checkResult.text =
-                'condition.' + condition.type + (result != condition.result ? 'True' : 'False')
+                'condition.' + condition.type + (result == condition.result ? 'True' : 'False')
             }
           } else {
             checkResult.text = condition.failure

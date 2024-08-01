@@ -262,18 +262,22 @@ export function getNaiveTheme(colors: App.Theme.ThemeColor, recommended = false)
       textColorHoverPrimary: '#edf2ff',
       textColorPressedPrimary: '#edf2ff',
       textColorDisabledPrimary: '#edf2ff',
+      textColorFocusPrimary: '#edf2ff',
       textColorSuccess: '#edf2ff',
       textColorHoverSuccess: '#edf2ff',
       textColorPressedSuccess: '#edf2ff',
       textColorDisabledSuccess: '#edf2ff',
+      textColorFocusSuccess: '#edf2ff',
       textColorWarning: '#edf2ff',
       textColorHoverWarning: '#edf2ff',
       textColorPressedWarning: '#edf2ff',
       textColorDisabledWarning: '#edf2ff',
+      textColorFocusWarning: '#edf2ff',
       textColorError: '#edf2ff',
       textColorHoverError: '#edf2ff',
       textColorPressedError: '#edf2ff',
-      textColorDisabledError: '#edf2ff'
+      textColorDisabledError: '#edf2ff',
+      textColorFocusError: '#edf2ff'
     }
   }
 

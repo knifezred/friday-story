@@ -220,7 +220,6 @@ function loadOptions(options: Array<Dto.ActionOption>, next: string | undefined)
     currentScene.value.text.push(info)
   }
   totalTextCount.value = currentScene.value.text.length
-  // nextText()
 }
 
 watch([() => isTyped.value], () => {

@@ -80,7 +80,8 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                     },
                     {
                       type: 'changeRoomTemperature',
-                      value: '5'
+                      value: '5',
+                      success: ''
                     }
                   ]
                 }
@@ -174,7 +175,8 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
               effects: [
                 {
                   type: 'addItem',
-                  value: 'material.wood,10'
+                  value: 'material.wood,10',
+                  notification: true
                 }
               ]
             }
