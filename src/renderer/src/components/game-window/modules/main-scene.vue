@@ -44,7 +44,7 @@
               :type="btn.buttonType ?? 'primary'"
               :disabled="btn.isDisabled || btn.locked"
               class="min-w-42"
-              :class="{ buttonLoading: btn.loading }"
+              :style="btn.loading != true ? '' : computedButtonLoadingStyle"
               @click="executeOption(btn)">
               <template #icon>
                 <SvgIcon v-if="btn.icon != undefined" :icon="btn.icon" class="mr-1" />
@@ -68,7 +68,7 @@ import { useMapStore } from '@renderer/store/modules/game-map'
 import { useStoryStore } from '@renderer/store/modules/game-story'
 import { useThemeStore } from '@renderer/store/modules/theme'
 import { dynamicResource } from '@renderer/utils/common'
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 defineOptions({
   name: 'StoryScene'
@@ -86,6 +86,15 @@ const mapStore = useMapStore()
 const itemStore = useGameItemStore()
 const storyStore = useStoryStore()
 const themeStore = useThemeStore()
+
+const computedButtonLoadingStyle = computed(() => {
+  return {
+    'background-image': 'linear-gradient(to right, var(--n-color-hover), var(--n-color-hover))',
+    'background-size': '100% 100%',
+    'background-repeat': 'no-repeat',
+    animation: 'bgColorWidthTransition ' + actionStore.currentAction.duration + 'ms forwards'
+  }
+})
 
 function bindText(text: string[]) {
   isTyped.value = true

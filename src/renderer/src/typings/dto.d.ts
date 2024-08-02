@@ -351,7 +351,7 @@ declare namespace Dto {
     options: Array<ActionOption>
   }
 
-  interface ActionOption {
+  class ActionOption {
     name: string
     text: string
     type: UnionKey.SceneModule

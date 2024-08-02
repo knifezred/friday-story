@@ -29,14 +29,6 @@ html.grayScale {
   padding: 1em !important;
 }
 
-.buttonLoading {
-  background-image: linear-gradient(to right, var(--n-color-hover), var(--n-color-hover));
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  animation: bgColorWidthTransition 3s forwards;
-  /* 使用forwards保持动画结束时的状态 */
-}
-
 /* 定义从右向左消失的动画 */
 @keyframes slideOut {
   to {
@@ -45,6 +37,7 @@ html.grayScale {
   }
 }
 
+/* 背景色宽度从右向左减为0的动画 */
 @keyframes bgColorWidthTransition {
   to {
     background-size: 0% 100%;

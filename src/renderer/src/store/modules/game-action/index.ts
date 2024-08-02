@@ -79,8 +79,7 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
           gameStore.currentScene.text.push(mapStore.currMap.text)
           break
       }
-
-      // 等待按钮间隔时间
+      // 操作冷却时间
       await new Promise((resolve) => {
         setTimeout(
           () => {
