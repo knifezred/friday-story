@@ -1,6 +1,7 @@
 import { DefaultActions } from '@renderer/constants/data/action'
 import { SetupStoreId } from '@renderer/enums'
 import { checkCondition, executeEffects } from '@renderer/hooks/game/index'
+import { projectSetting } from '@renderer/settings/projectSetting'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useGameStore } from '../game'
@@ -38,8 +39,7 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
     return result
   }
 
-  function executeAction(action: Dto.ActionOption) {
-    const resMsg: string[] = []
+  async function executeAction(action: Dto.ActionOption) {
     currentAction.value = action
     const executeResult = beforeExecute(currentAction.value)
     if (executeResult.success) {
@@ -47,41 +47,51 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
       // 执行动作
       const effectResults = executeEffects(action.effect)
       for (const r of effectResults) {
-        resMsg.push(r)
+        if (r.length > 0) {
+          gameStore.currentScene.text.push(r)
+        }
       }
+      // action计数
+      gameStore.countOptionExecute(action.name)
       switch (action.name) {
         case 'option.addWood':
           if (mapStore.currMap.temperature != undefined) {
             mapStore.currMap.temperature += 5
             if (mapStore.currMap.temperature <= 0) {
-              resMsg.push('火堆冒出火苗')
+              gameStore.currentScene.text.push('火堆冒出火苗')
             }
             if (mapStore.currMap.temperature >= 1 && mapStore.currMap.temperature < 10) {
-              resMsg.push('火堆大了一点')
+              gameStore.currentScene.text.push('火堆大了一点')
             }
             if (mapStore.currMap.temperature >= 10 && mapStore.currMap.temperature < 30) {
-              resMsg.push('火烧的很旺')
+              gameStore.currentScene.text.push('火烧的很旺')
             }
             if (mapStore.currMap.temperature >= 30 && mapStore.currMap.temperature < 40) {
-              resMsg.push('火有点大了')
+              gameStore.currentScene.text.push('火有点大了')
             }
-            resMsg.push(mapStore.currMap.text)
+            gameStore.currentScene.text.push(mapStore.currMap.text)
           } else {
-            resMsg.push(executeResult.text)
+            gameStore.currentScene.text.push(executeResult.text)
           }
           break
 
         default:
-          resMsg.push(mapStore.currMap.text)
+          gameStore.currentScene.text.push(mapStore.currMap.text)
           break
       }
+
+      // 等待按钮间隔时间
+      await new Promise((resolve) => {
+        setTimeout(
+          () => {
+            resolve(1)
+          },
+          action.duration == undefined ? projectSetting.duration : action.duration
+        )
+      })
     } else {
-      resMsg.push(executeResult.text)
+      gameStore.currentScene.text.push(executeResult.text)
     }
-    if (resMsg.length == 0) {
-      resMsg.push('message.' + action.text + 'Info')
-    }
-    return resMsg
   }
 
   function loadActionOptions(optionList: Dto.ActionOption[] | undefined, next: string | undefined) {

@@ -16,6 +16,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                 name: 'option.explore',
                 text: 'option.explore',
                 type: 'map',
+                duration: 2000,
                 condition: [
                   {
                     type: 'and',
@@ -58,6 +59,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                 name: 'option.addWood',
                 text: 'option.addWood',
                 type: 'map',
+                duration: 3000,
                 condition: [
                   {
                     type: 'and',
@@ -107,6 +109,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                 name: 'option.fix',
                 text: 'option.fix',
                 type: 'map',
+                duration: 5000,
                 condition: [
                   {
                     type: 'and',
@@ -150,6 +153,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                 name: 'option.make',
                 text: 'option.make',
                 type: 'map',
+                duration: 3000,
                 condition: [
                   {
                     type: 'and',
@@ -167,6 +171,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                 name: 'option.repair',
                 text: 'option.repair',
                 type: 'map',
+                duration: 2000,
                 condition: [
                   {
                     type: 'and',
@@ -192,6 +197,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
             name: 'option.cutTree',
             text: 'option.cutTree',
             type: 'map',
+            duration: 10000,
             effect: {
               type: 'all',
               effects: [

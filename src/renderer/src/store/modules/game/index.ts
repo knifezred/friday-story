@@ -15,6 +15,14 @@ export const useGameStore = defineStore(SetupStoreId.Game, () => {
     npc2: '',
     value: ''
   })
+  const currentScene = ref<Dto.GameScene>({
+    name: 'test',
+    title: '',
+    cover: '/static/stories/start',
+    next: '',
+    options: [],
+    text: []
+  })
   const currentSceneType = ref<UnionKey.SceneModule>('map')
   const currentMiniGame = ref<UnionKey.MiniGameModule>('finger-guessing')
   const temperature = ref(-18.0)
@@ -59,6 +67,7 @@ export const useGameStore = defineStore(SetupStoreId.Game, () => {
       return 0
     }
   }
+
   function timeUpdate() {
     console.log()
   }
@@ -70,6 +79,7 @@ export const useGameStore = defineStore(SetupStoreId.Game, () => {
     addMoney,
     addGold,
     coastTime,
+    currentScene,
     currentSceneType,
     currentMiniGame,
     changeMusic,

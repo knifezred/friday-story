@@ -75,19 +75,10 @@ defineOptions({
 })
 
 const textIndex = ref(0)
-const totalTextCount = ref(1)
 const isVideo = ref(false)
 const isTyped = ref(false)
 const currentText = ref('')
 const cover = ref<string>('')
-const currentScene = ref<Dto.GameScene>({
-  name: 'test',
-  title: '',
-  cover: '/static/stories/start',
-  next: '',
-  options: [],
-  text: []
-})
 const appStore = useAppStore()
 const actionStore = useGameActionStore()
 const gameStore = useGameStore()
@@ -98,7 +89,7 @@ const themeStore = useThemeStore()
 
 function bindText(text: string[]) {
   isTyped.value = true
-  totalTextCount.value = text.length
+  gameStore.currentScene.text.length = text.length
   textIndex.value = 0
   if (text.length > textIndex.value) {
     currentText.value = text[textIndex.value]
@@ -106,11 +97,11 @@ function bindText(text: string[]) {
 }
 
 async function dynamicCover() {
-  if (currentScene.value.cover.indexOf('.') == -1) {
+  if (gameStore.currentScene.cover.indexOf('.') == -1) {
     console.log(cover.value)
-    cover.value = await dynamicResource(currentScene.value.cover)
+    cover.value = await dynamicResource(gameStore.currentScene.cover)
   } else {
-    cover.value = currentScene.value.cover
+    cover.value = gameStore.currentScene.cover
   }
   if (cover.value.endsWith('.mp4')) {
     isVideo.value = true
@@ -121,11 +112,11 @@ async function dynamicCover() {
 }
 
 async function nextScene(next: string) {
-  currentScene.value = storyStore.getStoryScene(next)
+  gameStore.currentScene = storyStore.getStoryScene(next)
   await dynamicCover()
-  bindText(currentScene.value.text)
+  bindText(gameStore.currentScene.text)
   // 绑定按钮
-  loadOptions(currentScene.value.options, currentScene.value.next)
+  loadOptions(gameStore.currentScene.options, gameStore.currentScene.next)
 }
 
 async function nextText() {
@@ -133,23 +124,23 @@ async function nextText() {
     // 再次点击取消打字机效果
     isTyped.value = false
   } else {
-    if (textIndex.value == totalTextCount.value - 1) {
+    if (textIndex.value == gameStore.currentScene.text.length - 1) {
       if (actionStore.options.length == 0) {
-        if (currentScene.value.next != '') {
-          await nextScene(currentScene.value.next)
+        if (gameStore.currentScene.next != '') {
+          await nextScene(gameStore.currentScene.next)
         } else {
           // end
           gameStore.currentSceneType = 'map'
           appStore.siderCollapse = false
         }
       }
-    } else if (textIndex.value < totalTextCount.value - 1) {
+    } else if (textIndex.value < gameStore.currentScene.text.length - 1) {
       textIndex.value += 1
-      if (textIndex.value >= currentScene.value.text.length) {
-        bindText(currentScene.value.text)
+      if (textIndex.value >= gameStore.currentScene.text.length) {
+        bindText(gameStore.currentScene.text)
       } else {
         isTyped.value = true
-        currentText.value = currentScene.value.text[textIndex.value]
+        currentText.value = gameStore.currentScene.text[textIndex.value]
       }
     }
   }
@@ -159,14 +150,12 @@ async function nextText() {
 async function executeOption(action: Dto.ActionOption) {
   action.isDisabled = true
   action.loading = true
-  const executeResult = actionStore.executeAction(action)
-  for (const re of executeResult) {
-    currentScene.value.text.push(re)
-  }
-  loadOptions(currentScene.value.options, currentScene.value.next)
+  await actionStore.executeAction(action)
+  loadOptions(gameStore.currentScene.options, gameStore.currentScene.next)
+  action.isDisabled = false
+  action.loading = false
   if (actionStore.currentAction.canExecute) {
-    // action计数
-    gameStore.countOptionExecute(action.name)
+    gameStore.currentSceneType = action.type
     switch (action.type) {
       case 'map':
         mapStore.currMap.isLocked = false
@@ -193,17 +182,11 @@ async function executeOption(action: Dto.ActionOption) {
         nextText()
         break
     }
-    gameStore.currentSceneType = action.type
   }
-  nextText()
-  setTimeout(() => {
-    action.isDisabled = false
-    action.loading = false
-  }, 3000)
 }
 // 加载场景
 async function loadCurrentScene(options, cover: string, next: string | undefined, text: string[]) {
-  currentScene.value = {
+  gameStore.currentScene = {
     name: 'current',
     title: '',
     text: text,
@@ -212,17 +195,20 @@ async function loadCurrentScene(options, cover: string, next: string | undefined
     options: options ?? undefined
   }
   await dynamicCover()
-  loadOptions(currentScene.value.options, next)
-  bindText(currentScene.value.text)
+  loadOptions(gameStore.currentScene.options, next)
+  bindText(gameStore.currentScene.text)
 }
 
 function loadOptions(options: Array<Dto.ActionOption>, next: string | undefined) {
   const infos = actionStore.loadActionOptions(options, next)
   for (const info of infos) {
-    currentScene.value.text.push(info)
+    gameStore.currentScene.text.push(info)
   }
-  totalTextCount.value = currentScene.value.text.length
 }
+
+watch([() => gameStore.currentScene.text.length], () => {
+  nextText()
+})
 
 watch([() => isTyped.value], () => {
   // 自动跳转下一段话

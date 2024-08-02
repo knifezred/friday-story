@@ -365,6 +365,7 @@ declare namespace Dto {
     locked?: boolean
     isShow?: boolean
     loading?: boolean
+    duration?: number
     canExecute?: boolean
   }
 

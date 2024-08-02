@@ -109,6 +109,7 @@ declare namespace App {
       bgMusic: string
       defaultPlace: string
       localhost: string
+      duration: number
     }
   }
 
