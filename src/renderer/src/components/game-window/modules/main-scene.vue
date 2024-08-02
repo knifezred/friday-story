@@ -27,7 +27,12 @@
           ? 'height:20.5vw;width:calc(100% - ' + themeStore.sider.mixCollapsedWidth + 'px);'
           : 'height:18vw;'
       "
-      style="border: 0; border-radius: 0">
+      style="
+        border: 0;
+        border-radius: 0;
+        background-image: url('http://localhost:5175/static/imgs/frame/dialogue_card_bg.jpg');
+        background-repeat: round;
+      ">
       <n-scrollbar class="h-20vh" :distance="10" @click="nextText">
         <n-p class="text-xl color-success">
           <TypedText
@@ -37,7 +42,7 @@
         </n-p>
       </n-scrollbar>
       <template #footer>
-        <n-flex justify="end">
+        <n-flex justify="center">
           <template v-for="btn in actionStore.options" :key="btn.name">
             <n-button
               v-if="btn.isShow != false"
