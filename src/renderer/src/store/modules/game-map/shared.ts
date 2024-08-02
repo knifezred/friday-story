@@ -3,16 +3,21 @@ import { findStorage } from '@renderer/service/api/storage'
 import { localeText, prefixImage } from '@renderer/utils/common'
 
 export async function getDefaultMaps(id: number | undefined) {
-  const isProd = import.meta.env.PROD
-  if (id != undefined && isProd) {
+  const maps = flattenTree(generateIdAndPid(DefaultMaps, 'root'))
+  if (id != undefined) {
     const searchKey = id + '.map'
     const mapStorage = await findStorage(searchKey)
     if (mapStorage.data != null && typeof mapStorage.data != 'string') {
-      return JSON.parse(mapStorage.data.value) as Array<Dto.MapItemFull>
+      const userMaps = JSON.parse(mapStorage.data.value) as Array<Dto.MapItemFull>
+      maps.forEach((map) => {
+        if (userMaps.filter((x) => x.id == map.id).length == 0) {
+          userMaps.push(map)
+        }
+      })
+      return userMaps
     }
   }
-
-  return flattenTree(generateIdAndPid(DefaultMaps, 'root'))
+  return maps
 }
 
 export function generateIdAndPid(tree: any, parentId = 'root') {
