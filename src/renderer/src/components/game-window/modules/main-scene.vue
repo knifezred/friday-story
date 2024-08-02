@@ -23,16 +23,14 @@
       class="bg-gray-8"
       :class="!appStore.siderCollapse ? 'pos-relative bg-op-1' : 'pos-fixed bottom-0 bg-op-50'"
       :style="
-        appStore.siderCollapse
+        'background-image: url(' +
+        appStore.projectSettings.localhost +
+        'static/imgs/frame/dialogue_card_bg.jpg);' +
+        (appStore.siderCollapse
           ? 'height:20.5vw;width:calc(100% - ' + themeStore.sider.mixCollapsedWidth + 'px);'
-          : 'height:18vw;'
+          : 'height:18vw;')
       "
-      style="
-        border: 0;
-        border-radius: 0;
-        background-image: url('http://localhost:5175/static/imgs/frame/dialogue_card_bg.jpg');
-        background-repeat: round;
-      ">
+      style="border: 0; border-radius: 0; background-repeat: round">
       <n-scrollbar class="h-20vh" :distance="10" @click="nextText">
         <n-p class="text-xl color-success">
           <TypedText
