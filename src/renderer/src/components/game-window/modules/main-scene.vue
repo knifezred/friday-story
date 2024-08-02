@@ -71,7 +71,7 @@ import { dynamicResource } from '@renderer/utils/common'
 import { computed, ref, watch } from 'vue'
 
 defineOptions({
-  name: 'StoryScene'
+  name: 'MainScene'
 })
 
 const textIndex = ref(0)

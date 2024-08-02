@@ -8,8 +8,8 @@
 </template>
 
 <script setup lang="ts">
-import { useAppStore } from '@renderer/store/modules/app'
 import { useAuthStore } from '@renderer/store/modules/auth'
+import { useGameStore } from '@renderer/store/modules/game'
 import type { Component } from 'vue'
 import { computed } from 'vue'
 import DiceNumberGame from '../mini-games/dice-number-game.vue'
@@ -19,8 +19,8 @@ import MatchThreeGame from '../mini-games/match-three-game.vue'
 defineOptions({
   name: 'MiniGame'
 })
-const appStore = useAppStore()
 
+const gameStore = useGameStore()
 const authStore = useAuthStore()
 
 interface MiniGameModule {
@@ -34,7 +34,7 @@ const moduleMap: Record<UnionKey.MiniGameModule, MiniGameModule> = {
   'match-three': { label: 'FingerGuessing', component: MatchThreeGame }
 }
 
-const activeModule = computed(() => moduleMap[appStore.currentMiniGame || 'finger-guess'])
+const activeModule = computed(() => moduleMap[gameStore.currentMiniGame || 'finger-guess'])
 
 interface Emits {
   (e: 'result', result: boolean): boolean

@@ -73,6 +73,7 @@
 import { $t } from '@renderer/locales'
 import { useAppStore } from '@renderer/store/modules/app'
 import { useAuthStore } from '@renderer/store/modules/auth'
+import { useGameStore } from '@renderer/store/modules/game'
 import { useGameItemStore } from '@renderer/store/modules/game-item'
 import { onMounted, ref } from 'vue'
 
@@ -83,6 +84,7 @@ defineOptions({
 const shopItems = ref<Array<Dto.ShopGoodsFull>>([])
 const authStore = useAuthStore()
 const appStore = useAppStore()
+const gameStore = useGameStore()
 const gameItemStore = useGameItemStore()
 const totalCoast = ref(0)
 interface Emits {
@@ -128,7 +130,7 @@ function checkout() {
     }
   })
   gameItemStore.deal(totalCoast.value)
-  appStore.addMoney(-totalCoast.value)
+  gameStore.addMoney(-totalCoast.value)
   appStore.siderCollapse = false
   emit('result', true)
 }
