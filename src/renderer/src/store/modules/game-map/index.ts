@@ -1,6 +1,5 @@
 import { SetupStoreId } from '@renderer/enums'
 import { checkCondition } from '@renderer/hooks/game/index'
-import { createStorage, findStorage, updateStorage } from '@renderer/service/api/storage'
 import { roomTemperature } from '@renderer/utils/common'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
@@ -130,25 +129,6 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     checkConditions(currMap.value)
   }
 
-  async function updateMapStorage() {
-    if (authStore.userInfo.archive.id != undefined) {
-      const searchKey = authStore.userInfo.archive.id + '.map'
-      const mapStorage = await findStorage(searchKey)
-      if (mapStorage.data != null && typeof mapStorage.data != 'string') {
-        mapStorage.data.value = JSON.stringify(allMaps.value)
-        mapStorage.data.updatedTime = Date.now()
-        updateStorage(mapStorage.data)
-      } else {
-        createStorage({
-          value: JSON.stringify(allMaps.value),
-          key: searchKey,
-          createdTime: Date.now(),
-          updatedTime: Date.now()
-        })
-      }
-    }
-  }
-
   function findMap(id: string) {
     const map = allMaps.value.filter((x) => x.id == id)
     if (map.length > 0) {
@@ -185,7 +165,6 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     initMap,
     nextMap,
     beforeNextMap,
-    updateMapStorage,
     findMap,
     setMap,
     setMapTitle

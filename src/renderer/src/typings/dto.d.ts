@@ -171,6 +171,11 @@ declare namespace Dto {
     value: string
   }
 
+  type KeyValueNumPair = {
+    key: string
+    value: number
+  }
+
   interface ArchivedData {
     worldTime: number
     weather: WeatherType

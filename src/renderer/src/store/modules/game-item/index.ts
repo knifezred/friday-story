@@ -1,6 +1,6 @@
 import { DefaultGameItems, ShopGoodsRecord } from '@renderer/constants/data/items'
 import { SetupStoreId } from '@renderer/enums'
-import { createStorage, findStorage, updateStorage } from '@renderer/service/api/storage'
+import { createStorage, updateStorage } from '@renderer/service/api/storage'
 import { localeText, prefixImage } from '@renderer/utils/common'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
@@ -18,9 +18,8 @@ export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
   const authStore = useAuthStore()
   async function currentShopGoods() {
     // 分存档保存
-    const searchKey = authStore.userInfo.archive.id + '.shop.' + currentShop.value
-    const shopEntity = await findStorage(searchKey)
-    if (shopEntity.data != null && typeof shopEntity.data != 'string') {
+    const shopEntity = await authStore.findStorageData(SetupStoreId.GameItem + currentShop.value)
+    if (shopEntity != null && shopEntity.data != null && typeof shopEntity.data != 'string') {
       currentShopEntity.value = JSON.parse(shopEntity.data.value)
       isUpdate.value = true
     } else {

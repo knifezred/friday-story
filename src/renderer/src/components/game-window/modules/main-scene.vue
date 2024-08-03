@@ -115,6 +115,7 @@ function bindText(text: string[]) {
   }
 }
 
+// 从文件夹下动态获取场景资源（图片/视频），视频只支持mp4格式
 async function dynamicCover() {
   if (gameStore.currentScene.cover.indexOf('.') == -1) {
     console.log(cover.value)

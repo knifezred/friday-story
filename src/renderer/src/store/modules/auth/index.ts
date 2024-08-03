@@ -15,14 +15,23 @@ import {
   findArchive,
   updateArchive
 } from '@renderer/service/api/archive'
-import { createStorage, deleteStorage, fetchStorageListByKey } from '@renderer/service/api/storage'
+import {
+  createStorage,
+  deleteStorage,
+  fetchStorageListByKey,
+  findStorage,
+  updateStorage
+} from '@renderer/service/api/storage'
 import { localStg } from '@renderer/utils/storage'
+import { useGameStore } from '../game'
 import { useMapStore } from '../game-map'
+
 export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   const router = useRouter()
   const route = useRoute()
   const routeStore = useRouteStore()
   const mapStore = useMapStore()
+  const gameStore = useGameStore()
   const { redirectFromLogin } = useRouterPush()
   const { loading: loginLoading, startLoading, endLoading } = useLoading()
 
@@ -118,8 +127,10 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
       archivedData.value = JSON.parse(userInfo.archive.data) as Dto.ArchivedData
       // 3. update store
       token.value = data.id == undefined ? '' : data.id.toString()
-      // 初始化地图
+      // start 初始化数据
+      await gameStore.initOptionExecuteRecords()
       await mapStore.initMap(userInfo.archive.place)
+      // end
       return true
     }
 
@@ -134,7 +145,11 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
       userInfo.archive.saveTime = Date.now()
       userInfo.archive.data = JSON.stringify(archivedData.value)
       // 保存当前存档数据
-      await mapStore.updateMapStorage()
+      await saveStorageData(SetupStoreId.GameMap + '.allMaps', mapStore.allMaps)
+      await saveStorageData(
+        SetupStoreId.Game + '.optionExecuteRecords',
+        gameStore.optionExecuteRecords
+      )
       if (isNew) {
         const searchKey = userInfo.archive.id + '.'
         userInfo.archive.id = undefined
@@ -150,6 +165,34 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
         }
       } else {
         await updateArchive(userInfo.archive)
+      }
+    }
+  }
+  async function findStorageData(key: string) {
+    if (userInfo.archive.id != undefined) {
+      const searchKey = userInfo.archive.id + '.' + key
+      const dataStorage = await findStorage(searchKey)
+      return dataStorage
+    } else {
+      return null
+    }
+  }
+
+  async function saveStorageData(key: string, data: any) {
+    if (userInfo.archive.id != undefined) {
+      const searchKey = userInfo.archive.id + '.' + key
+      const dataStorage = await findStorage(searchKey)
+      if (dataStorage.data != null && typeof dataStorage.data != 'string') {
+        dataStorage.data.value = JSON.stringify(data)
+        dataStorage.data.updatedTime = Date.now()
+        updateStorage(dataStorage.data)
+      } else {
+        createStorage({
+          value: JSON.stringify(data),
+          key: searchKey,
+          createdTime: Date.now(),
+          updatedTime: Date.now()
+        })
       }
     }
   }
@@ -222,6 +265,8 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     hasItem,
     useItem,
     checkFlag,
-    addFlag
+    addFlag,
+    findStorageData,
+    saveStorageData
   }
 })

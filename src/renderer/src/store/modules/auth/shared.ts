@@ -18,7 +18,7 @@ export function getUserInfo() {
       cover: '',
       saveTime: 0,
       totalTime: 0,
-      place: 0,
+      place: '',
       data: ''
     }
   }

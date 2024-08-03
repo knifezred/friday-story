@@ -29,7 +29,7 @@ export const useGameStore = defineStore(SetupStoreId.Game, () => {
   const fromMoney = ref(0)
   const fromGold = ref(0)
   // TODO 存档，根据时间刷新
-  const optionExecuteNumbers = ref<Array<Game.ActionOption.ActionExecuteNumber>>([])
+  const optionExecuteRecords = ref<Array<Dto.KeyValueNumPair>>([])
 
   function addMoney(money: number) {
     fromMoney.value = authStore.archivedData.money
@@ -48,23 +48,30 @@ export const useGameStore = defineStore(SetupStoreId.Game, () => {
   }
 
   function countOptionExecute(name: string) {
-    const option = optionExecuteNumbers.value.filter((x) => x.name == name)
+    const option = optionExecuteRecords.value.filter((x) => x.key == name)
     if (option.length > 0) {
-      option[0].num += 1
+      option[0].value += 1
     } else {
-      optionExecuteNumbers.value.push({
-        name,
-        num: 1
+      optionExecuteRecords.value.push({
+        key: name,
+        value: 1
       })
     }
   }
 
   function getOptionExecuteNum(name: string) {
-    const option = optionExecuteNumbers.value.filter((x) => x.name == name)
+    const option = optionExecuteRecords.value.filter((x) => x.key == name)
     if (option.length > 0) {
-      return option[0].num
+      return option[0].value
     } else {
       return 0
+    }
+  }
+
+  async function initOptionExecuteRecords() {
+    const temp = await authStore.findStorageData(SetupStoreId.Game + '.optionExecuteRecords')
+    if (temp != null && temp.data != null && typeof temp.data != 'string') {
+      optionExecuteRecords.value = JSON.parse(temp.data.value) as Array<Dto.KeyValueNumPair>
     }
   }
 
@@ -73,6 +80,7 @@ export const useGameStore = defineStore(SetupStoreId.Game, () => {
   }
 
   return {
+    initOptionExecuteRecords,
     timeUpdate,
     fromMoney,
     fromGold,
@@ -86,6 +94,7 @@ export const useGameStore = defineStore(SetupStoreId.Game, () => {
     temperature,
     langParams,
     countOptionExecute,
+    optionExecuteRecords,
     getOptionExecuteNum
   }
 })

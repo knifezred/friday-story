@@ -1,13 +1,13 @@
 import { DefaultMaps } from '@renderer/constants/data/map'
-import { findStorage } from '@renderer/service/api/storage'
+import { SetupStoreId } from '@renderer/enums'
 import { localeText, prefixImage } from '@renderer/utils/common'
+import { useAuthStore } from '../auth'
 
 export async function getDefaultMaps(id: number | undefined) {
   const maps = flattenTree(generateIdAndPid(DefaultMaps, 'root'))
   if (id != undefined) {
-    const searchKey = id + '.map'
-    const mapStorage = await findStorage(searchKey)
-    if (mapStorage.data != null && typeof mapStorage.data != 'string') {
+    const mapStorage = await useAuthStore().findStorageData(SetupStoreId.GameMap + '.allMaps')
+    if (mapStorage != null && mapStorage.data != null && typeof mapStorage.data != 'string') {
       const userMaps = JSON.parse(mapStorage.data.value) as Array<Dto.MapItemFull>
       maps.forEach((map) => {
         if (userMaps.filter((x) => x.id == map.id).length == 0) {
