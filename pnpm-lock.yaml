@@ -92,6 +92,9 @@ importers:
       vue-i18n:
         specifier: ^9.13.1
         version: 9.13.1(vue@3.4.34(typescript@5.5.4))
+      vue-kinesis:
+        specifier: ^2.0.5
+        version: 2.0.5(vue@3.4.34(typescript@5.5.4))
       vue-router:
         specifier: ^4.4.0
         version: 4.4.0(vue@3.4.34(typescript@5.5.4))
@@ -4199,6 +4202,12 @@ packages:
   vue-i18n@9.13.1:
     resolution: {integrity: sha512-mh0GIxx0wPtPlcB1q4k277y0iKgo25xmDPWioVVYanjPufDBpvu5ySTjP5wOrSvlYQ2m1xI+CFhGdauv/61uQg==}
     engines: {node: '>= 16'}
+    peerDependencies:
+      vue: ^3.0.0
+
+  vue-kinesis@2.0.5:
+    resolution: {integrity: sha512-uO2lG9A/L4I9KvyJuUzAkAWqd37In/kWxQ6rZ3/heJZ8+7rHAbBO5Knz6xG+cpO+9Q4cYurxXsPfWM6e7X9E3Q==}
+    engines: {node: '>=10'}
     peerDependencies:
       vue: ^3.0.0
 
@@ -8916,6 +8925,10 @@ snapshots:
       '@intlify/core-base': 9.13.1
       '@intlify/shared': 9.13.1
       '@vue/devtools-api': 6.6.3
+      vue: 3.4.34(typescript@5.5.4)
+
+  vue-kinesis@2.0.5(vue@3.4.34(typescript@5.5.4)):
+    dependencies:
       vue: 3.4.34(typescript@5.5.4)
 
   vue-router@4.4.0(vue@3.4.34(typescript@5.5.4)):

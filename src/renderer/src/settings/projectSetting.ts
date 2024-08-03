@@ -5,5 +5,8 @@ export const projectSetting: App.Global.ProjectSetting = {
   bgMusic: '/static/music/default.mp3',
   defaultPlace: 'room.darkHouse.begin',
   localhost: 'http://localhost:5175/',
-  duration: 100
+  duration: 100,
+  sceneTransition: 'fade-half',
+  optionTransition: 'fade-bottom',
+  mapTransition: 'fade-slide'
 }

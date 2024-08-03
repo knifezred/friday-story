@@ -110,6 +110,9 @@ declare namespace App {
       defaultPlace: string
       localhost: string
       duration: number
+      sceneTransition: UnionKey.ThemePageAnimateMode
+      optionTransition: UnionKey.ThemePageAnimateMode
+      mapTransition: UnionKey.ThemePageAnimateMode
     }
   }
 

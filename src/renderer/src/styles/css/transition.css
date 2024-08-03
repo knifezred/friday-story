@@ -9,6 +9,17 @@
   opacity: 0;
 }
 
+/* fade-half */
+.fade-half-enter-active,
+.fade-half-leave-active {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fade-half-enter-from,
+.fade-half-leave-to {
+  opacity: 0.5;
+}
+
 /* fade-slide */
 .fade-slide-leave-active,
 .fade-slide-enter-active {

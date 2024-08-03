@@ -43,6 +43,7 @@ declare namespace UnionKey {
     | 'fade-slide'
     | 'fade-bottom'
     | 'fade-scale'
+    | 'fade-half'
     | 'zoom-fade'
     | 'zoom-out'
     | 'none'

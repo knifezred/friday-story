@@ -1,24 +1,28 @@
 <template>
   <NFlex vertical :size="0">
-    <video
-      v-if="isVideo"
-      :src="appStore.projectSettings.localhost + cover"
-      autoplay
-      loop
-      class="h-56.25%"></video>
-    <div
-      v-else
-      :style="
-        'background-image: url(' +
-        appStore.projectSettings.localhost +
-        cover +
-        ');padding-top: 56.25%;'
-      "
-      class="bg-repeat-round">
-      <!-- <p class="pt-12 pl-24 absolute-lt text-error">
+    <Transition :name="projectSetting.sceneTransition" mode="out-in" appear>
+      <video
+        v-if="isVideo"
+        :key="'v' + cover"
+        :src="appStore.projectSettings.localhost + cover"
+        autoplay
+        loop
+        class="h-56.25%"></video>
+      <div
+        v-else
+        :key="cover"
+        :style="
+          'background-image: url(' +
+          appStore.projectSettings.localhost +
+          cover +
+          ');padding-top: 56.25%;'
+        "
+        class="bg-repeat-round">
+        <!-- <p class="pt-12 pl-24 absolute-lt text-error">
         {{ cover }}
       </p> -->
-    </div>
+      </div>
+    </Transition>
     <n-card
       class="bg-gray-8"
       :class="!appStore.siderCollapse ? 'pos-relative bg-op-1' : 'pos-fixed bottom-0 bg-op-50'"
@@ -40,22 +44,24 @@
         </n-p>
       </n-scrollbar>
       <template #footer>
-        <n-flex justify="center">
-          <template v-for="btn in actionStore.options" :key="btn.name">
-            <n-button
-              v-if="btn.isShow != false"
-              :type="btn.buttonType ?? 'primary'"
-              :disabled="btn.isDisabled || btn.locked"
-              class="min-w-42"
-              :style="btn.loading != true ? '' : computedButtonLoadingStyle"
-              @click="executeOption(btn)">
-              <template #icon>
-                <SvgIcon v-if="btn.icon != undefined" :icon="btn.icon" class="mr-1" />
-              </template>
-              {{ btn.locked == true ? '???' : $t(btn.text) }}
-            </n-button>
-          </template>
-        </n-flex>
+        <Transition :name="projectSetting.optionTransition" mode="out-in" appear>
+          <n-flex :key="gameStore.currentScene.name" justify="center">
+            <template v-for="btn in actionStore.options" :key="btn.name">
+              <n-button
+                v-if="btn.isShow != false"
+                :type="btn.buttonType ?? 'primary'"
+                :disabled="btn.isDisabled || btn.locked"
+                class="min-w-42"
+                :style="btn.loading != true ? '' : computedButtonLoadingStyle"
+                @click="executeOption(btn)">
+                <template #icon>
+                  <SvgIcon v-if="btn.icon != undefined" :icon="btn.icon" class="mr-1" />
+                </template>
+                {{ btn.locked == true ? '???' : $t(btn.text) }}
+              </n-button>
+            </template>
+          </n-flex>
+        </Transition>
       </template>
     </n-card>
   </NFlex>
@@ -63,6 +69,7 @@
 
 <script setup lang="ts">
 import { $t } from '@renderer/locales'
+import { projectSetting } from '@renderer/settings/projectSetting'
 import { useAppStore } from '@renderer/store/modules/app'
 import { useGameStore } from '@renderer/store/modules/game'
 import { useGameActionStore } from '@renderer/store/modules/game-action'
@@ -197,9 +204,15 @@ async function executeOption(action: Dto.ActionOption) {
   }
 }
 // 加载场景
-async function loadCurrentScene(options, cover: string, next: string | undefined, text: string[]) {
+async function loadCurrentScene(
+  options,
+  cover: string,
+  next: string | undefined,
+  text: string[],
+  name: string
+) {
   gameStore.currentScene = {
-    name: 'current',
+    name: name,
     title: '',
     text: text,
     cover: cover,
@@ -239,7 +252,8 @@ watch(
         storyStore.currentStory.options,
         storyStore.currentStory.cover,
         storyStore.currentStory.nextScene,
-        storyStore.currentStory.text
+        storyStore.currentStory.text,
+        storyStore.currentStory.name
       )
     }
   },
@@ -254,7 +268,8 @@ watch(
         mapStore.currMap.options,
         mapStore.currMap.cover,
         mapStore.currMap.next,
-        [mapStore.currMap.text]
+        [mapStore.currMap.text],
+        mapStore.currMap.name
       )
     }
   },
