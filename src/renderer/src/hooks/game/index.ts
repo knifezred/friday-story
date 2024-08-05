@@ -68,10 +68,23 @@ export function executeEffects(effectModel: Dto.ActionEffectModel | undefined) {
     }
     for (const effect of effects) {
       if (effectHook[effect.type]) {
-        const result = effectHook[effect.type](effect.value)
-
         let tempText: string | undefined = ''
-        tempText = result ? effect.success : effect.failure
+        let val1 = effect.value
+        let val2 = ''
+        if (val1.includes(',')) {
+          val1 = effect.value.split(',')[0]
+          val2 = effect.value.split(',')[1]
+        }
+        const result = effectHook[effect.type](effect.value)
+        if (typeof result == 'boolean') {
+          tempText = result ? effect.success : effect.failure
+        } else {
+          // addItem返回对象
+          tempText = result.success ? effect.success : effect.failure
+          val1 = result.val1
+          val2 = result.val2
+        }
+        val1 = rebuildVal1(val1, effect.type)
         if (tempText == undefined) {
           if (effect.text == undefined) {
             tempText = 'effect.' + effect.type + (result ? 'True' : 'False')
@@ -79,14 +92,6 @@ export function executeEffects(effectModel: Dto.ActionEffectModel | undefined) {
             tempText = effect.text
           }
         }
-
-        let val1 = effect.value
-        let val2 = ''
-        if (val1.includes(',')) {
-          val1 = effect.value.split(',')[0]
-          val2 = effect.value.split(',')[1]
-        }
-        val1 = rebuildVal1(val1, effect.type)
         if (effect.notification != true) {
           resultText.push($t(tempText as never, { item: $t(val1 as never), value: val2 }))
         } else {

@@ -28,7 +28,7 @@ export const useGameStore = defineStore(SetupStoreId.Game, () => {
   const temperature = ref(-18.0)
   const fromMoney = ref(0)
   const fromGold = ref(0)
-  // TODO 存档，根据时间刷新
+
   const optionExecuteRecords = ref<Array<Dto.KeyValueNumPair>>([])
 
   function addMoney(money: number) {

@@ -1,7 +1,7 @@
 import { useAuthStore } from '@renderer/store/modules/auth'
 import { useGameStore } from '@renderer/store/modules/game'
 import { useMapStore } from '@renderer/store/modules/game-map'
-import { roomTemperature } from '@renderer/utils/common'
+import { randomInt, roomTemperature } from '@renderer/utils/common'
 
 export function useActionEffect() {
   const authStore = useAuthStore()
@@ -11,17 +11,26 @@ export function useActionEffect() {
   // 添加指定物品
   function addItem(value: string) {
     const { 0: name, 1: count } = value.split(',')
+    let countNum = 1
+    if (count.includes('-')) {
+      // 范围
+      const { 0: startCount, 1: endCount } = count.split('-')
+      countNum = randomInt(Number(startCount), Number(endCount))
+    } else {
+      countNum = Number(count)
+    }
     if (authStore.archivedData.items.filter((x) => x.name == name).length > 0) {
-      authStore.archivedData.items.filter((x) => x.name == name)[0].count += Number(count)
+      authStore.archivedData.items.filter((x) => x.name == name)[0].count += countNum
     } else {
       authStore.archivedData.items.push({
         name: name,
-        count: Number(count)
+        count: countNum
       })
     }
     return {
-      name: name,
-      count: Number(count)
+      success: true,
+      val1: name,
+      val2: countNum
     }
   }
 

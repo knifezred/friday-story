@@ -203,7 +203,23 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
               effects: [
                 {
                   type: 'addItem',
-                  value: 'material.wood,10',
+                  value: 'material.wood,5-10',
+                  notification: true
+                }
+              ]
+            }
+          },
+          {
+            name: 'option.catchFish',
+            text: 'option.catchFish',
+            type: 'map',
+            duration: 10000,
+            effect: {
+              type: 'all',
+              effects: [
+                {
+                  type: 'addItem',
+                  value: 'food.fish,1-3',
                   notification: true
                 }
               ]
