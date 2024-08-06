@@ -3,7 +3,7 @@ export const MainStartStories: Array<Dto.StoryPlot> = [
     name: 'main_start',
     type: 'main-line',
     cover: '',
-    text: ['嘶，你被冻醒了'],
+    text: ['嘶，你被冻醒了', '你缓过神来发现，地上散落着几张卡牌'],
     nextScene: 'scene.set_name'
   }
 ]
