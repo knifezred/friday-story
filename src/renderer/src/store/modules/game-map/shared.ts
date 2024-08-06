@@ -5,17 +5,14 @@ import { useAuthStore } from '../auth'
 
 export async function getDefaultMaps(id: number | undefined) {
   const maps = flattenTree(generateIdAndPid(DefaultMaps, 'root'))
+  const authStore = useAuthStore()
   if (id != undefined) {
-    const mapStorage = await useAuthStore().findStorageData(SetupStoreId.GameMap + '.allMaps')
-    if (mapStorage != null && mapStorage.data != null && typeof mapStorage.data != 'string') {
-      const userMaps = JSON.parse(mapStorage.data.value) as Array<Dto.MapItemFull>
-      maps.forEach((map) => {
-        if (userMaps.filter((x) => x.id == map.id).length == 0) {
-          userMaps.push(map)
-        }
-      })
-      return userMaps
-    }
+    maps.forEach((map) => {
+      const isShowFlag = authStore.hasFlag(SetupStoreId.GameMap + '.isShow.' + map.id)
+      if (isShowFlag != undefined) {
+        map.isShow = isShowFlag.value == '1'
+      }
+    })
   }
   return maps
 }

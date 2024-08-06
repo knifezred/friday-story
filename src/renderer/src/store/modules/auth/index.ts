@@ -145,7 +145,6 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
       userInfo.archive.saveTime = Date.now()
       userInfo.archive.data = JSON.stringify(archivedData.value)
       // 保存当前存档数据
-      await saveStorageData(SetupStoreId.GameMap + '.allMaps', mapStore.allMaps)
       await saveStorageData(
         SetupStoreId.Game + '.optionExecuteRecords',
         gameStore.optionExecuteRecords
@@ -224,24 +223,31 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     }
   }
 
-  function checkFlag(flag: string, value: string) {
+  function hasFlag(flag: string) {
     if (archivedData.value.flags == undefined) {
       archivedData.value.flags = []
     }
     const flags = archivedData.value.flags.filter((x) => x.key == flag)
     if (flags.length > 0) {
-      return flags[0].value == value
+      return flags[0]
+    } else {
+      return undefined
+    }
+  }
+
+  function checkFlag(flag: string, value: string) {
+    const flagValue = hasFlag(flag)
+    if (flagValue != undefined) {
+      return flagValue.value == value
     } else {
       return false
     }
   }
+
   function addFlag(flag: string, value: string) {
-    if (archivedData.value.flags == undefined) {
-      archivedData.value.flags = []
-    }
-    const flags = archivedData.value.flags.filter((x) => x.key == flag)
-    if (flags.length > 0) {
-      flags[0].value = value
+    const flagValue = hasFlag(flag)
+    if (flagValue != undefined) {
+      flagValue.value = value
     } else {
       archivedData.value.flags.push({
         key: flag,
@@ -264,8 +270,9 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     resetStore,
     hasItem,
     useItem,
-    checkFlag,
     addFlag,
+    checkFlag,
+    hasFlag,
     findStorageData,
     saveStorageData
   }

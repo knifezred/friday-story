@@ -1,3 +1,4 @@
+import { SetupStoreId } from '@renderer/enums'
 import { useAuthStore } from '@renderer/store/modules/auth'
 import { useGameStore } from '@renderer/store/modules/game'
 import { useMapStore } from '@renderer/store/modules/game-map'
@@ -39,6 +40,20 @@ export function useActionEffect() {
     const map = mapStore.findMap(value)
     if (map != undefined) {
       map.isShow = true
+      // 添加地图标识
+      addFlag(SetupStoreId.GameMap + '.isShow.' + value + ',1')
+      return true
+    }
+    return false
+  }
+
+  // 锁定地图
+  function lockMap(value: string) {
+    const map = mapStore.findMap(value)
+    if (map != undefined) {
+      map.isShow = false
+      // 添加地图标识
+      addFlag(SetupStoreId.GameMap + '.' + value + ',0')
       return true
     }
     return false
@@ -76,6 +91,7 @@ export function useActionEffect() {
     addFlag,
     addItem,
     useItem,
+    lockMap,
     unlockMap,
     changeRoomTemperature
   }
