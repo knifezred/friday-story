@@ -108,6 +108,7 @@ declare namespace App {
       volume: number
       bgMusic: string
       defaultPlace: string
+      startStory: string
       localhost: string
       duration: number
       sceneTransition: UnionKey.ThemePageAnimateMode

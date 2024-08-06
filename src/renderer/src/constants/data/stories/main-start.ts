@@ -12,7 +12,7 @@ export const MainStartScenes: Array<Dto.GameScene> = [
   {
     name: 'scene.set_name',
     title: 'title',
-    text: [],
+    text: ['test'],
     cover: '',
     next: '',
     options: [
@@ -26,11 +26,11 @@ export const MainStartScenes: Array<Dto.GameScene> = [
   },
   {
     name: 'scene.choose_id',
-    title: '',
+    title: 'title',
     cover: '',
     next: 'scene.set_special',
     options: [],
-    text: []
+    text: ['hello world']
   },
   {
     name: 'scene.set_special',
@@ -38,6 +38,6 @@ export const MainStartScenes: Array<Dto.GameScene> = [
     cover: '',
     next: '',
     options: [],
-    text: []
+    text: ['hello']
   }
 ]

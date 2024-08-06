@@ -23,12 +23,17 @@ import {
   updateStorage
 } from '@renderer/service/api/storage'
 import { localStg } from '@renderer/utils/storage'
+import { useAppStore } from '../app'
 import { useGameStore } from '../game'
 import { useMapStore } from '../game-map'
+import { useStoryStore } from '../game-story'
 
 export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   const router = useRouter()
   const route = useRoute()
+  const authStore = useAuthStore()
+  const appStore = useAppStore()
+  const storyStore = useStoryStore()
   const routeStore = useRouteStore()
   const mapStore = useMapStore()
   const gameStore = useGameStore()
@@ -129,7 +134,22 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
       token.value = data.id == undefined ? '' : data.id.toString()
       // start 初始化数据
       await gameStore.initOptionExecuteRecords()
-      await mapStore.initMap(userInfo.archive.place)
+
+      if (
+        !authStore.checkFlag(
+          SetupStoreId.GameStory + '.finished.' + appStore.projectSettings.startStory,
+          '1'
+        )
+      ) {
+        gameStore.currentSceneType = 'story'
+        appStore.setSiderCollapse(true)
+        storyStore.setCurrentStory(appStore.projectSettings.startStory)
+        setTimeout(() => {
+          appStore.projectSettings.startStory = ''
+        }, 10)
+      } else {
+        await mapStore.initMap(userInfo.archive.place)
+      }
       // end
       return true
     }

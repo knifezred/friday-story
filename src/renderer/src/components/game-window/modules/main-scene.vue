@@ -149,9 +149,10 @@ async function nextText() {
         if (gameStore.currentScene.next != '') {
           await nextScene(gameStore.currentScene.next)
         } else {
+          await storyStore.storyFinished(storyStore.currentStory.name)
           // end
           gameStore.currentSceneType = 'map'
-          appStore.siderCollapse = false
+          appStore.setSiderCollapse(false)
         }
       }
     } else if (textIndex.value < gameStore.currentScene.text.length - 1) {
@@ -161,6 +162,17 @@ async function nextText() {
       } else {
         isTyped.value = true
         currentText.value = gameStore.currentScene.text[textIndex.value]
+      }
+    } else if (textIndex.value == 0 && gameStore.currentScene.text.length == 0) {
+      if (actionStore.options.length == 0) {
+        if (gameStore.currentScene.next != '') {
+          await nextScene(gameStore.currentScene.next)
+        } else {
+          await storyStore.storyFinished(storyStore.currentStory.name)
+          // end
+          gameStore.currentSceneType = 'map'
+          appStore.setSiderCollapse(false)
+        }
       }
     }
   }
@@ -190,8 +202,8 @@ async function executeOption(action: Dto.ActionOption) {
         itemStore.currentShop = action.next ?? 'happy_shop'
         break
       case 'story':
-        storyStore.setCurrentStory(action.next ?? 'start')
-        appStore.siderCollapse = true
+        storyStore.setCurrentStory(action.next ?? 'main_start')
+        appStore.setSiderCollapse(true)
         if (action.next != undefined && action.next.startsWith('scene')) {
           await nextScene(action.next)
         } else {
@@ -248,7 +260,7 @@ watch([() => isTyped.value], () => {
 watch(
   [() => storyStore.currentStory],
   async () => {
-    if (gameStore.currentSceneType == 'story') {
+    if (gameStore.currentSceneType == 'story' && storyStore.currentStory != undefined) {
       await loadCurrentScene(
         storyStore.currentStory.options,
         storyStore.currentStory.cover,

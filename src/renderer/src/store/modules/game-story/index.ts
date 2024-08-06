@@ -4,6 +4,9 @@ import { SetupStoreId } from '@renderer/enums'
 import { localeText, prefixImage } from '@renderer/utils/common'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import { useAuthStore } from '../auth'
+import { useGameStore } from '../game'
+import { useMapStore } from '../game-map'
 
 export const useStoryStore = defineStore(SetupStoreId.GameStory, () => {
   const currentStory = ref<Dto.StoryPlot>({
@@ -13,11 +16,16 @@ export const useStoryStore = defineStore(SetupStoreId.GameStory, () => {
     text: [],
     nextScene: ''
   })
+
+  const authStore = useAuthStore()
+  const mapStore = useMapStore()
   function getStoryScene(sceneName: string) {
     return DefaultScenes.filter((x) => x.name == sceneName)[0]
   }
   function setCurrentStory(name: string) {
-    currentStory.value = DefaultStories.filter((x) => x.name == name)[0]
+    if (DefaultStories.filter((x) => x.name == name).length > 0) {
+      currentStory.value = DefaultStories.filter((x) => x.name == name)[0]
+    }
   }
 
   function getOptions(optionNames: string[]) {
@@ -51,5 +59,11 @@ export const useStoryStore = defineStore(SetupStoreId.GameStory, () => {
     })
   }
 
-  return { currentStory, setCurrentStory, getStoryScene, getOptions, initStory }
+  async function storyFinished(storyName: string) {
+    authStore.addFlag(SetupStoreId.GameStory + '.finished.' + storyName, '1')
+    useGameStore().currentSceneType = 'map'
+    await mapStore.initMap(authStore.userInfo.archive.place)
+  }
+
+  return { currentStory, setCurrentStory, getStoryScene, getOptions, initStory, storyFinished }
 })
