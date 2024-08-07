@@ -1,5 +1,5 @@
-import { MainStartScenes, MainStartStories } from './stories/main-start'
+import { RestartScenes, ReStartStories } from './stories/restart'
 
-export const DefaultStories: Array<Dto.StoryPlot> = [...MainStartStories]
+export const DefaultStories: Array<Dto.StoryPlot> = [...ReStartStories]
 
-export const DefaultScenes: Array<Dto.GameScene> = [...MainStartScenes]
+export const DefaultScenes: Array<Dto.GameScene> = [...RestartScenes]

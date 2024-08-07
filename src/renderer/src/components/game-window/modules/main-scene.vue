@@ -27,12 +27,11 @@
       class="bg-gray-8"
       :class="!appStore.siderCollapse ? 'pos-relative bg-op-1' : 'pos-fixed bottom-0 bg-op-50'"
       :style="
-        'background-image: url(' +
-        appStore.projectSettings.localhost +
-        'static/imgs/frame/dialogue_card_bg.jpg);' +
-        (appStore.siderCollapse
+        appStore.siderCollapse
           ? 'height:20.5vw;width:calc(100% - ' + themeStore.sider.mixCollapsedWidth + 'px);'
-          : 'height:18vw;')
+          : 'height:18vw;background-image: url(' +
+            appStore.projectSettings.localhost +
+            'static/imgs/frame/dialogue_card_bg.jpg);'
       "
       style="border: 0; border-radius: 0; background-repeat: round">
       <n-scrollbar class="h-20vh" :distance="10" @click="nextText">
@@ -202,7 +201,7 @@ async function executeOption(action: Dto.ActionOption) {
         itemStore.currentShop = action.next ?? 'happy_shop'
         break
       case 'story':
-        storyStore.setCurrentStory(action.next ?? 'story.restart')
+        storyStore.setCurrentStory(action.next ?? 'restart')
         appStore.setSiderCollapse(true)
         if (action.next != undefined && action.next.startsWith('scene')) {
           await nextScene(action.next)

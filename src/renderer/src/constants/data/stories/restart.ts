@@ -1,6 +1,6 @@
-export const MainStartStories: Array<Dto.StoryPlot> = [
+export const ReStartStories: Array<Dto.StoryPlot> = [
   {
-    name: 'story.restart',
+    name: 'restart',
     type: 'main-line',
     cover: '',
     text: ['周五下班的你在地铁上无聊的刷着手机'],
@@ -8,7 +8,7 @@ export const MainStartStories: Array<Dto.StoryPlot> = [
   }
 ]
 
-export const MainStartScenes: Array<Dto.GameScene> = [
+export const RestartScenes: Array<Dto.GameScene> = [
   {
     name: 'scene.restart.fainted',
     title: 'title',
