@@ -120,7 +120,7 @@ export const IslandMaps: Array<Dto.MapItem> = [
                       },
                       {
                         name: 'test.button',
-                        next: 'main_start',
+                        next: 'story.restart',
                         text: 'stories.start',
                         type: 'story'
                       }

@@ -4,7 +4,7 @@ export const projectSetting: App.Global.ProjectSetting = {
   volume: 30,
   bgMusic: '/static/music/default.mp3',
   defaultPlace: 'room.darkHouse.begin',
-  startStory: 'main_start',
+  startStory: 'story.restart',
   localhost: 'http://localhost:5175/',
   duration: 100,
   sceneTransition: 'fade-half',

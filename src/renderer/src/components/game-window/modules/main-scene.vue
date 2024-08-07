@@ -139,12 +139,12 @@ async function nextScene(next: string) {
   loadOptions(gameStore.currentScene.options, gameStore.currentScene.next)
 }
 
-async function nextText() {
+async function nextText(isAutoNext: boolean = true) {
   if (isTyped.value) {
     // 再次点击取消打字机效果
     isTyped.value = false
   } else {
-    if (textIndex.value == gameStore.currentScene.text.length - 1) {
+    if (textIndex.value == gameStore.currentScene.text.length - 1 && isAutoNext) {
       if (actionStore.options.length == 0) {
         if (gameStore.currentScene.next != '') {
           await nextScene(gameStore.currentScene.next)
@@ -202,7 +202,7 @@ async function executeOption(action: Dto.ActionOption) {
         itemStore.currentShop = action.next ?? 'happy_shop'
         break
       case 'story':
-        storyStore.setCurrentStory(action.next ?? 'main_start')
+        storyStore.setCurrentStory(action.next ?? 'story.restart')
         appStore.setSiderCollapse(true)
         if (action.next != undefined && action.next.startsWith('scene')) {
           await nextScene(action.next)
@@ -245,14 +245,14 @@ function loadOptions(options: Array<Dto.ActionOption>, next: string | undefined)
 }
 
 watch([() => gameStore.currentScene.text.length], () => {
-  nextText()
+  nextText(false)
 })
 
 watch([() => isTyped.value], () => {
   // 自动跳转下一段话
   if (isTyped.value == false) {
     setTimeout(() => {
-      nextText()
+      nextText(false)
     }, 500)
   }
 })
