@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { loginModuleRecord } from '@renderer/constants/app'
 import { $t } from '@renderer/locales'
-import { getPaletteColorByNumber, mixColor } from '@renderer/packages/color'
+import { mixColor } from '@renderer/packages/color'
 import { useAppStore } from '@renderer/store/modules/app'
 import { useThemeStore } from '@renderer/store/modules/theme'
+import { staticPath } from '@renderer/utils/common'
 import type { Component } from 'vue'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { KinesisContainer, KinesisElement } from 'vue-kinesis'
 import GameStart from './modules/game-start.vue'
 import PwdLogin from './modules/pwd-login.vue'
@@ -33,11 +34,11 @@ const moduleMap: Record<UnionKey.LoginModule, LoginModule> = {
   'game-start': { label: loginModuleRecord['game-start'], component: GameStart }
 }
 
-const activeModule = computed(() => moduleMap[props.module || 'game-start'])
-
-const bgThemeColor = computed(() =>
-  themeStore.darkMode ? getPaletteColorByNumber(themeStore.themeColor, 600) : themeStore.themeColor
-)
+const activeModule = ref<LoginModule>(moduleMap['game-start'])
+computed(() => moduleMap[props.module || 'game-start'])
+function changeComponent(module: string) {
+  activeModule.value = moduleMap[module || 'game-start']
+}
 
 const bgColor = computed(() => {
   const COLOR_WHITE = '#ffffff'
@@ -53,8 +54,7 @@ const bgColor = computed(() => {
     <div
       class="relative size-full flex-center overflow-hidden"
       :style="{ backgroundColor: bgColor }">
-      <WaveBg :theme-color="bgThemeColor" />
-      <NCard :bordered="false" class="relative z-4 w-auto rd-12px">
+      <NCard :bordered="false" class="absolute-center z-4 w-auto rd-0">
         <div class="w-400px lt-sm:w-300px">
           <header class="flex-y-center justify-between">
             <kinesis-element :strength="10" type="depth">
@@ -83,12 +83,27 @@ const bgColor = computed(() => {
             <h3 class="text-18px text-primary font-medium">{{ $t(activeModule.label) }}</h3>
             <div class="pt-24px">
               <Transition :name="themeStore.page.animateMode" mode="out-in" appear>
-                <component :is="activeModule.component" />
+                <component :is="activeModule.component" @module="changeComponent" />
               </Transition>
             </div>
           </main>
         </div>
       </NCard>
+      <video
+        :src="staticPath('/static/frame/login_bg.mp4')"
+        class="absolute"
+        style="
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          min-width: 100%;
+          min-height: 100%;
+          width: auto;
+          height: auto;
+        "
+        autoplay
+        muted
+        loop></video>
     </div>
   </kinesis-container>
 </template>

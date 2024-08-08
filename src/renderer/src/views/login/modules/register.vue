@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useRouterPush } from '@renderer/hooks/common/router'
 import { $t } from '@renderer/locales'
 import { createArchive } from '@renderer/service/api/archive'
 import { projectSetting } from '@renderer/settings/projectSetting'
@@ -10,8 +9,11 @@ defineOptions({
   name: 'Register'
 })
 
+interface Emits {
+  (e: 'module', module: string): string
+}
+const emit = defineEmits<Emits>()
 const authStore = useAuthStore()
-const { toggleLoginModule } = useRouterPush()
 const model: Dto.DbArchive = reactive({
   name: '',
   totalTime: 0,
@@ -47,7 +49,7 @@ function handleSubmit() {
       <NButton type="primary" size="large" round block @click="handleSubmit">
         {{ $t('common.confirm') }}
       </NButton>
-      <NButton size="large" round block @click="toggleLoginModule('game-start')">
+      <NButton size="large" round block @click="emit('module', 'game-start')">
         {{ $t('page.login.common.back') }}
       </NButton>
     </NFlex>

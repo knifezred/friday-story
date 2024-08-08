@@ -31,7 +31,7 @@
           ? 'height:20.5vw;width:calc(100% - ' + themeStore.sider.mixCollapsedWidth + 'px);'
           : 'height:18vw;background-image: url(' +
             appStore.projectSettings.localhost +
-            'static/imgs/frame/dialogue_card_bg.jpg);'
+            'static/frame/dialogue_card_bg.jpg);'
       "
       style="border: 0; border-radius: 0; background-repeat: round">
       <n-scrollbar class="h-20vh" :distance="10" @click="nextText">

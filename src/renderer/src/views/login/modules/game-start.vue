@@ -6,12 +6,16 @@ defineOptions({
   name: 'GameStart'
 })
 
-const { toggleLoginModule, routerPushByKey } = useRouterPush()
+interface Emits {
+  (e: 'module', module: string): string
+}
+const emit = defineEmits<Emits>()
+const { routerPushByKey } = useRouterPush()
 </script>
 
 <template>
   <NFlex vertical :size="24">
-    <NButton type="primary" size="large" round block @click="toggleLoginModule('register')">
+    <NButton type="primary" size="large" round block @click="emit('module', 'register')">
       {{ $t('page.login.gameStart.newGame') }}
     </NButton>
     <NButton type="primary" size="large" round block @click="routerPushByKey('archive')">

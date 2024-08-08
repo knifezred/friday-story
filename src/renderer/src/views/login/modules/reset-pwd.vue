@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useFormRules, useNaiveForm } from '@renderer/hooks/common/form'
-import { useRouterPush } from '@renderer/hooks/common/router'
 import { $t } from '@renderer/locales'
 import { computed, reactive } from 'vue'
 
@@ -8,7 +7,10 @@ defineOptions({
   name: 'ResetPwd'
 })
 
-const { toggleLoginModule } = useRouterPush()
+interface Emits {
+  (e: 'module', module: string): string
+}
+const emit = defineEmits<Emits>()
 const { formRef, validate } = useNaiveForm()
 
 interface FormModel {
@@ -70,7 +72,7 @@ async function handleSubmit() {
       <NButton type="primary" size="large" round block @click="handleSubmit">
         {{ $t('common.confirm') }}
       </NButton>
-      <NButton size="large" round block @click="toggleLoginModule('pwd-login')">
+      <NButton size="large" round block @click="emit('module', 'pwd-login')">
         {{ $t('page.login.common.back') }}
       </NButton>
     </NFlex>

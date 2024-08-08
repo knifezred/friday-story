@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { loginModuleRecord } from '@renderer/constants/app'
 import { useFormRules, useNaiveForm } from '@renderer/hooks/common/form'
-import { useRouterPush } from '@renderer/hooks/common/router'
 import { $t } from '@renderer/locales'
 import { useAuthStore } from '@renderer/store/modules/auth'
 import { computed, reactive } from 'vue'
@@ -10,8 +9,12 @@ defineOptions({
   name: 'PwdLogin'
 })
 
+interface Emits {
+  (e: 'module', module: string): string
+}
+const emit = defineEmits<Emits>()
+
 const authStore = useAuthStore()
-const { toggleLoginModule } = useRouterPush()
 const { formRef, validate } = useNaiveForm()
 
 interface FormModel {
@@ -57,7 +60,7 @@ async function handleSubmit() {
     <NFlex vertical :size="24">
       <div class="flex-y-center justify-between">
         <NCheckbox>{{ $t('page.login.pwdLogin.rememberMe') }}</NCheckbox>
-        <NButton quaternary @click="toggleLoginModule('reset-pwd')">
+        <NButton quaternary @click="emit('module', 'reset-pwd')">
           {{ $t('page.login.pwdLogin.forgetPassword') }}
         </NButton>
       </div>
@@ -71,7 +74,7 @@ async function handleSubmit() {
         {{ $t('common.confirm') }}
       </NButton>
       <div class="flex-y-center justify-between gap-12px">
-        <NButton class="flex-1" block @click="toggleLoginModule('register')">
+        <NButton class="flex-1" block @click="emit('module', 'register')">
           {{ $t(loginModuleRecord.register) }}
         </NButton>
       </div>
