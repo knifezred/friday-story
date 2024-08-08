@@ -12,7 +12,7 @@ An Electron application with Vue and TypeScript for QSP Game.
 
 ## 页面预览
 
-![登录页](project/1722248365465.png)
+![登录页](project/login.png)
 
 ![新存档](project/1722248556522.png)
 
