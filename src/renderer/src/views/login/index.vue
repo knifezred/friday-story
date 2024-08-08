@@ -92,6 +92,9 @@ const bgColor = computed(() => {
       <video
         :src="staticPath('/static/frame/login_bg.mp4')"
         class="absolute"
+        autoplay
+        muted
+        loop
         style="
           top: 50%;
           left: 50%;
@@ -100,10 +103,7 @@ const bgColor = computed(() => {
           min-height: 100%;
           width: auto;
           height: auto;
-        "
-        autoplay
-        muted
-        loop></video>
+        "></video>
     </div>
   </kinesis-container>
 </template>
