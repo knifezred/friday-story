@@ -45,7 +45,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   const userInfo: Dto.Auth.UserInfo = reactive(getUserInfo())
 
   const archivedData = ref<Dto.ArchivedData>({
-    worldTime: 1600000000000,
+    worldTime: 1697792310000,
     weather: 'sun',
     money: 1000,
     gold: 1,
