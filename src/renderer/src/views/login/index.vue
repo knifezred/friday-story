@@ -54,7 +54,7 @@ const bgColor = computed(() => {
     <div
       class="relative size-full flex-center overflow-hidden"
       :style="{ backgroundColor: bgColor }">
-      <NCard :bordered="false" class="absolute-center z-4 w-auto rd-0">
+      <NCard :bordered="false" class="absolute-center z-4 w-auto rd-0 opacity-50">
         <div class="w-400px lt-sm:w-300px">
           <header class="flex-y-center justify-between">
             <kinesis-element :strength="10" type="depth">
@@ -79,7 +79,7 @@ const bgColor = computed(() => {
                 @change-lang="appStore.changeLocale" />
             </div>
           </header>
-          <main class="pt-24px">
+          <main class="pt-2xl">
             <h3 class="text-18px text-primary font-medium">{{ $t(activeModule.label) }}</h3>
             <div class="pt-24px">
               <Transition :name="themeStore.page.animateMode" mode="out-in" appear>
