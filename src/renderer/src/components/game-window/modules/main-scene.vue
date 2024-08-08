@@ -24,8 +24,8 @@
       </div>
     </Transition>
     <n-card
-      class="bg-gray-8"
-      :class="!appStore.siderCollapse ? 'pos-relative bg-op-1' : 'pos-fixed bottom-0 bg-op-50'"
+      class="bg-gray-8 bg-op-50"
+      :class="!appStore.siderCollapse ? 'pos-relative' : 'pos-fixed bottom-0'"
       :style="
         appStore.siderCollapse
           ? 'height:20.5vw;width:calc(100% - ' + themeStore.sider.mixCollapsedWidth + 'px);'
