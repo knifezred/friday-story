@@ -77,8 +77,8 @@ export const ShopGoodsRecord: Record<ShopType, Dto.ShopEntity> = {
         type: 'task'
       }
     ],
-    name: 'map.building.happy_shop.title',
-    manager: 'map.building.happy_shop.manager',
+    name: 'game.map.building.happy_shop.title',
+    manager: 'game.map.building.happy_shop.manager',
     money: 20000
   },
   walmart: {

@@ -15,6 +15,7 @@
     "delete": "删除",
     "deleteSuccess": "删除成功",
     "edit": "编辑",
+    "editSuccess": "编辑成功",
     "empty": "这里什么也没有",
     "expandColumn": "展开列",
     "index": "序号",
@@ -41,30 +42,6 @@
     "yesOrNo": {
       "no": "否",
       "yes": "是"
-    }
-  },
-  "condition": {
-    "hasLockedTrue": "前面的区域以后再来探索吧",
-    "hasItemTrue": "你拥有 {item} !",
-    "hasItemFalse": "你没有足够的{item},至少需要{value} x {item} !",
-    "openHour": "营业时间：{item}"
-  },
-  "effect": {
-    "addItemTrue": "获得了 {item}+{value} !",
-    "useItemTrue": "{item} - {value}",
-    "useItemFalse": "你没有足够的{item},至少需要{item} x {value} !",
-    "unlockMapTrue": "解锁了{item}"
-  },
-  "env": {
-    "temperature": {
-      "coldest": "极寒",
-      "colder": "刺骨",
-      "cold": "微冷",
-      "suitable": "宜人",
-      "warm": "温暖",
-      "warmer": "温热",
-      "warmest": "燥热",
-      "hot": "酷热"
     }
   },
   "dataTable": {
@@ -104,6 +81,330 @@
       "required": "请输入用户名"
     }
   },
+  "game": {
+    "condition": {
+      "hasLockedTrue": "前面的区域以后再来探索吧",
+      "hasItemTrue": "你拥有 {item} !",
+      "hasItemFalse": "你没有足够的{item},至少需要{value} x {item} !",
+      "openHour": "营业时间：{item}"
+    },
+    "effect": {
+      "addItemTrue": "获得了 {item}+{value} !",
+      "useItemTrue": "{item} - {value}",
+      "useItemFalse": "你没有足够的{item},至少需要{item} x {value} !",
+      "unlockMapTrue": "解锁了{item}"
+    },
+    "env": {
+      "temperature": {
+        "coldest": "极寒",
+        "colder": "刺骨",
+        "cold": "微冷",
+        "suitable": "宜人",
+        "warm": "温暖",
+        "warmer": "温热",
+        "warmest": "燥热",
+        "hot": "酷热"
+      }
+    },
+    "items": {
+      "food": {
+        "beer": {
+          "desc": "鲜生啤",
+          "title": "啤酒"
+        },
+        "coffee": {
+          "desc": "一杯冰美式",
+          "title": "咖啡"
+        },
+        "cola": {
+          "desc": "一瓶碳酸饮料",
+          "title": "可口可乐"
+        },
+        "croissant": {
+          "desc": "牛角包",
+          "title": "牛角包"
+        },
+        "fired_eggs": {
+          "desc": "煎蛋",
+          "title": "煎蛋"
+        },
+        "fish": {
+          "desc": "烤鱼",
+          "title": "鱼"
+        },
+        "hamburger": {
+          "desc": "汉堡",
+          "title": "汉堡"
+        },
+        "milk": {
+          "desc": "牛奶",
+          "title": "牛奶"
+        },
+        "sandwich": {
+          "desc": "三明治",
+          "title": "三明治"
+        }
+      },
+      "task": {
+        "lin_home_key": {
+          "desc": "可以打开邻居家的大门",
+          "title": "林家大门钥匙"
+        }
+      },
+      "material": {
+        "wood": {
+          "desc": "可以添加到火堆里提高燃烧时间和温度",
+          "title": "木头"
+        }
+      }
+    },
+    "map": {
+      "area": {
+        "taiBai": {
+          "text": "太白区",
+          "title": "太白区"
+        },
+        "quan": {
+          "text": "泉区",
+          "title": "泉区"
+        },
+        "qingYe": {
+          "text": "青叶区",
+          "title": "青叶区"
+        },
+        "ruoLin": {
+          "text": "若林区",
+          "title": "若林区"
+        },
+        "gongYe": {
+          "text": "宫野区",
+          "title": "宫野区"
+        }
+      },
+      "building": {
+        "centerPark": {
+          "text": "中心公园",
+          "title": "中心公园"
+        },
+        "demo": {
+          "text": "测试",
+          "title": "测试"
+        },
+        "happy_shop": {
+          "manager": "店长李四",
+          "text": "开心超市，平安路上一家小超市，可以购买一些日用品",
+          "title": "开心超市"
+        },
+        "home": {
+          "backyard": {
+            "text": "后院",
+            "title": "后院"
+          },
+          "bathroom": {
+            "text": "卫生间",
+            "title": "卫生间"
+          },
+          "bedroom": {
+            "text": "主卧",
+            "title": "主卧"
+          },
+          "cousin_room": {
+            "text": "表妹房间",
+            "title": "表妹房间"
+          },
+          "kitchen": {
+            "text": "厨房",
+            "title": "厨房"
+          },
+          "living_room": {
+            "text": "客厅",
+            "title": "客厅"
+          },
+          "plyer_room": {
+            "text": "我的卧室",
+            "title": "我的卧室"
+          },
+          "sister_room": {
+            "text": "姐姐房间",
+            "title": "姐姐房间"
+          },
+          "text": "家",
+          "title": "家"
+        },
+        "lin_home": {
+          "bathroom": {
+            "text": "卫生间",
+            "title": "卫生间"
+          },
+          "bedroom": {
+            "text": "主卧",
+            "title": "主卧"
+          },
+          "door": {
+            "text": "大门",
+            "title": "大门"
+          },
+          "kitchen": {
+            "text": "厨房",
+            "title": "厨房"
+          },
+          "living_room": {
+            "text": "客厅",
+            "title": "客厅"
+          },
+          "sec_room": {
+            "text": "次卧",
+            "title": "次卧"
+          },
+          "text": "林的家，一座漂亮的小别墅",
+          "title": "邻居"
+        },
+        "metro": {
+          "text": "地铁",
+          "title": "地铁"
+        },
+        "metroCenterPark": {
+          "text": "地铁",
+          "title": "地铁"
+        },
+        "oGenPlaza": {
+          "text": "欧金广场,东山区最大的商场",
+          "title": "欧金广场"
+        },
+        "darkHouse": {
+          "title": "木屋",
+          "text": "一座木屋",
+          "begin": {
+            "title": "小屋",
+            "text": "一个{roomEnv}的房间，添柴时小心别把屋子烧了"
+          },
+          "roomWork": {
+            "title": "工作台",
+            "text": "一个简易工作台，可以制作一些粗糙的工具"
+          }
+        },
+        "mistyForest": {
+          "title": "迷雾森林",
+          "text": "被迷雾包围的森林、建议只在外围搜集木材"
+        }
+      },
+      "city": {
+        "tokyo": {
+          "text": "冬京是樱岛国的政治、经济中心，也是国际大都市。这里高楼林立，交通便捷，是科技创新和金融服务的聚集地。冬京拥有世界级的购物中心、娱乐场所和美食街，是购物和娱乐的天堂。",
+          "title": "冬京"
+        },
+        "osaka": {
+          "text": "大板",
+          "title": "大板"
+        },
+        "yokohama": {
+          "text": "恒滨",
+          "title": "恒滨"
+        },
+        "nagoya": {
+          "text": "明谷乌",
+          "title": "明谷乌"
+        },
+        "sapporo": {
+          "text": "札荒位于北方，风光优美，独具魅力，也是著名的旅游胜地",
+          "title": "札荒"
+        },
+        "fukuoka": {
+          "text": "富冈",
+          "title": "富冈"
+        },
+        "kobe": {
+          "text": "深扈",
+          "title": "深扈"
+        },
+        "kawasaki": {
+          "text": "一座重工业大城",
+          "title": "川奇"
+        },
+        "sendai": {
+          "text": "咸台位于樱岛的东北方向，学术氛围浓厚",
+          "title": "咸台"
+        }
+      },
+      "common": {
+        "exit": {
+          "text": "退出",
+          "title": "返回"
+        },
+        "test": {
+          "text": "测试",
+          "title": "测试"
+        }
+      },
+      "country": {
+        "island": {
+          "text": "樱岛国",
+          "title": "樱岛国"
+        },
+        "aDarkRoom": {
+          "text": "复刻小黑屋的文字冒险游戏",
+          "title": "小黑屋"
+        }
+      },
+      "street": {
+        "backstreet": {
+          "text": "后街",
+          "title": "后街"
+        },
+        "kaiYuan": {
+          "text": "开元大道",
+          "title": "开元大道"
+        },
+        "pingAn": {
+          "text": "平安路",
+          "title": "平安路"
+        }
+      }
+    },
+    "message": {
+      "notEnoughMoney": "余额不足",
+      "nothingHappened": "什么也没有发生",
+      "nothingFound": "一无所获",
+      "findMap": "发现了{item}",
+      "option": {
+        "exploreInfo": "你在屋内东翻西找、找到了一些看起来有用的东西",
+        "pickWoodInfo": "四处转了转，捡到了一些木材",
+        "cutTreeInfo": "伐木中... ..."
+      }
+    },
+    "miniGame": {
+      "currentRound": "当前轮次",
+      "endGame": "结束",
+      "finger-guessing": "石头剪刀布",
+      "gameResult": {
+        "equal": "平局",
+        "youLose": "你输了",
+        "youWin": "你赢了"
+      },
+      "playAgain": "再玩一局",
+      "startGame": "开始游戏"
+    },
+    "option": {
+      "choose_id": "选择出身",
+      "dice-number": "玩骰子",
+      "enter": "进入",
+      "finger-guessing": "石头剪刀布",
+      "goBack": "返回",
+      "goOut": "出去",
+      "knocked": "敲门",
+      "quit": "退出",
+      "wait": "等待",
+      "work": "工作",
+      "addWood": "添加木柴",
+      "pickWood": "搜刮木材",
+      "cutTree": "伐木",
+      "explore": "探索",
+      "fix": "修复",
+      "make": "制造",
+      "repair": "修理",
+      "story_start": "创建角色"
+    }
+  },
   "icon": {
     "collapse": "折叠菜单",
     "expand": "展开菜单",
@@ -117,310 +418,6 @@
     "themeConfig": "主题配置",
     "themeSchema": "主题模式",
     "unpin": "取消固定"
-  },
-  "items": {
-    "food": {
-      "beer": {
-        "desc": "鲜生啤",
-        "title": "啤酒"
-      },
-      "coffee": {
-        "desc": "一杯冰美式",
-        "title": "咖啡"
-      },
-      "cola": {
-        "desc": "一瓶碳酸饮料",
-        "title": "可口可乐"
-      },
-      "croissant": {
-        "desc": "牛角包",
-        "title": "牛角包"
-      },
-      "fired_eggs": {
-        "desc": "煎蛋",
-        "title": "煎蛋"
-      },
-      "fish": {
-        "desc": "烤鱼",
-        "title": "鱼"
-      },
-      "hamburger": {
-        "desc": "汉堡",
-        "title": "汉堡"
-      },
-      "milk": {
-        "desc": "牛奶",
-        "title": "牛奶"
-      },
-      "sandwich": {
-        "desc": "三明治",
-        "title": "三明治"
-      }
-    },
-    "task": {
-      "lin_home_key": {
-        "desc": "可以打开邻居家的大门",
-        "title": "林家大门钥匙"
-      }
-    },
-    "material": {
-      "wood": {
-        "desc": "可以添加到火堆里提高燃烧时间和温度",
-        "title": "木头"
-      }
-    }
-  },
-  "map": {
-    "area": {
-      "taiBai": {
-        "text": "太白区",
-        "title": "太白区"
-      },
-      "quan": {
-        "text": "泉区",
-        "title": "泉区"
-      },
-      "qingYe": {
-        "text": "青叶区",
-        "title": "青叶区"
-      },
-      "ruoLin": {
-        "text": "若林区",
-        "title": "若林区"
-      },
-      "gongYe": {
-        "text": "宫野区",
-        "title": "宫野区"
-      }
-    },
-    "building": {
-      "centerPark": {
-        "text": "中心公园",
-        "title": "中心公园"
-      },
-      "demo": {
-        "text": "测试",
-        "title": "测试"
-      },
-      "happy_shop": {
-        "manager": "店长李四",
-        "text": "开心超市，平安路上一家小超市，可以购买一些日用品",
-        "title": "开心超市"
-      },
-      "home": {
-        "backyard": {
-          "text": "后院",
-          "title": "后院"
-        },
-        "bathroom": {
-          "text": "卫生间",
-          "title": "卫生间"
-        },
-        "bedroom": {
-          "text": "主卧",
-          "title": "主卧"
-        },
-        "cousin_room": {
-          "text": "表妹房间",
-          "title": "表妹房间"
-        },
-        "kitchen": {
-          "text": "厨房",
-          "title": "厨房"
-        },
-        "living_room": {
-          "text": "客厅",
-          "title": "客厅"
-        },
-        "plyer_room": {
-          "text": "我的卧室",
-          "title": "我的卧室"
-        },
-        "sister_room": {
-          "text": "姐姐房间",
-          "title": "姐姐房间"
-        },
-        "text": "家",
-        "title": "家"
-      },
-      "lin_home": {
-        "bathroom": {
-          "text": "卫生间",
-          "title": "卫生间"
-        },
-        "bedroom": {
-          "text": "主卧",
-          "title": "主卧"
-        },
-        "door": {
-          "text": "大门",
-          "title": "大门"
-        },
-        "kitchen": {
-          "text": "厨房",
-          "title": "厨房"
-        },
-        "living_room": {
-          "text": "客厅",
-          "title": "客厅"
-        },
-        "sec_room": {
-          "text": "次卧",
-          "title": "次卧"
-        },
-        "text": "林的家，一座漂亮的小别墅",
-        "title": "邻居"
-      },
-      "metro": {
-        "text": "地铁",
-        "title": "地铁"
-      },
-      "metroCenterPark": {
-        "text": "地铁",
-        "title": "地铁"
-      },
-      "oGenPlaza": {
-        "text": "欧金广场,东山区最大的商场",
-        "title": "欧金广场"
-      },
-      "darkHouse": {
-        "title": "木屋",
-        "text": "一座木屋",
-        "begin": {
-          "title": "小屋",
-          "text": "一个{roomEnv}的房间，添柴时小心别把屋子烧了"
-        },
-        "roomWork": {
-          "title": "工作台",
-          "text": "一个简易工作台，可以制作一些粗糙的工具"
-        }
-      },
-      "mistyForest": {
-        "title": "迷雾森林",
-        "text": "被迷雾包围的森林、建议只在外围搜集木材"
-      }
-    },
-    "city": {
-      "tokyo": {
-        "text": "冬京是樱岛国的政治、经济中心，也是国际大都市。这里高楼林立，交通便捷，是科技创新和金融服务的聚集地。冬京拥有世界级的购物中心、娱乐场所和美食街，是购物和娱乐的天堂。",
-        "title": "冬京"
-      },
-      "osaka": {
-        "text": "大板",
-        "title": "大板"
-      },
-      "yokohama": {
-        "text": "恒滨",
-        "title": "恒滨"
-      },
-      "nagoya": {
-        "text": "明谷乌",
-        "title": "明谷乌"
-      },
-      "sapporo": {
-        "text": "札荒位于北方，风光优美，独具魅力，也是著名的旅游胜地",
-        "title": "札荒"
-      },
-      "fukuoka": {
-        "text": "富冈",
-        "title": "富冈"
-      },
-      "kobe": {
-        "text": "深扈",
-        "title": "深扈"
-      },
-      "kawasaki": {
-        "text": "一座重工业大城",
-        "title": "川奇"
-      },
-      "sendai": {
-        "text": "咸台位于樱岛的东北方向，学术氛围浓厚",
-        "title": "咸台"
-      }
-    },
-    "common": {
-      "exit": {
-        "text": "退出",
-        "title": "返回"
-      },
-      "test": {
-        "text": "测试",
-        "title": "测试"
-      }
-    },
-    "country": {
-      "island": {
-        "text": "樱岛国",
-        "title": "樱岛国"
-      },
-      "aDarkRoom": {
-        "text": "复刻小黑屋的文字冒险游戏",
-        "title": "小黑屋"
-      }
-    },
-    "locked": {
-      "locked_door": "门已上锁",
-      "no_key": "门已上锁，没有钥匙",
-      "no_open": "暂未开放",
-      "outTime": "已关门，请过一段时间再来"
-    },
-    "street": {
-      "backstreet": {
-        "text": "后街",
-        "title": "后街"
-      },
-      "kaiYuan": {
-        "text": "开元大道",
-        "title": "开元大道"
-      },
-      "pingAn": {
-        "text": "平安路",
-        "title": "平安路"
-      }
-    }
-  },
-  "message": {
-    "notEnoughMoney": "余额不足",
-    "nothingHappened": "什么也没有发生",
-    "nothingFound": "一无所获",
-    "findMap": "发现了{item}",
-    "option": {
-      "exploreInfo": "你在屋内东翻西找、找到了一些看起来有用的东西",
-      "pickWoodInfo": "四处转了转，捡到了一些木材",
-      "cutTreeInfo": "伐木中... ..."
-    }
-  },
-  "miniGame": {
-    "currentRound": "当前轮次",
-    "endGame": "结束",
-    "finger-guessing": "石头剪刀布",
-    "gameResult": {
-      "equal": "平局",
-      "youLose": "你输了",
-      "youWin": "你赢了"
-    },
-    "playAgain": "再玩一局",
-    "startGame": "开始游戏"
-  },
-  "option": {
-    "choose_id": "选择出身",
-    "dice-number": "玩骰子",
-    "enter": "进入",
-    "finger-guessing": "石头剪刀布",
-    "goBack": "返回",
-    "goOut": "出去",
-    "knocked": "敲门",
-    "quit": "退出",
-    "wait": "等待",
-    "work": "工作",
-    "addWood": "添加木柴",
-    "pickWood": "搜刮木材",
-    "cutTree": "伐木",
-    "explore": "探索",
-    "fix": "修复",
-    "make": "制造",
-    "repair": "修理",
-    "story_start": "创建角色"
   },
   "page": {
     "about": {
@@ -557,26 +554,6 @@
     "setting_system": "通用",
     "setting_theme": "外观",
     "task": "任务"
-  },
-  "setting": {
-    "general": {
-      "lang": "语言",
-      "volume": "音量"
-    }
-  },
-  "stories": {
-    "completed": "任务已完成",
-    "option": {
-      "start": "任务按钮"
-    },
-    "over": "任务已结束",
-    "scene": {
-      "set_name": {
-        "text": "设置姓名",
-        "title": "设置姓名"
-      }
-    },
-    "start": "第一个任务"
   },
   "system": {
     "title": "Friday Story"

@@ -41,9 +41,9 @@ function flattenTree(tree) {
       typeName = 'building.' + node.name
     }
     const fullMap: Dto.MapItemFull = {
-      title: localeText('', typeName, 'map', 'title').toString(),
-      text: localeText('', typeName, 'map', 'text').toString(),
-      cover: prefixImage('', typeName, 'map', '.jpeg'),
+      title: localeText('', typeName, 'game.map', 'title').toString(),
+      text: localeText('', typeName, 'game.map', 'text').toString(),
+      cover: prefixImage('', typeName, 'game.map', '.jpeg'),
       id: node.id,
       pid: node.pid,
       name: node.name,

@@ -22,7 +22,7 @@ export function checkCondition(conditionModel: Dto.ConditionModel | undefined) {
           if (condition.failure == undefined) {
             if (condition.text == undefined) {
               checkResult.text =
-                'condition.' + condition.type + (result == condition.result ? 'True' : 'False')
+                'game.condition.' + condition.type + (result == condition.result ? 'True' : 'False')
             }
           } else {
             checkResult.text = condition.failure
@@ -87,7 +87,7 @@ export function executeEffects(effectModel: Dto.ActionEffectModel | undefined) {
         val1 = rebuildVal1(val1, effect.type)
         if (tempText == undefined) {
           if (effect.text == undefined) {
-            tempText = 'effect.' + effect.type + (result ? 'True' : 'False')
+            tempText = 'game.effect.' + effect.type + (result ? 'True' : 'False')
           } else {
             tempText = effect.text
           }
@@ -105,10 +105,10 @@ export function executeEffects(effectModel: Dto.ActionEffectModel | undefined) {
 
 function rebuildVal1(value: string, type: string) {
   if (type.includes('Item')) {
-    value = 'items.' + value + '.title'
+    value = 'game.items.' + value + '.title'
   }
   if (type.includes('Map')) {
-    value = 'map.' + value.replace('room.', 'building.') + '.title'
+    value = 'game.map.' + value.replace('room.', 'building.') + '.title'
   }
   return value
 }

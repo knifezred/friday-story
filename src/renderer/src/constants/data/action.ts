@@ -1,7 +1,7 @@
 export const DefaultActions: Array<Dto.ActionOption> = [
   {
-    name: 'map.next',
-    text: 'option.enter',
+    name: 'game.map.next',
+    text: 'game.option.enter',
     buttonType: 'primary',
     type: 'map',
     condition: [
@@ -10,7 +10,7 @@ export const DefaultActions: Array<Dto.ActionOption> = [
         conditions: [
           {
             type: 'hasLocked',
-            value: 'map.isLocked',
+            value: 'game.map.isLocked',
             result: false
           }
         ],
@@ -20,7 +20,7 @@ export const DefaultActions: Array<Dto.ActionOption> = [
   },
   {
     name: 'knocked',
-    text: 'option.knocked',
+    text: 'game.option.knocked',
     type: 'map'
   }
 ]

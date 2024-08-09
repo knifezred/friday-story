@@ -15,6 +15,7 @@
     "delete": "Delete",
     "deleteSuccess": "Delete Success",
     "edit": "Edit",
+    "editSuccess": "Edited successfully",
     "empty": "There's nothing here",
     "expandColumn": "Expand Column",
     "index": "Index",
@@ -80,6 +81,330 @@
       "required": "Please enter user name"
     }
   },
+  "game": {
+    "condition": {
+      "hasItemFalse": "You don't have enough {item}, at least you need {value} x {item}!",
+      "hasItemTrue": "You have {item}!",
+      "hasLockedTrue": "Let's explore the area ahead later",
+      "openHour": "Business hours: {item}"
+    },
+    "effect": {
+      "addItemTrue": "Obtained {item}+{value}!",
+      "unlockMapTrue": "Unlocked {item}",
+      "useItemFalse": "You don't have enough {item}, at least you need {item} x {value}!",
+      "useItemTrue": "{item} - {value}"
+    },
+    "env": {
+      "temperature": {
+        "cold": "slightly cold",
+        "colder": "Bone chilling",
+        "coldest": "Extremely cold",
+        "hot": "extremely hot",
+        "suitable": "pleasant",
+        "warm": "warm",
+        "warmer": "Warm and Warm",
+        "warmest": "Dry heat"
+      }
+    },
+    "items": {
+      "food": {
+        "beer": {
+          "desc": "Fresh draft beer, a thousand cups without getting drunk",
+          "title": "Beer"
+        },
+        "coffee": {
+          "desc": "A glass of iced Americano",
+          "title": "Coffee"
+        },
+        "cola": {
+          "desc": "A bottle of carbonated beverage",
+          "title": "Coca Cola"
+        },
+        "croissant": {
+          "desc": "Croissant",
+          "title": "Croissant"
+        },
+        "fired_eggs": {
+          "desc": "Fried Eggs",
+          "title": "Fried Eggs"
+        },
+        "fish": {
+          "desc": "roast fish",
+          "title": "fish"
+        },
+        "hamburger": {
+          "desc": "hamburger",
+          "title": "hamburger"
+        },
+        "milk": {
+          "desc": "milk",
+          "title": "milk"
+        },
+        "sandwich": {
+          "desc": "Sandwich",
+          "title": "Sandwich"
+        }
+      },
+      "material": {
+        "wood": {
+          "desc": "Can be added to the bonfire to increase combustion time and temperature",
+          "title": "wood"
+        }
+      },
+      "task": {
+        "lin_home_key": {
+          "desc": "You can open the neighbor's door",
+          "title": "The key to the Lin family's front door"
+        }
+      }
+    },
+    "map": {
+      "area": {
+        "gongYe": {
+          "text": "Miyano District",
+          "title": "Miyano District"
+        },
+        "qingYe": {
+          "text": "Qingye District",
+          "title": "Qingye District"
+        },
+        "quan": {
+          "text": "Izumi-ku ",
+          "title": "Izumi-ku "
+        },
+        "ruoLin": {
+          "text": "Wakabayashi-ku ",
+          "title": "Wakabayashi-ku "
+        },
+        "taiBai": {
+          "text": "Taihaku-ku ",
+          "title": "Taihaku-ku "
+        }
+      },
+      "building": {
+        "centerPark": {
+          "text": "Central Park",
+          "title": "Central Park"
+        },
+        "darkHouse": {
+          "begin": {
+            "text": "A {roomEnv} room, be careful not to burn it down when adding firewood",
+            "title": "hut"
+          },
+          "roomWork": {
+            "text": "A simple workbench that can make some rough tools",
+            "title": "workbench"
+          },
+          "text": "A wooden house",
+          "title": "Wooden house"
+        },
+        "demo": {
+          "text": "test",
+          "title": "test"
+        },
+        "happy_shop": {
+          "manager": "Store Manager Li Si",
+          "text": "Happy Supermarket, a small supermarket on Ping'an Road where you can buy some daily necessities",
+          "title": "Happy Supermarket"
+        },
+        "home": {
+          "backyard": {
+            "text": "Backyard",
+            "title": "Backyard"
+          },
+          "bathroom": {
+            "text": "TOILET",
+            "title": "TOILET"
+          },
+          "bedroom": {
+            "text": "Master bedroom",
+            "title": "Master bedroom"
+          },
+          "cousin_room": {
+            "text": "Cousin's room",
+            "title": "Cousin's room"
+          },
+          "kitchen": {
+            "text": "Kitchen",
+            "title": "Kitchen"
+          },
+          "living_room": {
+            "text": "a living room",
+            "title": "a living room"
+          },
+          "plyer_room": {
+            "text": "My bedroom",
+            "title": "My bedroom"
+          },
+          "sister_room": {
+            "text": "Sister's room",
+            "title": "Sister's room"
+          },
+          "text": "Home",
+          "title": "Home"
+        },
+        "lin_home": {
+          "bathroom": {
+            "text": "TOILET",
+            "title": "TOILET"
+          },
+          "bedroom": {
+            "text": "Master bedroom",
+            "title": "Master bedroom"
+          },
+          "door": {
+            "text": "gate",
+            "title": "gate"
+          },
+          "kitchen": {
+            "text": "kitchen",
+            "title": "kitchen"
+          },
+          "living_room": {
+            "text": "a living room",
+            "title": "a living room"
+          },
+          "sec_room": {
+            "text": "Second bedroom",
+            "title": "Second bedroom"
+          },
+          "text": "Lin's house, a beautiful little villa",
+          "title": "neighbor"
+        },
+        "metro": {
+          "text": "metro",
+          "title": "metro"
+        },
+        "metroCenterPark": {
+          "text": "metro",
+          "title": "metro"
+        },
+        "mistyForest": {
+          "text": "Forest surrounded by fog, it is recommended to only collect wood on the periphery",
+          "title": "Misty Forest"
+        },
+        "oGenPlaza": {
+          "text": "Oujin Square, the largest shopping mall in Dongshan District",
+          "title": "Oujin Square"
+        }
+      },
+      "city": {
+        "fukuoka": {
+          "text": "Tomioka",
+          "title": "Tomioka"
+        },
+        "kawasaki": {
+          "text": "A heavy industrial city",
+          "title": "Chuan Qi"
+        },
+        "kobe": {
+          "text": "Shenhu",
+          "title": "Shenhu"
+        },
+        "nagoya": {
+          "text": "Minggu Wu",
+          "title": "Minggu Wu"
+        },
+        "osaka": {
+          "text": "Big board",
+          "title": "Big board"
+        },
+        "sapporo": {
+          "text": "Zhahuang is located in the north, with beautiful scenery and unique charm, and is also a famous tourist destination",
+          "title": "Zhahuang"
+        },
+        "sendai": {
+          "text": "Xiantai is located in the northeast direction of Sakurajima, with a strong academic atmosphere",
+          "title": "Xiantai"
+        },
+        "tokyo": {
+          "text": "Dongjing is the political and economic center of Sakurajima Island, as well as an international metropolis. Here, high-rise buildings stand tall and transportation is convenient, making it a gathering place for technological innovation and financial services. Dongjing has world-class shopping centers, entertainment venues, and food streets, making it a paradise for shopping and entertainment.",
+          "title": "Dong Jing"
+        },
+        "yokohama": {
+          "text": "Hengbin",
+          "title": "Hengbin"
+        }
+      },
+      "common": {
+        "exit": {
+          "text": "sign out",
+          "title": "return"
+        },
+        "test": {
+          "text": "test",
+          "title": "test"
+        }
+      },
+      "country": {
+        "aDarkRoom": {
+          "text": "A text-based adventure game that replicates Little Black House",
+          "title": "Little Black House"
+        },
+        "island": {
+          "text": "Sakurajima Island",
+          "title": "Sakurajima Island"
+        }
+      },
+      "street": {
+        "backstreet": {
+          "text": "Back St",
+          "title": "Back St"
+        },
+        "kaiYuan": {
+          "text": "Kaiyuan Avenue",
+          "title": "Kaiyuan Avenue"
+        },
+        "pingAn": {
+          "text": "Ping'an Road",
+          "title": "Ping'an Road"
+        }
+      }
+    },
+    "message": {
+      "findMap": "Found {item}",
+      "notEnoughMoney": "Sorry, your credit is running low",
+      "nothingFound": "have gained nothing",
+      "nothingHappened": "Nothing happened",
+      "option": {
+        "cutTreeInfo": "During logging",
+        "exploreInfo": "You searched around the house and found something that looked useful",
+        "pickWoodInfo": "I wandered around and found some wood"
+      }
+    },
+    "miniGame": {
+      "currentRound": "Current round",
+      "endGame": "end",
+      "finger-guessing": "Rock-paper-scissors",
+      "gameResult": {
+        "equal": "it ends in a draw",
+        "youLose": "You lost",
+        "youWin": "You win"
+      },
+      "playAgain": "Play another round",
+      "startGame": "Start the game"
+    },
+    "option": {
+      "addWood": "Add firewood",
+      "choose_id": "Choose Origin",
+      "cutTree": "lumbering",
+      "dice-number": "dice ",
+      "enter": "get into",
+      "explore": "explore",
+      "finger-guessing": "Rock-paper-scissors",
+      "fix": "repair",
+      "goBack": "return",
+      "goOut": "get out",
+      "knocked": "knock at the door",
+      "make": "manufacture",
+      "pickWood": "Search for wood",
+      "quit": "sign out",
+      "repair": "repair",
+      "story_start": "Create a role",
+      "wait": "wait for",
+      "work": "work"
+    }
+  },
   "icon": {
     "collapse": "Collapse Menu",
     "expand": "Expand Menu",
@@ -93,176 +418,6 @@
     "themeConfig": "Theme Configuration",
     "themeSchema": "Theme Schema",
     "unpin": "Unpin"
-  },
-  "items": {
-    "food": {
-      "beer": {
-        "desc": "Fresh draft beer, a thousand cups without getting drunk",
-        "title": "Beer"
-      },
-      "coffee": {
-        "desc": "A glass of iced Americano",
-        "title": "Coffee"
-      },
-      "cola": {
-        "desc": "A bottle of carbonated beverage",
-        "title": "Coca Cola"
-      },
-      "croissant": {
-        "desc": "Croissant",
-        "title": "Croissant"
-      },
-      "fired_eggs": {
-        "desc": "Fried Eggs",
-        "title": "Fried Eggs"
-      },
-      "fish": {
-        "desc": "roast fish",
-        "title": "fish"
-      },
-      "hamburger": {
-        "desc": "hamburger",
-        "title": "hamburger"
-      },
-      "milk": {
-        "desc": "milk",
-        "title": "milk"
-      },
-      "sandwich": {
-        "desc": "Sandwich",
-        "title": "Sandwich"
-      }
-    }
-  },
-  "map": {
-    "area": {
-      "dongShan": {
-        "text": "dongShan District",
-        "title": "dongShan District"
-      }
-    },
-    "building": {
-      "demo": {
-        "text": "test",
-        "title": "test"
-      },
-      "happy_shop": {
-        "text": "Happy Supermarket, a small supermarket on Ping'an Road where you can buy some daily necessities",
-        "title": "Happy Supermarket"
-      },
-      "home": {
-        "bathroom": {
-          "text": "TOILET",
-          "title": "TOILET"
-        },
-        "bedroom": {
-          "text": "Master bedroom",
-          "title": "Master bedroom"
-        },
-        "backyard": {
-          "text": "Backyard",
-          "title": "Backyard"
-        },
-        "kitchen": {
-          "text": "Kitchen",
-          "title": "Kitchen"
-        },
-        "living_room": {
-          "text": "a living room",
-          "title": "a living room"
-        },
-        "cousin_room": {
-          "text": "Cousin's room",
-          "title": "Cousin's room"
-        },
-        "plyer_room": {
-          "text": "My bedroom",
-          "title": "My bedroom"
-        },
-        "sister_room": {
-          "text": "Sister's room",
-          "title": "Sister's room"
-        },
-        "text": "Home",
-        "title": "Home"
-      },
-      "lin_home": {
-        "bathroom": {
-          "text": "TOILET",
-          "title": "TOILET"
-        },
-        "bedroom": {
-          "text": "Master bedroom",
-          "title": "Master bedroom"
-        },
-        "door": {
-          "text": "gate",
-          "title": "gate"
-        },
-        "kitchen": {
-          "text": "kitchen",
-          "title": "kitchen"
-        },
-        "living_room": {
-          "text": "a living room",
-          "title": "a living room"
-        },
-        "text": "Lin's house, a beautiful little villa",
-        "title": "neighbor"
-      }
-    },
-    "city": {
-      "boot": {
-        "text": "Bute City",
-        "title": "Bute City"
-      }
-    },
-    "common": {
-      "exit": {
-        "text": "sign out",
-        "title": "return"
-      },
-      "test": {
-        "text": "test",
-        "title": "test"
-      }
-    },
-    "country": {
-      "friday": {
-        "text": "Fred Republic",
-        "title": "Fred Republic"
-      }
-    },
-    "locked": {
-      "locked_door": "The door is locked",
-      "no_key": "No key",
-      "no_open": "Not yet open"
-    },
-    "street": {
-      "backstreet": {
-        "text": "Back St",
-        "title": "Back St"
-      },
-      "pingAn": {
-        "text": "Ping'an Road",
-        "title": "Ping'an Road"
-      }
-    }
-  },
-  "miniGame": {
-    "currentRound": "Current round",
-    "endGame": "end",
-    "finger-guessing": "Rock-paper-scissors",
-    "gameResult": {
-      "equal": "it ends in a draw",
-      "youLose": "You lost",
-      "youWin": "You win"
-    },
-    "playAgain": "Play another round",
-    "startGame": "Start the game"
-  },
-  "option": {
-    "choose_id": "Choose Origin"
   },
   "page": {
     "about": {
@@ -399,17 +554,6 @@
     "setting_system": "General",
     "setting_theme": "Appearance",
     "task": "Task"
-  },
-  "stories": {
-    "completed": "Task completed",
-    "over": "The task has ended",
-    "scene": {
-      "set_name": {
-        "text": "Set Name",
-        "title": "Set Name"
-      }
-    },
-    "start": "The first task"
   },
   "system": {
     "title": "Friday Story"

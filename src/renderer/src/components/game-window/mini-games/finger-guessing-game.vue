@@ -10,7 +10,7 @@
     <n-gi :span="2">
       <n-h2>
         <ButtonIcon text icon="streamline:peace-hand"></ButtonIcon>
-        {{ $t('miniGame.finger-guessing') }}
+        {{ $t('game.miniGame.finger-guessing') }}
       </n-h2>
     </n-gi>
     <n-gi> </n-gi>
@@ -25,7 +25,7 @@
       </n-h3>
     </n-gi>
     <n-gi :span="2">
-      <n-h3> {{ $t('miniGame.currentRound') }}: {{ currentRound }} </n-h3>
+      <n-h3> {{ $t('game.miniGame.currentRound') }}: {{ currentRound }} </n-h3>
     </n-gi>
     <n-gi>
       <n-h3>
@@ -45,15 +45,15 @@
         <n-h1 v-if="playerScore != computerScore" class="text-center">
           {{
             playerScore > computerScore
-              ? $t('miniGame.gameResult.youWin')
-              : $t('miniGame.gameResult.youLose')
+              ? $t('game.miniGame.gameResult.youWin')
+              : $t('game.miniGame.gameResult.youLose')
           }}
         </n-h1>
-        <n-h1 v-else class="text-center">{{ $t('miniGame.gameResult.equal') }}</n-h1>
+        <n-h1 v-else class="text-center">{{ $t('game.miniGame.gameResult.equal') }}</n-h1>
         <template v-if="isSuper" #footer>
           <n-flex justify="center">
-            <n-button @click="startGame"> {{ $t('miniGame.playAgain') }} </n-button>
-            <n-button @click="endGame"> {{ $t('miniGame.endGame') }} </n-button>
+            <n-button @click="startGame"> {{ $t('game.miniGame.playAgain') }} </n-button>
+            <n-button @click="endGame"> {{ $t('game.miniGame.endGame') }} </n-button>
           </n-flex>
         </template>
       </n-result>
@@ -67,7 +67,7 @@
     <n-gi> </n-gi>
     <n-gi :span="2">
       <n-button v-if="currentRound == 0" @click="startGame">{{
-        $t('miniGame.startGame')
+        $t('game.miniGame.startGame')
       }}</n-button>
       <n-flex v-else-if="!gameEnded && currentRound > 0" justify="space-around" size="large">
         <n-button text style="font-size: 64px" @click="makeChoice('rock')">
@@ -158,17 +158,17 @@ function makeChoice(choice: Choice) {
 
 function determineResult() {
   if (playerChoice.value === computerChoice.value) {
-    result.value = 'miniGame.gameResult.equal'
+    result.value = 'game.miniGame.gameResult.equal'
   } else if (
     (playerChoice.value === 'rock' && computerChoice.value === 'scissors') ||
     (playerChoice.value === 'paper' && computerChoice.value === 'rock') ||
     (playerChoice.value === 'scissors' && computerChoice.value === 'paper')
   ) {
     playerScore.value++
-    result.value = 'miniGame.gameResult.youWin'
+    result.value = 'game.miniGame.gameResult.youWin'
   } else {
     computerScore.value++
-    result.value = 'miniGame.gameResult.youLose'
+    result.value = 'game.miniGame.gameResult.youLose'
   }
   history.value.push({
     playerChoice: playerChoice.value,

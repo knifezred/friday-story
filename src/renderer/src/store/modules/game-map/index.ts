@@ -16,18 +16,18 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     id: '',
     pid: 'root',
     name: 'test',
-    title: 'map.common.test.title',
-    text: 'map.common.test.text',
+    title: 'game.map.common.test.title',
+    text: 'game.map.common.test.text',
     cover: '/static/map/common/exit.png',
     level: 'room',
     options: []
   })
   const parentMap = ref<Dto.MapItemFull>({
-    id: 'map.parent',
+    id: 'game.map.parent',
     pid: 'root',
-    name: 'map.common.exit',
-    title: 'map.common.exit.title',
-    text: 'map.common.exit.text',
+    name: 'game.map.common.exit',
+    title: 'game.map.common.exit.title',
+    text: 'game.map.common.exit.text',
     cover: '/static/map/common/exit.png',
     level: 'room',
     options: []

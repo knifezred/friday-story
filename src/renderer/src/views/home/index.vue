@@ -136,7 +136,7 @@ watch(
 )
 function mapFunc(map: Dto.MapItemFull) {
   if (gameStore.currentSceneType == 'map') {
-    if (map.id == 'map.parent') {
+    if (map.id == 'game.map.parent') {
       nextMap(map.next, map)
     } else {
       userInfo.archive.place = map.id

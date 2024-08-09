@@ -212,5 +212,5 @@ export function roomTemperature(temperature: number) {
   if (temperature >= 40) {
     result = 'hot'
   }
-  return $t(('env.temperature.' + result) as never)
+  return $t(('game.env.temperature.' + result) as never)
 }

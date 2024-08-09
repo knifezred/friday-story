@@ -43,7 +43,7 @@ export const IslandMaps: Array<Dto.MapItem> = [
                     level: 'building',
                     options: [
                       {
-                        name: 'map.next',
+                        name: 'game.map.next',
                         condition: [
                           {
                             type: 'or',
@@ -54,20 +54,20 @@ export const IslandMaps: Array<Dto.MapItem> = [
                             for: 'execute'
                           }
                         ],
-                        text: 'option.enter',
+                        text: 'game.option.enter',
                         next: 'room.lin_home.living_room',
                         type: 'map'
                       },
                       {
                         name: 'finger-guessing',
-                        text: 'option.finger-guessing',
+                        text: 'game.option.finger-guessing',
                         icon: 'fluent-emoji:victory-hand',
                         miniGame: 'finger-guessing',
                         type: 'mini-game'
                       },
                       {
                         name: 'dice-number',
-                        text: 'option.dice-number',
+                        text: 'game.option.dice-number',
                         icon: 'streamline-emojis:game-dice',
                         buttonType: 'error',
                         miniGame: 'dice-number',
@@ -86,8 +86,8 @@ export const IslandMaps: Array<Dto.MapItem> = [
                         next: 'building.lin_home',
                         options: [
                           {
-                            name: 'map.next',
-                            text: 'option.goOut',
+                            name: 'game.map.next',
+                            text: 'game.option.goOut',
                             next: 'building.lin_home',
                             type: 'map'
                           }
@@ -103,7 +103,7 @@ export const IslandMaps: Array<Dto.MapItem> = [
                         name: 'shop.enter',
                         type: 'shop',
                         next: 'happy_shop',
-                        text: 'option.enter',
+                        text: 'game.option.enter',
                         condition: [
                           {
                             type: 'and',
@@ -111,7 +111,7 @@ export const IslandMaps: Array<Dto.MapItem> = [
                               {
                                 type: 'inTime',
                                 value: '09:00-23:00',
-                                text: 'condition.openHour'
+                                text: 'game.condition.openHour'
                               }
                             ],
                             for: 'execute'

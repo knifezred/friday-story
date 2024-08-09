@@ -13,8 +13,8 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
             level: 'room',
             options: [
               {
-                name: 'option.explore',
-                text: 'option.explore',
+                name: 'game.option.explore',
+                text: 'game.option.explore',
                 type: 'map',
                 duration: 2000,
                 condition: [
@@ -24,8 +24,8 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                     conditions: [
                       {
                         type: 'maxOptionNum',
-                        value: 'option.explore,1',
-                        failure: 'message.nothingFound'
+                        value: 'game.option.explore,1',
+                        failure: 'game.message.nothingFound'
                       }
                     ]
                   },
@@ -35,7 +35,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                     conditions: [
                       {
                         type: 'maxOptionNum',
-                        value: 'option.explore,1'
+                        value: 'game.option.explore,1'
                       }
                     ]
                   }
@@ -50,14 +50,14 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                     {
                       type: 'unlockMap',
                       value: 'room.darkHouse.roomWork',
-                      success: 'message.findMap'
+                      success: 'game.message.findMap'
                     }
                   ]
                 }
               },
               {
-                name: 'option.addWood',
-                text: 'option.addWood',
+                name: 'game.option.addWood',
+                text: 'game.option.addWood',
                 type: 'map',
                 duration: 3000,
                 condition: [
@@ -67,7 +67,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                     conditions: [
                       {
                         type: 'maxOptionNum',
-                        value: 'option.explore,1',
+                        value: 'game.option.explore,1',
                         result: false
                       }
                     ]
@@ -106,8 +106,8 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
             isShow: false,
             options: [
               {
-                name: 'option.fix',
-                text: 'option.fix',
+                name: 'game.option.fix',
+                text: 'game.option.fix',
                 type: 'map',
                 duration: 5000,
                 condition: [
@@ -150,8 +150,8 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                 }
               },
               {
-                name: 'option.make',
-                text: 'option.make',
+                name: 'game.option.make',
+                text: 'game.option.make',
                 type: 'map',
                 duration: 3000,
                 condition: [
@@ -168,8 +168,8 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                 ]
               },
               {
-                name: 'option.repair',
-                text: 'option.repair',
+                name: 'game.option.repair',
+                text: 'game.option.repair',
                 type: 'map',
                 duration: 2000,
                 condition: [
@@ -194,8 +194,8 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
         level: 'building',
         options: [
           {
-            name: 'option.cutTree',
-            text: 'option.cutTree',
+            name: 'game.option.cutTree',
+            text: 'game.option.cutTree',
             type: 'map',
             duration: 10000,
             effect: {
@@ -210,8 +210,8 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
             }
           },
           {
-            name: 'option.catchFish',
-            text: 'option.catchFish',
+            name: 'game.option.catchFish',
+            text: 'game.option.catchFish',
             type: 'map',
             duration: 10000,
             effect: {

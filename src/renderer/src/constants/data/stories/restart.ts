@@ -33,20 +33,20 @@ export const RestartScenes: Array<Dto.GameScene> = [
     next: '',
     options: [
       {
-        name: 'option.choose_card1',
-        text: 'option.choose1',
+        name: 'game.option.choose_card1',
+        text: 'game.option.choose1',
         next: 'scene.choose_id',
         type: 'story'
       },
       {
-        name: 'option.choose_card2',
-        text: 'option.choose2',
+        name: 'game.option.choose_card2',
+        text: 'game.option.choose2',
         next: 'scene.choose_id',
         type: 'story'
       },
       {
-        name: 'option.choose_card3',
-        text: 'option.choose3',
+        name: 'game.option.choose_card3',
+        text: 'game.option.choose3',
         next: 'scene.choose_id',
         type: 'story'
       }

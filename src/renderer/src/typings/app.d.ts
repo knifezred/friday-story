@@ -159,6 +159,7 @@ declare namespace App {
         delete: string
         deleteSuccess: string
         edit: string
+        editSuccess: string
         empty: string
         expandColumn: string
         index: string
@@ -186,11 +187,6 @@ declare namespace App {
           no: string
           yes: string
         }
-      }
-      condition: {
-        hasItemTrue: string
-        hasItemFalse: string
-        openHour: string
       }
       dataTable: {
         itemCount: string
@@ -229,6 +225,26 @@ declare namespace App {
           required: string
         }
       }
+      game: {
+        env: {
+          temperature: {
+            coldest: string
+            colder: string
+            cold: string
+            suitable: string
+            warm: string
+            warmer: string
+            warmest: string
+            hot: string
+          }
+        }
+        message: {
+          notEnoughMoney: string
+          nothingHappened: string
+          nothingFound: string
+          findMap: string
+        }
+      }
       icon: {
         collapse: string
         expand: string
@@ -242,199 +258,6 @@ declare namespace App {
         themeConfig: string
         themeSchema: string
         unpin: string
-      }
-      items: {
-        food: {
-          beer: {
-            desc: string
-            title: string
-          }
-          coffee: {
-            desc: string
-            title: string
-          }
-          cola: {
-            desc: string
-            title: string
-          }
-          croissant: {
-            desc: string
-            title: string
-          }
-          fired_eggs: {
-            desc: string
-            title: string
-          }
-          fish: {
-            desc: string
-            title: string
-          }
-          hamburger: {
-            desc: string
-            title: string
-          }
-          milk: {
-            desc: string
-            title: string
-          }
-          sandwich: {
-            desc: string
-            title: string
-          }
-        }
-        task: {
-          lin_home_key: {
-            desc: string
-            title: string
-          }
-        }
-      }
-      map: {
-        area: {
-          dongShan: {
-            text: string
-            title: string
-          }
-        }
-        building: {
-          demo: {
-            text: string
-            title: string
-          }
-          happy_shop: {
-            text: string
-            title: string
-            manager: string
-          }
-          home: {
-            bathroom: {
-              text: string
-              title: string
-            }
-            bedroom: {
-              text: string
-              title: string
-            }
-            backyard: {
-              text: string
-              title: string
-            }
-            kitchen: {
-              text: string
-              title: string
-            }
-            living_room: {
-              text: string
-              title: string
-            }
-            cousin_room: {
-              text: string
-              title: string
-            }
-            plyer_room: {
-              text: string
-              title: string
-            }
-            sister_room: {
-              text: string
-              title: string
-            }
-            text: string
-            title: string
-          }
-          lin_home: {
-            bathroom: {
-              text: string
-              title: string
-            }
-            bedroom: {
-              text: string
-              title: string
-            }
-            door: {
-              text: string
-              title: string
-            }
-            kitchen: {
-              text: string
-              title: string
-            }
-            living_room: {
-              text: string
-              title: string
-            }
-            text: string
-            title: string
-          }
-        }
-        city: {
-          boot: {
-            text: string
-            title: string
-          }
-        }
-        common: {
-          exit: {
-            text: string
-            title: string
-          }
-          test: {
-            text: string
-            title: string
-          }
-        }
-        country: {
-          friday: {
-            text: string
-            title: string
-          }
-        }
-        locked: {
-          locked_door: string
-          no_key: string
-          outTime: string
-          no_open: string
-        }
-        street: {
-          backstreet: {
-            text: string
-            title: string
-          }
-          pingAn: {
-            text: string
-            title: string
-          }
-        }
-      }
-      message: {
-        notEnoughMoney: string
-        addItemSuccess: string
-        useItemSuccess: string
-      }
-      miniGame: {
-        currentRound: string
-        endGame: string
-        'finger-guessing': string
-        gameResult: {
-          equal: string
-          youLose: string
-          youWin: string
-        }
-        playAgain: string
-        startGame: string
-      }
-      option: {
-        noReply: string
-        'dice-number': string
-        enter: string
-        'finger-guessing': string
-        goBack: string
-        knocked: string
-        quit: string
-        story_start: string
-        wait: string
-        work: string
-        choose_id: string
       }
       page: {
         about: {
@@ -553,20 +376,6 @@ declare namespace App {
         logoutWithModalMsg: string
         refreshToken: string
         tokenExpired: string
-      }
-      stories: {
-        completed: string
-        over: string
-        option: {
-          start: string
-        }
-        scene: {
-          set_name: {
-            text: string
-            title: string
-          }
-        }
-        start: string
       }
       system: {
         title: string

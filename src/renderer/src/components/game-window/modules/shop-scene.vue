@@ -95,7 +95,7 @@ const emit = defineEmits<Emits>()
 
 function addToCart(goods: Dto.ShopGoodsFull) {
   if (totalCoast.value > authStore.archivedData.money) {
-    window.$message?.error($t('message.notEnoughMoney'))
+    window.$message?.error($t('game.message.notEnoughMoney'))
   } else {
     if (goods.count > 0) {
       goods.count--

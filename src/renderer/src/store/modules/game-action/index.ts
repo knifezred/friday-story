@@ -9,8 +9,8 @@ import { useMapStore } from '../game-map'
 
 export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
   const currentAction = ref<Dto.ActionOption>({
-    name: 'option.demo',
-    text: 'option.demo',
+    name: 'game.option.demo',
+    text: 'game.option.demo',
     type: 'map'
   })
   const options = ref<Array<Dto.ActionOption>>([])
@@ -54,7 +54,7 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
       // action计数
       gameStore.countOptionExecute(action.name)
       switch (action.name) {
-        case 'option.addWood':
+        case 'game.option.addWood':
           if (mapStore.currMap.temperature != undefined) {
             mapStore.currMap.temperature += 5
             if (mapStore.currMap.temperature <= 0) {
@@ -97,8 +97,8 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
     const checkInfos: string[] = []
     options.value = []
     if (next != undefined && next != '') {
-      if (!optionExists('map.next', optionList) && gameStore.currentSceneType == 'map') {
-        const defaultMapNext = getOptionByName('map.next', DefaultActions)
+      if (!optionExists('game.map.next', optionList) && gameStore.currentSceneType == 'map') {
+        const defaultMapNext = getOptionByName('game.map.next', DefaultActions)
         defaultMapNext.next = next
         options.value.push(defaultMapNext)
       }
