@@ -17,7 +17,7 @@
           cover +
           ');padding-top: 56.25%;'
         "
-        class="bg-repeat-round">
+        class="bg-no-repeat bg-cover">
         <!-- <p class="pt-12 pl-24 absolute-lt text-error">
         {{ cover }}
       </p> -->
