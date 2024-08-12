@@ -45,8 +45,8 @@ export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
   function initShopItems() {
     DefaultGameItems.forEach((item) => {
       item.name = item.type + '.' + item.name
-      item.desc = localeText(item.desc, item.name, 'items', 'desc')
-      item.title = localeText(item.title, item.name, 'items', 'title')
+      item.desc = localeText(item.desc, item.name, 'game.items', 'desc')
+      item.title = localeText(item.title, item.name, 'game.items', 'title')
       item.cover = prefixImage(item.cover, item.name, 'items', '.png')
     })
   }

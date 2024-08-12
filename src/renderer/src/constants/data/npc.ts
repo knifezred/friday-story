@@ -1,7 +1,7 @@
 // NPC列表
 export const DefaultNpcInfoList: Array<Dto.NpcInfo> = [
   {
-    name: 'girl',
+    name: 'sister',
     age: 22,
     gender: '2',
     identity: 'sister',
@@ -16,6 +16,7 @@ export const DefaultNpcInfoList: Array<Dto.NpcInfo> = [
     identity: 'sister',
     level: 'SR',
     work: '',
-    relationship: [3, 2, 3]
+    relationship: [3, 2, 3],
+    isLocked: true
   }
 ]
