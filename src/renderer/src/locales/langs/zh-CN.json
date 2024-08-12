@@ -88,6 +88,15 @@
       "hasItemFalse": "你没有足够的{item},至少需要{value} x {item} !",
       "openHour": "营业时间：{item}"
     },
+    "character": {
+      "female": {
+        "sister": {
+          "username": "奥利维亚",
+          "nickname": "小奥",
+          "desc": "煎蛋介绍一下"
+        }
+      }
+    },
     "effect": {
       "addItemTrue": "获得了 {item}+{value} !",
       "useItemTrue": "{item} - {value}",
@@ -527,6 +536,11 @@
     "setting": {
       "saveTips": "保存成功",
       "title": "设置"
+    },
+    "relationship": {
+      "stranger": "陌生人",
+      "beforeSeen": "还没有见过",
+      "friendly": "友好："
     }
   },
   "request": {

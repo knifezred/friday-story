@@ -18,7 +18,11 @@
         :class="item.isLocked ? 'grayscale-100' : ''">
         <template #header>
           <span class="text-4 text-amber">
-            {{ item.isLocked != true ? $t(item.name) : '陌生人' }}
+            {{
+              item.isLocked != true
+                ? $t(item.username) + ' (' + $t(item.nickname) + ')'
+                : $t('page.relationship.stranger')
+            }}
           </span>
         </template>
         <template #header-extra>
@@ -30,23 +34,23 @@
           </template>
           <n-flex vertical class="w-xs">
             <template v-if="item.isLocked">
-              <n-p class="my-0"> 尚未解锁 </n-p>
+              <n-p class="my-0"> {{ $t('page.relationship.beforeSeen') }} </n-p>
               <n-p class="my-0">
-                友好：
+                {{ $t('page.relationship.friendly') }}
                 <n-icon v-for="index in relationLevel" :key="index" :size="20">
                   <icon-solar:heart-bold v-if="0 >= index" color="#fa5252" />
                   <icon-solar:heart-bold-duotone v-else />
                 </n-icon>
               </n-p>
               <n-p class="my-0">
-                友好：
+                {{ $t('page.relationship.friendly') }}
                 <n-icon v-for="index in relationLevel" :key="index" :size="20">
                   <icon-solar:heart-bold v-if="0 >= index" color="#fa5252" />
                   <icon-solar:heart-bold-duotone v-else />
                 </n-icon>
               </n-p>
               <n-p class="my-0">
-                友好：
+                {{ $t('page.relationship.friendly') }}
                 <n-icon v-for="index in relationLevel" :key="index" :size="20">
                   <icon-solar:heart-bold v-if="0 >= index" color="#fa5252" />
                   <icon-solar:heart-bold-duotone v-else />
@@ -54,23 +58,23 @@
               </n-p>
             </template>
             <template v-else>
-              <n-p class="my-0"> {{ item.desc }} </n-p>
+              <n-p class="my-0"> {{ $t(item.desc) }} </n-p>
               <n-p class="my-0">
-                友好：
+                {{ $t('page.relationship.friendly') }}
                 <n-icon v-for="index in relationLevel" :key="index" :size="20">
                   <icon-solar:heart-bold v-if="item.relationship[0] >= index" color="#fa5252" />
                   <icon-solar:heart-bold-duotone v-else />
                 </n-icon>
               </n-p>
               <n-p class="my-0">
-                友好：
+                {{ $t('page.relationship.friendly') }}
                 <n-icon v-for="index in relationLevel" :key="index" :size="20">
                   <icon-solar:heart-bold v-if="item.relationship[1] >= index" color="#fa5252" />
                   <icon-solar:heart-bold-duotone v-else />
                 </n-icon>
               </n-p>
               <n-p class="my-0">
-                友好：
+                {{ $t('page.relationship.friendly') }}
                 <n-icon v-for="index in relationLevel" :key="index" :size="20">
                   <icon-solar:heart-bold v-if="item.relationship[2] >= index" color="#fa5252" />
                   <icon-solar:heart-bold-duotone v-else />
