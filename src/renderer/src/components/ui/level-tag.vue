@@ -1,5 +1,5 @@
 <template>
-  <n-avatar :round="round" :class="bgColor">
+  <n-avatar :round="round" :bordered="false" :class="bgColor">
     {{ level == undefined ? '???' : level }}
   </n-avatar>
 </template>
@@ -17,22 +17,22 @@ interface Props {
 const { level } = withDefaults(defineProps<Props>(), {
   round: true
 })
-const bgColor = ref('bg-gray')
+const bgColor = ref('bg-gray-200 text-gray')
 onMounted(() => {
   if (level == undefined) {
-    bgColor.value = 'bg-gray'
+    bgColor.value = 'bg-gray-200 text-gray'
   }
   if (level == 'SSR') {
-    bgColor.value = 'bg-error'
+    bgColor.value = 'bg-error-200 text-error'
   }
   if (level == 'SR') {
-    bgColor.value = 'bg-warning'
+    bgColor.value = 'bg-warning-200 text-warning'
   }
   if (level == 'R') {
-    bgColor.value = 'bg-info'
+    bgColor.value = 'bg-info-200 text-info'
   }
   if (level == 'N') {
-    bgColor.value = 'bg-success'
+    bgColor.value = 'bg-success-200 text-success'
   }
 })
 </script>
