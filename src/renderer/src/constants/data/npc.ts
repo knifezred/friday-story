@@ -1,9 +1,9 @@
 // NPC列表
 export const DefaultNpcInfoList: Array<Dto.NpcInfo> = [
   {
-    name: 'sister',
-    age: 28,
-    gender: '1',
+    name: 'girl',
+    age: 22,
+    gender: '2',
     identity: 'sister',
     level: 'SSR',
     work: '',
@@ -11,8 +11,8 @@ export const DefaultNpcInfoList: Array<Dto.NpcInfo> = [
   },
   {
     name: 'cousin',
-    age: 30,
-    gender: '1',
+    age: 18,
+    gender: '2',
     identity: 'sister',
     level: 'SR',
     work: '',

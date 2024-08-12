@@ -138,7 +138,7 @@ export function localeText(
       }
     }
   }
-  return text
+  return text.toString()
 }
 
 export function prefixImage(

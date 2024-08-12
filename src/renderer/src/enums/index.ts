@@ -9,5 +9,6 @@ export enum SetupStoreId {
   GameMap = 'game-map-store',
   GameItem = 'game-item-store',
   GameStory = 'game-story-store',
-  GameAction = 'game-action-store'
+  GameAction = 'game-action-store',
+  GameNpc = 'game-npc-store'
 }

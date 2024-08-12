@@ -82,15 +82,17 @@
 </template>
 
 <script setup lang="ts">
+import { useNpcStore } from '@renderer/store/modules/game-npc'
 import { onMounted, ref } from 'vue'
 defineOptions({
   name: 'Relationship'
 })
 const relationLevel = ref(5)
 const npcItems = ref<Array<Dto.NpcFull>>()
+const npcStore = useNpcStore()
 // N R SR SSR
 onMounted(() => {
-  // npcItems.value = DefaultNpcInfoList
+  npcItems.value = npcStore.allNPCs
 })
 </script>
 
