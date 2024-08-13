@@ -535,7 +535,11 @@
     },
     "setting": {
       "saveTips": "保存成功",
-      "title": "设置"
+      "title": "设置",
+      "general": {
+        "lang": "切换语言",
+        "volume": "音量"
+      }
     },
     "relationship": {
       "stranger": "陌生人",

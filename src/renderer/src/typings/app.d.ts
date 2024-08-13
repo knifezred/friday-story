@@ -367,6 +367,10 @@ declare namespace App {
         setting: {
           saveTips: string
           title: string
+          general: {
+            lang: string
+            volume: string
+          }
         }
       }
       request: {

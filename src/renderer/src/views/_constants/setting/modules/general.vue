@@ -5,7 +5,7 @@
         <n-gi></n-gi>
         <n-gi span="2">
           <n-form label-placement="left" label-width="220" label-align="left" size="large">
-            <n-form-item :label="$t('setting.general.lang')" path="langValue">
+            <n-form-item :label="$t('page.setting.general.lang')" path="langValue">
               <n-select
                 v-model:value="appStore.locale"
                 :options="appStore.localeOptions"
@@ -13,7 +13,7 @@
                 value-field="key"
                 @update:value="appStore.changeLocale(appStore.locale)" />
             </n-form-item>
-            <n-form-item :label="$t('setting.general.volume')" path="volumeValue">
+            <n-form-item :label="$t('page.setting.general.volume')" path="volumeValue">
               <n-slider v-model:value="appStore.projectSettings.volume" :step="10" />
             </n-form-item>
           </n-form>
