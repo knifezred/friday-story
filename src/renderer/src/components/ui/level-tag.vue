@@ -29,7 +29,7 @@ onMounted(() => {
     bgColor.value = 'bg-warning-200 text-warning'
   }
   if (level == 'R') {
-    bgColor.value = 'bg-info-200 text-info'
+    bgColor.value = 'bg-primary-200 text-primary'
   }
   if (level == 'N') {
     bgColor.value = 'bg-success-200 text-success'

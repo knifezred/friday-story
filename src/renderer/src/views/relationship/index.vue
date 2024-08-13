@@ -18,7 +18,7 @@
         class="relative z-4 w-xs shadow-primary shadow-op-30"
         :class="item.isLocked ? 'grayscale-100' : ''">
         <template #header>
-          <span class="text-4 text-amber">
+          <span class="text-4 text-primary">
             {{
               item.isLocked != true
                 ? $t(item.username) + ' (' + $t(item.nickname) + ')'
