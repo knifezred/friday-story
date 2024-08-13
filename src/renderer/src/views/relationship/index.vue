@@ -14,7 +14,8 @@
       <NCard
         v-for="item in npcItems"
         :key="item.name"
-        class="relative z-4 w-sm shadow-primary shadow-op-30"
+        content-class="pa-0!"
+        class="relative z-4 w-xs shadow-primary shadow-op-30"
         :class="item.isLocked ? 'grayscale-100' : ''">
         <template #header>
           <span class="text-4 text-amber">
@@ -28,11 +29,11 @@
         <template #header-extra>
           <LevelTag :level="item.level" />
         </template>
-        <n-popover :overlap="true" placement="bottom" trigger="hover">
+        <n-popover :overlap="true" placement="bottom" trigger="hover" class="w-xs">
           <template #trigger>
-            <ImageIcon :src="item.avatar" class="w-sm rd-xl" />
+            <ImageIcon :src="item.avatar" class="rd-md" />
           </template>
-          <n-flex vertical class="w-xs">
+          <n-flex vertical>
             <template v-if="item.isLocked">
               <n-p class="my-0"> {{ $t('page.relationship.beforeSeen') }} </n-p>
               <n-p class="my-0">

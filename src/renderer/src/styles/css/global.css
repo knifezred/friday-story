@@ -16,17 +16,9 @@ html.grayScale {
   filter: grayScale(100%);
 }
 
-.map-card>.n-card-header {
-  padding: 0.1em !important;
-}
-
 .n-card:hover {
   box-shadow: 0px 0px 8px 6px var(--un-shadow-color);
   cursor: pointer;
-}
-
-.n-card__action {
-  padding: 1em !important;
 }
 
 /* 定义从右向左消失的动画 */

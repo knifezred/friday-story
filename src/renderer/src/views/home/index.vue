@@ -76,7 +76,8 @@
                 <n-card
                   v-if="item.isShow"
                   :title="$t(item.title)"
-                  class="w-31% text-center cursor-pointer map-card"
+                  class="w-31% text-center cursor-pointer"
+                  header-class="pa-0.1em!"
                   size="small"
                   hoverable
                   @click="mapFunc(item)">
