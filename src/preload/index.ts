@@ -28,10 +28,10 @@ const api = {
     console.log(fileList)
     return fileList
   },
-  isFileExist: (filePath: string) => {
+  isFileExist: async (filePath: string) => {
     try {
-      const dirPath = __dirname
-      const staticPath = path.join(dirPath.replace('\\out\\preload', ''), filePath)
+      const appPath = await ipcRenderer.invoke('app-path')
+      const staticPath = path.join(appPath, filePath)
       fs.accessSync(staticPath, fs.constants.F_OK)
       return true
     } catch (error) {

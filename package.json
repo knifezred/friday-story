@@ -42,6 +42,7 @@
     "naive-ui": "^2.38.2",
     "nanoid": "^5.0.7",
     "nprogress": "^0.2.0",
+    "path-scurry": "^2.0.0",
     "pinia": "^2.1.7",
     "qs": "^6.12.1",
     "reflect-metadata": "^0.2.2",

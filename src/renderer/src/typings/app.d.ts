@@ -111,9 +111,9 @@ declare namespace App {
       startStory: string
       localhost: string
       duration: number
-      sceneTransition: UnionKey.ThemePageAnimateMode
-      optionTransition: UnionKey.ThemePageAnimateMode
-      mapTransition: UnionKey.ThemePageAnimateMode
+      sceneTransition: UnionKey.AnimateMode
+      optionTransition: UnionKey.AnimateMode
+      mapTransition: UnionKey.AnimateMode
     }
   }
 

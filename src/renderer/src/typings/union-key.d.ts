@@ -43,6 +43,15 @@ declare namespace UnionKey {
     | 'fade-slide'
     | 'fade-bottom'
     | 'fade-scale'
+    | 'zoom-fade'
+    | 'zoom-out'
+    | 'none'
+
+  type AnimateMode =
+    | 'fade'
+    | 'fade-slide'
+    | 'fade-bottom'
+    | 'fade-scale'
     | 'fade-half'
     | 'zoom-fade'
     | 'zoom-out'

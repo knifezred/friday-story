@@ -160,7 +160,6 @@ export function prefixImage(
       text = text + suffix
     }
   }
-  text = coverWithDefault(text)
   return text
 }
 
@@ -174,8 +173,8 @@ export async function dynamicResource(filePath: string) {
   }
 }
 
-export function coverWithDefault(filePath: string) {
-  if (window.api.isFileExist(filePath)) {
+export async function coverWithDefault(filePath: string) {
+  if (await window.api.isFileExist(filePath)) {
     return filePath
   }
   return '/static/imgs/t' + randomInt(0, 7) + '.webp'

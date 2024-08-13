@@ -5,7 +5,7 @@ declare global {
     electron: ElectronAPI
     api: {
       listDir(dirPath: string): Promise<Array<string>>
-      isFileExist(filePath: string): boolean
+      isFileExist(filePath: string): Promise<boolean>
     }
   }
 }

@@ -82,6 +82,15 @@
     }
   },
   "game": {
+    "character": {
+      "female": {
+        "sister": {
+          "desc": "Can you introduce the fried eggs",
+          "nickname": "Xiao Ao",
+          "username": "Olivia"
+        }
+      }
+    },
     "condition": {
       "hasItemFalse": "You don't have enough {item}, at least you need {value} x {item}!",
       "hasItemTrue": "You have {item}!",
@@ -524,7 +533,16 @@
         "title": "Reset Password"
       }
     },
+    "relationship": {
+      "beforeSeen": "I haven't met yet",
+      "friendly": "Friendly:",
+      "stranger": "stranger"
+    },
     "setting": {
+      "general": {
+        "lang": "switch language",
+        "volume": "volume"
+      },
       "saveTips": "Save successful",
       "title": "Setting"
     }

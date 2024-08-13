@@ -1,10 +1,13 @@
 import { DefaultMaps } from '@renderer/constants/data/map'
 import { SetupStoreId } from '@renderer/enums'
-import { localeText, prefixImage } from '@renderer/utils/common'
+import { coverWithDefault, localeText, prefixImage } from '@renderer/utils/common'
 import { useAuthStore } from '../auth'
 
 export async function getDefaultMaps(id: number | undefined) {
   const maps = flattenTree(generateIdAndPid(DefaultMaps, 'root'))
+  maps.forEach(async (map) => {
+    map.cover = await coverWithDefault(map.cover)
+  })
   const authStore = useAuthStore()
   if (id != undefined) {
     maps.forEach((map) => {
@@ -43,7 +46,7 @@ function flattenTree(tree) {
     const fullMap: Dto.MapItemFull = {
       title: localeText(node.title, typeName, 'game.map', 'title'),
       text: localeText(node.text, typeName, 'game.map', 'text'),
-      cover: prefixImage(node.cover, typeName, 'game.map', '.jpeg'),
+      cover: prefixImage(node.cover, typeName, 'map', '.jpeg'),
       id: node.id,
       pid: node.pid,
       name: node.name,
