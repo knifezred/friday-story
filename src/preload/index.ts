@@ -1,15 +1,15 @@
 import { electronAPI } from '@electron-toolkit/preload'
 import { contextBridge, ipcRenderer } from 'electron'
 import fs from 'fs'
-import path from 'path'
+import { join } from 'path'
 // Custom APIs for renderer
 const api = {
   listDir: async (dirPath: string) => {
     const fileList = [] as Array<string>
     const appPath = await ipcRenderer.invoke('app-path')
-    let staticPath = path.join(appPath, 'static')
+    let staticPath = join(appPath, 'static')
     if (dirPath != '') {
-      staticPath = path.join(appPath, dirPath)
+      staticPath = join(appPath, dirPath)
     }
     if (!dirPath.endsWith('/')) {
       dirPath = dirPath + '/'
@@ -17,7 +17,7 @@ const api = {
     try {
       const files = fs.readdirSync(staticPath)
       files.forEach((file) => {
-        const fullPath = path.join(staticPath, file)
+        const fullPath = join(staticPath, file)
         if (fs.statSync(fullPath).isFile()) {
           fileList.push(dirPath + file)
         }
@@ -31,7 +31,7 @@ const api = {
   isFileExist: async (filePath: string) => {
     try {
       const appPath = await ipcRenderer.invoke('app-path')
-      const staticPath = path.join(appPath, filePath)
+      const staticPath = join(appPath, filePath)
       fs.accessSync(staticPath, fs.constants.F_OK)
       return true
     } catch (error) {
