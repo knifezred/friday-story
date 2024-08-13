@@ -5,6 +5,7 @@
 </template>
 
 <script setup lang="ts">
+import { useThemeStore } from '@renderer/store/modules/theme'
 import { onMounted, ref } from 'vue'
 
 defineOptions({
@@ -17,22 +18,24 @@ interface Props {
 const { level } = withDefaults(defineProps<Props>(), {
   round: true
 })
-const bgColor = ref('bg-gray-200 text-gray')
+const themeStore = useThemeStore()
+const bgLevel = themeStore.themeScheme == 'dark' ? '700' : '200'
+const bgColor = ref('bg-gray-' + bgLevel + ' text-gray')
 onMounted(() => {
   if (level == undefined) {
-    bgColor.value = 'bg-gray-200 text-gray'
+    bgColor.value = 'bg-gray-' + bgLevel + ' text-gray'
   }
   if (level == 'SSR') {
-    bgColor.value = 'bg-error-200 text-error'
+    bgColor.value = 'bg-error-' + bgLevel + ' text-error-400'
   }
   if (level == 'SR') {
-    bgColor.value = 'bg-warning-200 text-warning'
+    bgColor.value = 'bg-warning-' + bgLevel + ' text-warning'
   }
   if (level == 'R') {
-    bgColor.value = 'bg-primary-200 text-primary'
+    bgColor.value = 'bg-primary-' + bgLevel + ' text-primary'
   }
   if (level == 'N') {
-    bgColor.value = 'bg-success-200 text-success'
+    bgColor.value = 'bg-success-' + bgLevel + ' text-success'
   }
 })
 </script>
