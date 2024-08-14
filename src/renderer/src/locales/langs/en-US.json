@@ -508,6 +508,7 @@
         "welcomeBack": "Welcome back, {userName} !"
       },
       "gameStart": {
+        "gallery": "gallery",
         "loadArchive": "Load Archive",
         "newGame": "New Game",
         "title": "A simple slg game"
@@ -541,6 +542,7 @@
     "setting": {
       "general": {
         "lang": "switch language",
+        "loginBg": "Login background",
         "volume": "volume"
       },
       "saveTips": "Save successful",
@@ -562,6 +564,7 @@
     "achievement": "achievement",
     "archive": "Archive",
     "demo": "Demo",
+    "gallery": "gallery",
     "home": "Home",
     "inventory": "goods",
     "login": "Login",

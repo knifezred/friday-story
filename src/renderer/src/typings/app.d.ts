@@ -107,6 +107,7 @@ declare namespace App {
       textSpeed: number
       volume: number
       bgMusic: string
+      loginBg: string
       defaultPlace: string
       startStory: string
       localhost: string
@@ -369,6 +370,7 @@ declare namespace App {
           title: string
           general: {
             lang: string
+            loginBg: string
             volume: string
           }
         }

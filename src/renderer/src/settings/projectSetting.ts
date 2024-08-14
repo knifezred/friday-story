@@ -9,5 +9,6 @@ export const projectSetting: App.Global.ProjectSetting = {
   duration: 100,
   sceneTransition: 'fade-half',
   optionTransition: 'fade-bottom',
-  mapTransition: 'fade-slide'
+  mapTransition: 'fade-slide',
+  loginBg: '/static/frame/login_bg.mp4'
 }

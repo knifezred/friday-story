@@ -82,37 +82,37 @@
     }
   },
   "game": {
-    "condition": {
-      "hasLockedTrue": "前面的区域以后再来探索吧",
-      "hasItemTrue": "你拥有 {item} !",
-      "hasItemFalse": "你没有足够的{item},至少需要{value} x {item} !",
-      "openHour": "营业时间：{item}"
-    },
     "character": {
       "female": {
         "sister": {
-          "username": "奥利维亚",
+          "desc": "煎蛋介绍一下",
           "nickname": "小奥",
-          "desc": "煎蛋介绍一下"
+          "username": "奥利维亚"
         }
       }
     },
+    "condition": {
+      "hasItemFalse": "你没有足够的{item},至少需要{value} x {item} !",
+      "hasItemTrue": "你拥有 {item} !",
+      "hasLockedTrue": "前面的区域以后再来探索吧",
+      "openHour": "营业时间：{item}"
+    },
     "effect": {
       "addItemTrue": "获得了 {item}+{value} !",
-      "useItemTrue": "{item} - {value}",
+      "unlockMapTrue": "解锁了{item}",
       "useItemFalse": "你没有足够的{item},至少需要{item} x {value} !",
-      "unlockMapTrue": "解锁了{item}"
+      "useItemTrue": "{item} - {value}"
     },
     "env": {
       "temperature": {
-        "coldest": "极寒",
-        "colder": "刺骨",
         "cold": "微冷",
+        "colder": "刺骨",
+        "coldest": "极寒",
+        "hot": "酷热",
         "suitable": "宜人",
         "warm": "温暖",
         "warmer": "温热",
-        "warmest": "燥热",
-        "hot": "酷热"
+        "warmest": "燥热"
       }
     },
     "items": {
@@ -154,46 +154,58 @@
           "title": "三明治"
         }
       },
-      "task": {
-        "lin_home_key": {
-          "desc": "可以打开邻居家的大门",
-          "title": "林家大门钥匙"
-        }
-      },
       "material": {
         "wood": {
           "desc": "可以添加到火堆里提高燃烧时间和温度",
           "title": "木头"
         }
+      },
+      "task": {
+        "lin_home_key": {
+          "desc": "可以打开邻居家的大门",
+          "title": "林家大门钥匙"
+        }
       }
     },
     "map": {
       "area": {
-        "taiBai": {
-          "text": "太白区",
-          "title": "太白区"
-        },
-        "quan": {
-          "text": "泉区",
-          "title": "泉区"
+        "gongYe": {
+          "text": "宫野区",
+          "title": "宫野区"
         },
         "qingYe": {
           "text": "青叶区",
           "title": "青叶区"
         },
+        "quan": {
+          "text": "泉区",
+          "title": "泉区"
+        },
         "ruoLin": {
           "text": "若林区",
           "title": "若林区"
         },
-        "gongYe": {
-          "text": "宫野区",
-          "title": "宫野区"
+        "taiBai": {
+          "text": "太白区",
+          "title": "太白区"
         }
       },
       "building": {
         "centerPark": {
           "text": "中心公园",
           "title": "中心公园"
+        },
+        "darkHouse": {
+          "begin": {
+            "text": "一个{roomEnv}的房间，添柴时小心别把屋子烧了",
+            "title": "小屋"
+          },
+          "roomWork": {
+            "text": "一个简易工作台，可以制作一些粗糙的工具",
+            "title": "工作台"
+          },
+          "text": "一座木屋",
+          "title": "木屋"
         },
         "demo": {
           "text": "测试",
@@ -276,63 +288,51 @@
           "text": "地铁",
           "title": "地铁"
         },
+        "mistyForest": {
+          "text": "被迷雾包围的森林、建议只在外围搜集木材",
+          "title": "迷雾森林"
+        },
         "oGenPlaza": {
           "text": "欧金广场,东山区最大的商场",
           "title": "欧金广场"
-        },
-        "darkHouse": {
-          "title": "木屋",
-          "text": "一座木屋",
-          "begin": {
-            "title": "小屋",
-            "text": "一个{roomEnv}的房间，添柴时小心别把屋子烧了"
-          },
-          "roomWork": {
-            "title": "工作台",
-            "text": "一个简易工作台，可以制作一些粗糙的工具"
-          }
-        },
-        "mistyForest": {
-          "title": "迷雾森林",
-          "text": "被迷雾包围的森林、建议只在外围搜集木材"
         }
       },
       "city": {
-        "tokyo": {
-          "text": "冬京是樱岛国的政治、经济中心，也是国际大都市。这里高楼林立，交通便捷，是科技创新和金融服务的聚集地。冬京拥有世界级的购物中心、娱乐场所和美食街，是购物和娱乐的天堂。",
-          "title": "冬京"
-        },
-        "osaka": {
-          "text": "大板",
-          "title": "大板"
-        },
-        "yokohama": {
-          "text": "恒滨",
-          "title": "恒滨"
-        },
-        "nagoya": {
-          "text": "明谷乌",
-          "title": "明谷乌"
-        },
-        "sapporo": {
-          "text": "札荒位于北方，风光优美，独具魅力，也是著名的旅游胜地",
-          "title": "札荒"
-        },
         "fukuoka": {
           "text": "富冈",
           "title": "富冈"
-        },
-        "kobe": {
-          "text": "深扈",
-          "title": "深扈"
         },
         "kawasaki": {
           "text": "一座重工业大城",
           "title": "川奇"
         },
+        "kobe": {
+          "text": "深扈",
+          "title": "深扈"
+        },
+        "nagoya": {
+          "text": "明谷乌",
+          "title": "明谷乌"
+        },
+        "osaka": {
+          "text": "大板",
+          "title": "大板"
+        },
+        "sapporo": {
+          "text": "札荒位于北方，风光优美，独具魅力，也是著名的旅游胜地",
+          "title": "札荒"
+        },
         "sendai": {
           "text": "咸台位于樱岛的东北方向，学术氛围浓厚",
           "title": "咸台"
+        },
+        "tokyo": {
+          "text": "冬京是樱岛国的政治、经济中心，也是国际大都市。这里高楼林立，交通便捷，是科技创新和金融服务的聚集地。冬京拥有世界级的购物中心、娱乐场所和美食街，是购物和娱乐的天堂。",
+          "title": "冬京"
+        },
+        "yokohama": {
+          "text": "恒滨",
+          "title": "恒滨"
         }
       },
       "common": {
@@ -346,13 +346,13 @@
         }
       },
       "country": {
-        "island": {
-          "text": "樱岛国",
-          "title": "樱岛国"
-        },
         "aDarkRoom": {
           "text": "复刻小黑屋的文字冒险游戏",
           "title": "小黑屋"
+        },
+        "island": {
+          "text": "樱岛国",
+          "title": "樱岛国"
         }
       },
       "street": {
@@ -371,14 +371,14 @@
       }
     },
     "message": {
-      "notEnoughMoney": "余额不足",
-      "nothingHappened": "什么也没有发生",
-      "nothingFound": "一无所获",
       "findMap": "发现了{item}",
+      "notEnoughMoney": "余额不足",
+      "nothingFound": "一无所获",
+      "nothingHappened": "什么也没有发生",
       "option": {
+        "cutTreeInfo": "伐木中... ...",
         "exploreInfo": "你在屋内东翻西找、找到了一些看起来有用的东西",
-        "pickWoodInfo": "四处转了转，捡到了一些木材",
-        "cutTreeInfo": "伐木中... ..."
+        "pickWoodInfo": "四处转了转，捡到了一些木材"
       }
     },
     "miniGame": {
@@ -394,24 +394,24 @@
       "startGame": "开始游戏"
     },
     "option": {
+      "addWood": "添加木柴",
       "choose_id": "选择出身",
+      "cutTree": "伐木",
       "dice-number": "玩骰子",
       "enter": "进入",
+      "explore": "探索",
       "finger-guessing": "石头剪刀布",
+      "fix": "修复",
       "goBack": "返回",
       "goOut": "出去",
       "knocked": "敲门",
-      "quit": "退出",
-      "wait": "等待",
-      "work": "工作",
-      "addWood": "添加木柴",
-      "pickWood": "搜刮木材",
-      "cutTree": "伐木",
-      "explore": "探索",
-      "fix": "修复",
       "make": "制造",
+      "pickWood": "搜刮木材",
+      "quit": "退出",
       "repair": "修理",
-      "story_start": "创建角色"
+      "story_start": "创建角色",
+      "wait": "等待",
+      "work": "工作"
     }
   },
   "icon": {
@@ -508,6 +508,7 @@
         "welcomeBack": "欢迎回来，{userName} ！"
       },
       "gameStart": {
+        "gallery": "画廊",
         "loadArchive": "读取存档",
         "newGame": "新的开始",
         "title": "欢迎来到麻瓜的世界"
@@ -533,18 +534,19 @@
         "title": "重置密码"
       }
     },
+    "relationship": {
+      "beforeSeen": "还没有见过",
+      "friendly": "友好：",
+      "stranger": "陌生人"
+    },
     "setting": {
-      "saveTips": "保存成功",
-      "title": "设置",
       "general": {
         "lang": "切换语言",
+        "loginBg": "登录背景",
         "volume": "音量"
-      }
-    },
-    "relationship": {
-      "stranger": "陌生人",
-      "beforeSeen": "还没有见过",
-      "friendly": "友好："
+      },
+      "saveTips": "保存成功",
+      "title": "设置"
     }
   },
   "request": {
@@ -562,6 +564,7 @@
     "achievement": "成就",
     "archive": "角色存档",
     "demo": "Demo",
+    "gallery": "画廊",
     "home": "首页",
     "inventory": "背包",
     "login": "登录",

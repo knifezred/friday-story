@@ -16,6 +16,20 @@
             <n-form-item :label="$t('page.setting.general.volume')" path="volumeValue">
               <n-slider v-model:value="appStore.projectSettings.volume" :step="10" />
             </n-form-item>
+            <n-form-item :label="$t('page.setting.general.loginBg')" path="loginBg">
+              <n-select
+                v-model:value="appStore.projectSettings.loginBg"
+                :options="[
+                  {
+                    label: 'car',
+                    value: '/static/frame/login_bg.mp4'
+                  },
+                  {
+                    label: 'muggle girl',
+                    value: '/static/frame/login_bg2.mp4'
+                  }
+                ]" />
+            </n-form-item>
           </n-form>
         </n-gi>
         <n-gi> </n-gi>
