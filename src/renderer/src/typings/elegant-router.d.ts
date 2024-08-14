@@ -23,6 +23,7 @@ declare module "@elegant-router/types" {
     "achievement": "/achievement";
     "archive": "/archive";
     "demo": "/demo";
+    "gallery": "/gallery";
     "home": "/home";
     "inventory": "/inventory";
     "login": "/login/:module(pwd-login|register|reset-pwd|game-start)?";
@@ -67,6 +68,7 @@ declare module "@elegant-router/types" {
     | "achievement"
     | "archive"
     | "demo"
+    | "gallery"
     | "home"
     | "inventory"
     | "login"
@@ -92,6 +94,7 @@ declare module "@elegant-router/types" {
     RouteKey,
     | "archive"
     | "demo"
+    | "gallery"
     | "personal"
     | "setting"
     | "403"

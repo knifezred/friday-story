@@ -167,6 +167,7 @@ const routeMap: RouteMap = {
   "achievement": "/achievement",
   "archive": "/archive",
   "demo": "/demo",
+  "gallery": "/gallery",
   "home": "/home",
   "inventory": "/inventory",
   "login": "/login/:module(pwd-login|register|reset-pwd|game-start)?",

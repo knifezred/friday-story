@@ -21,6 +21,9 @@ const { routerPushByKey } = useRouterPush()
     <NButton type="primary" size="large" round block @click="routerPushByKey('archive')">
       {{ $t('page.login.gameStart.loadArchive') }}
     </NButton>
+    <NButton type="primary" size="large" round block @click="routerPushByKey('gallery')">
+      {{ $t('page.login.gameStart.gallery') }}
+    </NButton>
     <NButton type="primary" size="large" round block @click="routerPushByKey('setting')">
       {{ $t('page.setting.title') }}
     </NButton>

@@ -73,6 +73,17 @@ export const generatedRoutes: GeneratedRoute[] = [
     }
   },
   {
+    name: 'gallery',
+    path: '/gallery',
+    component: 'layout.blank$view.gallery',
+    meta: {
+      title: 'gallery',
+      i18nKey: 'route.gallery',
+      constant: true,
+      hideInMenu: true
+    }
+  },
+  {
     name: 'home',
     path: '/home',
     component: 'layout.base$view.home',
@@ -151,4 +162,4 @@ export const generatedRoutes: GeneratedRoute[] = [
       order: 20
     }
   }
-];
+]

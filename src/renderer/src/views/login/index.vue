@@ -90,7 +90,7 @@ const bgColor = computed(() => {
         </div>
       </NCard>
       <video
-        :src="staticPath('/static/frame/login_bg.mp4')"
+        :src="staticPath(appStore.projectSettings.loginBg)"
         class="absolute"
         autoplay
         muted

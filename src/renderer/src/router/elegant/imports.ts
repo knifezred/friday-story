@@ -17,6 +17,7 @@ export const layouts: Record<RouteLayout, RouteComponent | (() => Promise<RouteC
 export const views: Record<LastLevelRouteKey, RouteComponent | (() => Promise<RouteComponent>)> = {
   archive: () => import("@renderer/views/_constants/archive/index.vue"),
   demo: () => import("@renderer/views/_constants/demo/index.vue"),
+  gallery: () => import("@renderer/views/_constants/gallery/index.vue"),
   personal: () => import("@renderer/views/_constants/personal/index.vue"),
   setting: () => import("@renderer/views/_constants/setting/index.vue"),
   403: () => import("@renderer/views/_error/403/index.vue"),
