@@ -19,23 +19,40 @@ const { level } = withDefaults(defineProps<Props>(), {
   round: true
 })
 const themeStore = useThemeStore()
-const bgLevel = themeStore.themeScheme == 'dark' ? '700' : '200'
-const bgColor = ref('bg-gray-' + bgLevel + ' text-gray')
+const bgColor = ref('text-gray')
 onMounted(() => {
-  if (level == undefined) {
-    bgColor.value = 'bg-gray-' + bgLevel + ' text-gray'
-  }
-  if (level == 'SSR') {
-    bgColor.value = 'bg-error-' + bgLevel + ' text-error-400'
-  }
-  if (level == 'SR') {
-    bgColor.value = 'bg-warning-' + bgLevel + ' text-warning'
-  }
-  if (level == 'R') {
-    bgColor.value = 'bg-primary-' + bgLevel + ' text-primary'
-  }
-  if (level == 'N') {
-    bgColor.value = 'bg-success-' + bgLevel + ' text-success'
+  if (themeStore.themeScheme == 'dark') {
+    if (level == undefined) {
+      bgColor.value = 'text-gray bg-gray-700'
+    }
+    if (level == 'SSR') {
+      bgColor.value = 'text-error-400 bg-error-700'
+    }
+    if (level == 'SR') {
+      bgColor.value = 'text-warning bg-warning-700'
+    }
+    if (level == 'R') {
+      bgColor.value = 'text-primary-400 bg-primary-700'
+    }
+    if (level == 'N') {
+      bgColor.value = 'text-success bg-success-700'
+    }
+  } else {
+    if (level == undefined) {
+      bgColor.value = 'text-gray bg-gray-300'
+    }
+    if (level == 'SSR') {
+      bgColor.value = 'text-error bg-error-300'
+    }
+    if (level == 'SR') {
+      bgColor.value = 'text-warning-600 bg-warning-300'
+    }
+    if (level == 'R') {
+      bgColor.value = 'text-primary bg-primary-300'
+    }
+    if (level == 'N') {
+      bgColor.value = 'text-success bg-success-300'
+    }
   }
 })
 </script>
