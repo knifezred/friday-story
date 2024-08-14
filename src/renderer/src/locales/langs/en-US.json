@@ -543,6 +543,10 @@
       "general": {
         "lang": "switch language",
         "loginBg": "Login background",
+        "loginBgOption": {
+          "car": "Car",
+          "muggleGirl": "Magical Girl"
+        },
         "volume": "volume"
       },
       "saveTips": "Save successful",

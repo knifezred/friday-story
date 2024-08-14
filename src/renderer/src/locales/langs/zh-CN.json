@@ -543,6 +543,10 @@
       "general": {
         "lang": "切换语言",
         "loginBg": "登录背景",
+        "loginBgOption": {
+          "car": "汽车",
+          "muggleGirl": "魔法少女"
+        },
         "volume": "音量"
       },
       "saveTips": "保存成功",

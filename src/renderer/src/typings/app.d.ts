@@ -371,6 +371,10 @@ declare namespace App {
           general: {
             lang: string
             loginBg: string
+            loginBgOption: {
+              car: string
+              muggleGirl: string
+            }
             volume: string
           }
         }

@@ -21,11 +21,11 @@
                 v-model:value="appStore.projectSettings.loginBg"
                 :options="[
                   {
-                    label: 'car',
+                    label: $t('page.setting.general.loginBgOption.car'),
                     value: '/static/frame/login_bg.mp4'
                   },
                   {
-                    label: 'muggle girl',
+                    label: $t('page.setting.general.loginBgOption.muggleGirl'),
                     value: '/static/frame/login_bg2.mp4'
                   }
                 ]" />
