@@ -1,22 +1,7 @@
-import { EquipmentItems } from './items/equipment'
-import { FoodGameItems } from './items/foods'
-import { MaterialGameItems } from './items/material'
-import { OtherGameItems } from './items/other'
-import { TaskGameItems } from './items/task'
+export type WorkbenchType = 'default' | 'darkHouse'
 
-// type+'.'+name
-export const DefaultGameItems: Array<Dto.GameItem> = [
-  ...FoodGameItems,
-  ...OtherGameItems,
-  ...MaterialGameItems,
-  ...TaskGameItems,
-  ...EquipmentItems
-]
-
-export type ShopType = 'happy_shop' | 'walmart' | 'yong_hui'
-
-export const ShopGoodsRecord: Record<ShopType, Dto.ShopEntity> = {
-  happy_shop: {
+export const WorkbenchRecords: Record<WorkbenchType, Dto.ShopEntity> = {
+  default: {
     goods: [
       {
         name: 'beer',
@@ -83,20 +68,7 @@ export const ShopGoodsRecord: Record<ShopType, Dto.ShopEntity> = {
     manager: 'game.map.building.happy_shop.manager',
     money: 20000
   },
-  walmart: {
-    name: 'walmart',
-    manager: '',
-    money: 0,
-    goods: [
-      {
-        name: 'sandwich',
-        count: 10,
-        price: 10,
-        type: 'food'
-      }
-    ]
-  },
-  yong_hui: {
+  darkHouse: {
     name: 'walmart',
     manager: '',
     money: 0,

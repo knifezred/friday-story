@@ -1,4 +1,5 @@
 import { DefaultGameItems, ShopGoodsRecord } from '@renderer/constants/data/items'
+import { EquipmentItems } from '@renderer/constants/data/items/equipment'
 import { SetupStoreId } from '@renderer/enums'
 import { createStorage, updateStorage } from '@renderer/service/api/storage'
 import { localeText, prefixImage } from '@renderer/utils/common'
@@ -7,6 +8,8 @@ import { ref } from 'vue'
 import { useAuthStore } from '../auth'
 
 export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
+  const authStore = useAuthStore()
+  const isUpdate = ref(false)
   const currentShop = ref('')
   const currentShopEntity = ref<Dto.ShopEntity>({
     name: '',
@@ -14,8 +17,26 @@ export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
     money: 0,
     goods: []
   })
-  const isUpdate = ref(false)
-  const authStore = useAuthStore()
+  const currentWorkbench = ref('')
+
+  function workbenchTableItems() {
+    const workbenchTable: Array<Dto.EquipmentItemFull> = []
+    EquipmentItems.forEach((item) => {
+      const equipment: Dto.EquipmentItemFull = {
+        ...item,
+        name: item.type + '.' + item.name,
+        desc: localeText(item.desc, item.name, 'game.items', 'desc'),
+        title: localeText(item.title, item.name, 'game.items', 'title'),
+        cover: prefixImage(item.cover, item.name, 'items', '.png'),
+        count: item.count ?? 1,
+        material: item.material ?? [],
+        selectedCount: 0
+      }
+      workbenchTable.push(equipment)
+    })
+    return workbenchTable
+  }
+
   async function currentShopGoods() {
     // 分存档保存
     const shopEntity = await authStore.findStorageData(SetupStoreId.GameItem + currentShop.value)
@@ -67,5 +88,13 @@ export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
     }
   }
 
-  return { currentShop, currentShopEntity, currentShopGoods, initShopItems, deal }
+  return {
+    currentShop,
+    currentShopEntity,
+    currentShopGoods,
+    initShopItems,
+    deal,
+    currentWorkbench,
+    workbenchTableItems
+  }
 })

@@ -116,6 +116,16 @@
       }
     },
     "items": {
+      "equipment": {
+        "stoneAxe": {
+          "title": "石斧",
+          "desc": "一把由砸碎的石片制成的斧子"
+        },
+        "stonePickaxe": {
+          "title": "石镐",
+          "desc": "一把由砸碎的石头制成的石镐"
+        }
+      },
       "food": {
         "beer": {
           "desc": "鲜生啤",

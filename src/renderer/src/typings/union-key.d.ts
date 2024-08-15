@@ -14,7 +14,7 @@ declare namespace UnionKey {
 
   type MiniGameModule = 'dice-number' | 'finger-guessing' | 'match-three'
 
-  type SceneModule = 'map' | 'mini-game' | 'shop' | 'story'
+  type SceneModule = 'map' | 'mini-game' | 'shop' | 'story' | 'workbench'
 
   /** Theme scheme */
   type ThemeScheme = 'light' | 'dark' | 'auto'

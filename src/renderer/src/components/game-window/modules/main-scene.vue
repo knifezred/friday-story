@@ -198,7 +198,7 @@ async function executeOption(action: Dto.ActionOption) {
         gameStore.currentMiniGame = action.miniGame ?? 'finger-guessing'
         break
       case 'shop':
-        itemStore.currentShop = action.next ?? 'happy_shop'
+        itemStore.currentShop = action.next ?? 'default'
         break
       case 'story':
         storyStore.setCurrentStory(action.next ?? 'restart')
@@ -208,6 +208,9 @@ async function executeOption(action: Dto.ActionOption) {
         } else {
           await nextText()
         }
+        break
+      case 'workbench':
+        itemStore.currentShop = action.next ?? 'default'
         break
       default:
         nextText()

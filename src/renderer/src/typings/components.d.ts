@@ -10,7 +10,9 @@ declare module 'vue' {
     AppProvider: typeof import('./../components/common/app-provider.vue')['default']
     BetterScroll: typeof import('./../components/custom/better-scroll.vue')['default']
     ButtonIcon: typeof import('./../components/custom/button-icon.vue')['default']
+    copy: typeof import('./../components/game-window/modules/shop-scene copy.vue')['default']
     CountTo: typeof import('./../components/custom/count-to.vue')['default']
+    CreateScene: typeof import('../components/game-window/modules/workbench-scene.vue')['default']
     DarkModeContainer: typeof import('./../components/common/dark-mode-container.vue')['default']
     DiceCup: typeof import('./../components/game-window/mini-games/dice-cup.vue')['default']
     DiceNumberGame: typeof import('./../components/game-window/mini-games/dice-number-game.vue')['default']
@@ -41,6 +43,7 @@ declare module 'vue' {
     'IconSolar:heartBold': typeof import('~icons/solar/heart-bold')['default']
     'IconSolar:heartBoldDuotone': typeof import('~icons/solar/heart-bold-duotone')['default']
     'IconSolar:pointOnMapBoldDuotone': typeof import('~icons/solar/point-on-map-bold-duotone')['default']
+    'IconSolar:sledgehammerBoldDuotone': typeof import('~icons/solar/sledgehammer-bold-duotone')['default']
     'IconSolar:starBold': typeof import('~icons/solar/star-bold')['default']
     'IconSolar:starBoldDuotone': typeof import('~icons/solar/star-bold-duotone')['default']
     'IconSolar:threeSquaresBoldDuotone': typeof import('~icons/solar/three-squares-bold-duotone')['default']
@@ -131,5 +134,6 @@ declare module 'vue' {
     WindowClose: typeof import('./../components/common/window-close.vue')['default']
     WindowMaximize: typeof import('./../components/common/window-maximize.vue')['default']
     WindowMinimize: typeof import('./../components/common/window-minimize.vue')['default']
+    WorkbenchScene: typeof import('./../components/game-window/modules/workbench-scene.vue')['default']
   }
 }

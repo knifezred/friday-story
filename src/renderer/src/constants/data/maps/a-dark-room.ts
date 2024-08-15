@@ -152,8 +152,8 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
               {
                 name: 'game.option.make',
                 text: 'game.option.make',
-                type: 'shop',
-                next: 'happy_shop',
+                type: 'workbench',
+                next: 'darkHouse',
                 duration: 0,
                 condition: [
                   {

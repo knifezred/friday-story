@@ -276,6 +276,12 @@ declare namespace Dto {
   type ArchiveNpcRelationShip = CommonType.RecordNullable<
     Pick<NpcInfo, 'id' | 'relationship' | 'identity'>
   >
+
+  interface ArchivedItem {
+    name: string
+    count: number
+  }
+
   type GameItemType = 'other' | 'food' | 'equipment' | 'task' | 'car' | 'material'
 
   interface GameItem {
@@ -288,6 +294,7 @@ declare namespace Dto {
     count?: number
     maxNum?: number
     isLocked?: boolean
+    material?: Array<KeyValueNumPair>
   }
 
   interface GameItemFull {
@@ -300,11 +307,12 @@ declare namespace Dto {
     count: number
     maxNum?: number
     isLocked?: boolean
+    material?: Array<KeyValueNumPair>
   }
 
-  interface ArchivedItem {
-    name: string
+  interface EquipmentItemFull extends GameItemFull {
     count: number
+    selectedCount: number
   }
 
   interface ShopGoods {
