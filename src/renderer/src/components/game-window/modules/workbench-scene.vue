@@ -29,11 +29,11 @@
               <n-p class="text-info-600">{{ $t(goods.desc) }} </n-p>
               <template #action>
                 <n-flex justify="space-around">
-                  <n-button :disabled="goods.selectedCount == 0" @click="removeToCart(goods)">
+                  <n-button :disabled="goods.selectedCount == 0" @click="removeToBuild(goods)">
                     -1
                   </n-button>
                   <span class="mt-2">{{ goods.count }}</span>
-                  <n-button :disabled="goods.count == 0" @click="addToCart(goods)">+1</n-button>
+                  <n-button :disabled="goods.count == 0" @click="addToBuild(goods)">+1</n-button>
                 </n-flex>
               </template>
             </n-thing>
@@ -44,7 +44,7 @@
     <n-gi :span="4" class="text-center">
       <n-button type="primary" class="w-48 h-12" @click="checkout">
         <icon-solar:sledgehammer-bold-duotone class="size-8 color-white" />
-        （{{ totalCoast }}）
+        （{{ buildCount }}）
       </n-button>
     </n-gi>
   </n-grid>
@@ -65,27 +65,29 @@ const shopItems = ref<Array<Dto.EquipmentItemFull>>([])
 const authStore = useAuthStore()
 const appStore = useAppStore()
 const gameItemStore = useGameItemStore()
-const totalCoast = ref(0)
+const buildCount = ref(0)
 interface Emits {
   (e: 'result', result: boolean): boolean
 }
 
 const emit = defineEmits<Emits>()
 
-function addToCart(goods: Dto.EquipmentItemFull) {
-  if (totalCoast.value > authStore.archivedData.money) {
+function addToBuild(goods: Dto.EquipmentItemFull) {
+  if (buildCount.value > authStore.archivedData.money) {
     window.$message?.error($t('game.message.notEnoughMoney'))
   } else {
     if (goods.count > 0) {
       goods.count--
       goods.selectedCount++
+      buildCount.value++
     }
   }
 }
-function removeToCart(goods: Dto.EquipmentItemFull) {
+function removeToBuild(goods: Dto.EquipmentItemFull) {
   if (goods.selectedCount > 0) {
     goods.count++
     goods.selectedCount--
+    buildCount.value--
   }
 }
 
