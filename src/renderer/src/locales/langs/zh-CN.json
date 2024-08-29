@@ -42,7 +42,8 @@
     "yesOrNo": {
       "no": "否",
       "yes": "是"
-    }
+    },
+    "notUnlocked": "未解锁"
   },
   "dataTable": {
     "itemCount": "共 {total} 条"
@@ -82,6 +83,16 @@
     }
   },
   "game": {
+    "achievement": {
+      "hatTrick": {
+        "title": "帽子戏法",
+        "desc": "3把定输赢"
+      },
+      "heavyArmorProficient": {
+        "title": "重甲精通",
+        "desc": "随便写写"
+      }
+    },
     "character": {
       "female": {
         "sister": {

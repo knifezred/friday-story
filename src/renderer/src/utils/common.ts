@@ -153,7 +153,11 @@ export function prefixImage(
   } else {
     // 不以/开头加prefix
     if (!text.startsWith('/')) {
-      text = prefix + text
+      if (text.startsWith('.')) {
+        text = prefix + text
+      } else {
+        text = prefix + '/' + text
+      }
     }
     // 不含.加suffix
     if (text.indexOf('.') == -1) {

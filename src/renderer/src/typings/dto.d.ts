@@ -415,4 +415,18 @@ declare namespace Dto {
     failure?: string
     notification?: boolean
   }
+
+  interface AchievementModel {
+    name: string
+    title: string
+    desc: string
+    cover: string
+    unlockCover: string
+    star: number
+    level: LevelType
+    locked: boolean
+    isHiding: boolean
+    unlockTime: string
+    condition?: ConditionModel
+  }
 }

@@ -1,4 +1,6 @@
+import { DefaultAchievements } from '@renderer/constants/data/achievement'
 import { SetupStoreId } from '@renderer/enums'
+import { localeText, prefixImage } from '@renderer/utils/common'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useAppStore } from '../app'
@@ -28,6 +30,19 @@ export const useGameStore = defineStore(SetupStoreId.Game, () => {
   const temperature = ref(-18.0)
   const fromMoney = ref(0)
   const fromGold = ref(0)
+
+  const achievementList = ref<Array<Dto.AchievementModel>>(DefaultAchievements)
+  function getAchievements() {
+    const list: Array<Dto.AchievementModel> = []
+    DefaultAchievements.forEach((item) => {
+      item.title = localeText(item.title, item.name, 'game.achievement', 'title')
+      item.desc = localeText(item.desc, item.name, 'game.achievement', 'desc')
+      item.cover = prefixImage(item.cover, item.name, 'achievement', '')
+      console.log(item.title)
+      list.push(item)
+    })
+    return list
+  }
 
   const optionExecuteRecords = ref<Array<Dto.KeyValueNumPair>>([])
 
@@ -95,6 +110,8 @@ export const useGameStore = defineStore(SetupStoreId.Game, () => {
     langParams,
     countOptionExecute,
     optionExecuteRecords,
-    getOptionExecuteNum
+    getOptionExecuteNum,
+    achievementList,
+    getAchievements
   }
 })
