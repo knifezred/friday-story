@@ -1,3 +1,4 @@
+import { ManName, Surname, WomanName } from '@renderer/constants/data/config/name/people'
 import { $t } from '@renderer/locales'
 import { projectSetting } from '@renderer/settings/projectSetting'
 import dayjs from 'dayjs'
@@ -184,13 +185,6 @@ export async function coverWithDefault(filePath: string) {
   return '/static/imgs/t' + randomInt(0, 7) + '.webp'
 }
 
-export function randomInt(min: number, max: number) {
-  // 确保min小于max
-  min = Math.ceil(min)
-  max = Math.floor(max)
-  return Math.floor(Math.random() * (max - min + 1)) + min
-}
-
 export function roomTemperature(temperature: number) {
   // 刺骨 冰冷 寒冷 微冷 宜人 温暖 温热 燥热 酷热
   let result: Game.Env.TemperatureType = 'coldest'
@@ -216,4 +210,28 @@ export function roomTemperature(temperature: number) {
     result = 'hot'
   }
   return $t(('game.env.temperature.' + result) as never)
+}
+
+export function randomInt(min: number, max: number) {
+  // 确保min小于max
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+// 随机生成姓名
+export function randPersonName(gender: number, surname: string = '') {
+  if (surname == '') {
+    surname = Surname[randomInt(0, Surname.length - 1)]
+  }
+  let personName = surname
+  const nameLen = randomInt(1, 2)
+  for (let index = 0; index < nameLen; index++) {
+    if (gender == 1) {
+      personName += ManName[randomInt(0, ManName.length - 1)]
+    } else {
+      personName += WomanName[randomInt(0, WomanName.length - 1)]
+    }
+  }
+  return personName
 }

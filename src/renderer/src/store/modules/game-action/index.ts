@@ -130,6 +130,10 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
     return checkInfos
   }
 
+  function cleanOptions() {
+    options.value = []
+  }
+
   function getOptionByName(name: string, list: Array<Dto.ActionOption>) {
     return list.filter((x) => x.name == name)[0]
   }
@@ -141,5 +145,5 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
     return list.filter((x) => x.name == name).length > 0
   }
 
-  return { currentAction, options, beforeExecute, executeAction, loadActionOptions }
+  return { currentAction, options, beforeExecute, executeAction, loadActionOptions, cleanOptions }
 })

@@ -41,7 +41,7 @@ export function useActionEffect() {
     if (map != undefined) {
       map.isShow = true
       // 添加地图标识
-      addFlag(SetupStoreId.GameMap + '.isShow.' + value + ',1')
+      setFlag(SetupStoreId.GameMap + '.isShow.' + value + ',1')
       return true
     }
     return false
@@ -53,15 +53,15 @@ export function useActionEffect() {
     if (map != undefined) {
       map.isShow = false
       // 添加地图标识
-      addFlag(SetupStoreId.GameMap + '.' + value + ',0')
+      setFlag(SetupStoreId.GameMap + '.' + value + ',0')
       return true
     }
     return false
   }
 
-  function addFlag(value: string) {
+  function setFlag(value: string) {
     const { 0: key, 1: flagValue } = value.split(',')
-    return authStore.addFlag(key, flagValue)
+    return authStore.setFlag(key, flagValue)
   }
 
   function useItem(value: string) {
@@ -88,7 +88,7 @@ export function useActionEffect() {
   }
 
   return {
-    addFlag,
+    setFlag,
     addItem,
     useItem,
     lockMap,

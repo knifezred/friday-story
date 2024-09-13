@@ -11,5 +11,11 @@
   "i18n-ally.localesPaths": [
     "src/renderer/src/locales/langs"
   ],
-  "i18n-ally.keystyle": "nested"
+  "i18n-ally.keystyle": "nested",
+  "files.exclude": {
+    "**/*.rpyc": true,
+    "**/*.rpa": true,
+    "**/*.rpymc": true,
+    "**/cache/": true
+  }
 }

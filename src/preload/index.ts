@@ -28,6 +28,17 @@ const api = {
     console.log(fileList)
     return fileList
   },
+  readFile: async (filePath: string) => {
+    const appPath = await ipcRenderer.invoke('app-path')
+    const staticPath = join(appPath, filePath)
+    try {
+      const content = fs.readFileSync(staticPath, 'utf-8')
+      return content
+    } catch (error) {
+      console.log(error)
+    }
+    return ''
+  },
   isFileExist: async (filePath: string) => {
     try {
       const appPath = await ipcRenderer.invoke('app-path')

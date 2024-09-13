@@ -1,6 +1,7 @@
 import { DefaultActions } from '@renderer/constants/data/action'
 import { DefaultScenes, DefaultStories } from '@renderer/constants/data/story'
 import { SetupStoreId } from '@renderer/enums'
+import { parseRenPyScript } from '@renderer/hooks/game/renpy'
 import { localeText, prefixImage } from '@renderer/utils/common'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
@@ -14,17 +15,32 @@ export const useStoryStore = defineStore(SetupStoreId.GameStory, () => {
     type: 'main-line',
     cover: '',
     text: [],
-    nextScene: ''
+    nextScene: '',
+    script: ''
   })
 
   const authStore = useAuthStore()
   const mapStore = useMapStore()
+
+  const currentStoryScenes = ref<Array<Dto.RenPyScene>>([])
+
   function getStoryScene(sceneName: string) {
-    return DefaultScenes.filter((x) => x.name == sceneName)[0]
+    if (sceneName == null) {
+      sceneName = 'start'
+    }
+    return currentStoryScenes.value.filter((x) => x.name == sceneName)[0]
   }
-  function setCurrentStory(name: string) {
+
+  function getSceneOptions(sceneName: string, menuName: string) {
+    return currentStoryScenes.value
+      .filter((x) => x.name == sceneName)[0]
+      .menus.filter((x) => x.name == menuName.replace('menu ', ''))[0].options
+  }
+
+  async function setCurrentStory(name: string) {
     if (DefaultStories.filter((x) => x.name == name).length > 0) {
       currentStory.value = DefaultStories.filter((x) => x.name == name)[0]
+      currentStoryScenes.value = await parseRenPyScript(currentStory.value.script)
     }
   }
 
@@ -54,10 +70,18 @@ export const useStoryStore = defineStore(SetupStoreId.GameStory, () => {
   }
 
   async function storyFinished(storyName: string) {
-    authStore.addFlag(SetupStoreId.GameStory + '.finished.' + storyName, '1')
+    authStore.setFlag(SetupStoreId.GameStory + '.finished.' + storyName, '1')
     useGameStore().currentSceneType = 'map'
     await mapStore.initMap(authStore.userInfo.archive.place)
   }
 
-  return { currentStory, setCurrentStory, getStoryScene, getOptions, initStory, storyFinished }
+  return {
+    currentStory,
+    setCurrentStory,
+    getStoryScene,
+    getSceneOptions,
+    getOptions,
+    initStory,
+    storyFinished
+  }
 })

@@ -142,7 +142,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                       value: 'material.wood,3'
                     },
                     {
-                      type: 'addFlag',
+                      type: 'setFlag',
                       value: 'room.darkHouse.roomWork.unlock,1',
                       success: '工作台已解锁'
                     }

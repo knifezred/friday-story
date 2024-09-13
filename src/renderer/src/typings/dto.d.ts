@@ -349,8 +349,9 @@ declare namespace Dto {
     name: string
     type: PlotType
     cover: string
+    script: string
     text: string[]
-    nextScene: string
+    nextScene?: string
     condition?: ConditionModel
     options?: Array<ActionOption>
   }
@@ -362,6 +363,20 @@ declare namespace Dto {
     cover: string
     next: string
     options: Array<ActionOption>
+    optionStyle?: string
+  }
+
+  interface RenPyScene {
+    name: string
+    text: string[]
+    next: string
+    cover: string
+    menus: Array<RenPyMenu>
+  }
+
+  interface RenPyMenu {
+    name: string
+    options: Array<ActionOption>
   }
 
   class ActionOption {
@@ -369,7 +384,7 @@ declare namespace Dto {
     text: string
     type: UnionKey.SceneModule
     condition?: ConditionModel[]
-    effect?: ActionEffectModel
+    effect: ActionEffectModel
     next?: string | undefined
     miniGame?: UnionKey.MiniGameModule | undefined
     icon?: string | undefined

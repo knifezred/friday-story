@@ -34,7 +34,7 @@
             'static/frame/textbox.png);'
       "
       style="border: 0; border-radius: 0; background-repeat: round">
-      <n-scrollbar class="h-20vh" :distance="10" @click="nextText">
+      <n-scrollbar class="h-20vh" :distance="10" @click="nextText(true)">
         <n-p class="text-xl color-success">
           <TypedText
             v-model:value="isTyped"
@@ -44,7 +44,7 @@
       </n-scrollbar>
       <template #footer>
         <Transition :name="projectSetting.optionTransition" mode="out-in" appear>
-          <n-flex :key="gameStore.currentScene.name" justify="center">
+          <n-flex :key="gameStore.renpyScene.name" justify="center">
             <template v-for="btn in actionStore.options" :key="btn.name">
               <n-button
                 v-if="btn.isShow != false"
@@ -80,7 +80,7 @@ import { dynamicResource } from '@renderer/utils/common'
 import { computed, ref, watch } from 'vue'
 
 defineOptions({
-  name: 'MainScene'
+  name: 'StoryScene'
 })
 
 const textIndex = ref(0)
@@ -107,20 +107,36 @@ const computedButtonLoadingStyle = computed(() => {
 
 function bindText(text: string[]) {
   isTyped.value = true
-  gameStore.currentScene.text.length = text.length
+  gameStore.renpyScene.text.length = text.length
   textIndex.value = 0
   if (text.length > textIndex.value) {
-    currentText.value = text[textIndex.value]
+    parseText(text[textIndex.value])
+  }
+}
+
+function parseText(text: string) {
+  if (text.startsWith('cover=')) {
+    gameStore.renpyScene.cover = text.replace('cover=', '')
+    dynamicCover()
+    nextText()
+  } else if (text.startsWith('menu=')) {
+    loadOptions(
+      storyStore.getSceneOptions(gameStore.renpyScene.name, text.replace('menu=', '')),
+      gameStore.renpyScene.next
+    )
+  } else {
+    isTyped.value = true
+    currentText.value = text
   }
 }
 
 // 从文件夹下动态获取场景资源（图片/视频），视频只支持mp4格式
 async function dynamicCover() {
-  if (gameStore.currentScene.cover.indexOf('.') == -1) {
+  if (gameStore.renpyScene.cover.indexOf('.') == -1) {
     console.log(cover.value)
-    cover.value = await dynamicResource(gameStore.currentScene.cover)
+    cover.value = await dynamicResource(gameStore.renpyScene.cover)
   } else {
-    cover.value = gameStore.currentScene.cover
+    cover.value = gameStore.renpyScene.cover
   }
   if (cover.value.endsWith('.mp4')) {
     isVideo.value = true
@@ -131,11 +147,10 @@ async function dynamicCover() {
 }
 
 async function nextScene(next: string) {
-  gameStore.currentScene = storyStore.getStoryScene(next)
+  gameStore.renpyScene = storyStore.getStoryScene(next)
+  actionStore.cleanOptions()
   await dynamicCover()
-  bindText(gameStore.currentScene.text)
-  // 绑定按钮
-  loadOptions(gameStore.currentScene.options, gameStore.currentScene.next)
+  bindText(gameStore.renpyScene.text)
 }
 
 async function nextText(isAutoNext: boolean = true) {
@@ -143,34 +158,35 @@ async function nextText(isAutoNext: boolean = true) {
     // 再次点击取消打字机效果
     isTyped.value = false
   } else {
-    if (textIndex.value == gameStore.currentScene.text.length - 1 && isAutoNext) {
-      if (actionStore.options.length == 0) {
-        if (gameStore.currentScene.next != '') {
-          await nextScene(gameStore.currentScene.next)
-        } else {
-          await storyStore.storyFinished(storyStore.currentStory.name)
-          // end
-          gameStore.currentSceneType = 'map'
-          appStore.setSiderCollapse(false)
+    if (actionStore.options.length == 0) {
+      if (textIndex.value == gameStore.renpyScene.text.length - 1 && isAutoNext) {
+        if (actionStore.options.length == 0) {
+          if (gameStore.renpyScene.next != '') {
+            await nextScene(gameStore.renpyScene.next)
+          } else {
+            await storyStore.storyFinished(storyStore.currentStory.name)
+            // end
+            gameStore.currentSceneType = 'map'
+            appStore.setSiderCollapse(false)
+          }
         }
-      }
-    } else if (textIndex.value < gameStore.currentScene.text.length - 1) {
-      textIndex.value += 1
-      if (textIndex.value >= gameStore.currentScene.text.length) {
-        bindText(gameStore.currentScene.text)
-      } else {
-        isTyped.value = true
-        currentText.value = gameStore.currentScene.text[textIndex.value]
-      }
-    } else if (textIndex.value == 0 && gameStore.currentScene.text.length == 0) {
-      if (actionStore.options.length == 0) {
-        if (gameStore.currentScene.next != '') {
-          await nextScene(gameStore.currentScene.next)
+      } else if (textIndex.value < gameStore.renpyScene.text.length - 1) {
+        textIndex.value += 1
+        if (textIndex.value >= gameStore.renpyScene.text.length) {
+          bindText(gameStore.renpyScene.text)
         } else {
-          await storyStore.storyFinished(storyStore.currentStory.name)
-          // end
-          gameStore.currentSceneType = 'map'
-          appStore.setSiderCollapse(false)
+          parseText(gameStore.renpyScene.text[textIndex.value])
+        }
+      } else if (textIndex.value == 0 && gameStore.renpyScene.text.length == 0) {
+        if (actionStore.options.length == 0) {
+          if (gameStore.renpyScene.next != '') {
+            await nextScene(gameStore.renpyScene.next)
+          } else {
+            await storyStore.storyFinished(storyStore.currentStory.name)
+            // end
+            gameStore.currentSceneType = 'map'
+            appStore.setSiderCollapse(false)
+          }
         }
       }
     }
@@ -182,12 +198,21 @@ async function executeOption(action: Dto.ActionOption) {
   action.isDisabled = true
   action.loading = true
   await actionStore.executeAction(action)
-  loadOptions(gameStore.currentScene.options, gameStore.currentScene.next)
   action.isDisabled = false
   action.loading = false
   if (actionStore.currentAction.canExecute) {
     gameStore.currentSceneType = action.type
     switch (action.type) {
+      case 'story':
+        // await storyStore.setCurrentStory(action.next ?? 'restart')
+        appStore.setSiderCollapse(true)
+        if (action.next != undefined) {
+          await nextScene(action.next)
+        } else {
+          actionStore.cleanOptions()
+          await nextText()
+        }
+        break
       case 'map':
         mapStore.currMap.isLocked = false
         if (action.next != undefined && action.next != '') {
@@ -200,15 +225,6 @@ async function executeOption(action: Dto.ActionOption) {
       case 'shop':
         itemStore.currentShop = action.next ?? 'default'
         break
-      // case 'story':
-      //   await storyStore.setCurrentStory(action.next ?? 'restart')
-      //   appStore.setSiderCollapse(true)
-      //   if (action.next != undefined && action.next.startsWith('scene')) {
-      //     await nextScene(action.next)
-      //   } else {
-      //     await nextText()
-      //   }
-      //   break
       case 'workbench':
         itemStore.currentShop = action.next ?? 'default'
         break
@@ -218,58 +234,34 @@ async function executeOption(action: Dto.ActionOption) {
     }
   }
 }
-// 加载场景
-async function loadCurrentScene(
-  options,
-  cover: string,
-  next: string | undefined,
-  text: string[],
-  name: string
-) {
-  gameStore.currentScene = {
-    name: name,
-    title: '',
-    text: text,
-    cover: cover,
-    next: next ?? '',
-    options: options ?? undefined
-  }
-  await dynamicCover()
-  loadOptions(gameStore.currentScene.options, next)
-  bindText(gameStore.currentScene.text)
-}
 
 function loadOptions(options: Array<Dto.ActionOption>, next: string | undefined) {
   const infos = actionStore.loadActionOptions(options, next)
-  for (const info of infos) {
-    gameStore.currentScene.text.push(info)
-  }
+  gameStore.renpyScene.text.splice(textIndex.value, 0, ...infos)
 }
-
-watch([() => gameStore.currentScene.text.length], () => {
-  nextText(false)
-})
 
 watch([() => isTyped.value], () => {
   // 自动跳转下一段话
   if (isTyped.value == false) {
     setTimeout(() => {
-      nextText(false)
+      // nextText(false)
     }, 500)
   }
 })
 
 watch(
-  [() => mapStore.currMap],
+  [() => storyStore.currentStory],
   async () => {
-    if (gameStore.currentSceneType == 'map') {
-      await loadCurrentScene(
-        mapStore.currMap.options,
-        mapStore.currMap.cover,
-        mapStore.currMap.next,
-        [mapStore.currMap.text],
-        mapStore.currMap.name
-      )
+    if (gameStore.currentSceneType == 'story' && storyStore.currentStory != undefined) {
+      gameStore.renpyScene = {
+        name: storyStore.currentStory.name,
+        text: storyStore.currentStory.text,
+        cover: storyStore.currentStory.cover,
+        next: 'start',
+        menus: []
+      }
+      await dynamicCover()
+      bindText(storyStore.currentStory.text)
     }
   },
   { immediate: true }

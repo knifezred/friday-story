@@ -2,9 +2,9 @@ export const ReStartStories: Array<Dto.StoryPlot> = [
   {
     name: 'restart',
     type: 'main-line',
+    script: '/static/scripts/restart.rpy',
     cover: '',
-    text: ['周五下班的你在地铁上无聊的刷着手机'],
-    nextScene: 'scene.restart.fainted'
+    text: ['主线任务']
   }
 ]
 
@@ -33,32 +33,54 @@ export const RestartScenes: Array<Dto.GameScene> = [
     next: '',
     options: [
       {
-        name: 'game.option.choose_card1',
-        text: 'game.option.choose1',
-        next: 'scene.choose_id',
+        name: 'game.option.choose_immortal',
+        text: '玄幻修仙',
+        next: 'scene.choose_world',
+        effect: {
+          type: 'all',
+          effects: [
+            {
+              type: 'setFlag',
+              value: 'world.immortal',
+              text: '你选择了修仙世界'
+            }
+          ]
+        },
         type: 'story'
       },
       {
-        name: 'game.option.choose_card2',
-        text: 'game.option.choose2',
-        next: 'scene.choose_id',
-        type: 'story'
+        name: 'game.option.choose_city',
+        text: '都市异能',
+        next: 'scene.choose_world',
+        type: 'story',
+        effect: {
+          type: 'all',
+          effects: [
+            {
+              type: 'setFlag',
+              value: 'world.city',
+              text: '你选择了都市世界'
+            }
+          ]
+        },
+        isDisabled: true
       },
       {
-        name: 'game.option.choose_card3',
-        text: 'game.option.choose3',
-        next: 'scene.choose_id',
-        type: 'story'
+        name: 'game.option.choose_random',
+        text: '武侠',
+        type: 'story',
+        isDisabled: true,
+        effect: { type: 'all', effects: [] }
       }
     ]
   },
   {
-    name: 'scene.choose_id',
+    name: 'scene.choose_world',
     title: 'title',
     cover: '',
     next: 'scene.set_special',
     options: [],
-    text: ['你选择了卡牌']
+    text: ['又是一阵晕眩，你晕了过去']
   },
   {
     name: 'scene.set_special',

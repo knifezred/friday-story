@@ -143,7 +143,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
       ) {
         gameStore.currentSceneType = 'story'
         appStore.setSiderCollapse(true)
-        storyStore.setCurrentStory(appStore.projectSettings.startStory)
+        await storyStore.setCurrentStory(appStore.projectSettings.startStory)
         setTimeout(() => {
           appStore.projectSettings.startStory = ''
         }, 10)
@@ -264,7 +264,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     }
   }
 
-  function addFlag(flag: string, value: string) {
+  function setFlag(flag: string, value: string) {
     const flagValue = hasFlag(flag)
     if (flagValue != undefined) {
       flagValue.value = value
@@ -290,7 +290,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     resetStore,
     hasItem,
     useItem,
-    addFlag,
+    setFlag,
     checkFlag,
     hasFlag,
     findStorageData,

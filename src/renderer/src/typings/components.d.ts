@@ -123,6 +123,7 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     ShopScene: typeof import('./../components/game-window/modules/shop-scene.vue')['default']
     SoybeanAvatar: typeof import('./../components/custom/soybean-avatar.vue')['default']
+    StoryScene: typeof import('./../components/game-window/modules/story-scene.vue')['default']
     SvgIcon: typeof import('./../components/custom/svg-icon.vue')['default']
     SystemLogo: typeof import('./../components/common/system-logo.vue')['default']
     TableColumnSetting: typeof import('./../components/advanced/table-column-setting.vue')['default']

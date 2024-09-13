@@ -14,6 +14,7 @@ import { computed } from 'vue'
 import MainScene from './modules/main-scene.vue'
 import MiniGame from './modules/mini-game.vue'
 import ShopScene from './modules/shop-scene.vue'
+import StoryScene from './modules/story-scene.vue'
 import WorkbenchScene from './modules/workbench-scene.vue'
 
 defineOptions({
@@ -32,7 +33,7 @@ interface SceneModule {
 
 const moduleMap: Record<UnionKey.SceneModule, SceneModule> = {
   map: { label: 'map', component: MainScene },
-  story: { label: 'story', component: MainScene },
+  story: { label: 'story', component: StoryScene },
   shop: { label: 'shop', component: ShopScene },
   'mini-game': { label: 'miniGame', component: MiniGame },
   workbench: { label: 'workbench', component: WorkbenchScene }

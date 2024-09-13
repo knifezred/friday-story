@@ -25,6 +25,13 @@ export const useGameStore = defineStore(SetupStoreId.Game, () => {
     options: [],
     text: []
   })
+  const renpyScene = ref<Dto.RenPyScene>({
+    name: '',
+    cover: '',
+    next: '',
+    text: [],
+    menus: []
+  })
   const currentSceneType = ref<UnionKey.SceneModule>('map')
   const currentMiniGame = ref<UnionKey.MiniGameModule>('finger-guessing')
   const temperature = ref(-18.0)
@@ -102,6 +109,7 @@ export const useGameStore = defineStore(SetupStoreId.Game, () => {
     addMoney,
     addGold,
     coastTime,
+    renpyScene,
     currentScene,
     currentSceneType,
     currentMiniGame,
