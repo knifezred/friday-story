@@ -11,7 +11,8 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
   const currentAction = ref<Dto.ActionOption>({
     name: 'game.option.demo',
     text: 'game.option.demo',
-    type: 'map'
+    type: 'map',
+    line: []
   })
   const options = ref<Array<Dto.ActionOption>>([])
 

@@ -376,12 +376,14 @@ declare namespace Dto {
 
   interface RenPyMenu {
     name: string
+    tabIndex: number
     options: Array<ActionOptionFull>
   }
 
   class ActionOption {
     name: string
     text: string
+    line: string[]
     type: UnionKey.SceneModule
     condition?: ConditionModel[]
     effect?: ActionEffectModel

@@ -1,4 +1,4 @@
-# 游戏在此开始。
+# 禁止menu嵌套，可以jump到其他label再次设置menu
 label start:
     $ scene.cover="/static/imgs/t0.webp"
     "周五下班的你在地铁上无聊的刷着手机"
@@ -58,6 +58,3 @@ label watch_mirror:
             $ option.isDisabled=True
             "暂未开放"
             #block of code to run
-
-label end:
-    # 结束剧情

@@ -105,10 +105,10 @@ const computedButtonLoadingStyle = computed(() => {
   }
 })
 
-function bindText(text: string[]) {
+function bindText(text: string[], index: number = 0) {
   isTyped.value = true
   gameStore.renpyScene.text.length = text.length
-  textIndex.value = 0
+  textIndex.value = index
   if (text.length > textIndex.value) {
     parseText(text[textIndex.value])
   }
@@ -232,12 +232,15 @@ async function executeOption(action: Dto.ActionOption) {
         nextText()
         break
     }
+    gameStore.renpyScene.text.splice(textIndex.value, 0, ...actionStore.currentAction.line)
+    bindText(gameStore.renpyScene.text, textIndex.value)
   }
 }
 
 function loadOptions(options: Array<Dto.ActionOption>, next: string | undefined) {
   const infos = actionStore.loadActionOptions(options, next)
   gameStore.renpyScene.text.splice(textIndex.value, 0, ...infos)
+  bindText(gameStore.renpyScene.text, textIndex.value)
 }
 
 watch([() => isTyped.value], () => {
