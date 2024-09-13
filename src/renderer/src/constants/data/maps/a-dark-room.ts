@@ -166,7 +166,11 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                       }
                     ]
                   }
-                ]
+                ],
+                effect: {
+                  type: 'all',
+                  effects: []
+                }
               },
               {
                 name: 'game.option.repair',
@@ -184,7 +188,11 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                       }
                     ]
                   }
-                ]
+                ],
+                effect: {
+                  type: 'all',
+                  effects: []
+                }
               }
             ]
           }

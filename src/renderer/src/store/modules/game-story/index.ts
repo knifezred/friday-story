@@ -1,5 +1,5 @@
 import { DefaultActions } from '@renderer/constants/data/action'
-import { DefaultScenes, DefaultStories } from '@renderer/constants/data/story'
+import { DefaultStories } from '@renderer/constants/data/story'
 import { SetupStoreId } from '@renderer/enums'
 import { parseRenPyScript } from '@renderer/hooks/game/renpy'
 import { localeText, prefixImage } from '@renderer/utils/common'
@@ -60,13 +60,7 @@ export const useStoryStore = defineStore(SetupStoreId.GameStory, () => {
       item.text = [localizationText]
       item.cover = prefixImage(item.cover, item.name, 'stories', '')
     })
-
-    DefaultScenes.forEach((item) => {
-      const localizationText = localeText(item.text, item.name, 'stories', 'text')
-      item.text = [localizationText]
-      item.title = localeText(item.text, item.name, 'stories', 'title').toString()
-      item.cover = prefixImage(item.cover, item.name, 'stories', '')
-    })
+    // TODO 初始化所有场景，使场景可以跨剧情跳转
   }
 
   async function storyFinished(storyName: string) {

@@ -24,7 +24,7 @@
       </div>
     </Transition>
     <n-card
-      class="bg-op-50"
+      class="opacity-80"
       :class="!appStore.siderCollapse ? 'pos-relative' : 'pos-fixed bottom-0'"
       :style="
         appStore.siderCollapse
@@ -74,7 +74,6 @@ import { useGameStore } from '@renderer/store/modules/game'
 import { useGameActionStore } from '@renderer/store/modules/game-action'
 import { useGameItemStore } from '@renderer/store/modules/game-item'
 import { useMapStore } from '@renderer/store/modules/game-map'
-import { useStoryStore } from '@renderer/store/modules/game-story'
 import { useThemeStore } from '@renderer/store/modules/theme'
 import { dynamicResource } from '@renderer/utils/common'
 import { computed, ref, watch } from 'vue'
@@ -93,7 +92,6 @@ const actionStore = useGameActionStore()
 const gameStore = useGameStore()
 const mapStore = useMapStore()
 const itemStore = useGameItemStore()
-const storyStore = useStoryStore()
 const themeStore = useThemeStore()
 
 const computedButtonLoadingStyle = computed(() => {
@@ -130,48 +128,18 @@ async function dynamicCover() {
   return cover.value
 }
 
-async function nextScene(next: string) {
-  gameStore.currentScene = storyStore.getStoryScene(next)
-  await dynamicCover()
-  bindText(gameStore.currentScene.text)
-  // 绑定按钮
-  loadOptions(gameStore.currentScene.options, gameStore.currentScene.next)
-}
-
-async function nextText(isAutoNext: boolean = true) {
+async function nextText() {
   if (isTyped.value) {
     // 再次点击取消打字机效果
     isTyped.value = false
   } else {
-    if (textIndex.value == gameStore.currentScene.text.length - 1 && isAutoNext) {
-      if (actionStore.options.length == 0) {
-        if (gameStore.currentScene.next != '') {
-          await nextScene(gameStore.currentScene.next)
-        } else {
-          await storyStore.storyFinished(storyStore.currentStory.name)
-          // end
-          gameStore.currentSceneType = 'map'
-          appStore.setSiderCollapse(false)
-        }
-      }
-    } else if (textIndex.value < gameStore.currentScene.text.length - 1) {
+    if (textIndex.value < gameStore.currentScene.text.length - 1) {
       textIndex.value += 1
       if (textIndex.value >= gameStore.currentScene.text.length) {
         bindText(gameStore.currentScene.text)
       } else {
         isTyped.value = true
         currentText.value = gameStore.currentScene.text[textIndex.value]
-      }
-    } else if (textIndex.value == 0 && gameStore.currentScene.text.length == 0) {
-      if (actionStore.options.length == 0) {
-        if (gameStore.currentScene.next != '') {
-          await nextScene(gameStore.currentScene.next)
-        } else {
-          await storyStore.storyFinished(storyStore.currentStory.name)
-          // end
-          gameStore.currentSceneType = 'map'
-          appStore.setSiderCollapse(false)
-        }
       }
     }
   }
@@ -218,26 +186,6 @@ async function executeOption(action: Dto.ActionOption) {
     }
   }
 }
-// 加载场景
-async function loadCurrentScene(
-  options,
-  cover: string,
-  next: string | undefined,
-  text: string[],
-  name: string
-) {
-  gameStore.currentScene = {
-    name: name,
-    title: '',
-    text: text,
-    cover: cover,
-    next: next ?? '',
-    options: options ?? undefined
-  }
-  await dynamicCover()
-  loadOptions(gameStore.currentScene.options, next)
-  bindText(gameStore.currentScene.text)
-}
 
 function loadOptions(options: Array<Dto.ActionOption>, next: string | undefined) {
   const infos = actionStore.loadActionOptions(options, next)
@@ -247,14 +195,14 @@ function loadOptions(options: Array<Dto.ActionOption>, next: string | undefined)
 }
 
 watch([() => gameStore.currentScene.text.length], () => {
-  nextText(false)
+  nextText()
 })
 
 watch([() => isTyped.value], () => {
   // 自动跳转下一段话
   if (isTyped.value == false) {
     setTimeout(() => {
-      nextText(false)
+      nextText()
     }, 500)
   }
 })
@@ -263,13 +211,17 @@ watch(
   [() => mapStore.currMap],
   async () => {
     if (gameStore.currentSceneType == 'map') {
-      await loadCurrentScene(
-        mapStore.currMap.options,
-        mapStore.currMap.cover,
-        mapStore.currMap.next,
-        [mapStore.currMap.text],
-        mapStore.currMap.name
-      )
+      gameStore.currentScene = {
+        name: mapStore.currMap.name,
+        title: '',
+        text: [mapStore.currMap.text],
+        cover: mapStore.currMap.cover,
+        next: mapStore.currMap.next ?? '',
+        options: mapStore.currMap.options ?? []
+      }
+      await dynamicCover()
+      loadOptions(gameStore.currentScene.options, mapStore.currMap.next)
+      bindText(gameStore.currentScene.text)
     }
   },
   { immediate: true }

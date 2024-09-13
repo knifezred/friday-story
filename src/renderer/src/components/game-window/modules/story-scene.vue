@@ -24,7 +24,7 @@
       </div>
     </Transition>
     <n-card
-      class="bg-op-50"
+      class="opacity-80"
       :class="!appStore.siderCollapse ? 'pos-relative' : 'pos-fixed bottom-0'"
       :style="
         appStore.siderCollapse

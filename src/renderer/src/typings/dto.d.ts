@@ -376,7 +376,7 @@ declare namespace Dto {
 
   interface RenPyMenu {
     name: string
-    options: Array<ActionOption>
+    options: Array<ActionOptionFull>
   }
 
   class ActionOption {
@@ -384,7 +384,7 @@ declare namespace Dto {
     text: string
     type: UnionKey.SceneModule
     condition?: ConditionModel[]
-    effect: ActionEffectModel
+    effect?: ActionEffectModel
     next?: string | undefined
     miniGame?: UnionKey.MiniGameModule | undefined
     icon?: string | undefined
@@ -395,6 +395,10 @@ declare namespace Dto {
     loading?: boolean
     duration?: number
     canExecute?: boolean
+  }
+
+  interface ActionOptionFull extends ActionOption {
+    effect: ActionEffectModel
   }
 
   type ConditionType = 'and' | 'or'
