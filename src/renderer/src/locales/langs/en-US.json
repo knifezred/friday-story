@@ -452,7 +452,7 @@
       }
     },
     "archive": {
-      "playTime": "playtime",
+      "playTime": "Playing time",
       "saveTime": "Save time"
     },
     "home": {

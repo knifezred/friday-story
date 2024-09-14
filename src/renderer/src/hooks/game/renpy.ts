@@ -2,8 +2,6 @@
 // 1. 禁止menu嵌套，可以jump到其他label再次设置menu
 
 const sceneOptionRegex = /\$ scene\.(.*?)="(.*?)"/
-const dialogueRegex = /(.*?) "(.*)"/
-const textRegex = /"(.*?)"/
 const optionRegex = /"(.*?)":/
 const optionAttrRegex = /\$ option\.(.*?)="(.*?)"/
 const effectRegex = /\$ effect\.(.*?)\("(.*?)"\)(.*?)?/
@@ -108,25 +106,8 @@ export async function parseRenPyScript(script: string): Promise<Array<Dto.RenPyS
         }
         break
       default:
-        if (trimmedLine.endsWith('"') && trimmedLine.includes(' "')) {
-          const match = trimmedLine.match(dialogueRegex)
-          if (match) {
-            // TODO match[1] 替换姓名
-            scene.text.push(`${match[1]}: ${match[2]}`)
-          }
-        } else if (trimmedLine.startsWith('"') && trimmedLine.endsWith('"')) {
-          const match = trimmedLine.match(textRegex)
-          if (match) {
-            if (inOptionLine(currentTab, optionTab)) {
-              const currentOption = getMenuOption(currentMenu, currentMenuOption, menus)
-              if (currentOption) {
-                currentOption.line.push(match[1])
-              }
-            } else {
-              scene.text.push(match[1])
-            }
-          }
-        } else if (trimmedLine.startsWith('"') && trimmedLine.endsWith(':')) {
+        if (trimmedLine.startsWith('"') && trimmedLine.endsWith(':')) {
+          // 菜单选项
           const match = trimmedLine.match(optionRegex)
           if (match) {
             const menu = getMenu(currentMenu, menus)
@@ -142,6 +123,15 @@ export async function parseRenPyScript(script: string): Promise<Array<Dto.RenPyS
               optionTab = currentTab
               menu.options.push(option)
             }
+          }
+        } else if (trimmedLine.length > 0) {
+          if (inOptionLine(currentTab, optionTab)) {
+            const currentOption = getMenuOption(currentMenu, currentMenuOption, menus)
+            if (currentOption) {
+              currentOption.line.push(trimmedLine)
+            }
+          } else {
+            scene.text.push(trimmedLine)
           }
         }
         break
@@ -193,4 +183,31 @@ export function parseRenPyDefine(script: string) {
       }
     }
   })
+}
+
+const dialogueRegex = /"(.*?)" "(.*)"/ // 匹配形如 "speaker" "text" 的字符串
+const dialogueOrTextRegex = /(.*?) "(.*)"/ // 匹配形如 anything "text" 的字符串，用于处理没有明确说话者的情况
+const textOnlyRegex = /"(.*?)"/ // 仅匹配被双引号包裹的文本
+export function say(trimmedLine: string) {
+  let match = trimmedLine.match(dialogueRegex) || trimmedLine.match(dialogueOrTextRegex)
+  if (match) {
+    // TODO Speaker姓名替换
+    return {
+      speaker: match[1],
+      text: match[2]
+    }
+  }
+  // 如果没有匹配到包含说话者的对话，尝试匹配仅包含文本的对话或文本
+  match = trimmedLine.match(textOnlyRegex)
+  if (match) {
+    return {
+      speaker: '',
+      text: match[1]
+    }
+  }
+  // 如果没有任何匹配，返回空对象
+  return {
+    speaker: '',
+    text: trimmedLine
+  }
 }

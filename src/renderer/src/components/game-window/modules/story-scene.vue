@@ -34,8 +34,9 @@
             'static/frame/textbox.png);'
       "
       style="border: 0; border-radius: 0; background-repeat: round">
+      <n-h2 class="color-primary text-3xl">{{ speaker }}</n-h2>
       <n-scrollbar class="h-20vh" :distance="10" @click="nextText(true)">
-        <n-p class="text-xl color-success">
+        <n-p class="text-xl color-success indent-8">
           <TypedText
             v-model:value="isTyped"
             :speed="appStore.projectSettings.textSpeed"
@@ -67,6 +68,7 @@
 </template>
 
 <script setup lang="ts">
+import { say } from '@renderer/hooks/game/renpy'
 import { $t } from '@renderer/locales'
 import { projectSetting } from '@renderer/settings/projectSetting'
 import { useAppStore } from '@renderer/store/modules/app'
@@ -84,6 +86,7 @@ defineOptions({
 })
 
 const textIndex = ref(0)
+const speaker = ref('')
 const isVideo = ref(false)
 const isTyped = ref(false)
 const currentText = ref('')
@@ -126,7 +129,9 @@ function parseText(text: string) {
     )
   } else {
     isTyped.value = true
-    currentText.value = text
+    const sayObj = say(text)
+    speaker.value = sayObj.speaker
+    currentText.value = sayObj.text
   }
 }
 
@@ -251,7 +256,7 @@ watch([() => isTyped.value], () => {
   // 自动跳转下一段话
   if (isTyped.value == false) {
     setTimeout(() => {
-      nextText()
+      nextText(false)
     }, 1000)
   }
 })
