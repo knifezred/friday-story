@@ -3,6 +3,8 @@ export const projectSetting: App.Global.ProjectSetting = {
   textSpeed: 50,
   volume: 30,
   music: '/static/music/default.mp3',
+  sound: '',
+  voice: '',
   defaultPlace: 'room.darkHouse.begin',
   startStory: 'restart',
   localhost: 'http://localhost:5175/',

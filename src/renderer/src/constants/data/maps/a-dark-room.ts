@@ -53,7 +53,8 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                       success: 'game.message.findMap'
                     }
                   ]
-                }
+                },
+                line: []
               },
               {
                 name: 'game.option.addWood',
@@ -96,7 +97,8 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                       success: ''
                     }
                   ]
-                }
+                },
+                line: []
               }
             ]
           },
@@ -147,7 +149,8 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                       success: '工作台已解锁'
                     }
                   ]
-                }
+                },
+                line: []
               },
               {
                 name: 'game.option.make',
@@ -170,7 +173,8 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                 effect: {
                   type: 'all',
                   effects: []
-                }
+                },
+                line: []
               },
               {
                 name: 'game.option.repair',
@@ -192,7 +196,8 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                 effect: {
                   type: 'all',
                   effects: []
-                }
+                },
+                line: []
               }
             ]
           }
@@ -216,7 +221,8 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                   notification: true
                 }
               ]
-            }
+            },
+            line: []
           },
           {
             name: 'game.option.catchFish',
@@ -232,7 +238,8 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                   notification: true
                 }
               ]
-            }
+            },
+            line: []
           }
         ]
       }
