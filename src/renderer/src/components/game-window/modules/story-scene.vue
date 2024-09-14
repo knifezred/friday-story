@@ -121,7 +121,7 @@ function parseText(text: string) {
     nextText()
   } else if (text.startsWith('menu=')) {
     loadOptions(
-      storyStore.getSceneOptions(gameStore.renpyScene.name, text.replace('menu=', '')),
+      storyStore.getSceneOptions(gameStore.renpyScene.name, text.substring(5)),
       gameStore.renpyScene.next
     )
   } else {
@@ -150,10 +150,10 @@ async function nextScene(next: string) {
   gameStore.renpyScene = storyStore.getStoryScene(next)
   actionStore.cleanOptions()
   await dynamicCover()
-  bindText(gameStore.renpyScene.text)
+  bindText(gameStore.renpyScene.text, 0)
 }
 
-async function nextText(isAutoNext: boolean = true) {
+async function nextText(isAutoNext: boolean = false) {
   if (isTyped.value) {
     // 再次点击取消打字机效果
     isTyped.value = false
@@ -232,23 +232,27 @@ async function executeOption(action: Dto.ActionOption) {
         nextText()
         break
     }
-    gameStore.renpyScene.text.splice(textIndex.value, 0, ...actionStore.currentAction.line)
-    bindText(gameStore.renpyScene.text, textIndex.value)
+    if (actionStore.currentAction.line.length > 0) {
+      gameStore.renpyScene.text.splice(textIndex.value, 0, ...actionStore.currentAction.line)
+      bindText(gameStore.renpyScene.text, textIndex.value)
+    }
   }
 }
 
 function loadOptions(options: Array<Dto.ActionOption>, next: string | undefined) {
   const infos = actionStore.loadActionOptions(options, next)
-  gameStore.renpyScene.text.splice(textIndex.value, 0, ...infos)
-  bindText(gameStore.renpyScene.text, textIndex.value)
+  if (infos.length > 0) {
+    gameStore.renpyScene.text.splice(textIndex.value, 0, ...infos)
+    bindText(gameStore.renpyScene.text, textIndex.value)
+  }
 }
 
 watch([() => isTyped.value], () => {
   // 自动跳转下一段话
   if (isTyped.value == false) {
     setTimeout(() => {
-      // nextText(false)
-    }, 500)
+      nextText()
+    }, 1000)
   }
 })
 

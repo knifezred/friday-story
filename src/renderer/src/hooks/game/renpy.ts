@@ -1,14 +1,15 @@
-const labelRegex = /label (\w+):/
-const sceneRegex = /scene "(.*)"/
+// RULES
+// 1. 禁止menu嵌套，可以jump到其他label再次设置menu
+
 const sceneOptionRegex = /\$ scene\.(.*?)="(.*?)"/
-const jumpRegex = /jump (.*)/
 const dialogueRegex = /(.*?) "(.*)"/
 const textRegex = /"(.*?)"/
-const menuRegex = /menu (.*):/
 const optionRegex = /"(.*?)":/
 const optionAttrRegex = /\$ option\.(.*?)="(.*?)"/
 const effectRegex = /\$ effect\.(.*?)\("(.*?)"\)(.*?)?/
 const tabSize = 4
+
+// 按行解析Renpy脚本
 export async function parseRenPyScript(script: string): Promise<Array<Dto.RenPyScene>> {
   const fileContent = await window.api.readFile(script)
   const lines = fileContent.split('\n')
@@ -28,118 +29,129 @@ export async function parseRenPyScript(script: string): Promise<Array<Dto.RenPyS
   lines.forEach((line) => {
     const trimmedLine = line.trim()
     currentTab = line.length - line.trimStart().length
-    if (trimmedLine.startsWith('label ')) {
-      const match = trimmedLine.match(labelRegex)
-      if (match) {
+    const startText = trimmedLine.split(' ')[0]
+    switch (startText) {
+      case '#':
+        // 注释行，不做处理
+        break
+      case 'label':
         if (scene.name) {
           scene.menus = menus
           parsedData.push(scene)
           menus = []
         }
-        scene = { name: match[1], text: [], next: '', menus: [], cover: '' }
-      }
-    } else if (trimmedLine.startsWith('scene ')) {
-      const match = trimmedLine.match(sceneRegex)
-      if (match) {
-        scene.text.push('cover=' + match[1])
-      }
-    } else if (trimmedLine.startsWith('$ scene.') && trimmedLine.includes('=')) {
-      const match = trimmedLine.match(sceneOptionRegex)
-      if (match) {
-        scene[match[1]] = match[2]
-      }
-    } else if (trimmedLine.startsWith('jump ')) {
-      const match = trimmedLine.match(jumpRegex)
-      if (match) {
+        scene = { name: trimmedLine.slice(6, -1), text: [], next: '', menus: [], cover: '' }
+        break
+      case 'scene':
+        // 更换背景
+        scene.text.push('cover=' + trimmedLine.slice(7, -1))
+        break
+      case 'show':
+        // 显示角色图像
+        scene.text.push('npc=' + trimmedLine.substring(5))
+        break
+      case 'jump':
         if (inOptionLine(currentTab, optionTab)) {
           const option = getMenuOption(currentMenu, currentMenuOption, menus)
           if (option) {
-            option.next = match[1]
+            option.next = trimmedLine.substring(5)
           } else {
             console.warn(
               `Menu or option not found for setting 'next': ${currentMenu}, ${currentMenuOption}`
             )
           }
         } else {
-          scene.next = match[1]
+          scene.next = trimmedLine.substring(5)
         }
-      }
-    } else if (trimmedLine.endsWith('"') && trimmedLine.includes(' "')) {
-      const match = trimmedLine.match(dialogueRegex)
-      if (match) {
-        // todo match[1] 替换姓名
-        scene.text.push(`${match[1]}: ${match[2]}`)
-      }
-    } else if (trimmedLine.startsWith('"') && trimmedLine.endsWith('"')) {
-      const match = trimmedLine.match(textRegex)
-      if (match) {
-        if (inOptionLine(currentTab, optionTab)) {
-          const currentOption = getMenuOption(currentMenu, currentMenuOption, menus)
-          if (currentOption) {
-            currentOption.line.push(match[1])
-          }
-        } else {
-          scene.text.push(match[1])
-        }
-      }
-    } else if (trimmedLine.startsWith('menu ')) {
-      const match = trimmedLine.match(menuRegex)
-      if (match) {
-        currentMenu = match[1]
-        const menu = { name: currentMenu, tabIndex: currentTab, options: [] }
-        menus.push(menu)
+        break
+      case 'menu':
+        currentMenu = trimmedLine.slice(5, -1)
+        menus.push({ name: currentMenu, tabIndex: currentTab, options: [] })
         scene.text.push('menu=' + currentMenu)
-      }
-    } else if (trimmedLine.startsWith('"') && trimmedLine.endsWith(':')) {
-      const match = trimmedLine.match(optionRegex)
-      if (match) {
-        const menu = getMenu(currentMenu, menus)
-        if (menu) {
-          const option = {
-            name: `${currentMenu}_${menu.options.length}`,
-            text: match[1],
-            line: [],
-            type: 'story',
-            effect: { type: 'all', effects: [] }
-          } as Dto.ActionOptionFull
-          currentMenuOption = option.name
-          optionTab = currentTab
-          menu.options.push(option)
-        }
-      }
-    } else if (trimmedLine.startsWith('$ option.') && trimmedLine.includes('=')) {
-      const match = trimmedLine.match(optionAttrRegex)
-      if (match) {
-        const option = getMenuOption(currentMenu, currentMenuOption, menus)
-        if (option) {
-          option[match[1]] = match[2]
-          if (match[3]) {
-            // TODO 设置其他属性
+        break
+      case '$':
+        // 自定义方法，非renpy自带，暂不支持python脚本
+        // $ scene.cover=""
+        if (trimmedLine.startsWith('$ scene.')) {
+          const match = trimmedLine.match(sceneOptionRegex)
+          if (match) {
+            scene[match[1]] = match[2]
           }
         }
-      }
-    } else if (trimmedLine == '$ effect.single') {
-      const option = getMenuOption(currentMenu, currentMenuOption, menus)
-      if (option) {
-        option.effect.type = 'single'
-      }
-    } else if (trimmedLine.startsWith('$ effect.')) {
-      const match = trimmedLine.match(effectRegex)
-      if (match && menus.length > 0) {
-        const effect = { type: match[1], value: match[2] }
-        const option = getMenuOption(currentMenu, currentMenuOption, menus)
-        if (option) {
-          option.effect.effects.push(effect)
+        // $ option.isDisabled="True"
+        else if (trimmedLine.startsWith('$ option.')) {
+          const match = trimmedLine.match(optionAttrRegex)
+          if (match) {
+            const option = getMenuOption(currentMenu, currentMenuOption, menus)
+            if (option) {
+              option[match[1]] = match[2]
+            }
+          }
         }
-      }
+        // $ effect.addFlag("test,1")
+        else if (trimmedLine.startsWith('$ effect.')) {
+          const option = getMenuOption(currentMenu, currentMenuOption, menus)
+          if (option) {
+            if (trimmedLine == '$ effect.single') {
+              option.effect.type = 'single'
+            } else {
+              const match = trimmedLine.match(effectRegex)
+              if (match) {
+                const effect = { type: match[1], value: match[2] }
+                if (match[3]) {
+                  // TODO 设置其他属性
+                }
+                option.effect.effects.push(effect)
+              }
+            }
+          }
+        }
+        break
+      default:
+        if (trimmedLine.endsWith('"') && trimmedLine.includes(' "')) {
+          const match = trimmedLine.match(dialogueRegex)
+          if (match) {
+            // TODO match[1] 替换姓名
+            scene.text.push(`${match[1]}: ${match[2]}`)
+          }
+        } else if (trimmedLine.startsWith('"') && trimmedLine.endsWith('"')) {
+          const match = trimmedLine.match(textRegex)
+          if (match) {
+            if (inOptionLine(currentTab, optionTab)) {
+              const currentOption = getMenuOption(currentMenu, currentMenuOption, menus)
+              if (currentOption) {
+                currentOption.line.push(match[1])
+              }
+            } else {
+              scene.text.push(match[1])
+            }
+          }
+        } else if (trimmedLine.startsWith('"') && trimmedLine.endsWith(':')) {
+          const match = trimmedLine.match(optionRegex)
+          if (match) {
+            const menu = getMenu(currentMenu, menus)
+            if (menu) {
+              const option = {
+                name: `${currentMenu}_${menu.options.length}`,
+                text: match[1],
+                line: [],
+                type: 'story',
+                effect: { type: 'all', effects: [] }
+              } as Dto.ActionOptionFull
+              currentMenuOption = option.name
+              optionTab = currentTab
+              menu.options.push(option)
+            }
+          }
+        }
+        break
     }
   })
-
+  // 添加最后一个label
   if (scene.name) {
     scene.menus = menus
     parsedData.push(scene)
   }
-
   return parsedData
 }
 

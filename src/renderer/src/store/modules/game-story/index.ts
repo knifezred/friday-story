@@ -34,7 +34,7 @@ export const useStoryStore = defineStore(SetupStoreId.GameStory, () => {
   function getSceneOptions(sceneName: string, menuName: string) {
     return currentStoryScenes.value
       .filter((x) => x.name == sceneName)[0]
-      .menus.filter((x) => x.name == menuName.replace('menu ', ''))[0].options
+      .menus.filter((x) => x.name == menuName)[0].options
   }
 
   async function setCurrentStory(name: string) {
