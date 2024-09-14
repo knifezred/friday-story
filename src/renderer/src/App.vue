@@ -9,10 +9,18 @@
       <RouterView class="bg-layout"></RouterView>
 
       <audio
-        :src="staticPath(appStore.projectSettings.bgMusic)"
+        :src="staticPath(appStore.projectSettings.music)"
         :volume="appStore.projectSettings.volume / 100"
         autoplay
         loop></audio>
+      <audio
+        :src="staticPath(appStore.projectSettings.sound)"
+        :volume="appStore.projectSettings.volume / 100"
+        autoplay></audio>
+      <audio
+        :src="staticPath(appStore.projectSettings.voice)"
+        :volume="appStore.projectSettings.volume / 100"
+        autoplay></audio>
     </AppProvider>
   </NConfigProvider>
 </template>

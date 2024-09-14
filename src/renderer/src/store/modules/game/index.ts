@@ -65,8 +65,15 @@ export const useGameStore = defineStore(SetupStoreId.Game, () => {
     authStore.archivedData.worldTime += minutes * 60 * 1000
   }
 
-  function changeMusic(src: string) {
-    appStore.projectSettings.bgMusic = src
+  function playMusic(src: string) {
+    appStore.projectSettings.music = src
+  }
+
+  function playVoice(src: string) {
+    appStore.projectSettings.voice = src
+  }
+  function playSound(src: string) {
+    appStore.projectSettings.sound = src
   }
 
   function countOptionExecute(name: string) {
@@ -113,7 +120,9 @@ export const useGameStore = defineStore(SetupStoreId.Game, () => {
     currentScene,
     currentSceneType,
     currentMiniGame,
-    changeMusic,
+    playMusic,
+    playSound,
+    playVoice,
     temperature,
     langParams,
     countOptionExecute,

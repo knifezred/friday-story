@@ -106,7 +106,9 @@ declare namespace App {
       isAuth: boolean
       textSpeed: number
       volume: number
-      bgMusic: string
+      music: string
+      sound: string
+      voice: string
       loginBg: string
       defaultPlace: string
       startStory: string
