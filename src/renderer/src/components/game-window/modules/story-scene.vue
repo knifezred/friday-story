@@ -1,26 +1,33 @@
 <template>
   <NFlex vertical :size="0">
     <Transition :name="projectSetting.sceneTransition" mode="out-in" appear>
-      <video
-        v-if="isVideo"
-        :key="'v' + cover"
-        :src="appStore.projectSettings.localhost + cover"
-        autoplay
-        loop
-        class="h-56.25%"></video>
-      <div
-        v-else
-        :key="cover"
-        :style="
-          'background-image: url(' +
-          appStore.projectSettings.localhost +
-          cover +
-          ');padding-top: 56.25%;'
-        "
-        class="bg-no-repeat bg-cover">
-        <!-- <p class="pt-12 pl-24 absolute-lt text-error">
-        {{ cover }}
-      </p> -->
+      <div>
+        <video
+          v-if="isVideo"
+          :key="'v' + cover"
+          :src="appStore.projectSettings.localhost + cover"
+          autoplay
+          loop
+          class="h-56.25%"></video>
+        <div
+          v-else
+          :key="cover"
+          :style="
+            'background-image: url(' +
+            appStore.projectSettings.localhost +
+            cover +
+            ');padding-top: 56.25%;'
+          "
+          class="bg-no-repeat bg-cover"></div>
+        <p class="pt-12 pl-24 absolute-lt text-error">
+          {{ cover }}
+        </p>
+        <img
+          v-if="showNpc"
+          :src="appStore.projectSettings.localhost + showNpc"
+          :class="showClass"
+          class="absolute-center h-50% w-auto top-38.75% left-50%"
+          style="transform: translate(-50%, -50%)" />
       </div>
     </Transition>
     <n-card
@@ -68,7 +75,7 @@
 </template>
 
 <script setup lang="ts">
-import { say } from '@renderer/hooks/game/renpy'
+import { say, showImage } from '@renderer/hooks/game/renpy'
 import { $t } from '@renderer/locales'
 import { projectSetting } from '@renderer/settings/projectSetting'
 import { useAppStore } from '@renderer/store/modules/app'
@@ -91,6 +98,8 @@ const isVideo = ref(false)
 const isTyped = ref(false)
 const currentText = ref('')
 const cover = ref<string>('')
+const showNpc = ref<string>('')
+const showClass = ref<string>('')
 const appStore = useAppStore()
 const actionStore = useGameActionStore()
 const gameStore = useGameStore()
@@ -120,6 +129,7 @@ function bindText(text: string[], index: number = 0) {
 function parseText(text: string) {
   if (text.startsWith('cover=')) {
     gameStore.renpyScene.cover = text.replace('cover=', '')
+    showNpc.value = ''
     dynamicCover()
     nextText()
   } else if (text.startsWith('menu=')) {
@@ -127,6 +137,14 @@ function parseText(text: string) {
       storyStore.getSceneOptions(gameStore.renpyScene.name, text.substring(5)),
       gameStore.renpyScene.next
     )
+  } else if (text.startsWith('show=')) {
+    const imgObj = showImage(text)
+    showNpc.value = imgObj.src
+    showClass.value = imgObj.class
+    nextText()
+  } else if (text.startsWith('hide=')) {
+    showNpc.value = ''
+    nextText()
   } else {
     isTyped.value = true
     const sayObj = say(text)
@@ -252,14 +270,14 @@ function loadOptions(options: Array<Dto.ActionOption>, next: string | undefined)
   }
 }
 
-watch([() => isTyped.value], () => {
-  // 自动跳转下一段话
-  if (isTyped.value == false) {
-    setTimeout(() => {
-      nextText(false)
-    }, 1000)
-  }
-})
+// 自动跳转下一段话
+// watch([() => isTyped.value], () => {
+//   if (isTyped.value == false) {
+//     setTimeout(() => {
+//       nextText(false)
+//     }, 1000)
+//   }
+// })
 
 watch(
   [() => storyStore.currentStory],

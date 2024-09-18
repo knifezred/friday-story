@@ -3,10 +3,12 @@ label start:
     $ scene.cover="/static/imgs/t0.webp"
     "周五下班的你在地铁上无聊的刷着手机"
     scene "/static/imgs/t1.webp"
+    show sister normal at left
     "突然一真晕眩，你两眼漆黑倒在了地上"
     "未知" "又一个..."
     "不知道过了多久，你再次醒来"
     scene "/static/imgs/t2.webp"
+    hide sister normal
     "缓过神来的你发现，地上散落着几张卡牌"
     menu optional_select_world:
         "玄幻修仙":
@@ -17,7 +19,7 @@ label start:
             $ effect.setFlag("world.type,city")
             "你选择了都市世界"
 
-    show sister happy
+
     sister "hello world"
     jump dark_room
 

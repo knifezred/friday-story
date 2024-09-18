@@ -46,7 +46,11 @@ export async function parseRenPyScript(script: string): Promise<Array<Dto.RenPyS
         break
       case 'show':
         // 显示角色图像
-        scene.text.push('npc=' + trimmedLine.substring(5))
+        scene.text.push('show=' + trimmedLine.substring(5))
+        break
+      case 'hide':
+        // 显示角色图像
+        scene.text.push('hide=' + trimmedLine.substring(5))
         break
       case 'jump':
         if (inOptionLine(currentTab, optionTab)) {
@@ -188,6 +192,7 @@ export function parseRenPyDefine(script: string) {
 const dialogueRegex = /"(.*?)" "(.*)"/ // 匹配形如 "speaker" "text" 的字符串
 const dialogueOrTextRegex = /(.*?) "(.*)"/ // 匹配形如 anything "text" 的字符串，用于处理没有明确说话者的情况
 const textOnlyRegex = /"(.*?)"/ // 仅匹配被双引号包裹的文本
+
 export function say(trimmedLine: string) {
   let match = trimmedLine.match(dialogueRegex) || trimmedLine.match(dialogueOrTextRegex)
   if (match) {
@@ -210,4 +215,28 @@ export function say(trimmedLine: string) {
     speaker: '',
     text: trimmedLine
   }
+}
+
+export function showImage(trimmedLine: string) {
+  const result = {
+    src: '',
+    class: ''
+  }
+  if (trimmedLine.includes('at')) {
+    const arr = trimmedLine.split('at')
+    result.src = arr[0].substring(5).trim()
+    result.class = arr[1].trim()
+  }
+  if (trimmedLine.includes('with')) {
+    const arr = trimmedLine.split('with')
+    result.src = arr[0].substring(5).trim()
+    result.class = arr[1].trim()
+  }
+  if (result.src == '') {
+    result.src = trimmedLine.substring(5).trim()
+  }
+  if (!result.src.includes('.')) {
+    result.src = 'static/images/' + result.src + '.png'
+  }
+  return result
 }
