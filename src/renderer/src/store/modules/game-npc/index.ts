@@ -6,8 +6,10 @@ import { ref } from 'vue'
 
 export const useNpcStore = defineStore(SetupStoreId.GameNpc, () => {
   const allNPCs = ref<Array<Dto.NpcFull>>([])
+  const defineText = ref<string>('')
 
-  function initNpc() {
+  async function initNpc() {
+    defineText.value = await window.api.readFile('/static/scripts/define.rpy')
     allNPCs.value = []
     DefaultNpcInfoList.forEach((npc) => {
       const npcType = (npc.gender == '1' ? 'male.' : 'female.') + npc.name
@@ -23,6 +25,5 @@ export const useNpcStore = defineStore(SetupStoreId.GameNpc, () => {
     })
   }
 
-  initNpc()
-  return { allNPCs, initNpc }
+  return { allNPCs, defineText, initNpc }
 })

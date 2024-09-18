@@ -38,7 +38,7 @@
         'static/frame/textbox.png);'
       "
       style="border: 0; border-radius: 0; background-repeat: round">
-      <n-h2 class="color-primary text-3xl">{{ speaker }}</n-h2>
+      <n-h2 class="color-primary text-3xl">{{ $t(speaker) }}</n-h2>
       <n-scrollbar class="h-20vh" :distance="10" @click="nextText(true)">
         <n-p class="text-xl color-success indent-8">
           <TypedText

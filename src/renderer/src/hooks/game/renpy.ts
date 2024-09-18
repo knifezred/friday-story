@@ -1,6 +1,9 @@
 // RULES
 // 1. 禁止menu嵌套，可以jump到其他label再次设置menu
 
+import { useAuthStore } from '@renderer/store/modules/auth'
+import { useNpcStore } from '@renderer/store/modules/game-npc'
+
 const sceneOptionRegex = /\$ scene\.(.*?)="(.*?)"/
 const optionRegex = /"(.*?)":/
 const optionAttrRegex = /\$ option\.(.*?)="(.*?)"/
@@ -168,25 +171,66 @@ function inOptionLine(currentTab: number, optionTab: number) {
   return optionTab > 0 && currentTab == optionTab + tabSize
 }
 
-export function parseRenPyDefine(script: string) {
-  const lines = script.split('\n')
+const characterRegex = /define (\w+) = Character\("(.*?)"\)/
+// 解析renpy定义
+export async function parseRenPyDefine(script: string) {
+  const fileContent = await window.api.readFile(script)
+  const lines = fileContent.split('\n')
   const parsedData: any = []
+  const authStore = useAuthStore()
   lines.forEach((line: string) => {
-    // 去除行首行尾的空白字符
     const trimmedLine = line.trim()
-    // 检查是否是角色定义行
-    if (trimmedLine.startsWith('define ')) {
-      const defineMatch = trimmedLine.match(/define (\w+) = Character\(.*?\)/)
-      if (defineMatch) {
-        parsedData.push({
-          type: 'character',
-          name: defineMatch[1],
-          // 这里可以进一步解析Character中的参数
-          content: defineMatch[0]
-        })
-      }
+    const startText = trimmedLine.split(' ')[0]
+    switch (startText) {
+      case 'define':
+        if (trimmedLine.includes('Character')) {
+          const match = trimmedLine.match(characterRegex)
+          if (match) {
+            if (match[2] == 'userName') {
+              parsedData.push({
+                userId: match[1],
+                userName: authStore.userInfo.userName
+              })
+            } else {
+              parsedData.push({
+                userId: match[1],
+                userName: match[2]
+              })
+            }
+          }
+        }
+        break
+      default:
+        break
     }
   })
+}
+
+export function getCharacterName(name: string) {
+  const npcStore = useNpcStore()
+  debugger
+  const fileContent = npcStore.defineText
+  const lines = fileContent.split('\n')
+  let userName = ''
+  lines.forEach((line: string) => {
+    const trimmedLine = line.trim()
+    const startText = trimmedLine.split(' ')[0]
+    switch (startText) {
+      case 'define':
+        if (trimmedLine.includes(name)) {
+          const match = trimmedLine.match(characterRegex)
+          if (match) {
+            if (match[1] == name) {
+              userName = match[2]
+            }
+          }
+        }
+        break
+      default:
+        break
+    }
+  })
+  return userName
 }
 
 const dialogueRegex = /"(.*?)" "(.*)"/ // 匹配形如 "speaker" "text" 的字符串
@@ -198,7 +242,7 @@ export function say(trimmedLine: string) {
   if (match) {
     // TODO Speaker姓名替换
     return {
-      speaker: match[1],
+      speaker: getCharacterName(match[1]),
       text: match[2]
     }
   }

@@ -5,7 +5,7 @@ label start:
     scene "/static/imgs/t1.webp"
     "突然一真晕眩，你两眼漆黑倒在了地上"
     show sister normal at left
-    "未知" "又一个..."
+    anon "又一个..."
     "不知道过了多久，你再次醒来"
     scene "/static/imgs/t2.webp"
     hide sister normal
