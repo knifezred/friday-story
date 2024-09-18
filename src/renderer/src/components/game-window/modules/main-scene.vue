@@ -17,11 +17,7 @@
           cover +
           ');padding-top: 56.25%;'
         "
-        class="bg-no-repeat bg-cover">
-        <!-- <p class="pt-12 pl-24 absolute-lt text-error">
-        {{ cover }}
-      </p> -->
-      </div>
+        class="bg-no-repeat bg-cover"></div>
     </Transition>
     <n-card
       class="opacity-80"

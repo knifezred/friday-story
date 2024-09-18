@@ -81,7 +81,6 @@ import { useGameActionStore } from '@renderer/store/modules/game-action'
 import { useGameItemStore } from '@renderer/store/modules/game-item'
 import { useMapStore } from '@renderer/store/modules/game-map'
 import { useStoryStore } from '@renderer/store/modules/game-story'
-import { useThemeStore } from '@renderer/store/modules/theme'
 import { dynamicResource } from '@renderer/utils/common'
 import { computed, ref, watch } from 'vue'
 
@@ -103,7 +102,6 @@ const gameStore = useGameStore()
 const mapStore = useMapStore()
 const itemStore = useGameItemStore()
 const storyStore = useStoryStore()
-const themeStore = useThemeStore()
 
 const computedButtonLoadingStyle = computed(() => {
   return {

@@ -3,8 +3,8 @@ label start:
     $ scene.cover="/static/imgs/t0.webp"
     "周五下班的你在地铁上无聊的刷着手机"
     scene "/static/imgs/t1.webp"
-    show sister normal at left
     "突然一真晕眩，你两眼漆黑倒在了地上"
+    show sister normal at left
     "未知" "又一个..."
     "不知道过了多久，你再次醒来"
     scene "/static/imgs/t2.webp"
