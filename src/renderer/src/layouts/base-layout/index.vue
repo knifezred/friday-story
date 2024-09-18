@@ -99,7 +99,7 @@ function getSiderCollapsedWidth() {
     :tab-visible="themeStore.tab.visible"
     :tab-height="themeStore.tab.height"
     :content-class="appStore.contentXScrollable ? 'overflow-x-hidden' : ''"
-    :sider-visible="siderVisible"
+    :sider-visible="siderVisible && !appStore.siderHidden"
     :sider-width="siderWidth"
     :sider-collapsed-width="siderCollapsedWidth"
     :footer-visible="themeStore.footer.visible"

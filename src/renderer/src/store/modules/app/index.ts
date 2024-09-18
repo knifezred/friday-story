@@ -40,6 +40,7 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
     setBool: setMixSiderFixed,
     toggle: toggleMixSiderFixed
   } = useBoolean(true)
+  const { bool: siderHidden, setBool: setSiderHidden, toggle: toggleSiderHidden } = useBoolean()
   // localStg.get('mixSiderFixed') === 'Y'
 
   /** Is mobile layout */
@@ -185,6 +186,9 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
     siderCollapse,
     setSiderCollapse,
     toggleSiderCollapse,
+    siderHidden,
+    setSiderHidden,
+    toggleSiderHidden,
     mixSiderFixed,
     setMixSiderFixed,
     toggleMixSiderFixed,

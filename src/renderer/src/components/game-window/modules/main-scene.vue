@@ -157,15 +157,18 @@ async function executeOption(action: Dto.ActionOption) {
     gameStore.currentSceneType = action.type
     switch (action.type) {
       case 'map':
+        appStore.setSiderHidden(false)
         mapStore.currMap.isLocked = false
         if (action.next != undefined && action.next != '') {
           mapStore.nextMap(action.next, mapStore.currMap)
         }
         break
       case 'mini-game':
+        appStore.setSiderHidden(true)
         gameStore.currentMiniGame = action.miniGame ?? 'finger-guessing'
         break
       case 'shop':
+        appStore.setSiderHidden(false)
         itemStore.currentShop = action.next ?? 'default'
         break
       // case 'story':
@@ -178,6 +181,7 @@ async function executeOption(action: Dto.ActionOption) {
       //   }
       //   break
       case 'workbench':
+        appStore.setSiderHidden(false)
         itemStore.currentShop = action.next ?? 'default'
         break
       default:
@@ -211,6 +215,7 @@ watch(
   [() => mapStore.currMap],
   async () => {
     if (gameStore.currentSceneType == 'map') {
+      appStore.setSiderHidden(false)
       gameStore.currentScene = {
         name: mapStore.currMap.name,
         title: '',

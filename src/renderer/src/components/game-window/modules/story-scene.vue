@@ -31,14 +31,11 @@
       </div>
     </Transition>
     <n-card
-      class="opacity-80"
-      :class="!appStore.siderCollapse ? 'pos-relative' : 'pos-fixed bottom-0'"
+      class="opacity-70 pos-fixed bottom-0"
       :style="
-        appStore.siderCollapse
-          ? 'height:20.5vw;width:calc(100% - ' + themeStore.sider.mixCollapsedWidth + 'px);'
-          : 'height:18vw;background-image: url(' +
-            appStore.projectSettings.localhost +
-            'static/frame/textbox.png);'
+        'height:20.5vw;background-image: url(' +
+        appStore.projectSettings.localhost +
+        'static/frame/textbox.png);'
       "
       style="border: 0; border-radius: 0; background-repeat: round">
       <n-h2 class="color-primary text-3xl">{{ speaker }}</n-h2>
@@ -283,6 +280,7 @@ watch(
   [() => storyStore.currentStory],
   async () => {
     if (gameStore.currentSceneType == 'story' && storyStore.currentStory != undefined) {
+      appStore.setSiderHidden(true)
       gameStore.renpyScene = {
         name: storyStore.currentStory.name,
         text: storyStore.currentStory.text,
