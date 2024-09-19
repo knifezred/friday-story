@@ -220,7 +220,7 @@ async function executeOption(action: Dto.ActionOption) {
     gameStore.setSceneType(action.type)
     switch (action.type) {
       case 'story':
-        // await storyStore.setCurrentStory(action.next ?? 'restart')
+        // await storyStore.setCurrentStory(action.next ?? 'demo')
         if (action.next != undefined) {
           await nextScene(action.next)
         } else {

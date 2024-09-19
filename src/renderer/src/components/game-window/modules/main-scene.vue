@@ -165,7 +165,7 @@ async function executeOption(action: Dto.ActionOption) {
         itemStore.currentShop = action.next ?? 'default'
         break
       case 'story':
-        await storyStore.setCurrentStory(action.next ?? 'restart')
+        await storyStore.setCurrentStory(action.next ?? 'demo')
         break
       case 'workbench':
         appStore.setSiderHidden(false)

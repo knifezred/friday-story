@@ -6,7 +6,7 @@ export const projectSetting: App.Global.ProjectSetting = {
   sound: '',
   voice: '',
   defaultPlace: 'street.xinDaZhen',
-  startStory: 'restart',
+  startStory: 'demo',
   localhost: 'http://localhost:5175/',
   duration: 100,
   sceneTransition: 'fade-half',

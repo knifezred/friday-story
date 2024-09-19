@@ -188,7 +188,7 @@ export const IslandMaps: Array<Dto.MapItem> = [
                       },
                       {
                         name: 'test.button',
-                        next: 'restart',
+                        next: 'demo',
                         text: 'stories.start',
                         type: 'story',
                         line: []

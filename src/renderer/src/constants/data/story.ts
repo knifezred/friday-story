@@ -1,3 +1,3 @@
-import { ReStartStories } from './stories/restart'
+import { DemoStories } from './stories/demo'
 
-export const DefaultStories: Array<Dto.StoryPlot> = [...ReStartStories]
+export const DefaultStories: Array<Dto.StoryPlot> = [...DemoStories]
