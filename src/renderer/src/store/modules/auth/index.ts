@@ -142,7 +142,6 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
         )
       ) {
         gameStore.setSceneType('story')
-        appStore.setSiderCollapse(true)
         await storyStore.setCurrentStory(appStore.projectSettings.startStory)
         setTimeout(() => {
           appStore.projectSettings.startStory = ''

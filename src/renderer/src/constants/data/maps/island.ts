@@ -5,14 +5,6 @@ export const IslandMaps: Array<Dto.MapItem> = [
     isLocked: true,
     children: [
       {
-        name: 'osaka',
-        level: 'city'
-      },
-      {
-        name: 'sapporo',
-        level: 'city'
-      },
-      {
         name: 'sendai',
         level: 'city',
         children: [
@@ -28,15 +20,57 @@ export const IslandMaps: Array<Dto.MapItem> = [
                     name: 'home',
                     level: 'building',
                     children: [
-                      { name: 'home.living_room', level: 'room' },
-                      { name: 'home.bedroom', level: 'room' },
-                      { name: 'home.plyer_room', level: 'room' },
-                      { name: 'home.sister_room', level: 'room' },
-                      { name: 'home.cousin_room', level: 'room' },
-                      { name: 'home.kitchen', level: 'room' },
-                      { name: 'home.bathroom', level: 'room' },
-                      { name: 'home.backyard', level: 'room' }
-                    ]
+                      {
+                        name: 'home.living_room',
+                        level: 'room',
+                        title: '',
+                        desc: ''
+                      },
+                      {
+                        name: 'home.bedroom',
+                        level: 'room',
+                        title: '',
+                        desc: ''
+                      },
+                      {
+                        name: 'home.plyer_room',
+                        level: 'room',
+                        title: '',
+                        desc: ''
+                      },
+                      {
+                        name: 'home.sister_room',
+                        level: 'room',
+                        title: '',
+                        desc: ''
+                      },
+                      {
+                        name: 'home.cousin_room',
+                        level: 'room',
+                        title: '',
+                        desc: ''
+                      },
+                      {
+                        name: 'home.kitchen',
+                        level: 'room',
+                        title: '',
+                        desc: ''
+                      },
+                      {
+                        name: 'home.bathroom',
+                        level: 'room',
+                        title: '',
+                        desc: ''
+                      },
+                      {
+                        name: 'home.backyard',
+                        level: 'room',
+                        title: '',
+                        desc: ''
+                      }
+                    ],
+                    title: '',
+                    desc: ''
                   },
                   {
                     name: 'lin_home',
@@ -56,14 +90,16 @@ export const IslandMaps: Array<Dto.MapItem> = [
                         ],
                         text: 'game.option.enter',
                         next: 'room.lin_home.living_room',
-                        type: 'map'
+                        type: 'map',
+                        line: []
                       },
                       {
                         name: 'finger-guessing',
                         text: 'game.option.finger-guessing',
                         icon: 'fluent-emoji:victory-hand',
                         miniGame: 'finger-guessing',
-                        type: 'mini-game'
+                        type: 'mini-game',
+                        line: []
                       },
                       {
                         name: 'dice-number',
@@ -71,15 +107,41 @@ export const IslandMaps: Array<Dto.MapItem> = [
                         icon: 'streamline-emojis:game-dice',
                         buttonType: 'error',
                         miniGame: 'dice-number',
-                        type: 'mini-game'
+                        type: 'mini-game',
+                        line: []
                       }
                     ],
                     children: [
-                      { name: 'lin_home.living_room', level: 'room' },
-                      { name: 'lin_home.bedroom', level: 'room' },
-                      { name: 'lin_home.kitchen', level: 'room' },
-                      { name: 'lin_home.sec_room', level: 'room' },
-                      { name: 'lin_home.bathroom', level: 'room' },
+                      {
+                        name: 'lin_home.living_room',
+                        level: 'room',
+                        title: '',
+                        desc: ''
+                      },
+                      {
+                        name: 'lin_home.bedroom',
+                        level: 'room',
+                        title: '',
+                        desc: ''
+                      },
+                      {
+                        name: 'lin_home.kitchen',
+                        level: 'room',
+                        title: '',
+                        desc: ''
+                      },
+                      {
+                        name: 'lin_home.sec_room',
+                        level: 'room',
+                        title: '',
+                        desc: ''
+                      },
+                      {
+                        name: 'lin_home.bathroom',
+                        level: 'room',
+                        title: '',
+                        desc: ''
+                      },
                       {
                         name: 'lin_home.door',
                         level: 'room',
@@ -89,11 +151,16 @@ export const IslandMaps: Array<Dto.MapItem> = [
                             name: 'game.map.next',
                             text: 'game.option.goOut',
                             next: 'building.lin_home',
-                            type: 'map'
+                            type: 'map',
+                            line: []
                           }
-                        ]
+                        ],
+                        title: '',
+                        desc: ''
                       }
-                    ]
+                    ],
+                    title: '',
+                    desc: ''
                   },
                   {
                     name: 'happy_shop',
@@ -116,77 +183,60 @@ export const IslandMaps: Array<Dto.MapItem> = [
                             ],
                             for: 'execute'
                           }
-                        ]
+                        ],
+                        line: []
                       },
                       {
                         name: 'test.button',
                         next: 'restart',
                         text: 'stories.start',
-                        type: 'story'
+                        type: 'story',
+                        line: []
                       }
-                    ]
+                    ],
+                    title: '开心超市',
+                    desc: '开心超市，平安路上一家小超市，可以购买一些日用品'
                   }
-                ]
+                ],
+                title: '平安路',
+                desc: ''
               },
-              { name: 'backstreet', level: 'street' },
+              {
+                name: 'backstreet',
+                level: 'street',
+                title: '后街',
+                desc: ''
+              },
               {
                 name: 'kaiYuan',
                 level: 'street',
                 children: [
                   {
                     name: 'centerPark',
-                    level: 'building'
+                    level: 'building',
+                    title: '',
+                    desc: ''
                   },
                   {
                     name: 'oGenPlaza',
-                    level: 'building'
+                    level: 'building',
+                    title: '',
+                    desc: ''
                   }
-                ]
+                ],
+                title: '',
+                desc: ''
               }
-            ]
-          },
-          {
-            name: 'quan',
-            level: 'area'
-          },
-          {
-            name: 'qingYe',
-            level: 'area'
-          },
-          {
-            name: 'ruoLin',
-            level: 'area'
-          },
-          {
-            name: 'gongYe',
-            level: 'area'
+            ],
+            title: '太白区',
+            desc: ''
           }
-        ]
-      },
-      {
-        name: 'nagoya',
-        level: 'city'
-      },
-      {
-        name: 'fukuoka',
-        level: 'city'
-      },
-      {
-        name: 'tokyo',
-        level: 'city'
-      },
-      {
-        name: 'yokohama',
-        level: 'city'
-      },
-      {
-        name: 'kobe',
-        level: 'city'
-      },
-      {
-        name: 'kawasaki',
-        level: 'city'
+        ],
+        title: '神代城',
+        desc: ''
       }
-    ]
+    ],
+    title: '浮岛国',
+    desc: '失落的小岛'
   }
 ]

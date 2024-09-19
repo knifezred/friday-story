@@ -20,7 +20,8 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     text: 'game.map.common.test.text',
     cover: '/static/map/common/exit.png',
     level: 'room',
-    options: []
+    options: [],
+    next: ''
   })
   const parentMap = ref<Dto.MapItemFull>({
     id: 'game.map.parent',
@@ -30,7 +31,8 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     text: 'game.map.common.exit.text',
     cover: '/static/map/common/exit.png',
     level: 'room',
-    options: []
+    options: [],
+    next: ''
   })
   const canJumpNext = ref(true)
 

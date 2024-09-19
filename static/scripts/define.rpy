@@ -1,5 +1,5 @@
 define anon = Character("未知")
 define me = Character("userinfo.userName")
 define ai = Character("小爱")
-define sister = Character("game.character.female.sister.username")
-define cousin = Character("game.character.female.cousin.username")
+define sister = Character("npc.sister.username")
+define cousin = Character("npc.cousin.username")

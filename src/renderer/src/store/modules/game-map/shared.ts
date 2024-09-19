@@ -1,6 +1,6 @@
 import { DefaultMaps } from '@renderer/constants/data/map'
 import { SetupStoreId } from '@renderer/enums'
-import { coverWithDefault, localeText, prefixImage } from '@renderer/utils/common'
+import { coverWithDefault, prefixImage } from '@renderer/utils/common'
 import { useAuthStore } from '../auth'
 
 export async function getDefaultMaps(id: number | undefined) {
@@ -44,20 +44,21 @@ function flattenTree(tree) {
       typeName = 'building.' + node.name
     }
     const fullMap: Dto.MapItemFull = {
-      title: localeText(node.title, typeName, 'game.map', 'title'),
-      text: localeText(node.text, typeName, 'game.map', 'text'),
-      cover: prefixImage(node.cover, typeName, 'map', '.jpeg'),
       id: node.id,
       pid: node.pid,
       name: node.name,
       level: node.level,
+      title: node.title,
+      text: node.desc,
+      cover: prefixImage(node.cover, typeName, 'map', '.jpeg'),
       options: node.options,
       icon: node.icon,
       isDisabled: node.isDisabled,
       isShow: node.isShow != false,
       order: node.order,
       isLocked: node.isLocked,
-      condition: node.condition
+      condition: node.condition,
+      next: node.next
     }
     if (node.children != undefined && node.children.length > 0) {
       result.push({

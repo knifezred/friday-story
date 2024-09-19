@@ -131,12 +131,10 @@ function checkout() {
   })
   gameItemStore.deal(totalCoast.value)
   gameStore.addMoney(-totalCoast.value)
-  appStore.setSiderCollapse(false)
   emit('result', true)
 }
 
 onMounted(async () => {
-  appStore.setSiderCollapse(true)
   ;(await gameItemStore.currentShopGoods()).forEach((goods) => {
     shopItems.value.push({
       ...goods,

@@ -100,7 +100,9 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                 },
                 line: []
               }
-            ]
+            ],
+            title: '',
+            desc: ''
           },
           {
             name: 'darkHouse.roomWork',
@@ -199,9 +201,13 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                 },
                 line: []
               }
-            ]
+            ],
+            title: '',
+            desc: ''
           }
-        ]
+        ],
+        title: '',
+        desc: ''
       },
       {
         name: 'mistyForest',
@@ -241,8 +247,12 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
             },
             line: []
           }
-        ]
+        ],
+        title: '',
+        desc: ''
       }
-    ]
+    ],
+    title: '小黑屋',
+    desc: '复刻'
   }
 ]

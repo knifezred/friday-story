@@ -124,6 +124,7 @@ watch(
   [() => appStore.siderHidden],
   () => {
     isShowMap.value = !appStore.siderHidden
+    splitSize.value = isShowMap.value ? 0.67 : 1
   },
   { immediate: true }
 )

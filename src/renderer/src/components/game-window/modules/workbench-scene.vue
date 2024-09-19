@@ -108,12 +108,10 @@ function checkout() {
       goods.selectedCount = 0
     }
   })
-  appStore.setSiderCollapse(false)
   emit('result', true)
 }
 
 onMounted(async () => {
-  appStore.setSiderCollapse(true)
   gameItemStore.workbenchTableItems().forEach((goods) => {
     shopItems.value.push({
       ...goods,

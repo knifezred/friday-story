@@ -224,6 +224,9 @@ export function getCharacterName(name: string) {
               if (match[2] == 'userinfo.userName') {
                 const authStore = useAuthStore()
                 userName = authStore.userInfo.userName
+              } else if (match[2].startsWith('npc.')) {
+                const npcStore = useNpcStore()
+                userName = npcStore.getNpcProp(match[2].split('.')[1], match[2].split('.')[2])
               }
             }
           }
@@ -231,6 +234,9 @@ export function getCharacterName(name: string) {
         break
       default:
         break
+    }
+    if (userName != '') {
+      return
     }
   })
   return userName

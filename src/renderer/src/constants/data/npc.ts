@@ -2,6 +2,10 @@
 export const DefaultNpcInfoList: Array<Dto.NpcInfo> = [
   {
     name: 'sister',
+    username: '奥利维亚',
+    nickname: '小奥',
+    desc: '煎蛋介绍一下',
+    introduce: '',
     age: 22,
     gender: '2',
     identity: 'sister',
@@ -11,6 +15,10 @@ export const DefaultNpcInfoList: Array<Dto.NpcInfo> = [
   },
   {
     name: 'cousin',
+    username: '爱莲娜',
+    nickname: '小娜',
+    desc: '',
+    introduce: '',
     age: 18,
     gender: '2',
     identity: 'sister',

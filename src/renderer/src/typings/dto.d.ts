@@ -188,6 +188,7 @@ declare namespace Dto {
     flags: Array<KeyValuePair>
   }
 
+  // 房间 建筑 街道 区域 城市 国家 地铁
   type MapLevelType = 'room' | 'building' | 'street' | 'area' | 'city' | 'country' | 'metro'
 
   type TreeBase = {
@@ -199,16 +200,17 @@ declare namespace Dto {
 
   interface MapItem {
     name: string
+    title: string
+    desc: string
+    level: MapLevelType
     next?: string
     story?: string
     icon?: string
-    text?: string[]
-    isDisabled?: boolean
     isShow?: boolean
-    level: MapLevelType
+    isLocked?: boolean
+    isDisabled?: boolean
     order?: number
     options?: Array<ActionOption>
-    isLocked?: boolean
     condition?: ConditionModel
     children?: Array<MapItem>
   }
@@ -217,17 +219,17 @@ declare namespace Dto {
     id: string
     pid: string
     name: string
-    next?: string
     title: string
     text: string
     cover: string
+    next: string
     icon?: string
     isDisabled?: boolean
     isShow?: boolean
     level: MapLevelType
     order?: number
     options: Array<ActionOption> | undefined
-    isLocked?: boolean //锁门
+    isLocked?: boolean
     condition?: ConditionModel
     temperature?: number
   }
@@ -240,10 +242,10 @@ declare namespace Dto {
     level: LevelType
     work: string
     relationship: Array<number>
-    username?: string
-    nickname?: string
-    desc?: string
-    introduce?: string
+    username: string
+    nickname: string
+    desc: string
+    introduce: string
     avatar?: string
     isLocked?: boolean
   }
