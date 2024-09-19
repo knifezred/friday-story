@@ -87,6 +87,7 @@ function handleClickMixMenu(menu: App.Global.Menu) {
         @click="handleClickMixMenu(menu)" />
     </SimpleScrollbar>
     <MenuToggler
+      v-if="false"
       arrow-icon
       :collapsed="appStore.siderCollapse"
       :z-index="99"

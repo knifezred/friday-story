@@ -208,7 +208,6 @@ export async function parseRenPyDefine(script: string) {
 
 export function getCharacterName(name: string) {
   const npcStore = useNpcStore()
-  debugger
   const fileContent = npcStore.defineText
   const lines = fileContent.split('\n')
   let userName = ''
@@ -222,6 +221,10 @@ export function getCharacterName(name: string) {
           if (match) {
             if (match[1] == name) {
               userName = match[2]
+              if (match[2] == 'userinfo.userName') {
+                const authStore = useAuthStore()
+                userName = authStore.userInfo.userName
+              }
             }
           }
         }
@@ -240,7 +243,6 @@ const textOnlyRegex = /"(.*?)"/ // 仅匹配被双引号包裹的文本
 export function say(trimmedLine: string) {
   let match = trimmedLine.match(dialogueRegex) || trimmedLine.match(dialogueOrTextRegex)
   if (match) {
-    // TODO Speaker姓名替换
     return {
       speaker: getCharacterName(match[1]),
       text: match[2]

@@ -42,12 +42,11 @@ label dark_room:
 
 # 照镜子
 label watch_mirror:
-    "镜子倒映着你的脸"
+    "{color=#ffa}镜子{/color}倒映着你的脸"
     menu watch_mirror_option:
         "改名":
-            player "我的名字是 [player.name]!"
-            #block of code to run
+            me "我的名字是 [me.username]!"
         "加点":
             $ option.isDisabled="True"
             "暂未开放"
-            #block of code to run
+    "发呆..."

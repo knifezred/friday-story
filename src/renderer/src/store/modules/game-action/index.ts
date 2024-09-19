@@ -98,7 +98,7 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
     const checkInfos: string[] = []
     options.value = []
     if (next != undefined && next != '') {
-      if (!optionExists('game.map.next', optionList) && gameStore.currentSceneType == 'map') {
+      if (!optionExists('game.map.next', optionList) && gameStore.sceneType == 'map') {
         const defaultMapNext = getOptionByName('game.map.next', DefaultActions)
         defaultMapNext.next = next
         options.value.push(defaultMapNext)

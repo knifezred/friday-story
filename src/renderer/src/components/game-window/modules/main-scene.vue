@@ -20,14 +20,11 @@
         class="bg-no-repeat bg-cover"></div>
     </Transition>
     <n-card
-      class="opacity-80"
-      :class="!appStore.siderCollapse ? 'pos-relative' : 'pos-fixed bottom-0'"
+      class="opacity-80 pos-relative"
       :style="
-        appStore.siderCollapse
-          ? 'height:20.5vw;width:calc(100% - ' + themeStore.sider.mixCollapsedWidth + 'px);'
-          : 'height:18vw;background-image: url(' +
-            appStore.projectSettings.localhost +
-            'static/frame/textbox.png);'
+        'height:18vw;background-image: url(' +
+        appStore.projectSettings.localhost +
+        'static/frame/textbox.png);'
       "
       style="border: 0; border-radius: 0; background-repeat: round">
       <n-scrollbar class="h-20vh" :distance="10" @click="nextText">
@@ -70,7 +67,7 @@ import { useGameStore } from '@renderer/store/modules/game'
 import { useGameActionStore } from '@renderer/store/modules/game-action'
 import { useGameItemStore } from '@renderer/store/modules/game-item'
 import { useMapStore } from '@renderer/store/modules/game-map'
-import { useThemeStore } from '@renderer/store/modules/theme'
+import { useStoryStore } from '@renderer/store/modules/game-story'
 import { dynamicResource } from '@renderer/utils/common'
 import { computed, ref, watch } from 'vue'
 
@@ -88,7 +85,7 @@ const actionStore = useGameActionStore()
 const gameStore = useGameStore()
 const mapStore = useMapStore()
 const itemStore = useGameItemStore()
-const themeStore = useThemeStore()
+const storyStore = useStoryStore()
 
 const computedButtonLoadingStyle = computed(() => {
   return {
@@ -150,7 +147,7 @@ async function executeOption(action: Dto.ActionOption) {
   action.isDisabled = false
   action.loading = false
   if (actionStore.currentAction.canExecute) {
-    gameStore.currentSceneType = action.type
+    gameStore.setSceneType(action.type)
     switch (action.type) {
       case 'map':
         appStore.setSiderHidden(false)
@@ -167,15 +164,9 @@ async function executeOption(action: Dto.ActionOption) {
         appStore.setSiderHidden(false)
         itemStore.currentShop = action.next ?? 'default'
         break
-      // case 'story':
-      //   await storyStore.setCurrentStory(action.next ?? 'restart')
-      //   appStore.setSiderCollapse(true)
-      //   if (action.next != undefined && action.next.startsWith('scene')) {
-      //     await nextScene(action.next)
-      //   } else {
-      //     await nextText()
-      //   }
-      //   break
+      case 'story':
+        await storyStore.setCurrentStory(action.next ?? 'restart')
+        break
       case 'workbench':
         appStore.setSiderHidden(false)
         itemStore.currentShop = action.next ?? 'default'
@@ -210,7 +201,7 @@ watch([() => isTyped.value], () => {
 watch(
   [() => mapStore.currMap],
   async () => {
-    if (gameStore.currentSceneType == 'map') {
+    if (gameStore.sceneType == 'map') {
       appStore.setSiderHidden(false)
       gameStore.currentScene = {
         name: mapStore.currMap.name,

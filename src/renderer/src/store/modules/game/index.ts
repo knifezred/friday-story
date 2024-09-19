@@ -32,7 +32,10 @@ export const useGameStore = defineStore(SetupStoreId.Game, () => {
     text: [],
     menus: []
   })
-  const currentSceneType = ref<UnionKey.SceneModule>('map')
+  const sceneType = ref<UnionKey.SceneModule>('map')
+  function setSceneType(key: UnionKey.SceneModule) {
+    sceneType.value = key
+  }
   const currentMiniGame = ref<UnionKey.MiniGameModule>('finger-guessing')
   const temperature = ref(-18.0)
   const fromMoney = ref(0)
@@ -118,7 +121,8 @@ export const useGameStore = defineStore(SetupStoreId.Game, () => {
     coastTime,
     renpyScene,
     currentScene,
-    currentSceneType,
+    sceneType,
+    setSceneType,
     currentMiniGame,
     playMusic,
     playSound,

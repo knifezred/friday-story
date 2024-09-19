@@ -40,7 +40,7 @@ export function useCondition() {
   }
 
   function hasLocked() {
-    if (gameStore.currentSceneType == 'map') {
+    if (gameStore.sceneType == 'map') {
       return mapStore.currMap.isLocked == true
     }
     return false

@@ -6,7 +6,7 @@
     :min="splitSize"
     :max="splitSize">
     <template #1>
-      <GameWindow v-model:value="gameStore.currentSceneType" />
+      <GameWindow v-model:value="gameStore.sceneType" />
     </template>
     <template #2>
       <NFlex v-if="isShowMap" vertical class="pa-2 text-center">
@@ -68,10 +68,7 @@
 
         <n-scrollbar class="h-100vh" :distance="10">
           <Transition :name="projectSetting.mapTransition" mode="out-in" appear>
-            <NFlex
-              v-if="gameStore.currentSceneType == 'map'"
-              :key="mapStore.currMap.pid"
-              class="pl-2">
+            <NFlex v-if="gameStore.sceneType == 'map'" :key="mapStore.currMap.pid" class="pl-2">
               <template v-for="item in mapStore.currLevelMaps" :key="item.id">
                 <n-card
                   v-if="item.isShow"
@@ -121,22 +118,17 @@ const { nextMap } = useMapStore()
 const { userInfo, archivedData, isStaticSuper } = useAuthStore()
 
 const isShowMap = ref(false)
-const splitSize = ref(1)
+const splitSize = ref(0.675)
 
 watch(
-  [() => appStore.siderCollapse],
+  [() => appStore.siderHidden],
   () => {
-    isShowMap.value = !appStore.siderCollapse
-    if (appStore.siderCollapse) {
-      splitSize.value = isShowMap.value ? 0.59 : 1
-    } else {
-      splitSize.value = isShowMap.value ? 0.675 : 1
-    }
+    isShowMap.value = !appStore.siderHidden
   },
   { immediate: true }
 )
 function mapFunc(map: Dto.MapItemFull) {
-  if (gameStore.currentSceneType == 'map') {
+  if (gameStore.sceneType == 'map') {
     if (map.id == 'game.map.parent') {
       nextMap(map.next, map)
     } else {

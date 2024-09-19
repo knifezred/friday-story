@@ -184,8 +184,7 @@ async function nextText(isAutoNext: boolean = false) {
           } else {
             await storyStore.storyFinished(storyStore.currentStory.name)
             // end
-            gameStore.currentSceneType = 'map'
-            appStore.setSiderCollapse(false)
+            gameStore.setSceneType('map')
           }
         }
       } else if (textIndex.value < gameStore.renpyScene.text.length - 1) {
@@ -202,8 +201,7 @@ async function nextText(isAutoNext: boolean = false) {
           } else {
             await storyStore.storyFinished(storyStore.currentStory.name)
             // end
-            gameStore.currentSceneType = 'map'
-            appStore.setSiderCollapse(false)
+            gameStore.setSceneType('map')
           }
         }
       }
@@ -219,11 +217,10 @@ async function executeOption(action: Dto.ActionOption) {
   action.isDisabled = false
   action.loading = false
   if (actionStore.currentAction.canExecute) {
-    gameStore.currentSceneType = action.type
+    gameStore.setSceneType(action.type)
     switch (action.type) {
       case 'story':
         // await storyStore.setCurrentStory(action.next ?? 'restart')
-        appStore.setSiderCollapse(true)
         if (action.next != undefined) {
           await nextScene(action.next)
         } else {
@@ -277,7 +274,7 @@ function loadOptions(options: Array<Dto.ActionOption>, next: string | undefined)
 watch(
   [() => storyStore.currentStory],
   async () => {
-    if (gameStore.currentSceneType == 'story' && storyStore.currentStory != undefined) {
+    if (gameStore.sceneType == 'story' && storyStore.currentStory != undefined) {
       appStore.setSiderHidden(true)
       gameStore.renpyScene = {
         name: storyStore.currentStory.name,
