@@ -26,6 +26,7 @@
     "modify": "Modify",
     "modifySuccess": "Modify Success",
     "noData": "No Data",
+    "notUnlocked": "Not unlocked",
     "operate": "Operate",
     "pleaseCheckValue": "Please check whether the value is valid",
     "refresh": "Refresh",
@@ -82,13 +83,14 @@
     }
   },
   "game": {
-    "character": {
-      "female": {
-        "sister": {
-          "desc": "Can you introduce the fried eggs",
-          "nickname": "Xiao Ao",
-          "username": "Olivia"
-        }
+    "achievement": {
+      "hatTrick": {
+        "desc": "3 sets of winners and losers",
+        "title": "hat-trick"
+      },
+      "heavyArmorProficient": {
+        "desc": "Write casually",
+        "title": "Proficient in heavy armor"
       }
     },
     "condition": {
@@ -116,6 +118,16 @@
       }
     },
     "items": {
+      "equipment": {
+        "stoneAxe": {
+          "desc": "An axe made of smashed stone pieces",
+          "title": "a stone axe"
+        },
+        "stonePickaxe": {
+          "desc": "A stone pickaxe made of smashed stones",
+          "title": "Stone pickaxe"
+        }
+      },
       "food": {
         "beer": {
           "desc": "Fresh draft beer, a thousand cups without getting drunk",

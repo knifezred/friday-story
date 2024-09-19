@@ -63,7 +63,7 @@
           class="text-xl pa-4 cursor-pointer"
           @click="mapFunc(mapStore.parentMap)">
           <icon-solar:point-on-map-bold-duotone />
-          {{ $t(mapStore.parentMap.title) }}
+          {{ mapStore.parentMap.title }}
         </n-tag>
 
         <n-scrollbar class="h-100vh" :distance="10">

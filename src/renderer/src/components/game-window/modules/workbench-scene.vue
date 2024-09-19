@@ -52,7 +52,6 @@
 
 <script setup lang="ts">
 import { $t } from '@renderer/locales'
-import { useAppStore } from '@renderer/store/modules/app'
 import { useAuthStore } from '@renderer/store/modules/auth'
 import { useGameItemStore } from '@renderer/store/modules/game-item'
 import { onMounted, ref } from 'vue'
@@ -63,7 +62,6 @@ defineOptions({
 
 const shopItems = ref<Array<Dto.EquipmentItemFull>>([])
 const authStore = useAuthStore()
-const appStore = useAppStore()
 const gameItemStore = useGameItemStore()
 const buildCount = ref(0)
 interface Emits {

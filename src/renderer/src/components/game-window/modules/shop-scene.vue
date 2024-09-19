@@ -71,7 +71,6 @@
 
 <script setup lang="ts">
 import { $t } from '@renderer/locales'
-import { useAppStore } from '@renderer/store/modules/app'
 import { useAuthStore } from '@renderer/store/modules/auth'
 import { useGameStore } from '@renderer/store/modules/game'
 import { useGameItemStore } from '@renderer/store/modules/game-item'
@@ -83,7 +82,6 @@ defineOptions({
 
 const shopItems = ref<Array<Dto.ShopGoodsFull>>([])
 const authStore = useAuthStore()
-const appStore = useAppStore()
 const gameStore = useGameStore()
 const gameItemStore = useGameItemStore()
 const totalCoast = ref(0)
