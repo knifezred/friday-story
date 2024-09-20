@@ -3,50 +3,32 @@ label start:
     $ scene.cover="/static/imgs/t0.webp"
     "周五下班的你在地铁上无聊的刷着手机"
     scene "/static/imgs/t1.webp"
-    "突然一真晕眩，你两眼漆黑倒在了地上"
-    show sister normal at left
+    "突然一阵{color=#ff4757}晕眩{/color}，你两眼漆黑倒在了地上"
+    show sister normal at center
     anon "又一个..."
     "不知道过了多久，你再次醒来"
     scene "/static/imgs/t2.webp"
     hide sister normal
-    "缓过神来的你发现，地上散落着几张卡牌"
+    "你发现身处竹林之中，只听得风吹竹林的沙沙声"
+    "你决定走进竹林身处"
+    "你发现一个老者和棋盘"
+    anon "你来了"
+    anon "与我手谈一把可好，我可让你一子"
     menu optional_select_world:
-        "玄幻修仙":
-            $ effect.setFlag("world.type,immortal")
-            "你选择了修仙世界"
-        "都市生活":
-            $ effect.single
-            $ effect.setFlag("world.type,city")
-            "你选择了都市世界"
-
-
-    sister "hello world"
-    jump dark_room
-
-# 小黑屋
-label dark_room:
-    scene "/static/map/building/darkHouse.jpeg"
-    "这是一间小黑屋"
-    "你快要冻死了"
-    "你决定去寻找木材"
-    menu optional_find_wood:
-        "四处翻找":
-            $ effect.addItem("material.wood,5-10")
-            "你找到了一些木材"
-            "你发现了一面镜子"
-            jump watch_mirror
-        "出门查看":
-            "你被冻死了"
-
-    player "也许我该点燃一个火堆"
-
-# 照镜子
-label watch_mirror:
-    "{color=#ffa}镜子{/color}倒映着你的脸"
-    menu watch_mirror_option:
-        "改名":
-            me "我的名字是 [me.username]!"
-        "加点":
+        "双鱼佩":
+            $ effect.setFlag("world.type,PiscesPendant")
+            "你选择了双鱼佩"
+        "昊天眼":
             $ option.isDisabled="True"
-            "暂未开放"
-    "发呆..."
+            $ effect.single
+            $ effect.setFlag("world.type,HaotianEye")
+            "你选择了昊天眼"
+        "炼妖壶":
+            $ option.isDisabled="True"
+            $ effect.single
+            $ effect.setFlag("world.type,LianyaoFlask")
+            "你选择了炼妖壶"
+    "{color=#ffa}镜子{/color}倒映着{b}[me.username]{/b}的脸"
+    jump baiyuan_area
+label baiyuan_area:
+    anon "若想回去，就来天元山找我吧，哈哈哈..."
