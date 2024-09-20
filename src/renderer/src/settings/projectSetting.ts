@@ -5,7 +5,7 @@ export const projectSetting: App.Global.ProjectSetting = {
   music: '/static/music/default.mp3',
   sound: '',
   voice: '',
-  defaultPlace: 'street.xinDaZhen',
+  defaultPlace: 'street.xinDaTown',
   startStory: 'demo',
   localhost: 'http://localhost:5175/',
   duration: 100,

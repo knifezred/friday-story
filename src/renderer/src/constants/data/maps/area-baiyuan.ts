@@ -75,7 +75,7 @@ export const AreaBaiYuanMaps: Array<Dto.MapItem> = [
     isLocked: true,
     children: [
       {
-        name: 'xinDaZhen',
+        name: 'xinDaTown',
         title: '新达镇',
         desc: '踏足八荒的第一站',
         level: 'street',
