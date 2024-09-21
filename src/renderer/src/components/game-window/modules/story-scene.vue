@@ -44,7 +44,7 @@
           <TypedText
             v-model:value="isTyped"
             :speed="appStore.projectSettings.textSpeed"
-            :strings="$t(currentText, gameStore.langParams)" />
+            :strings="currentText" />
         </n-p>
       </n-scrollbar>
       <template #footer>
