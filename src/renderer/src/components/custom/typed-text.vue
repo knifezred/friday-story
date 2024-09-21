@@ -3,6 +3,7 @@
 </template>
 
 <script setup lang="ts">
+import { extractAndAppendDynamicText } from '@renderer/hooks/game/renpy'
 import { projectSetting } from '@renderer/settings/projectSetting'
 import { useAppStore } from '@renderer/store/modules/app'
 import { ref, watch } from 'vue'
@@ -63,9 +64,11 @@ const typeWriter = () => {
         index.value++
       }
     } else if (props.strings[index.value] == '[') {
-      // TODO 解析文本中的动态参数
-      text.value += props.strings.charAt(index.value)
-      index.value++
+      // 解析文本中的动态参数
+      const tempText = props.strings.substring(index.value)
+      const dynamicParam = tempText.split(']')[0]
+      text.value += extractAndAppendDynamicText(dynamicParam.substring(1))
+      index.value += dynamicParam.length + 1
     } else {
       text.value += props.strings.charAt(index.value)
       index.value++

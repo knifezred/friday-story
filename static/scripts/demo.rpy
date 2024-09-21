@@ -1,6 +1,7 @@
 # 禁止menu嵌套，可以jump到其他label再次设置menu
 label start:
     $ scene.cover="/static/imgs/t0.webp"
+    "{color=#4542ee}镜子{/color}倒映着{b}[me.username]{/b}的脸"
     "周五下班的你在地铁上无聊的刷着手机"
     scene "/static/imgs/t1.webp"
     "突然一阵{color=#ff4757}晕眩{/color}，你两眼漆黑倒在了地上"
@@ -28,7 +29,21 @@ label start:
             $ effect.single
             $ effect.setFlag("world.type,LianyaoFlask")
             "你选择了炼妖壶"
-    "{color=#ffa}镜子{/color}倒映着{b}[me.username]{/b}的脸"
+    "{color=#4542ee}镜子{/color}倒映着{b}[npc.sister.username]{/b}的脸"
     jump baiyuan_area
 label baiyuan_area:
     anon "若想回去，就来天元山找我吧，哈哈哈..."
+
+# 武罗山洞
+label wuluo_hole:
+    "一个寂静的山洞，传说中有妖兽"
+    menu optional_explore:
+        "一探究竟":
+            "你鼓起勇气进入山洞"
+            jump wuluo_hole_event
+        "从长计议":
+            "你决定先休整一番，再做打算"
+    "done"
+
+label wuluo_hole_event:
+    "小心探索"

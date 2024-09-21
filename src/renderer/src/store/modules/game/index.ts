@@ -5,6 +5,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useAppStore } from '../app'
 import { useAuthStore } from '../auth'
+import { useNpcStore } from '../game-npc'
 
 export const useGameStore = defineStore(SetupStoreId.Game, () => {
   const appStore = useAppStore()
@@ -17,6 +18,18 @@ export const useGameStore = defineStore(SetupStoreId.Game, () => {
     npc2: '',
     value: ''
   })
+  const textInterpolation = ref<Game.Env.Interpolation>({
+    me: undefined,
+    npc: {}
+  })
+  function initTextInterpolation() {
+    textInterpolation.value.me = authStore.userInfo
+    const npc = {}
+    useNpcStore().allNPCs.forEach((item) => {
+      npc[item.name] = item
+    })
+    textInterpolation.value.npc = npc
+  }
   const currentScene = ref<Dto.GameScene>({
     name: 'test',
     title: '',
@@ -64,6 +77,7 @@ export const useGameStore = defineStore(SetupStoreId.Game, () => {
     fromGold.value = authStore.archivedData.gold
     authStore.archivedData.gold = authStore.archivedData.gold + gold
   }
+
   function coastTime(minutes: number) {
     authStore.archivedData.worldTime += minutes * 60 * 1000
   }
@@ -133,6 +147,8 @@ export const useGameStore = defineStore(SetupStoreId.Game, () => {
     optionExecuteRecords,
     getOptionExecuteNum,
     achievementList,
-    getAchievements
+    getAchievements,
+    textInterpolation,
+    initTextInterpolation
   }
 })

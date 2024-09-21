@@ -2,7 +2,7 @@
   <NFlex vertical>
     <NCard :bordered="false" class="relative z-4 w-auto rd-12px text-center">
       <image-icon :src="'/static/imgs/' + auth.userInfo.archive.cover" class="size-32" />
-      <n-h2 class="my-2"> {{ auth.userInfo.userName }}</n-h2>
+      <n-h2 class="my-2"> {{ auth.userInfo.username }}</n-h2>
     </NCard>
     <n-carousel effect="card" :show-dots="false" style="height: 60%">
       <n-carousel-item style="width: 60%">

@@ -14,7 +14,7 @@
     <n-gi :span="1" class="text-center">
       <n-p class="pt-4">
         <n-tag :bordered="false" type="success">
-          {{ authStore.userInfo.userName }}: {{ authStore.archivedData.money }}
+          {{ authStore.userInfo.username }}: {{ authStore.archivedData.money }}
         </n-tag>
       </n-p>
     </n-gi>

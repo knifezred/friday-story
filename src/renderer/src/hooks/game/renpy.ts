@@ -1,7 +1,7 @@
 // RULES
 // 1. 禁止menu嵌套，可以jump到其他label再次设置menu
 
-import { useAuthStore } from '@renderer/store/modules/auth'
+import { useGameStore } from '@renderer/store/modules/game'
 import { useNpcStore } from '@renderer/store/modules/game-npc'
 
 const sceneOptionRegex = /\$ scene\.(.*?)="(.*?)"/
@@ -177,7 +177,6 @@ export async function parseRenPyDefine(script: string) {
   const fileContent = await window.api.readFile(script)
   const lines = fileContent.split('\n')
   const parsedData: any = []
-  const authStore = useAuthStore()
   lines.forEach((line: string) => {
     const trimmedLine = line.trim()
     const startText = trimmedLine.split(' ')[0]
@@ -186,17 +185,10 @@ export async function parseRenPyDefine(script: string) {
         if (trimmedLine.includes('Character')) {
           const match = trimmedLine.match(characterRegex)
           if (match) {
-            if (match[2] == 'userName') {
-              parsedData.push({
-                userId: match[1],
-                userName: authStore.userInfo.userName
-              })
-            } else {
-              parsedData.push({
-                userId: match[1],
-                userName: match[2]
-              })
-            }
+            parsedData.push({
+              userId: match[1],
+              userName: extractAndAppendDynamicText(match[2])
+            })
           }
         }
         break
@@ -220,14 +212,7 @@ export function getCharacterName(name: string) {
           const match = trimmedLine.match(characterRegex)
           if (match) {
             if (match[1] == name) {
-              userName = match[2]
-              if (match[2] == 'userinfo.userName') {
-                const authStore = useAuthStore()
-                userName = authStore.userInfo.userName
-              } else if (match[2].startsWith('npc.')) {
-                const npcStore = useNpcStore()
-                userName = npcStore.getNpcProp(match[2].split('.')[1], match[2].split('.')[2])
-              }
+              userName = extractAndAppendDynamicText(match[2])
             }
           }
         }
@@ -291,4 +276,19 @@ export function showImage(trimmedLine: string) {
     result.src = 'static/images/' + result.src + '.png'
   }
   return result
+}
+
+export function extractAndAppendDynamicText(dynamicParam: string) {
+  const path = dynamicParam.split('.')
+  const gameStore = useGameStore()
+  gameStore.initTextInterpolation()
+  // 使用 reduce 来安全地访问嵌套属性
+  const value = path.reduce((obj, key) => {
+    if (obj && Object.prototype.hasOwnProperty.call(obj, key)) {
+      return obj[key]
+    }
+    console.warn(`Property '${key}' does not exist in the object.`)
+    return dynamicParam
+  }, gameStore.textInterpolation)
+  return value as unknown as string
 }

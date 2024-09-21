@@ -108,7 +108,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
         if (routeStore.isInitAuthRoute) {
           playTime.value = Date.now()
           window.$message?.success(
-            $t('page.login.common.welcomeBack', { userName: userInfo.userName })
+            $t('page.login.common.welcomeBack', { userName: userInfo.username })
           )
         }
       }
@@ -126,7 +126,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     if (!error) {
       // 2. store archive info
       userInfo.userId = data.id
-      userInfo.userName = data.name
+      userInfo.username = data.name
       userInfo.archive = data
       localStg.set('userInfo', userInfo)
       archivedData.value = JSON.parse(userInfo.archive.data) as Dto.ArchivedData

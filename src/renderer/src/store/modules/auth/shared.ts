@@ -9,7 +9,7 @@ export function getToken() {
 export function getUserInfo() {
   const emptyInfo: Dto.Auth.UserInfo = {
     userId: 0,
-    userName: 'guest',
+    username: 'guest',
     roles: ['SuperAdmin'],
     buttons: [],
     archive: {

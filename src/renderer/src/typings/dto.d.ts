@@ -8,7 +8,7 @@ declare namespace Dto {
 
     interface UserInfo {
       userId: number | undefined
-      userName: string
+      username: string
       roles: string[]
       buttons: string[]
       archive: DbArchive

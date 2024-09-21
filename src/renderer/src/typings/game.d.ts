@@ -7,6 +7,10 @@ declare namespace Game {
       npc2: string
       value: string
     }
+    interface Interpolation {
+      me: Dto.Auth.UserInfo | undefined
+      npc: object
+    }
     type TemperatureType =
       | 'coldest'
       | 'colder'

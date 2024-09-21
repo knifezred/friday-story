@@ -64,7 +64,7 @@ const loading = ref(false)
 function archiveList() {
   fetchArchiveList().then((res) => {
     if (authStore.isLogin) {
-      archives.value = res.data?.filter((x) => x.name == authStore.userInfo.userName) ?? []
+      archives.value = res.data?.filter((x) => x.name == authStore.userInfo.username) ?? []
     } else {
       archives.value = res.data
     }
