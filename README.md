@@ -1,28 +1,36 @@
 # friday-story
 
-An Electron application with Vue and TypeScript for QSP Game.
+Friday Story is a visual novel game framework based on fridayboot-election, with a main focus on QSP and AVG like games
 
-## 已实现功能
+[中文Readme](README_CN.md)
 
-- 存档模块
-- 地图模块
-- 故事模块
-- 商店模块
-- 背包模块
+## Support functions
 
-## 页面预览
+- Archive module
+- Map module
+- Story module
+- Shop module
+- Backpack module
 
-![登录页](project/login.png)
+## Why not use Renpy ？
 
-![新存档](project/1722248556522.png)
+1. There are few compatible video formats, and when the interface started during testing, the content page failed to play the video normally
 
-![首页](project/1722248333302.png)
+2. Vue is more convenient to modify styles for me
 
-![成就页](project/1722248635251.png)
+## Page Preview
 
-![商店页](project/1722248986270.png)
+![Login Page](project/login.png)
 
-![背包页](project/1722248993153.png)
+![New Archive](project/1722248556522.png)
+
+![Home Page](project/1722248333302.png)
+
+![Achievement Page](project/1722248635251.png)
+
+![Shop Page](project/1722248986270.png)
+
+![Backpack Page](project/1722248993153.png)
 
 ## Recommended IDE Setup
 
@@ -53,4 +61,23 @@ $ pnpm build:mac
 
 # For Linux
 $ pnpm build:linux
+```
+
+## How to add yourself story
+
+### Add Item
+
+```
+GameItem {
+    name: string
+    type: GameItemType
+    level: LevelType
+    title?: string
+    desc?: string
+    cover?: string
+    count?: number
+    maxNum?: number
+    isLocked?: boolean
+    material?: Array<KeyValueNumPair>
+  }
 ```
