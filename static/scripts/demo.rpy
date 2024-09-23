@@ -29,10 +29,8 @@ label start:
             $ effect.single
             $ effect.setFlag("world.type,LianyaoFlask")
             "你选择了炼妖壶"
-    "{color=#4542ee}镜子{/color}倒映着{b}[npc.sister.username]{/b}的脸"
-    jump baiyuan_area
-label baiyuan_area:
     anon "若想回去，就来天元山找我吧，哈哈哈..."
+
 
 # 武罗山洞
 label wuluo_hole:
@@ -43,7 +41,7 @@ label wuluo_hole:
             jump wuluo_hole_event
         "从长计议":
             "你决定先休整一番，再做打算"
-    "done"
+    "你退出了山洞"
 
 label wuluo_hole_event:
     "小心探索"

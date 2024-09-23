@@ -15,7 +15,6 @@ export const useStoryStore = defineStore(SetupStoreId.GameStory, () => {
     type: 'main-line',
     cover: '',
     text: [],
-    nextScene: '',
     script: ''
   })
 
@@ -38,8 +37,11 @@ export const useStoryStore = defineStore(SetupStoreId.GameStory, () => {
   }
 
   async function setCurrentStory(name: string) {
-    if (DefaultStories.filter((x) => x.name == name).length > 0) {
-      currentStory.value = DefaultStories.filter((x) => x.name == name)[0]
+    const [storyName, nextScene] = name.split('.')
+    const story = DefaultStories.find((x) => x.name === storyName)
+    if (story) {
+      currentStory.value = story
+      currentStory.value.nextScene = nextScene
       currentStoryScenes.value = await parseRenPyScript(currentStory.value.script)
     }
   }

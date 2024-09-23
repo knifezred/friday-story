@@ -98,7 +98,8 @@ export const AreaBaiYuanMaps: Array<Dto.MapItem> = [
           {
             name: 'explore',
             line: [],
-            type: 'map',
+            type: 'story',
+            next: 'demo.wuluo_hole',
             text: 'game.option.explore'
           }
         ]

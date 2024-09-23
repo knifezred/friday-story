@@ -276,15 +276,20 @@ watch(
   async () => {
     if (gameStore.sceneType == 'story' && storyStore.currentStory != undefined) {
       appStore.setSiderHidden(true)
-      gameStore.renpyScene = {
-        name: storyStore.currentStory.name,
-        text: storyStore.currentStory.text,
-        cover: storyStore.currentStory.cover,
-        next: 'start',
-        menus: []
+      if (storyStore.currentStory.nextScene) {
+        nextScene(storyStore.currentStory.nextScene)
+      } else {
+        gameStore.renpyScene = {
+          name: storyStore.currentStory.name,
+          text: storyStore.currentStory.text,
+          cover: storyStore.currentStory.cover,
+          next: storyStore.currentStory.nextScene ?? 'start',
+          menus: []
+        }
+        loadOptions(storyStore.currentStory.options ?? [], storyStore.currentStory.nextScene)
+        await dynamicCover()
+        bindText(storyStore.currentStory.text)
       }
-      await dynamicCover()
-      bindText(storyStore.currentStory.text)
     }
   },
   { immediate: true }
