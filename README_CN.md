@@ -64,6 +64,10 @@ $ pnpm build:linux
 
 ## 怎么添加自定义的故事？
 
+所有数据都在`/src/renderer/src/constants/data/`下，格式参照对应的定义，暂无详细文档介绍
+
+剧情脚本推荐存储在`/static/scripts/`下，剧情使用Renpy脚本编写，自定义实现部分语法，详情可参照`demo.rpy`
+
 ### 1. 添加Story
 
 > 添加目录：/src/renderer/src/constants/data/stories/yourStory.ts

@@ -65,19 +65,6 @@ $ pnpm build:linux
 
 ## How to add yourself story
 
-### Add Item
+All data is under `/src/renderer/src/constants/data/`, and the format refers to the corresponding definition. There is no detailed document description
 
-```
-GameItem {
-    name: string
-    type: GameItemType
-    level: LevelType
-    title?: string
-    desc?: string
-    cover?: string
-    count?: number
-    maxNum?: number
-    isLocked?: boolean
-    material?: Array<KeyValueNumPair>
-  }
-```
+It is recommended that plot scripts be stored under `/static/scripts/`. The plot is written using Renpy scripts, and some syntax is customized. For details, please refer to `demo.rpy`
