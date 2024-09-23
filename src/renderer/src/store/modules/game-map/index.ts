@@ -114,8 +114,7 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     }
   }
 
-  async function initMap(id: string) {
-    allMaps.value = await getDefaultMaps(authStore.userInfo.archive.id)
+  async function loadMap(id: string) {
     const map = allMaps.value.filter((x) => x.id == id)[0]
     if (map.id == id) {
       if (map.next != undefined) {
@@ -129,6 +128,10 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     currMap.value = allMaps.value.filter((x) => x.id == id)[0]
     authStore.userInfo.archive.place = id
     checkConditions(currMap.value)
+  }
+
+  async function initMaps() {
+    allMaps.value = await getDefaultMaps(authStore.userInfo.archive.id)
   }
 
   function findMap(id: string) {
@@ -164,7 +167,8 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     currLevelMaps,
     currMap,
     parentMap,
-    initMap,
+    loadMap,
+    initMaps,
     nextMap,
     beforeNextMap,
     findMap,

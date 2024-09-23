@@ -147,7 +147,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
           appStore.projectSettings.startStory = ''
         }, 10)
       } else {
-        await mapStore.initMap(userInfo.archive.place)
+        await mapStore.loadMap(userInfo.archive.place)
       }
       // end
       return true

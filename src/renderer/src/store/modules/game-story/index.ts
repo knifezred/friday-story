@@ -68,7 +68,7 @@ export const useStoryStore = defineStore(SetupStoreId.GameStory, () => {
   async function storyFinished(storyName: string) {
     authStore.setFlag(SetupStoreId.GameStory + '.finished.' + storyName, '1')
     useGameStore().sceneType = 'map'
-    await mapStore.initMap(authStore.userInfo.archive.place)
+    await mapStore.loadMap(authStore.userInfo.archive.place)
   }
 
   return {

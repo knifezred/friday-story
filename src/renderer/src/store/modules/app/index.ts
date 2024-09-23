@@ -8,6 +8,7 @@ import { breakpointsTailwind, useBreakpoints, useEventListener, useTitle } from 
 import { defineStore } from 'pinia'
 import { effectScope, nextTick, onScopeDispose, ref, watch } from 'vue'
 import { useGameItemStore } from '../game-item'
+import { useMapStore } from '../game-map'
 import { useNpcStore } from '../game-npc'
 import { useStoryStore } from '../game-story'
 import { useRouteStore } from '../route'
@@ -22,6 +23,7 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
   const storyStore = useStoryStore()
   const gameItemStore = useGameItemStore()
   const npcStore = useNpcStore()
+  const mapStore = useMapStore()
   const scope = effectScope()
   const breakpoints = useBreakpoints(breakpointsTailwind)
   const {
@@ -105,6 +107,7 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
 
   function init() {
     setDayjsLocale(locale.value)
+    mapStore.initMaps()
     storyStore.initStory()
     gameItemStore.initShopItems()
     npcStore.initNpc()

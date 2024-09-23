@@ -161,7 +161,6 @@ async function dynamicCover() {
   } else {
     isVideo.value = false
   }
-  return cover.value
 }
 
 async function nextScene(next: string) {
