@@ -106,7 +106,6 @@ export const useAppStore = defineStore(SetupStoreId.App, () => {
   }
 
   function init() {
-    console.log('appStore.init')
     setDayjsLocale(locale.value)
     mapStore.initMaps()
     storyStore.initStory()
