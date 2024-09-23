@@ -54,7 +54,7 @@ const bgColor = computed(() => {
     <div
       class="relative size-full flex-center overflow-hidden"
       :style="{ backgroundColor: bgColor }">
-      <NCard :bordered="false" class="absolute-center z-4 w-auto rd-0 opacity-50">
+      <NCard :bordered="false" class="absolute-center z-4 w-auto rd-0 opacity-80">
         <div class="w-400px lt-sm:w-300px">
           <header class="flex-y-center justify-between">
             <kinesis-element :strength="10" type="depth">
