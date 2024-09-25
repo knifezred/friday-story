@@ -204,7 +204,6 @@ declare namespace Dto {
     desc: string
     level: MapLevelType
     next?: string
-    story?: string
     icon?: string
     isShow?: boolean
     isLocked?: boolean

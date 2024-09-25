@@ -3,6 +3,7 @@
     "action": "操作",
     "add": "新增",
     "addSuccess": "添加成功",
+    "autoNext": "自动对话",
     "backToHome": "返回首页",
     "batchDelete": "批量删除",
     "cancel": "取消",
@@ -14,6 +15,7 @@
     "confirmDelete": "确认删除吗？",
     "delete": "删除",
     "deleteSuccess": "删除成功",
+    "doubleSpeed": "快进",
     "edit": "编辑",
     "editSuccess": "编辑成功",
     "empty": "这里什么也没有",
@@ -26,6 +28,7 @@
     "modify": "修改",
     "modifySuccess": "修改成功",
     "noData": "无数据",
+    "notUnlocked": "未解锁",
     "operate": "操作",
     "pleaseCheckValue": "请检查输入的值是否合法",
     "refresh": "刷新",
@@ -42,8 +45,7 @@
     "yesOrNo": {
       "no": "否",
       "yes": "是"
-    },
-    "notUnlocked": "未解锁"
+    }
   },
   "dataTable": {
     "itemCount": "共 {total} 条"
@@ -85,12 +87,12 @@
   "game": {
     "achievement": {
       "hatTrick": {
-        "title": "帽子戏法",
-        "desc": "3把定输赢"
+        "desc": "3把定输赢",
+        "title": "帽子戏法"
       },
       "heavyArmorProficient": {
-        "title": "重甲精通",
-        "desc": "随便写写"
+        "desc": "随便写写",
+        "title": "重甲精通"
       }
     },
     "condition": {
@@ -120,12 +122,12 @@
     "items": {
       "equipment": {
         "stoneAxe": {
-          "title": "石斧",
-          "desc": "一把由砸碎的石片制成的斧子"
+          "desc": "一把由砸碎的石片制成的斧子",
+          "title": "石斧"
         },
         "stonePickaxe": {
-          "title": "石镐",
-          "desc": "一把由砸碎的石头制成的石镐"
+          "desc": "一把由砸碎的石头制成的石镐",
+          "title": "石镐"
         }
       },
       "food": {

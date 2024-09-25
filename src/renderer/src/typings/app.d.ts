@@ -150,6 +150,7 @@ declare namespace App {
         action: string
         add: string
         addSuccess: string
+        autoNext: string
         backToHome: string
         batchDelete: string
         cancel: string
@@ -161,6 +162,7 @@ declare namespace App {
         confirmDelete: string
         delete: string
         deleteSuccess: string
+        doubleSpeed: string
         edit: string
         editSuccess: string
         empty: string

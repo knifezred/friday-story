@@ -41,10 +41,7 @@
       <n-h2 class="color-primary text-3xl">{{ $t(speaker) }}</n-h2>
       <n-scrollbar class="h-20vh" :distance="10" @click="nextText(true)">
         <n-p class="text-xl color-success indent-8">
-          <TypedText
-            v-model:value="isTyped"
-            :speed="appStore.projectSettings.textSpeed"
-            :strings="currentText" />
+          <TypedText v-model:value="isTyped" :speed="textSpeed" :strings="currentText" />
         </n-p>
       </n-scrollbar>
       <template #footer>
@@ -66,6 +63,27 @@
             </template>
           </n-flex>
         </Transition>
+
+        <n-tooltip placement="top" trigger="hover">
+          <template #trigger>
+            <n-button text class="absolute-rb bottom-4 right-12" @click="toggleTextSpeed">
+              <icon-ph:caret-right-fill
+                v-if="textSpeed == appStore.projectSettings.textSpeed"
+                class="size-5 color-white" />
+              <icon-ph:caret-double-right-fill v-else class="size-5 color-white" />
+            </n-button>
+          </template>
+          <span> {{ $t('common.doubleSpeed') }} </span>
+        </n-tooltip>
+        <n-tooltip placement="top" trigger="hover">
+          <template #trigger>
+            <n-button text class="absolute-rb bottom-4 right-4" @click="toggleAutoNext">
+              <icon-solar:map-bold v-if="!isAutoNext" class="size-5 color-white" />
+              <icon-svg-spinners:bars-fade v-else class="size-5 color-white" />
+            </n-button>
+          </template>
+          <span> {{ $t('common.autoNext') }}</span>
+        </n-tooltip>
       </template>
     </n-card>
   </NFlex>
@@ -111,6 +129,22 @@ const computedButtonLoadingStyle = computed(() => {
     animation: 'bgColorWidthTransition ' + actionStore.currentAction.duration + 'ms forwards'
   }
 })
+
+const textSpeed = ref(appStore.projectSettings.textSpeed)
+function toggleTextSpeed() {
+  if (textSpeed.value == appStore.projectSettings.textSpeed) {
+    textSpeed.value = appStore.projectSettings.textSpeed / 2
+  } else {
+    textSpeed.value = appStore.projectSettings.textSpeed
+  }
+}
+const isAutoNext = ref(false)
+function toggleAutoNext() {
+  isAutoNext.value = !isAutoNext.value
+  if (!isTyped.value && isAutoNext.value) {
+    nextText()
+  }
+}
 
 function bindText(text: string[], index: number = 0) {
   isTyped.value = true
@@ -262,13 +296,13 @@ function loadOptions(options: Array<Dto.ActionOption>, next: string | undefined)
 }
 
 // 自动跳转下一段话
-// watch([() => isTyped.value], () => {
-//   if (isTyped.value == false) {
-//     setTimeout(() => {
-//       nextText(false)
-//     }, 1000)
-//   }
-// })
+watch([() => isTyped.value], () => {
+  if (isTyped.value == false && isAutoNext.value) {
+    setTimeout(() => {
+      nextText(false)
+    }, 1000)
+  }
+})
 
 watch(
   [() => storyStore.currentStory],
