@@ -13,10 +13,13 @@ export const DefaultGameItems: Array<Dto.GameItem> = [
   ...EquipmentItems
 ]
 
-export type ShopType = 'happy_shop' | 'walmart' | 'yong_hui'
+export type ShopType = 'happy_shop' | 'walmart' | 'yong_hui' | 'pubShop'
 
 export const ShopGoodsRecord: Record<ShopType, Dto.ShopEntity> = {
   happy_shop: {
+    name: '开心超市',
+    manager: 'npc.sister',
+    money: 20000,
     goods: [
       {
         name: 'beer',
@@ -78,10 +81,7 @@ export const ShopGoodsRecord: Record<ShopType, Dto.ShopEntity> = {
         price: 800,
         type: 'task'
       }
-    ],
-    name: 'game.map.building.happy_shop.title',
-    manager: 'game.map.building.happy_shop.manager',
-    money: 20000
+    ]
   },
   walmart: {
     name: 'walmart',
@@ -105,6 +105,37 @@ export const ShopGoodsRecord: Record<ShopType, Dto.ShopEntity> = {
         name: 'sandwich',
         count: 10,
         price: 10,
+        type: 'food'
+      }
+    ]
+  },
+  pubShop: {
+    name: '酒馆柜台',
+    manager: 'npc.cousin',
+    money: 20000,
+    goods: [
+      {
+        name: 'beer',
+        count: 10,
+        price: 10,
+        type: 'food'
+      },
+      {
+        name: 'cola',
+        count: 18,
+        price: 20,
+        type: 'food'
+      },
+      {
+        name: 'coffee',
+        count: 80,
+        price: 40,
+        type: 'food'
+      },
+      {
+        name: 'milk',
+        count: 105,
+        price: 50,
         type: 'food'
       }
     ]

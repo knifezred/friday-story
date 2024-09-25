@@ -160,8 +160,8 @@ async function executeOption(action: Dto.ActionOption) {
         gameStore.currentMiniGame = action.miniGame ?? 'finger-guessing'
         break
       case 'shop':
-        appStore.setSiderHidden(false)
-        itemStore.currentShop = action.next ?? 'default'
+        appStore.setSiderHidden(true)
+        itemStore.setCurrentShop(mapStore.currMap.id, action.next ?? 'pubShop')
         break
       case 'story':
         await storyStore.setCurrentStory(action.next ?? 'demo')

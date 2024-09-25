@@ -44,7 +44,7 @@ export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
       currentShopEntity.value = JSON.parse(shopEntity.data.value)
       isUpdate.value = true
     } else {
-      currentShopEntity.value = ShopGoodsRecord[currentShop.value]
+      currentShopEntity.value = ShopGoodsRecord[currentShop.value.split('#')[0]]
       isUpdate.value = false
     }
     currentShopEntity.value.goods.forEach((goods) => {
@@ -88,8 +88,13 @@ export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
     }
   }
 
+  function setCurrentShop(mapId: string, shopId: string) {
+    currentShop.value = shopId + '#' + mapId
+  }
+
   return {
     currentShop,
+    setCurrentShop,
     currentShopEntity,
     currentShopGoods,
     initShopItems,

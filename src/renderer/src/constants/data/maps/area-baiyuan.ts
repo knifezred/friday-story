@@ -27,7 +27,8 @@ const CityBuildings: Array<Dto.MapItem> = [
         name: 'buyWine',
         text: '买酒',
         line: [],
-        type: 'shop'
+        type: 'shop',
+        next: 'pubShop'
       },
       {
         name: 'treatDrink',
@@ -44,13 +45,31 @@ const CityBuildings: Array<Dto.MapItem> = [
     name: 'workshop',
     level: 'building',
     title: '工坊',
-    desc: '提供简单的加工打造功能'
+    desc: '提供简单的加工打造功能',
+    options: [
+      {
+        name: 'make',
+        text: '制作',
+        line: [],
+        type: 'shop',
+        next: 'happy_shop'
+      }
+    ]
   },
   {
     name: 'market',
     level: 'building',
     title: '坊市',
-    desc: '提供基础的物资供给'
+    desc: '提供基础的物资供给',
+    options: [
+      {
+        name: 'transaction',
+        text: '交易',
+        line: [],
+        type: 'shop',
+        next: 'happy_shop'
+      }
+    ]
   },
   {
     name: 'skillLibrary',
