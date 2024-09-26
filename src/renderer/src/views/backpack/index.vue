@@ -5,31 +5,25 @@
       </n-empty>
       <n-scrollbar v-else class="h-90vh">
         <n-flex>
-          <n-card
-            v-for="goods in shopItems"
-            :key="goods.name"
-            class="relative z-4 w-xs ma-1 shadow-primary shadow-op-30">
-            <n-thing>
-              <template #avatar>
-                <ImageIcon :src="goods.cover" class="size-18" />
-              </template>
-              <template #header>
-                <span class="text-4 text-info">
-                  {{ $t(goods.title) }}
-                  ({{ goods.count.toString() }})
-                </span>
-              </template>
-              <template #header-extra>
-                <LevelTag :level="goods.level" />
-              </template>
-              <template #description>
-                <n-p class="my-1 text-info-600"> {{ $t(goods.desc) }}</n-p>
-              </template>
-              <template #action>
-                <n-flex justify="space-around"> </n-flex>
-              </template>
-            </n-thing>
-          </n-card>
+          <template v-for="goods in shopItems" :key="goods.name">
+            <n-card class="relative w-56 ma-2 shadow-primary shadow-op-30">
+              <n-thing>
+                <template #avatar>
+                  <n-badge :value="goods.count">
+                    <LevelAvatar :round="false" :size="64" :level="goods.level">
+                      <ImageIcon :src="goods.cover" class="size-12" />
+                    </LevelAvatar>
+                  </n-badge>
+                </template>
+                <template #header>
+                  <span class="pl-1 text-4 text-info"> {{ $t(goods.title) }}</span>
+                </template>
+                <template #description>
+                  <n-p class="text-info-600">{{ $t(goods.desc) }} </n-p>
+                </template>
+              </n-thing>
+            </n-card>
+          </template>
         </n-flex>
       </n-scrollbar>
     </n-gi>
@@ -42,7 +36,7 @@ import { useAuthStore } from '@renderer/store/modules/auth'
 import { onMounted, ref } from 'vue'
 
 defineOptions({
-  name: 'Inventory'
+  name: 'Backpack'
 })
 
 const shopItems = ref<Array<Dto.GameItemFull>>([])

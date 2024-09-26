@@ -16,11 +16,13 @@ export const DefaultActions: Array<Dto.ActionOption> = [
         ],
         for: 'execute'
       }
-    ]
+    ],
+    line: []
   },
   {
     name: 'knocked',
     text: 'game.option.knocked',
-    type: 'map'
+    type: 'map',
+    line: []
   }
 ]

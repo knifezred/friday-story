@@ -1,41 +1,22 @@
 <template>
-  <n-grid :x-gap="12" :y-gap="12" :cols="4" layout-shift-disabled>
-    <n-gi :span="1" class="text-center">
-      <n-p class="pt-4">
-        <n-tag :bordered="false" type="success">
-          {{ $t(gameItemStore.currentShopEntity.manager) }}:
-          {{ gameItemStore.currentShopEntity.money }}
-        </n-tag>
-      </n-p>
-    </n-gi>
-    <n-gi :span="2" class="text-center">
-      <n-h1 class="text-primary-500 mb-0"> {{ $t(gameItemStore.currentShopEntity.name) }}</n-h1>
-    </n-gi>
-    <n-gi :span="1" class="text-center">
-      <n-p class="pt-4">
-        <n-tag :bordered="false" type="success">
-          {{ authStore.userInfo.username }}: {{ authStore.archivedData.money }}
-        </n-tag>
-      </n-p>
-    </n-gi>
-    <n-gi :span="4">
+  <n-grid :x-gap="12" :y-gap="12" :cols="4" layout-shift-disabled class="mt-2">
+    <n-gi :span="3">
       <n-scrollbar class="h-78vh pl-2 pt-2">
         <n-flex class="ma-2">
           <n-card
             v-for="goods in shopItems"
             :key="goods.name"
-            class="relative z-4 w-92 shadow-primary shadow-op-30">
+            class="relative z-4 w-64 shadow-primary shadow-op-30">
             <n-thing>
               <template #avatar>
                 <n-badge :value="goods.selectedCount">
-                  <ImageIcon :src="goods.cover" class="size-18" />
+                  <LevelAvatar :round="false" :size="64" :level="goods.level">
+                    <ImageIcon :src="goods.cover" class="size-12" />
+                  </LevelAvatar>
                 </n-badge>
               </template>
               <template #header>
-                <span class="text-4 text-info"> {{ $t(goods.title) }}</span>
-              </template>
-              <template #header-extra>
-                <LevelTag :level="goods.level" />
+                <span class="pl-1 text-4 text-info"> {{ $t(goods.title) }}</span>
               </template>
               <template #description>
                 <n-tag type="info" :bordered="false">
@@ -60,7 +41,14 @@
         </n-flex>
       </n-scrollbar>
     </n-gi>
-    <n-gi :span="4" class="text-center">
+    <n-gi :span="1" class="text-center">
+      <n-h1 class="text-primary-500 mb-0"> {{ $t(gameItemStore.currentShopEntity.name) }}</n-h1>
+      <n-p class="pt-4">
+        <n-tag :bordered="false" type="success">
+          {{ $t(gameItemStore.currentShopEntity.manager) }}:
+          {{ gameItemStore.currentShopEntity.money }}
+        </n-tag>
+      </n-p>
       <n-button type="primary" class="w-48 h-12" @click="checkout">
         <icon-solar:cart-large-3-bold-duotone class="size-8 color-white" />
         （{{ totalCoast }}）

@@ -13,9 +13,7 @@ export const DefaultGameItems: Array<Dto.GameItem> = [
   ...EquipmentItems
 ]
 
-export type ShopType = 'happy_shop' | 'walmart' | 'yong_hui' | 'pubShop'
-
-export const ShopGoodsRecord: Record<ShopType, Dto.ShopEntity> = {
+export const ShopGoodsRecord: Record<string, Dto.ShopEntity> = {
   happy_shop: {
     name: '开心超市',
     manager: 'sister',
@@ -83,10 +81,10 @@ export const ShopGoodsRecord: Record<ShopType, Dto.ShopEntity> = {
       }
     ]
   },
-  walmart: {
-    name: 'walmart',
+  workshop_1: {
+    name: '工坊',
     manager: 'sister',
-    money: 0,
+    money: 21535,
     goods: [
       {
         name: 'sandwich',
@@ -96,10 +94,10 @@ export const ShopGoodsRecord: Record<ShopType, Dto.ShopEntity> = {
       }
     ]
   },
-  yong_hui: {
-    name: 'walmart',
-    manager: '',
-    money: 0,
+  market_1: {
+    name: '坊市',
+    manager: 'sister',
+    money: 124124,
     goods: [
       {
         name: 'sandwich',

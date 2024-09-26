@@ -61,6 +61,7 @@ declare module 'vue' {
     ImageIcon: typeof import('./../components/custom/image-icon.vue')['default']
     ImageIconPicker: typeof import('./../components/custom/image-icon-picker.vue')['default']
     LangSwitch: typeof import('./../components/common/lang-switch.vue')['default']
+    LevelAvatar: typeof import('./../components/ui/level-avatar.vue')['default']
     LevelTag: typeof import('./../components/ui/level-tag.vue')['default']
     LookForward: typeof import('./../components/custom/look-forward.vue')['default']
     MainScene: typeof import('./../components/game-window/modules/main-scene.vue')['default']

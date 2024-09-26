@@ -46,7 +46,7 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'achievement',
       i18nKey: 'route.achievement',
-      icon: 'streamline-emojis:wrapped-gift-2',
+      icon: 'fluent-emoji-flat:military-medal',
       order: 30
     }
   },
@@ -60,6 +60,17 @@ export const generatedRoutes: GeneratedRoute[] = [
       i18nKey: 'route.archive',
       constant: true,
       hideInMenu: true
+    }
+  },
+  {
+    name: 'backpack',
+    path: '/backpack',
+    component: 'layout.base$view.backpack',
+    meta: {
+      title: 'backpack',
+      i18nKey: 'route.backpack',
+      localIcon: 'game-bag',
+      order: 10
     }
   },
   {
@@ -90,19 +101,8 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'home',
       i18nKey: 'route.home',
-      icon: 'streamline-emojis:house-with-garden',
+      localIcon: 'map-icon',
       order: 1
-    }
-  },
-  {
-    name: 'inventory',
-    path: '/inventory',
-    component: 'layout.base$view.inventory',
-    meta: {
-      title: 'inventory',
-      i18nKey: 'route.inventory',
-      icon: 'streamline-emojis:package',
-      order: 10
     }
   },
   {
@@ -158,8 +158,8 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'task',
       i18nKey: 'route.task',
-      icon: 'unjs:fs-memo',
+      icon: 'fluent-emoji-flat:bookmark-tabs',
       order: 20
     }
   }
-];
+]

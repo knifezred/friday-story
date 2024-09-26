@@ -22,10 +22,10 @@ declare module "@elegant-router/types" {
     "500": "/500";
     "achievement": "/achievement";
     "archive": "/archive";
+    "backpack": "/backpack";
     "demo": "/demo";
     "gallery": "/gallery";
     "home": "/home";
-    "inventory": "/inventory";
     "login": "/login/:module(pwd-login|register|reset-pwd|game-start)?";
     "personal": "/personal";
     "relationship": "/relationship";
@@ -67,10 +67,10 @@ declare module "@elegant-router/types" {
     | "500"
     | "achievement"
     | "archive"
+    | "backpack"
     | "demo"
     | "gallery"
     | "home"
-    | "inventory"
     | "login"
     | "personal"
     | "relationship"
@@ -101,8 +101,8 @@ declare module "@elegant-router/types" {
     | "404"
     | "500"
     | "achievement"
+    | "backpack"
     | "home"
-    | "inventory"
     | "login"
     | "relationship"
     | "task"

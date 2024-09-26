@@ -9,7 +9,20 @@ const CityBuildings: Array<Dto.MapItem> = [
         name: 'reset',
         text: '休息',
         line: [],
-        type: 'map'
+        type: 'map',
+        effect: {
+          type: 'all',
+          effects: [
+            {
+              type: 'removeHurt',
+              value: 'HeavyHurt'
+            },
+            {
+              type: 'recovery',
+              value: 'all'
+            }
+          ]
+        }
       }
     ]
   },
@@ -52,7 +65,7 @@ const CityBuildings: Array<Dto.MapItem> = [
         text: '制作',
         line: [],
         type: 'shop',
-        next: 'happy_shop'
+        next: 'workshop_1'
       }
     ]
   },
@@ -67,7 +80,7 @@ const CityBuildings: Array<Dto.MapItem> = [
         text: '交易',
         line: [],
         type: 'shop',
-        next: 'happy_shop'
+        next: 'market_1'
       }
     ]
   },
@@ -78,7 +91,7 @@ const CityBuildings: Array<Dto.MapItem> = [
     desc: '收录天下功法'
   },
   {
-    name: 'warehouse',
+    name: 'inventory',
     level: 'building',
     title: '建木',
     desc: '可存放物品'

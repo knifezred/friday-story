@@ -1,6 +1,4 @@
-export type WorkbenchType = 'default' | 'darkHouse'
-
-export const WorkbenchRecords: Record<WorkbenchType, Dto.ShopEntity> = {
+export const WorkbenchRecords: Record<string, Dto.ShopEntity> = {
   default: {
     goods: [
       {
@@ -64,21 +62,8 @@ export const WorkbenchRecords: Record<WorkbenchType, Dto.ShopEntity> = {
         type: 'task'
       }
     ],
-    name: 'game.map.building.happy_shop.title',
-    manager: 'game.map.building.happy_shop.manager',
+    name: '工坊',
+    manager: 'sister',
     money: 20000
-  },
-  darkHouse: {
-    name: 'walmart',
-    manager: '',
-    money: 0,
-    goods: [
-      {
-        name: 'sandwich',
-        count: 10,
-        price: 10,
-        type: 'food'
-      }
-    ]
   }
 }
