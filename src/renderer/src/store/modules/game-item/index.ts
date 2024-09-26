@@ -6,6 +6,7 @@ import { localeText, prefixImage } from '@renderer/utils/common'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useAuthStore } from '../auth'
+import { getCharacterName } from '@renderer/hooks/game/renpy'
 
 export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
   const authStore = useAuthStore()
@@ -45,6 +46,7 @@ export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
       isUpdate.value = true
     } else {
       currentShopEntity.value = ShopGoodsRecord[currentShop.value.split('#')[0]]
+      currentShopEntity.value.manager = getCharacterName(currentShopEntity.value.manager)
       isUpdate.value = false
     }
     currentShopEntity.value.goods.forEach((goods) => {

@@ -18,7 +18,7 @@ export type ShopType = 'happy_shop' | 'walmart' | 'yong_hui' | 'pubShop'
 export const ShopGoodsRecord: Record<ShopType, Dto.ShopEntity> = {
   happy_shop: {
     name: '开心超市',
-    manager: 'npc.sister',
+    manager: 'sister',
     money: 20000,
     goods: [
       {
@@ -85,7 +85,7 @@ export const ShopGoodsRecord: Record<ShopType, Dto.ShopEntity> = {
   },
   walmart: {
     name: 'walmart',
-    manager: '',
+    manager: 'sister',
     money: 0,
     goods: [
       {
@@ -111,7 +111,7 @@ export const ShopGoodsRecord: Record<ShopType, Dto.ShopEntity> = {
   },
   pubShop: {
     name: '酒馆柜台',
-    manager: 'npc.cousin',
+    manager: 'cousin',
     money: 20000,
     goods: [
       {
