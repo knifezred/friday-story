@@ -164,10 +164,11 @@ async function executeOption(action: Dto.ActionOption) {
         itemStore.setCurrentShop(mapStore.currMap.id, action.next ?? 'pubShop')
         break
       case 'story':
+        appStore.setSiderHidden(true)
         await storyStore.setCurrentStory(action.next ?? 'demo')
         break
       case 'workbench':
-        appStore.setSiderHidden(false)
+        appStore.setSiderHidden(true)
         itemStore.currentShop = action.next ?? 'default'
         break
       default:
