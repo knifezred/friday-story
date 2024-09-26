@@ -42,8 +42,11 @@
       </n-scrollbar>
     </n-gi>
     <n-gi :span="1" class="text-center">
-      <n-h1 class="text-primary-500 mb-0"> {{ $t(gameItemStore.currentShopEntity.name) }}</n-h1>
+      <n-tag :bordered="false" type="primary" class="text-8 text-center h-10 block">
+        {{ $t(gameItemStore.currentShopEntity.name) }}
+      </n-tag>
       <n-p class="pt-4">
+        <ImageIcon :src="gameItemStore.currentShopEntity.managerAvatar" />
         <n-tag :bordered="false" type="success">
           {{ $t(gameItemStore.currentShopEntity.manager) }}:
           {{ gameItemStore.currentShopEntity.money }}

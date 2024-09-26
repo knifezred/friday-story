@@ -1,12 +1,12 @@
 import { DefaultGameItems, ShopGoodsRecord } from '@renderer/constants/data/items'
 import { EquipmentItems } from '@renderer/constants/data/items/equipment'
 import { SetupStoreId } from '@renderer/enums'
+import { getCharacterName } from '@renderer/hooks/game/renpy'
 import { createStorage, updateStorage } from '@renderer/service/api/storage'
 import { localeText, prefixImage } from '@renderer/utils/common'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useAuthStore } from '../auth'
-import { getCharacterName } from '@renderer/hooks/game/renpy'
 
 export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
   const authStore = useAuthStore()
@@ -16,7 +16,8 @@ export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
     name: '',
     manager: '',
     money: 0,
-    goods: []
+    goods: [],
+    managerAvatar: ''
   })
   const currentWorkbench = ref('')
 

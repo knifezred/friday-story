@@ -339,6 +339,7 @@ declare namespace Dto {
   interface ShopEntity {
     name: string
     manager: string
+    managerAvatar: string
     money: number
     goods: Array<ShopGoods>
   }
