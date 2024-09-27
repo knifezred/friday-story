@@ -94,7 +94,7 @@
       <n-space justify="end">
         <n-p>
           <n-tag :bordered="false" type="warning" class="block-10 w-48" size="large">
-            花费： {{ totalCoast }}
+            {{ totalCoast }}
           </n-tag>
         </n-p>
         <n-button type="primary" class="w-48" size="large" @click="checkout">
@@ -109,7 +109,6 @@
 </template>
 
 <script setup lang="ts">
-import { DefaultGameItems } from '@renderer/constants/data/items'
 import { $t } from '@renderer/locales'
 import { useAuthStore } from '@renderer/store/modules/auth'
 import { useGameStore } from '@renderer/store/modules/game'
@@ -207,18 +206,16 @@ function resetDeal() {
 
 const userItems = ref<Array<Dto.GameItemFull>>([])
 
+const { totalGameItems } = useGameItemStore()
 function loadUserItems() {
-  DefaultGameItems.filter(
-    (x) => authStore.archivedData.items.filter((p) => p.name == x.name).length > 0
-  ).forEach((item) => {
-    userItems.value.push({
-      ...item,
-      title: item.title ?? '',
-      desc: item.desc ?? '',
-      cover: item.cover ?? '',
-      count: authStore.archivedData.items.filter((x) => x.name == item.name)[0].count
+  totalGameItems
+    .filter((x) => authStore.archivedData.items.filter((p) => p.name == x.name).length > 0)
+    .forEach((item) => {
+      userItems.value.push({
+        ...item,
+        count: authStore.archivedData.items.filter((x) => x.name == item.name)[0].count
+      })
     })
-  })
 }
 
 onMounted(async () => {

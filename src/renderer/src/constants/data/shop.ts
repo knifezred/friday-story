@@ -1,18 +1,3 @@
-import { EquipmentItems } from './items/equipment'
-import { FoodGameItems } from './items/foods'
-import { MaterialGameItems } from './items/material'
-import { OtherGameItems } from './items/other'
-import { TaskGameItems } from './items/task'
-
-// type+'.'+name
-export const DefaultGameItems: Array<Dto.GameItem> = [
-  ...FoodGameItems,
-  ...OtherGameItems,
-  ...MaterialGameItems,
-  ...TaskGameItems,
-  ...EquipmentItems
-]
-
 export const ShopGoodsRecord: Record<string, Dto.ShopEntity> = {
   happy_shop: {
     name: '开心超市',

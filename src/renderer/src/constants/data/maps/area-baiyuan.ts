@@ -1,3 +1,6 @@
+import { useActionEffect } from '@renderer/hooks/game/action-effect'
+
+const effect = useActionEffect()
 const CityBuildings: Array<Dto.MapItem> = [
   {
     name: 'inn',
@@ -14,8 +17,8 @@ const CityBuildings: Array<Dto.MapItem> = [
           type: 'all',
           effects: [
             {
-              type: 'recovery',
-              value: 'all'
+              value: ',1',
+              func: effect.addItem
             }
           ]
         }

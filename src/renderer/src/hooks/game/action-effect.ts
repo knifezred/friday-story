@@ -5,12 +5,9 @@ import { useMapStore } from '@renderer/store/modules/game-map'
 import { randomInt, roomTemperature } from '@renderer/utils/common'
 
 export function useActionEffect() {
-  const authStore = useAuthStore()
-  const gameStore = useGameStore()
-  const mapStore = useMapStore()
-
   // 添加指定物品
   function addItem(value: string) {
+    const authStore = useAuthStore()
     const { 0: name, 1: count } = value.split(',')
     let countNum = 1
     if (count.includes('-')) {
@@ -37,6 +34,7 @@ export function useActionEffect() {
 
   // 解锁地图
   function unlockMap(value: string) {
+    const mapStore = useMapStore()
     const map = mapStore.findMap(value)
     if (map != undefined) {
       map.isShow = true
@@ -49,6 +47,7 @@ export function useActionEffect() {
 
   // 锁定地图
   function lockMap(value: string) {
+    const mapStore = useMapStore()
     const map = mapStore.findMap(value)
     if (map != undefined) {
       map.isShow = false
@@ -60,16 +59,20 @@ export function useActionEffect() {
   }
 
   function setFlag(value: string) {
+    const authStore = useAuthStore()
     const { 0: key, 1: flagValue } = value.split(',')
     return authStore.setFlag(key, flagValue)
   }
 
   function useItem(value: string) {
+    const authStore = useAuthStore()
     const { 0: key, 1: num } = value.split(',')
     return authStore.useItem(key, Number(num))
   }
 
   function changeRoomTemperature(value: string) {
+    const gameStore = useGameStore()
+    const mapStore = useMapStore()
     if (value.includes(',')) {
       const { 0: key, 1: num } = value.split(',')
       const map = mapStore.findMap(key)

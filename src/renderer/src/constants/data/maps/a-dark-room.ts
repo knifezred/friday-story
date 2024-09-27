@@ -1,3 +1,8 @@
+import { useActionEffect } from '@renderer/hooks/game/action-effect'
+import { useCondition } from '@renderer/hooks/game/condition'
+
+const condition = useCondition()
+const effect = useActionEffect()
 export const ADarkRoomMaps: Array<Dto.MapItem> = [
   {
     name: 'aDarkRoom',
@@ -23,7 +28,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                     for: 'execute',
                     conditions: [
                       {
-                        type: 'maxOptionNum',
+                        func: condition.maxOptionNum,
                         value: 'game.option.explore,1',
                         failure: 'game.message.nothingFound'
                       }
@@ -34,8 +39,8 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                     for: 'show',
                     conditions: [
                       {
-                        type: 'maxOptionNum',
-                        value: 'game.option.explore,1'
+                        value: 'game.option.explore,1',
+                        func: condition.maxOptionNum
                       }
                     ]
                   }
@@ -44,11 +49,11 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                   type: 'all',
                   effects: [
                     {
-                      type: 'addItem',
+                      func: effect.addItem,
                       value: 'material.wood,5'
                     },
                     {
-                      type: 'unlockMap',
+                      func: effect.unlockMap,
                       value: 'room.darkHouse.roomWork',
                       success: 'game.message.findMap'
                     }
@@ -67,9 +72,9 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                     for: 'show',
                     conditions: [
                       {
-                        type: 'maxOptionNum',
                         value: 'game.option.explore,1',
-                        result: false
+                        result: false,
+                        func: condition.maxOptionNum
                       }
                     ]
                   },
@@ -78,8 +83,8 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                     for: 'execute',
                     conditions: [
                       {
-                        type: 'hasItem',
-                        value: 'material.wood,1'
+                        value: 'material.wood,1',
+                        func: condition.hasItem
                       }
                     ]
                   }
@@ -88,11 +93,11 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                   type: 'all',
                   effects: [
                     {
-                      type: 'useItem',
+                      func: effect.useItem,
                       value: 'material.wood,1'
                     },
                     {
-                      type: 'changeRoomTemperature',
+                      func: effect.changeRoomTemperature,
                       value: '5',
                       success: ''
                     }
@@ -120,10 +125,10 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                     for: 'show',
                     conditions: [
                       {
-                        type: 'checkFlag',
                         value: 'room.darkHouse.roomWork.unlock,1',
                         success: '你需要3根木头来修理工作台',
-                        result: false
+                        result: false,
+                        func: condition.checkFlag
                       }
                     ]
                   },
@@ -132,8 +137,8 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                     for: 'execute',
                     conditions: [
                       {
-                        type: 'hasItem',
-                        value: 'material.wood,3'
+                        value: 'material.wood,3',
+                        func: condition.hasItem
                       }
                     ]
                   }
@@ -142,11 +147,11 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                   type: 'all',
                   effects: [
                     {
-                      type: 'useItem',
+                      func: effect.useItem,
                       value: 'material.wood,3'
                     },
                     {
-                      type: 'setFlag',
+                      func: effect.setFlag,
                       value: 'room.darkHouse.roomWork.unlock,1',
                       success: '工作台已解锁'
                     }
@@ -166,8 +171,8 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                     for: 'show',
                     conditions: [
                       {
-                        type: 'checkFlag',
-                        value: 'room.darkHouse.roomWork.unlock,1'
+                        value: 'room.darkHouse.roomWork.unlock,1',
+                        func: condition.checkFlag
                       }
                     ]
                   }
@@ -189,8 +194,8 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
                     for: 'show',
                     conditions: [
                       {
-                        type: 'checkFlag',
-                        value: 'room.darkHouse.roomWork.unlock,1'
+                        value: 'room.darkHouse.roomWork.unlock,1',
+                        func: condition.checkFlag
                       }
                     ]
                   }
@@ -222,7 +227,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
               type: 'all',
               effects: [
                 {
-                  type: 'addItem',
+                  func: effect.addItem,
                   value: 'material.wood,5-10',
                   notification: true
                 }
@@ -239,7 +244,7 @@ export const ADarkRoomMaps: Array<Dto.MapItem> = [
               type: 'all',
               effects: [
                 {
-                  type: 'addItem',
+                  func: effect.addItem,
                   value: 'food.fish,1-3',
                   notification: true
                 }

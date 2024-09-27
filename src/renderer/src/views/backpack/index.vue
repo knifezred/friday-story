@@ -31,8 +31,8 @@
 </template>
 
 <script setup lang="ts">
-import { DefaultGameItems } from '@renderer/constants/data/items'
 import { useAuthStore } from '@renderer/store/modules/auth'
+import { useGameItemStore } from '@renderer/store/modules/game-item'
 import { onMounted, ref } from 'vue'
 
 defineOptions({
@@ -41,20 +41,18 @@ defineOptions({
 
 const shopItems = ref<Array<Dto.GameItemFull>>([])
 const { archivedData } = useAuthStore()
+const { totalGameItems } = useGameItemStore()
 
 onMounted(() => {
   shopItems.value = []
-  DefaultGameItems.filter(
-    (x) => archivedData.items.filter((p) => p.name == x.name).length > 0
-  ).forEach((item) => {
-    shopItems.value.push({
-      ...item,
-      title: item.title ?? '',
-      desc: item.desc ?? '',
-      cover: item.cover ?? '',
-      count: archivedData.items.filter((x) => x.name == item.name)[0].count
+  totalGameItems
+    .filter((x) => archivedData.items.filter((p) => p.name == x.name).length > 0)
+    .forEach((item) => {
+      shopItems.value.push({
+        ...item,
+        count: archivedData.items.filter((x) => x.name == item.name)[0].count
+      })
     })
-  })
 })
 </script>
 

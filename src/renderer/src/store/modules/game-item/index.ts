@@ -1,12 +1,11 @@
-import { DefaultGameItems, ShopGoodsRecord } from '@renderer/constants/data/items'
-import { EquipmentItems } from '@renderer/constants/data/items/equipment'
+import { ShopGoodsRecord } from '@renderer/constants/data/shop'
 import { SetupStoreId } from '@renderer/enums'
 import { getCharacterName } from '@renderer/hooks/game/renpy'
 import { createStorage, updateStorage } from '@renderer/service/api/storage'
-import { localeText, prefixImage } from '@renderer/utils/common'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useAuthStore } from '../auth'
+import { initGameItems } from './shared'
 
 export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
   const authStore = useAuthStore()
@@ -20,22 +19,21 @@ export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
     managerAvatar: ''
   })
   const currentWorkbench = ref('')
+  const totalGameItems: Array<Dto.GameItemFull> = initGameItems()
 
   function workbenchTableItems() {
     const workbenchTable: Array<Dto.EquipmentItemFull> = []
-    EquipmentItems.forEach((item) => {
-      const equipment: Dto.EquipmentItemFull = {
-        ...item,
-        name: item.type + '.' + item.name,
-        desc: localeText(item.desc, item.name, 'game.items', 'desc'),
-        title: localeText(item.title, item.name, 'game.items', 'title'),
-        cover: prefixImage(item.cover, item.name, 'items', '.png'),
-        count: item.count ?? 1,
-        material: item.material ?? [],
-        selectedCount: 0
-      }
-      workbenchTable.push(equipment)
-    })
+    totalGameItems
+      .filter((x) => x.type == 'equipment')
+      .forEach((item) => {
+        const equipment: Dto.EquipmentItemFull = {
+          ...item,
+          count: item.count ?? 1,
+          material: item.material ?? [],
+          selectedCount: 0
+        }
+        workbenchTable.push(equipment)
+      })
     return workbenchTable
   }
 
@@ -54,7 +52,7 @@ export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
       if (goods.name.indexOf('.') == -1) {
         goods.name = goods.type + '.' + goods.name
       }
-      const gameItem = DefaultGameItems.filter((x) => x.name == goods.name)[0]
+      const gameItem = totalGameItems.filter((x) => x.name == goods.name)[0]
       goods.name = gameItem.name
       goods.title = gameItem.title
       goods.desc = gameItem.desc
@@ -64,15 +62,6 @@ export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
       goods.selectedCount = 0
     })
     return currentShopEntity.value.goods
-  }
-
-  function initShopItems() {
-    DefaultGameItems.forEach((item) => {
-      item.name = item.type + '.' + item.name
-      item.desc = localeText(item.desc, item.name, 'game.items', 'desc')
-      item.title = localeText(item.title, item.name, 'game.items', 'title')
-      item.cover = prefixImage(item.cover, item.name, 'items', '.png')
-    })
   }
 
   function deal(totalMoney: number) {
@@ -96,11 +85,11 @@ export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
   }
 
   return {
+    totalGameItems,
     currentShop,
     setCurrentShop,
     currentShopEntity,
     currentShopGoods,
-    initShopItems,
     deal,
     currentWorkbench,
     workbenchTableItems

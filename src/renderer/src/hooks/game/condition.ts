@@ -4,11 +4,8 @@ import { useMapStore } from '@renderer/store/modules/game-map'
 import dayjs from 'dayjs'
 
 export function useCondition() {
-  const authStore = useAuthStore()
-  const mapStore = useMapStore()
-  const gameStore = useGameStore()
-
   function hasAuth(codes: string | string[]) {
+    const authStore = useAuthStore()
     if (!authStore.isLogin) {
       return false
     }
@@ -22,11 +19,13 @@ export function useCondition() {
 
   //是否拥有指定成就
   function hasAchievement(achievement: string) {
+    const authStore = useAuthStore()
     return authStore.archivedData.achievement.includes(achievement)
   }
 
   // 是否拥有指定物品
   function hasItem(value: string) {
+    const authStore = useAuthStore()
     const { 0: name, 1: num } = value.split(',')
     const item = authStore.archivedData.items.filter((x) => x.name == name)[0]
     if (item == undefined) {
@@ -40,13 +39,16 @@ export function useCondition() {
   }
 
   function hasLocked() {
+    const gameStore = useGameStore()
     if (gameStore.sceneType == 'map') {
+      const mapStore = useMapStore()
       return mapStore.currMap.isLocked == true
     }
     return false
   }
 
   function inTime(betweens: string) {
+    const authStore = useAuthStore()
     const times = betweens.split('-')
     const [hours, minutes] = times[0].split(':').map(Number)
     const startTime = hours * 60 + minutes
@@ -88,6 +90,7 @@ export function useCondition() {
 
   // 是否在指定时间段内
   function inSpecifiedTime(time: string, type: 'day' | 'month' | 'hour') {
+    const authStore = useAuthStore()
     const times = time.split(',')
     const current = dayjs(authStore.archivedData.worldTime).get(type).toString()
     if (times.includes(current)) {
@@ -97,18 +100,21 @@ export function useCondition() {
   }
 
   function minOptionNum(value: string) {
+    const gameStore = useGameStore()
     const { 0: name, 1: num } = value.split(',')
     const count = gameStore.getOptionExecuteNum(name)
     return count >= Number(num)
   }
 
   function maxOptionNum(value: string) {
+    const gameStore = useGameStore()
     const { 0: name, 1: num } = value.split(',')
     const count = gameStore.getOptionExecuteNum(name)
     return count < Number(num)
   }
 
   function checkFlag(flag: string) {
+    const authStore = useAuthStore()
     const { 0: key, 1: value } = flag.split(',')
     return authStore.checkFlag(key, value)
   }

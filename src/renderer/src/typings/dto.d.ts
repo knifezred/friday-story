@@ -285,10 +285,15 @@ declare namespace Dto {
 
   type GameItemType = 'other' | 'food' | 'equipment' | 'task' | 'car' | 'material'
 
+  interface GameItemCollection {
+    type: GameItemType
+    items: Array<GameItem>
+  }
+
   interface GameItem {
     name: string
-    type: GameItemType
     level: LevelType
+    type?: GameItemType
     title?: string
     desc?: string
     cover?: string
@@ -300,8 +305,8 @@ declare namespace Dto {
 
   interface GameItemFull {
     name: string
-    type: GameItemType
     level: LevelType
+    type: GameItemType
     title: string
     desc: string
     cover: string
@@ -412,7 +417,7 @@ declare namespace Dto {
     conditions: Condition[]
   }
   interface Condition {
-    type: string
+    func: (value: string) => boolean
     value: string
     result?: boolean
     text?: string
@@ -430,7 +435,7 @@ declare namespace Dto {
     effects: ActionEffect[]
   }
   interface ActionEffect {
-    type: string
+    func: (value: string) => any
     value: string
     result?: boolean
     text?: string
