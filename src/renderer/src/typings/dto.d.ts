@@ -300,6 +300,8 @@ declare namespace Dto {
     count?: number
     maxNum?: number
     isLocked?: boolean
+    condition?: ConditionModel[]
+    effect?: ActionEffectModel
     material?: Array<KeyValueNumPair>
   }
 
@@ -313,6 +315,8 @@ declare namespace Dto {
     count: number
     maxNum?: number
     isLocked?: boolean
+    condition?: ConditionModel[]
+    effect?: ActionEffectModel
     material?: Array<KeyValueNumPair>
   }
 
