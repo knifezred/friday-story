@@ -1,11 +1,12 @@
+import { GameItemCollections } from '@renderer/constants/data/items'
 import { ShopGoodsRecord } from '@renderer/constants/data/shop'
 import { SetupStoreId } from '@renderer/enums'
 import { getCharacterName } from '@renderer/hooks/game/renpy'
 import { createStorage, updateStorage } from '@renderer/service/api/storage'
+import { localeText, prefixImage } from '@renderer/utils/common'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useAuthStore } from '../auth'
-import { initGameItems } from './shared'
 
 export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
   const authStore = useAuthStore()
@@ -19,11 +20,29 @@ export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
     managerAvatar: ''
   })
   const currentWorkbench = ref('')
-  const totalGameItems: Array<Dto.GameItemFull> = initGameItems()
+  const totalGameItems = ref<Array<Dto.GameItemFull>>([])
+
+  function initTotalGameItems() {
+    totalGameItems.value = []
+    GameItemCollections.forEach((co) => {
+      co.items.forEach((item) => {
+        item.type = co.type
+        item.name = co.type + '.' + item.name
+        totalGameItems.value.push({
+          ...item,
+          desc: localeText(item.desc, item.name, 'game.items', 'desc'),
+          title: localeText(item.title, item.name, 'game.items', 'title'),
+          cover: prefixImage(item.cover, item.name, 'items', '.png'),
+          type: co.type,
+          count: item.count ?? -1
+        })
+      })
+    })
+  }
 
   function workbenchTableItems() {
     const workbenchTable: Array<Dto.EquipmentItemFull> = []
-    totalGameItems
+    totalGameItems.value
       .filter((x) => x.type == 'equipment')
       .forEach((item) => {
         const equipment: Dto.EquipmentItemFull = {
@@ -52,7 +71,7 @@ export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
       if (goods.name.indexOf('.') == -1) {
         goods.name = goods.type + '.' + goods.name
       }
-      const gameItem = totalGameItems.filter((x) => x.name == goods.name)[0]
+      const gameItem = totalGameItems.value.filter((x) => x.name == goods.name)[0]
       goods.name = gameItem.name
       goods.title = gameItem.title
       goods.desc = gameItem.desc
@@ -86,6 +105,7 @@ export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
 
   return {
     totalGameItems,
+    initTotalGameItems,
     currentShop,
     setCurrentShop,
     currentShopEntity,
