@@ -94,8 +94,8 @@
       <n-space justify="end">
         <n-p>
           <n-tag :bordered="false" type="warning" class="block-10 w-48" size="large">
-            花费： {{ totalCoast }}</n-tag
-          >
+            花费： {{ totalCoast }}
+          </n-tag>
         </n-p>
         <n-button type="primary" class="w-48" size="large" @click="checkout">
           {{ $t('common.confirm') }}
