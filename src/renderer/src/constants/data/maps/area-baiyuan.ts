@@ -17,7 +17,7 @@ const CityBuildings: Array<Dto.MapItem> = [
           type: 'all',
           effects: [
             {
-              value: ',1',
+              value: 'food.cola,1',
               func: effect.addItem
             }
           ]

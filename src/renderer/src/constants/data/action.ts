@@ -1,3 +1,6 @@
+import { useCondition } from '@renderer/hooks/game/condition'
+
+const condition = useCondition()
 export const DefaultActions: Array<Dto.ActionOption> = [
   {
     name: 'game.map.next',
@@ -9,7 +12,7 @@ export const DefaultActions: Array<Dto.ActionOption> = [
         type: 'and',
         conditions: [
           {
-            type: 'hasLocked',
+            func: condition.hasLocked,
             value: 'game.map.isLocked',
             result: false
           }

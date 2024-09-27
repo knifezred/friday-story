@@ -1,3 +1,6 @@
+import { useCondition } from '@renderer/hooks/game/condition'
+
+const condition = useCondition()
 export const IslandMaps: Array<Dto.MapItem> = [
   {
     name: 'island',
@@ -82,8 +85,8 @@ export const IslandMaps: Array<Dto.MapItem> = [
                           {
                             type: 'or',
                             conditions: [
-                              { type: 'inTime', value: '8:00-23:00' },
-                              { type: 'hasItem', value: 'task.lin_home_key' }
+                              { func: condition.inTime, value: '8:00-23:00' },
+                              { func: condition.hasItem, value: 'task.lin_home_key' }
                             ],
                             for: 'execute'
                           }
@@ -176,7 +179,7 @@ export const IslandMaps: Array<Dto.MapItem> = [
                             type: 'and',
                             conditions: [
                               {
-                                type: 'inTime',
+                                func: condition.inTime,
                                 value: '09:00-23:00',
                                 text: 'game.condition.openHour'
                               }
