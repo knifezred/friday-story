@@ -111,7 +111,7 @@ export const ShopGoodsRecord: Record<string, Dto.ShopEntity> = {
     ]
   },
   pubShop: {
-    name: '酒馆柜台',
+    name: '酒馆',
     manager: 'cousin',
     managerAvatar: '/static/images/cousin normal.png',
     money: 20000,

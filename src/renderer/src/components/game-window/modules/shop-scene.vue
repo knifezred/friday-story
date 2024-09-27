@@ -1,17 +1,23 @@
 <template>
   <n-grid :x-gap="12" :y-gap="12" :cols="5" layout-shift-disabled class="mt-2">
     <n-gi :span="1" class="text-center">
-      <n-p class="pt-4">
+      <n-p class="pt-4 pl-2">
         <ImageIcon :src="gameItemStore.currentShopEntity.managerAvatar" />
-        <n-tag :bordered="false" type="success">
-          {{ $t(gameItemStore.currentShopEntity.manager) }}:
-          {{ gameItemStore.currentShopEntity.money }}
-        </n-tag>
+        <n-p>
+          <n-tag :bordered="false" type="success" class="block-8 w-full" size="large">
+            {{ $t(gameItemStore.currentShopEntity.manager) }}:
+            {{ gameItemStore.currentShopEntity.money }}
+          </n-tag>
+        </n-p>
       </n-p>
     </n-gi>
     <n-gi :span="2">
       <n-card>
-        <n-tag :bordered="false" type="primary" class="text-8 text-center h-10 block">
+        <n-tag
+          :bordered="false"
+          type="primary"
+          class="text-center block-8 w-full text-5"
+          size="large">
           {{ $t(gameItemStore.currentShopEntity.name) }}
         </n-tag>
         <n-scrollbar class="h-68vh pl-2 pt-2">
@@ -57,8 +63,8 @@
     </n-gi>
     <n-gi :span="2" class="pr-4">
       <n-card>
-        <n-tag :bordered="false" type="primary" class="text-8 text-center h-10 block">
-          {{ $t(authStore.userInfo.username) }}
+        <n-tag :bordered="false" type="info" class="text-center block-8 w-full text-5" size="large">
+          {{ $t('route.backpack') }}
         </n-tag>
         <n-scrollbar class="h-68vh pl-2 pt-2">
           <n-flex class="ma-2">
@@ -86,9 +92,13 @@
     <n-gi :span="1"></n-gi>
     <n-gi :span="4" class="pr-8">
       <n-space justify="end">
+        <n-p>
+          <n-tag :bordered="false" type="warning" class="block-10 w-48" size="large">
+            花费： {{ totalCoast }}</n-tag
+          >
+        </n-p>
         <n-button type="primary" class="w-48" size="large" @click="checkout">
-          <icon-solar:cart-large-3-bold-duotone class="size-4 color-white" />
-          （{{ totalCoast }}）
+          {{ $t('common.confirm') }}
         </n-button>
         <n-button type="primary" class="w-48" size="large" @click="resetDeal">
           {{ $t('common.reset') }}
@@ -192,6 +202,7 @@ function resetDeal() {
       goods.selectedCount = 0
     }
   })
+  totalCoast.value = 0
 }
 
 const userItems = ref<Array<Dto.GameItemFull>>([])

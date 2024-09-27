@@ -97,6 +97,8 @@ export function executeEffects(effectModel: Dto.ActionEffectModel | undefined) {
         } else {
           notificationResult($t(tempText as never, { item: $t(val1 as never), value: val2 }))
         }
+      } else {
+        window.$message?.warning(effect.text ?? '尚未实装')
       }
     }
   }

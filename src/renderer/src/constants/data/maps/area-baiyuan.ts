@@ -14,10 +14,6 @@ const CityBuildings: Array<Dto.MapItem> = [
           type: 'all',
           effects: [
             {
-              type: 'removeHurt',
-              value: 'HeavyHurt'
-            },
-            {
               type: 'recovery',
               value: 'all'
             }

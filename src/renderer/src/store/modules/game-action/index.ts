@@ -5,7 +5,6 @@ import { projectSetting } from '@renderer/settings/projectSetting'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useGameStore } from '../game'
-import { useMapStore } from '../game-map'
 
 export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
   const currentAction = ref<Dto.ActionOption>({
@@ -17,8 +16,6 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
   const options = ref<Array<Dto.ActionOption>>([])
 
   const gameStore = useGameStore()
-
-  const mapStore = useMapStore()
 
   function beforeExecute(action: Dto.ActionOption) {
     currentAction.value = action
@@ -49,37 +46,11 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
       const effectResults = executeEffects(action.effect)
       for (const r of effectResults) {
         if (r.length > 0) {
-          gameStore.currentScene.text.push(r)
+          window.$message?.info(r)
         }
       }
       // action计数
       gameStore.countOptionExecute(action.name)
-      switch (action.name) {
-        case 'game.option.addWood':
-          if (mapStore.currMap.temperature != undefined) {
-            mapStore.currMap.temperature += 5
-            if (mapStore.currMap.temperature <= 0) {
-              gameStore.currentScene.text.push('火堆冒出火苗')
-            }
-            if (mapStore.currMap.temperature >= 1 && mapStore.currMap.temperature < 10) {
-              gameStore.currentScene.text.push('火堆大了一点')
-            }
-            if (mapStore.currMap.temperature >= 10 && mapStore.currMap.temperature < 30) {
-              gameStore.currentScene.text.push('火烧的很旺')
-            }
-            if (mapStore.currMap.temperature >= 30 && mapStore.currMap.temperature < 40) {
-              gameStore.currentScene.text.push('火有点大了')
-            }
-            gameStore.currentScene.text.push(mapStore.currMap.text)
-          } else {
-            gameStore.currentScene.text.push(executeResult.text)
-          }
-          break
-
-        default:
-          gameStore.currentScene.text.push(mapStore.currMap.text)
-          break
-      }
       // 操作冷却时间
       await new Promise((resolve) => {
         setTimeout(
@@ -90,7 +61,7 @@ export const useGameActionStore = defineStore(SetupStoreId.GameAction, () => {
         )
       })
     } else {
-      gameStore.currentScene.text.push(executeResult.text)
+      window.$message?.warning(executeResult.text)
     }
   }
 
