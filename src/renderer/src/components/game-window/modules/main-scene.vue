@@ -31,7 +31,9 @@
         <TypedText
           v-model:value="isTyped"
           :speed="appStore.projectSettings.textSpeed"
-          :strings="$t(currentText, gameStore.langParams)"
+          :strings="
+            currentText.startsWith('game.') ? $t(currentText, gameStore.langParams) : currentText
+          "
           class="text-xl color-success" />
       </n-scrollbar>
       <template #footer>
@@ -48,7 +50,13 @@
                 <template #icon>
                   <SvgIcon v-if="btn.icon != undefined" :icon="btn.icon" class="mr-1" />
                 </template>
-                {{ btn.locked == true ? '???' : $t(btn.text) }}
+                {{
+                  btn.locked == true
+                    ? '???'
+                    : btn.text.startsWith('game.')
+                      ? $t(btn.text)
+                      : btn.text
+                }}
               </n-button>
             </template>
           </n-flex>
@@ -59,7 +67,6 @@
 </template>
 
 <script setup lang="ts">
-import { $t } from '@renderer/locales'
 import { projectSetting } from '@renderer/settings/projectSetting'
 import { useAppStore } from '@renderer/store/modules/app'
 import { useGameStore } from '@renderer/store/modules/game'

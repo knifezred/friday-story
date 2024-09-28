@@ -72,7 +72,7 @@
               <template v-for="item in mapStore.currLevelMaps" :key="item.id">
                 <n-card
                   v-if="item.isShow"
-                  :title="$t(item.title)"
+                  :title="item.title"
                   class="w-31% text-center cursor-pointer"
                   header-class="pa-0.1em!"
                   size="small"
