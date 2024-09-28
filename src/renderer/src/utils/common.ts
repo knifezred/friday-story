@@ -61,7 +61,7 @@ export function toggleHtmlClass(className: string) {
 }
 
 export function staticPath(src: string) {
-  return projectSetting.localhost + src
+  return (projectSetting.localhost + src).replace('//static', '/static')
 }
 
 // 格式化时间戳
@@ -148,7 +148,7 @@ export function prefixImage(
   prefix: string,
   suffix: string
 ) {
-  prefix = '/static/' + prefix + '/' + name.replaceAll('.', '/')
+  prefix = '/static/images/' + prefix + '/' + name.replaceAll('.', '/')
   if (text == undefined) {
     text = prefix + suffix
   } else {
@@ -182,7 +182,7 @@ export async function coverWithDefault(filePath: string) {
   if (await window.api.isFileExist(filePath)) {
     return filePath
   }
-  return '/static/imgs/t' + randomInt(0, 7) + '.webp'
+  return '/static/demo/t' + randomInt(0, 7) + '.webp'
 }
 
 export function roomTemperature(temperature: number) {

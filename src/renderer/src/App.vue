@@ -15,10 +15,12 @@
         autoplay
         loop></audio>
       <audio
+        v-if="appStore.projectSettings.sound"
         :src="staticPath(appStore.projectSettings.sound)"
         :volume="appStore.projectSettings.volume / 100"
         autoplay></audio>
       <audio
+        v-if="appStore.projectSettings.voice"
         :src="staticPath(appStore.projectSettings.voice)"
         :volume="appStore.projectSettings.volume / 100"
         autoplay></audio>

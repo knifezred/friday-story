@@ -18,7 +18,7 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     name: 'test',
     title: 'game.map.common.test.title',
     text: 'game.map.common.test.text',
-    cover: '/static/map/common/exit.png',
+    cover: '/static/images/map/common/exit.png',
     level: 'room',
     options: [],
     next: ''
@@ -29,7 +29,7 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     name: 'game.map.common.exit',
     title: 'game.map.common.exit.title',
     text: 'game.map.common.exit.text',
-    cover: '/static/map/common/exit.png',
+    cover: '/static/images/map/common/exit.png',
     level: 'room',
     options: [],
     next: ''
