@@ -41,8 +41,9 @@ export const useStoryStore = defineStore(SetupStoreId.GameStory, () => {
     const story = DefaultStories.find((x) => x.name === storyName)
     if (story) {
       currentStory.value = story
-      currentStory.value.nextScene = nextScene
       currentStoryScenes.value = await parseRenPyScript(currentStory.value.script)
+      currentStory.value.nextScene = nextScene
+      console.log(currentStory.value.nextScene)
     }
   }
 

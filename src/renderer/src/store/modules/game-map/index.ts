@@ -119,7 +119,15 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     currLevelMaps.value = allMaps.value.filter(
       (x) => x.pid == currMap.value.pid && x.isLocked != true
     )
-    parentMap.value = allMaps.value.filter((x) => x.id == currMap.value.pid)[0]
+    const pMap = allMaps.value.filter((x) => x.id == currMap.value.pid)[0]
+    if (pMap != undefined) {
+      parentMap.value.pid = currLevelMaps.value[0].pid
+      parentMap.value.next = currMap.value.pid
+      parentMap.value.level = currMap.value.level
+      parentMap.value.title = pMap.title
+      parentMap.value.cover = pMap.cover
+      parentMap.value.isLocked = pMap.isLocked
+    }
     authStore.userInfo.archive.place = id
     checkConditions(currMap.value)
   }

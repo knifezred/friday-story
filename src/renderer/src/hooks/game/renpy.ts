@@ -3,7 +3,8 @@
 
 import { useGameStore } from '@renderer/store/modules/game'
 import { useNpcStore } from '@renderer/store/modules/game-npc'
-
+import { useActionEffect } from './action-effect'
+const actionEffect = useActionEffect()
 const sceneOptionRegex = /\$ scene\.(.*?)="(.*?)"/
 const optionRegex = /"(.*?)":/
 const optionAttrRegex = /\$ option\.(.*?)="(.*?)"/
@@ -102,7 +103,7 @@ export async function parseRenPyScript(script: string): Promise<Array<Dto.RenPyS
             } else {
               const match = trimmedLine.match(effectRegex)
               if (match) {
-                const effect = { type: match[1], value: match[2] }
+                const effect = { func: actionEffect[match[1]], value: match[2] }
                 if (match[3]) {
                   // TODO 设置其他属性
                 }
