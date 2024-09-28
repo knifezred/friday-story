@@ -22,11 +22,25 @@
                 :options="[
                   {
                     label: $t('page.setting.general.loginBgOption.car'),
-                    value: '/static/frame/login_bg.mp4'
+                    value: '/static/gui/login_bg.mp4'
                   },
                   {
                     label: $t('page.setting.general.loginBgOption.muggleGirl'),
-                    value: '/static/frame/login_bg2.mp4'
+                    value: '/static/gui/login_bg2.mp4'
+                  }
+                ]" />
+            </n-form-item>
+            <n-form-item :label="$t('page.setting.general.fontFamily')" path="fontFamily">
+              <n-select
+                v-model:value="appStore.projectSettings.fontFamily"
+                :options="[
+                  {
+                    label: $t('page.setting.general.fontFamilyOption.butter'),
+                    value: 'font-family-butter'
+                  },
+                  {
+                    label: $t('page.setting.general.fontFamilyOption.harmony'),
+                    value: 'font-family-harmony'
                   }
                 ]" />
             </n-form-item>

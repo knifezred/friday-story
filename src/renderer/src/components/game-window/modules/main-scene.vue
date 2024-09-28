@@ -24,16 +24,15 @@
       :style="
         'height:18vw;background-image: url(' +
         appStore.projectSettings.localhost +
-        'static/frame/textbox.png);'
+        'static/gui/textbox.png);'
       "
       style="border: 0; border-radius: 0; background-repeat: round">
       <n-scrollbar class="h-20vh" :distance="10" @click="nextText">
-        <n-p class="text-xl color-success">
-          <TypedText
-            v-model:value="isTyped"
-            :speed="appStore.projectSettings.textSpeed"
-            :strings="$t(currentText, gameStore.langParams)" />
-        </n-p>
+        <TypedText
+          v-model:value="isTyped"
+          :speed="appStore.projectSettings.textSpeed"
+          :strings="$t(currentText, gameStore.langParams)"
+          class="text-xl color-success" />
       </n-scrollbar>
       <template #footer>
         <Transition :name="projectSetting.optionTransition" mode="out-in" appear>

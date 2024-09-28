@@ -117,6 +117,7 @@ declare namespace App {
       sceneTransition: UnionKey.AnimateMode
       optionTransition: UnionKey.AnimateMode
       mapTransition: UnionKey.AnimateMode
+      fontFamily: string
     }
   }
 
@@ -354,6 +355,11 @@ declare namespace App {
               muggleGirl: string
             }
             volume: string
+            fontFamily: string
+            fontFamilyOption: {
+              butter: string
+              harmony: string
+            }
           }
         }
       }

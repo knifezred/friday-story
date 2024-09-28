@@ -6,7 +6,7 @@ import { useAppStore } from '@renderer/store/modules/app'
 import { useThemeStore } from '@renderer/store/modules/theme'
 import { staticPath } from '@renderer/utils/common'
 import type { Component } from 'vue'
-import { computed, ref } from 'vue'
+import { computed, shallowRef } from 'vue'
 import { KinesisContainer, KinesisElement } from 'vue-kinesis'
 import GameStart from './modules/game-start.vue'
 import PwdLogin from './modules/pwd-login.vue'
@@ -34,7 +34,7 @@ const moduleMap: Record<UnionKey.LoginModule, LoginModule> = {
   'game-start': { label: loginModuleRecord['game-start'], component: GameStart }
 }
 
-const activeModule = ref<LoginModule>(moduleMap['game-start'])
+const activeModule = shallowRef<LoginModule>(moduleMap['game-start'])
 computed(() => moduleMap[props.module || 'game-start'])
 function changeComponent(module: string) {
   activeModule.value = moduleMap[module || 'game-start']
@@ -80,7 +80,9 @@ const bgColor = computed(() => {
             </div>
           </header>
           <main class="pt-2xl">
-            <h3 class="text-18px text-primary font-medium">{{ $t(activeModule.label) }}</h3>
+            <h3 class="text-18px text-primary font-medium">
+              {{ $t(activeModule.label) }}
+            </h3>
             <div class="pt-24px">
               <Transition :name="themeStore.page.animateMode" mode="out-in" appear>
                 <component :is="activeModule.component" @module="changeComponent" />

@@ -325,6 +325,11 @@
     },
     "setting": {
       "general": {
+        "fontFamily": "字体",
+        "fontFamilyOption": {
+          "butter": "黄油体",
+          "harmony": "鸿蒙体"
+        },
         "lang": "切换语言",
         "loginBg": "登录背景",
         "loginBgOption": {
@@ -351,10 +356,10 @@
     "500": "服务器错误",
     "achievement": "成就",
     "archive": "角色存档",
+    "backpack": "背包",
     "demo": "Demo",
     "gallery": "画廊",
     "home": "首页",
-    "backpack": "背包",
     "login": "登录",
     "personal": "个人中心",
     "relationship": "关系",

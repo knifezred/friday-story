@@ -12,5 +12,6 @@ export const projectSetting: App.Global.ProjectSetting = {
   sceneTransition: 'fade-half',
   optionTransition: 'fade-bottom',
   mapTransition: 'fade-slide',
-  loginBg: '/static/frame/login_bg.mp4'
+  loginBg: '/static/gui/login_bg.mp4',
+  fontFamily: 'font-family-harmony'
 }

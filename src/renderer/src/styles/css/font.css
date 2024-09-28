@@ -1,0 +1,19 @@
+@font-face {
+  font-family: 'custom_butter';
+  src: url('../../assets/fonts/ZhanKuQingKeHuangYouTi.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'HarmonyOS_Sans_SC';
+  src: url('../../assets/fonts/HarmonyOS_Sans_SC_Regular.ttf') format('truetype');
+}
+
+.font-family-butter {
+  font-family: 'custom_butter', sans-serif;
+  letter-spacing: .5em;
+}
+
+.font-family-harmony {
+  font-family: 'HarmonyOS_Sans_SC', sans-serif;
+  letter-spacing: .2em;
+}
