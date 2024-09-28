@@ -115,17 +115,11 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
   }
 
   async function loadMap(id: string) {
-    const map = allMaps.value.filter((x) => x.id == id)[0]
-    if (map.id == id) {
-      if (map.next != undefined) {
-        currMap.value = map
-      } else {
-        currMap.value = allMaps.value.filter((x) => x.id == map.pid)[0]
-      }
-    }
-    nextMap(currMap.value.next, currMap.value)
-    // 再次绑定
     currMap.value = allMaps.value.filter((x) => x.id == id)[0]
+    currLevelMaps.value = allMaps.value.filter(
+      (x) => x.pid == currMap.value.pid && x.isLocked != true
+    )
+    parentMap.value = allMaps.value.filter((x) => x.id == currMap.value.pid)[0]
     authStore.userInfo.archive.place = id
     checkConditions(currMap.value)
   }
