@@ -94,9 +94,15 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
         parentMap.value.pid = currLevelMaps.value[0].pid
         parentMap.value.next = nextMap.pid
         parentMap.value.level = nextMap.level
-        parentMap.value.title = allMaps.value.filter((x) => x.id == nextMap.pid)[0].title
-        parentMap.value.cover = allMaps.value.filter((x) => x.id == nextMap.pid)[0].cover
-        parentMap.value.isLocked = allMaps.value.filter((x) => x.id == nextMap.pid)[0].isLocked
+        if (nextMap.pid == 'root') {
+          parentMap.value.title = nextMap.title
+          parentMap.value.cover = nextMap.cover
+          parentMap.value.isLocked = nextMap.isLocked
+        } else {
+          parentMap.value.title = allMaps.value.filter((x) => x.id == nextMap.pid)[0].title
+          parentMap.value.cover = allMaps.value.filter((x) => x.id == nextMap.pid)[0].cover
+          parentMap.value.isLocked = allMaps.value.filter((x) => x.id == nextMap.pid)[0].isLocked
+        }
       }
       if (currLevelMaps.value.length > 0) {
         if (currLevelMaps.value.filter((x) => x.id == map.pid).length > 0) {

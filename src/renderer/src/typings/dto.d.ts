@@ -283,7 +283,7 @@ declare namespace Dto {
     count: number
   }
 
-  type GameItemType = 'other' | 'food' | 'equipment' | 'task' | 'car' | 'material'
+  type GameItemType = 'other' | 'food' | 'equipment' | 'task' | 'car' | 'material' | 'book'
 
   interface ItemTypeInfo {
     type: GameItemType

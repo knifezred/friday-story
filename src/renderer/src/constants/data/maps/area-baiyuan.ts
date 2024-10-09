@@ -87,68 +87,112 @@ const CityBuildings: Array<Dto.MapItem> = [
     name: 'skillLibrary',
     level: 'building',
     title: '仙法阁',
-    desc: '收录天下功法'
+    desc: '收录天下功法',
+    options: [
+      {
+        name: 'transaction',
+        text: '交易',
+        line: [],
+        type: 'shop',
+        next: 'skillLibrary_1'
+      }
+    ]
   },
   {
     name: 'inventory',
     level: 'building',
     title: '建木',
-    desc: '可存放物品'
+    desc: '可存放物品',
+    options: [
+      {
+        name: 'access',
+        text: '存取',
+        line: [],
+        type: 'shop',
+        next: 'market_1'
+      }
+    ]
   }
 ]
 
 export const AreaBaiYuanMaps: Array<Dto.MapItem> = [
   {
-    name: 'baiYuan',
-    title: '白源区',
-    desc: '这里竹林环绕，清幽寂静，是个隐世僻静之地，传说中武罗就出没于此',
-    level: 'area',
-    isLocked: true,
+    name: 'world',
+    title: '八荒大陆',
+    desc: '神奇的土地',
+    level: 'country',
     children: [
       {
-        name: 'xinDaTown',
-        title: '新达镇',
-        desc: '踏足八荒的第一站',
-        level: 'street',
-        children: [...CityBuildings]
-      },
-      {
-        name: 'yuCun',
-        title: '愚村',
-        desc: '太行王屋二山山脚下的一个村落，因愚公移山而得名愚村',
-        level: 'street',
-        children: []
-      },
-      {
-        name: 'wuLuoHole',
-        level: 'street',
-        title: '神秘山洞',
-        desc: '传说中武罗隐居之地',
-        children: [],
-        options: [
+        name: 'baiYuan',
+        title: '白源区',
+        desc: '这里竹林环绕，清幽寂静，是个隐世僻静之地，传说中武罗就出没于此',
+        level: 'area',
+        isLocked: true,
+        children: [
           {
-            name: 'explore',
-            line: [],
-            type: 'story',
-            next: 'demo.wuluo_hole',
-            text: 'game.option.explore'
+            name: 'xinDaTown',
+            title: '新达镇',
+            desc: '踏足八荒的第一站',
+            level: 'street',
+            children: [...CityBuildings]
+          },
+          {
+            name: 'yuCun',
+            title: '愚村',
+            desc: '太行王屋二山山脚下的一个村落，因愚公移山而得名愚村',
+            level: 'street',
+            children: []
+          },
+          {
+            name: 'wuLuoHole',
+            level: 'street',
+            title: '神秘山洞',
+            desc: '传说中武罗隐居之地',
+            children: [],
+            options: [
+              {
+                name: 'explore',
+                line: [],
+                type: 'story',
+                next: 'demo.wuluo_hole',
+                text: 'game.option.explore'
+              }
+            ]
+          },
+          {
+            name: 'portal',
+            level: 'street',
+            isShow: false,
+            children: [],
+            title: '传送阵',
+            desc: '通往外界的传送阵法',
+            next: 'root.world.yongNing.portal'
           }
         ]
       },
       {
-        name: 'portal',
-        level: 'street',
-        isShow: false,
-        children: [],
-        title: '传送阵',
-        desc: '通往外界的传送阵法'
+        name: 'yongNing',
+        title: '永宁州',
+        desc: '',
+        level: 'area',
+        children: [
+          {
+            name: 'portal',
+            level: 'street',
+            children: [],
+            title: '传送阵',
+            desc: '神秘的传送阵，通往白源区',
+            next: 'root.world.baiYuan.portal'
+          },
+          {
+            name: 'stoneCity',
+            title: '石双城',
+            desc: '永宁主城',
+            level: 'street',
+            children: [...CityBuildings]
+          }
+        ]
       }
     ]
-  },
-  {
-    name: 'yongNing',
-    title: '永宁州',
-    desc: '',
-    level: 'area'
   }
 ]

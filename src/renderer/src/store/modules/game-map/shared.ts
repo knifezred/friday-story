@@ -22,7 +22,7 @@ export async function getDefaultMaps(id: number | undefined) {
 
 export function generateIdAndPid(tree: any, parentId = 'root') {
   return tree.map((node: any) => {
-    const id = node.level + '.' + node.name
+    const id = parentId + '.' + node.name
     const newNode = {
       ...node,
       id: id,

@@ -20,20 +20,24 @@ export const ItemTypeList: Array<Dto.ItemTypeInfo> = [
     name: '食物'
   },
   {
+    type: 'equipment',
+    name: '装备'
+  },
+  {
     type: 'material',
     name: '材料'
+  },
+  {
+    type: 'book',
+    name: '书信'
   },
   {
     type: 'car',
     name: '座驾'
   },
   {
-    type: 'equipment',
-    name: '装备'
-  },
-  {
     type: 'task',
-    name: '任务物品'
+    name: '特殊'
   },
   {
     type: 'other',

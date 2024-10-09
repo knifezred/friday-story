@@ -5,7 +5,7 @@ export const projectSetting: App.Global.ProjectSetting = {
   music: '/static/gui/audio/Hacking to the Gate.mp3',
   sound: '',
   voice: '',
-  defaultPlace: 'street.xinDaTown',
+  defaultPlace: 'root.world.baiYuan.xinDaTown',
   startStory: 'demo',
   localhost: 'http://localhost:5175/',
   duration: 100,
