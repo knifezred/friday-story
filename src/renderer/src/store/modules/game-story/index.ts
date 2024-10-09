@@ -22,6 +22,7 @@ export const useStoryStore = defineStore(SetupStoreId.GameStory, () => {
   const mapStore = useMapStore()
 
   const currentStoryScenes = ref<Array<Dto.RenPyScene>>([])
+  const totalStoryScenes = ref<Array<Dto.StoryRenpyScene>>([])
 
   function getStoryScene(sceneName: string) {
     if (sceneName == null) {
@@ -41,9 +42,13 @@ export const useStoryStore = defineStore(SetupStoreId.GameStory, () => {
     const story = DefaultStories.find((x) => x.name === storyName)
     if (story) {
       currentStory.value = story
-      currentStoryScenes.value = await parseRenPyScript(currentStory.value.script)
+      const storyScene = totalStoryScenes.value.find((x) => x.name == currentStory.value.name)
+      if (storyScene) {
+        currentStoryScenes.value = storyScene.scenes
+      } else {
+        currentStoryScenes.value = []
+      }
       currentStory.value.nextScene = nextScene
-      console.log(currentStory.value.nextScene)
     }
   }
 
@@ -58,12 +63,15 @@ export const useStoryStore = defineStore(SetupStoreId.GameStory, () => {
   }
 
   function initStory() {
-    DefaultStories.forEach((item) => {
+    DefaultStories.forEach(async (item) => {
       const localizationText = localeText(item.text, item.name, 'stories', '')
       item.text = [localizationText]
       item.cover = prefixImage(item.cover, item.name, 'stories', '')
+      totalStoryScenes.value.push({
+        name: item.name,
+        scenes: await parseRenPyScript(item.script)
+      })
     })
-    // TODO 初始化所有场景，使场景可以跨剧情跳转
   }
 
   async function storyFinished(storyName: string) {

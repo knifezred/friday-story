@@ -385,6 +385,11 @@ declare namespace Dto {
     menus: Array<RenPyMenu>
   }
 
+  interface StoryRenpyScene {
+    name: string
+    scenes: Array<RenPyScene>
+  }
+
   interface RenPyMenu {
     name: string
     tabIndex: number
