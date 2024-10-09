@@ -285,6 +285,11 @@ declare namespace Dto {
 
   type GameItemType = 'other' | 'food' | 'equipment' | 'task' | 'car' | 'material'
 
+  interface ItemTypeInfo {
+    type: GameItemType
+    name: string
+  }
+
   interface GameItemCollection {
     type: GameItemType
     items: Array<GameItem>
