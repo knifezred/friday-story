@@ -3,6 +3,7 @@
     "action": "Action",
     "add": "Add",
     "addSuccess": "Add Success",
+    "autoNext": "Automatic dialogue",
     "backToHome": "Back to home",
     "batchDelete": "Batch Delete",
     "cancel": "Cancel",
@@ -14,6 +15,7 @@
     "confirmDelete": "Are you sure you want to delete?",
     "delete": "Delete",
     "deleteSuccess": "Delete Success",
+    "doubleSpeed": "Fast forward",
     "edit": "Edit",
     "editSuccess": "Edited successfully",
     "empty": "There's nothing here",
@@ -323,6 +325,11 @@
     },
     "setting": {
       "general": {
+        "fontFamily": "typeface",
+        "fontFamilyOption": {
+          "butter": "Butter body",
+          "harmony": "Hongmeng Body"
+        },
         "lang": "switch language",
         "loginBg": "Login background",
         "loginBgOption": {
@@ -349,10 +356,10 @@
     "500": "Server Error",
     "achievement": "achievement",
     "archive": "Archive",
+    "backpack": "Backpack",
     "demo": "Demo",
     "gallery": "gallery",
     "home": "Home",
-    "backpack": "Backpack",
     "login": "Login",
     "personal": "Personal Center",
     "relationship": "Relationship",

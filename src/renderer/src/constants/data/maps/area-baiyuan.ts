@@ -175,6 +175,7 @@ export const AreaBaiYuanMaps: Array<Dto.MapItem> = [
         title: '永宁州',
         desc: '',
         level: 'area',
+        isLocked: true,
         children: [
           {
             name: 'portal',

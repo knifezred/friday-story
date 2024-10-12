@@ -1,11 +1,11 @@
 {
   "name": "friday-story",
-  "version": "0.1.3",
-  "description": "An Electron application with Vue and TypeScript",
+  "version": "0.1.4",
+  "description": "A friday story created by KnifeZ",
   "main": "./out/main/index.js",
   "author": "KnifeZ",
-  "homepage": "https://gitee.com/KnifeZ/friday-story",
-  "website": "https://www.knifez.net",
+  "homepage": "https://github.com/knifezred/friday-story",
+  "website": "https://www.omgx.cn",
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts,.vue --fix",
