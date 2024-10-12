@@ -58,7 +58,7 @@ export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
 
   async function currentShopGoods() {
     // 分存档保存
-    const shopEntity = await authStore.findStorageData(SetupStoreId.GameItem + currentShop.value)
+    const shopEntity = await authStore.findStorageData(currentShop.value)
     if (shopEntity != null && shopEntity.data != null && typeof shopEntity.data != 'string') {
       currentShopEntity.value = JSON.parse(shopEntity.data.value)
       isUpdate.value = true
@@ -85,7 +85,7 @@ export const useGameItemStore = defineStore(SetupStoreId.GameItem, () => {
 
   function deal(totalMoney: number) {
     currentShopEntity.value.money += totalMoney
-    const searchKey = authStore.userInfo.archive.id + '.shop.' + currentShop.value
+    const searchKey = authStore.userInfo.archive.id + '.' + currentShop.value
     if (isUpdate.value) {
       updateStorage({
         key: searchKey,
