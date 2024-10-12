@@ -4,11 +4,16 @@
 import { useGameStore } from '@renderer/store/modules/game'
 import { useNpcStore } from '@renderer/store/modules/game-npc'
 import { useActionEffect } from './action-effect'
+import { useCondition } from './condition'
 const actionEffect = useActionEffect()
+const actionCondition = useCondition()
 const sceneOptionRegex = /\$ scene\.(.*?)="(.*?)"/
 const optionRegex = /"(.*?)":/
 const optionAttrRegex = /\$ option\.(.*?)="(.*?)"/
 const effectRegex = /\$ effect\.(.*?)\("(.*?)"\)(.*?)?/
+const conditionRegex = /\$ condition\.(.*?)\.(.*?)\("(.*?)"\)(.*?)?/
+const coRegex = /(.*?)\("(.*?)"\)/
+
 const tabSize = 4
 
 // 按行解析Renpy脚本
@@ -109,6 +114,43 @@ export async function parseRenPyScript(script: string): Promise<Array<Dto.RenPyS
                 }
                 option.effect.effects.push(effect)
               }
+            }
+          }
+        }
+        // $ condition.hasItem("food.cola,1")
+        else if (trimmedLine.startsWith('$ condition.')) {
+          const option = getMenuOption(currentMenu, currentMenuOption, menus)
+          if (option) {
+            const match = trimmedLine.match(conditionRegex)
+            if (match) {
+              if (option.condition == undefined) {
+                option.condition = []
+              }
+              const conditionModel = {
+                conditions: [],
+                for: match[1] as 'lock' | 'execute' | 'show',
+                type: 'and'
+              } as Dto.ConditionModel
+              const temp = { func: actionCondition[match[2]], value: match[3] }
+              conditionModel.conditions.push(temp)
+              if (match[4]) {
+                if (match[4].startsWith('&')) {
+                  conditionModel.type = 'and'
+                } else {
+                  conditionModel.type = 'or'
+                }
+                const conditionList = match[4].split(/[&|]/).filter(Boolean)
+                conditionList.forEach((co) => {
+                  const coMatch = co.match(coRegex)
+                  if (coMatch) {
+                    conditionModel.conditions.push({
+                      func: actionCondition[coMatch[1]],
+                      value: coMatch[2]
+                    })
+                  }
+                })
+              }
+              option.condition.push(conditionModel)
             }
           }
         }

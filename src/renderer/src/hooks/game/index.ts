@@ -1,4 +1,5 @@
 import { $t } from '@renderer/locales'
+import { useMapStore } from '@renderer/store/modules/game-map'
 import { randomInt } from '@renderer/utils/common'
 
 export function checkCondition(conditionModel: Dto.ConditionModel | undefined) {
@@ -105,7 +106,7 @@ function rebuildVal1(value: string, type: string) {
     value = 'game.items.' + value + '.title'
   }
   if (type.includes('Map')) {
-    value = 'game.map.' + value.replace('room.', 'building.') + '.title'
+    value = useMapStore().getMapTitle(value)
   }
   return value
 }

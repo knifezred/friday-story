@@ -170,6 +170,15 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
       return false
     }
   }
+
+  function getMapTitle(id: string) {
+    const filterMap = findMap(id)
+    if (filterMap != undefined) {
+      return filterMap.title
+    } else {
+      return 'common.noMap'
+    }
+  }
   return {
     allMaps,
     currLevelMaps,
@@ -181,6 +190,7 @@ export const useMapStore = defineStore(SetupStoreId.GameMap, () => {
     beforeNextMap,
     findMap,
     setMap,
-    setMapTitle
+    setMapTitle,
+    getMapTitle
   }
 })

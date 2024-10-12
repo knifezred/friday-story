@@ -47,4 +47,17 @@ label wuluo_hole:
 label wuluo_hole_event:
     scene "/static/demo/t1.webp"
     "小心探索"
-    "前面的区域以后再来探索吧"
+    show wuLuo normal
+    wuLuo "站住"
+    wuLuo "要想出去，就拿{color=#ff4757}一罐牛奶{/color}来换"
+    menu give_pearl:
+        "交付牛奶":
+            $ condition.execute.hasItem("food.milk,1")&hasItem("food.cola,1")
+            $ effect.useItem("food.milk,1")
+            $ effect.unlockMap("root.world.baiYuan.portal")
+            $ effect.unlockMap("root.world.yongNing.portal")
+            "你将{color=#ff4757}牛奶{/color}交给武罗，她随机为你打开了通往外界的传送门"
+            "传送门已开，请返回洞外查看"
+        "下次一定":
+            "你决定先去游玩一阵，再做打算"
+    "这里一览无余，没有探查的必要，你决定退出山洞"

@@ -26,5 +26,19 @@ export const DefaultNpcInfoList: Array<Dto.NpcInfo> = [
     work: 'student',
     relationship: [3, 2, 3],
     isLocked: true
+  },
+  {
+    name: 'wuLuo',
+    username: '武罗',
+    nickname: '武罗',
+    desc: '相传是愚村旁一个大妖、断绝愚村与外界往来',
+    introduce: '',
+    age: 18,
+    gender: '2',
+    identity: 'stranger',
+    level: 'SSR',
+    work: '',
+    relationship: [3, 2, 3],
+    isLocked: false
   }
 ]
