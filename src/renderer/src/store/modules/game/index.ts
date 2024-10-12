@@ -5,11 +5,18 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useAppStore } from '../app'
 import { useAuthStore } from '../auth'
+import { useGameItemStore } from '../game-item'
+import { useMapStore } from '../game-map'
 import { useNpcStore } from '../game-npc'
+import { useStoryStore } from '../game-story'
 
 export const useGameStore = defineStore(SetupStoreId.Game, () => {
   const appStore = useAppStore()
   const authStore = useAuthStore()
+  const storyStore = useStoryStore()
+  const npcStore = useNpcStore()
+  const mapStore = useMapStore()
+  const itemStore = useGameItemStore()
 
   const langParams = ref<Game.Env.LangParams>({
     roomEnv: 'coldest',
@@ -25,7 +32,7 @@ export const useGameStore = defineStore(SetupStoreId.Game, () => {
   function initTextInterpolation() {
     textInterpolation.value.me = authStore.userInfo
     const npc = {}
-    useNpcStore().allNPCs.forEach((item) => {
+    npcStore.allNPCs.forEach((item) => {
       npc[item.name] = item
     })
     textInterpolation.value.npc = npc
@@ -125,6 +132,12 @@ export const useGameStore = defineStore(SetupStoreId.Game, () => {
     console.log()
   }
 
+  function initGameData() {
+    itemStore.initTotalGameItems()
+    mapStore.initMaps()
+    storyStore.initStory()
+    npcStore.initNpc()
+  }
   return {
     initOptionExecuteRecords,
     timeUpdate,
@@ -149,6 +162,7 @@ export const useGameStore = defineStore(SetupStoreId.Game, () => {
     achievementList,
     getAchievements,
     textInterpolation,
-    initTextInterpolation
+    initTextInterpolation,
+    initGameData
   }
 })

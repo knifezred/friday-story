@@ -133,6 +133,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
       // 3. update store
       token.value = data.id == undefined ? '' : data.id.toString()
       // start 初始化数据
+      gameStore.initGameData()
       await gameStore.initOptionExecuteRecords()
 
       if (
