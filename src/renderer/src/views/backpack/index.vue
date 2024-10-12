@@ -57,7 +57,7 @@ const { totalGameItems } = useGameItemStore()
 onMounted(() => {
   shopItems.value = []
   totalGameItems
-    .filter((x) => archivedData.items.filter((p) => p.name == x.name).length > 0)
+    .filter((x) => archivedData.items.filter((p) => p.name == x.name && p.count > 0).length > 0)
     .forEach((item) => {
       shopItems.value.push({
         ...item,
