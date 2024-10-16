@@ -3,24 +3,22 @@ export const DefaultAchievements: Array<Dto.AchievementModel> = [
     name: 'hatTrick',
     title: '',
     desc: '',
-    cover: '.svg',
+    cover: '.png',
     unlockCover: '',
     star: 3,
     level: 'R',
     locked: false,
-    isHiding: false,
-    unlockTime: '2024-08-29'
+    isHiding: false
   },
   {
     name: 'heavyArmorProficient',
     title: '',
     desc: '',
-    cover: '.svg',
+    cover: '.png',
     unlockCover: '',
     star: 4,
     level: 'SR',
     locked: true,
-    isHiding: false,
-    unlockTime: ''
+    isHiding: false
   }
 ]

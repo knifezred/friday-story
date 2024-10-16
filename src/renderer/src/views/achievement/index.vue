@@ -23,11 +23,11 @@
           </n-icon>
         </n-p>
         <n-p>{{ $t(item.desc) }}</n-p>
-        <n-p v-if="item.locked">
-          <n-tag type="warning"> {{ $t('common.notUnlocked') }} </n-tag>
-        </n-p>
-        <n-p v-else>
-          <n-tag type="success"> {{ item.unlockTime }} </n-tag>
+        <n-p>
+          <n-tag v-if="item.locked" type="warning"> {{ $t('common.notUnlocked') }} </n-tag>
+          <n-tag v-else type="success">
+            {{ $t('common.unlocked') }}
+          </n-tag>
         </n-p>
       </NCard>
     </NFlex>

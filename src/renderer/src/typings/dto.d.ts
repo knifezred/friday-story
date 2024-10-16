@@ -468,7 +468,6 @@ declare namespace Dto {
     level: LevelType
     locked: boolean
     isHiding: boolean
-    unlockTime: string
     condition?: ConditionModel
   }
 }
