@@ -8,7 +8,11 @@ import { Settings } from '../settings'
 // 创建express http服务器
 export function createExpressServer() {
   const server = express()
-  const serverDir = app.getAppPath()
+  let serverDir = app.getAppPath()
+  const isPublished = !/electron/.test(process.execPath)
+  if (isPublished) {
+    serverDir = serverDir + '.unpacked'
+  }
   // 设置静态文件目录
   server.use(express.static(serverDir))
   logger.info(serverDir)

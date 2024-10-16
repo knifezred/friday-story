@@ -148,7 +148,7 @@ export function prefixImage(
   prefix: string,
   suffix: string
 ) {
-  prefix = '/static/images/' + prefix + '/' + name.replaceAll('.', '/')
+  prefix = '/resources/images/' + prefix + '/' + name.replaceAll('.', '/')
   if (text == undefined) {
     text = prefix + suffix
   } else {
@@ -182,7 +182,7 @@ export async function coverWithDefault(filePath: string) {
   if (await window.api.isFileExist(filePath)) {
     return filePath
   }
-  return '/static/demo/t' + randomInt(0, 7) + '.webp'
+  return '/resources/demo/t' + randomInt(0, 7) + '.webp'
 }
 
 export function roomTemperature(temperature: number) {

@@ -7,8 +7,6 @@ friday story是基于fridayboot-election的视觉小说游戏框架，主要方�
 1. 视频兼容格式少，且在测试时开始界面，内容页面均未能实现正常播放视频
 2. 样式修改起来还是vue更顺手一些
 
-
-
 ## 已实现功能
 
 - 存档模块
@@ -66,7 +64,7 @@ $ pnpm build:linux
 
 所有数据都在`/src/renderer/src/constants/data/`下，格式参照对应的定义，暂无详细文档介绍
 
-剧情脚本推荐存储在`/static/scripts/`下，剧情使用Renpy脚本编写，自定义实现部分语法，详情可参照`demo.rpy`
+剧情脚本推荐存储在`/resources/scripts/`下，剧情使用Renpy脚本编写，自定义实现部分语法，详情可参照`demo.rpy`
 
 ### 1. 添加Story
 
@@ -77,7 +75,7 @@ export const DemoStories: Array<Dto.StoryPlot> = [
   {
     name: 'demo',
     type: 'main-line',
-    script: '/static/scripts/demo.rpy', // 对应后续添加的Renpy脚本
+    script: '/resources/scripts/demo.rpy', // 对应后续添加的Renpy脚本
     cover: '',
     text: ['本故事纯属虚构，如有雷同纯属巧合']
   }
@@ -86,7 +84,7 @@ export const DemoStories: Array<Dto.StoryPlot> = [
 
 ### 2. 添加Renpy脚本（仅应用Renpy的格式，自定义实现解析）
 
-> 添加目录：/static/scripts/yourStory.rpy
+> 添加目录：/resources/scripts/yourStory.rpy
 
 可参照demo.rpy进行修改，大部分与Renpy含义一致，仅支持部分语法
 

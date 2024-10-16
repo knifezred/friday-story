@@ -1,14 +1,14 @@
 # 禁止menu嵌套，可以jump到其他label再次设置menu
 label start:
-    $ scene.cover="/static/demo/t8.webp"
+    $ scene.cover="/resources/demo/t8.webp"
     # "{color=#4542ee}镜子{/color}倒映着{b}[me.username]{/b}的脸"
     "周五下班的你在地铁上无聊的刷着手机"
-    scene "/static/demo/t1.webp"
+    scene "/resources/demo/t1.webp"
     "突然一阵{color=#ff4757}晕眩{/color}，你两眼漆黑倒在了地上"
     show sister normal at center
     anon "又一个..."
     "不知道过了多久，你再次醒来"
-    scene "/static/demo/t2.webp"
+    scene "/resources/demo/t2.webp"
     hide sister normal
     "你发现身处竹林之中，只听得风吹竹林的沙沙声"
     "你决定走进竹林身处"
@@ -34,7 +34,7 @@ label start:
 
 # 武罗山洞
 label wuluo_hole:
-    scene "/static/demo/t0.webp"
+    scene "/resources/demo/t0.webp"
     "一个寂静的山洞，传说中有妖兽"
     menu optional_explore:
         "一探究竟":
@@ -45,7 +45,7 @@ label wuluo_hole:
     "你退出了山洞"
 
 label wuluo_hole_event:
-    scene "/static/demo/t1.webp"
+    scene "/resources/demo/t1.webp"
     "小心探索"
     show wuLuo normal
     wuLuo "站住"

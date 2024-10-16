@@ -22,7 +22,7 @@ export function traverseDir(dirPath, fileList: Array<string>) {
           traverseDir(fullPath, fileList)
         } else {
           fileList.push(
-            '/static/' + fullPath.split('/static/')[fullPath.split('/static/').length - 1]
+            '/resources/' + fullPath.split('/resources/')[fullPath.split('/resources/').length - 1]
           )
           console.log(`${fullPath} is a file`)
         }

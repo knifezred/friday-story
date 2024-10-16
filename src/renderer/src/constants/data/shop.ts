@@ -2,7 +2,7 @@ export const ShopGoodsRecord: Record<string, Dto.ShopEntity> = {
   happy_shop: {
     name: '开心超市',
     manager: 'sister',
-    managerAvatar: '/static/images/sister normal.png',
+    managerAvatar: '/resources/images/sister normal.png',
     money: 20000,
     goods: [
       {
@@ -70,7 +70,7 @@ export const ShopGoodsRecord: Record<string, Dto.ShopEntity> = {
   workshop_1: {
     name: '工坊',
     manager: 'sister',
-    managerAvatar: '/static/images/sister normal.png',
+    managerAvatar: '/resources/images/sister normal.png',
     money: 21535,
     goods: [
       {
@@ -84,7 +84,7 @@ export const ShopGoodsRecord: Record<string, Dto.ShopEntity> = {
   market_1: {
     name: '坊市',
     manager: 'sister',
-    managerAvatar: '/static/images/sister normal.png',
+    managerAvatar: '/resources/images/sister normal.png',
     money: 124124,
     goods: [
       {
@@ -98,7 +98,7 @@ export const ShopGoodsRecord: Record<string, Dto.ShopEntity> = {
   pubShop: {
     name: '酒馆',
     manager: 'cousin',
-    managerAvatar: '/static/images/cousin normal.png',
+    managerAvatar: '/resources/images/cousin normal.png',
     money: 20000,
     goods: [
       {

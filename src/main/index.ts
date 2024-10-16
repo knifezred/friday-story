@@ -121,7 +121,12 @@ ipcMain.handle('close-window', () => {
 })
 
 ipcMain.handle('app-path', () => {
-  return app.getAppPath()
+  let path = app.getAppPath()
+  const isPublished = !/electron/.test(process.execPath)
+  if (isPublished) {
+    path = path + '.unpacked'
+  }
+  return path
 })
 
 // In this file you can include the rest of your app"s specific main process

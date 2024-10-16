@@ -9,7 +9,7 @@ export const useNpcStore = defineStore(SetupStoreId.GameNpc, () => {
   const defineText = ref<string>('')
 
   async function initNpc() {
-    defineText.value = await window.api.readFile('/static/scripts/define.rpy')
+    defineText.value = await window.api.readFile('/resources/scripts/define.rpy')
     allNPCs.value = []
     DefaultNpcInfoList.forEach((npc) => {
       const npcType = (npc.gender == '1' ? 'male.' : 'female.') + npc.name

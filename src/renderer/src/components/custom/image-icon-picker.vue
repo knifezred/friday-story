@@ -2,7 +2,7 @@
   <NFlex>
     <ImageIcon
       class="size-16 cursor-pointer"
-      :src="'/static/images/' + currentIcon"
+      :src="'/resources/images/' + currentIcon"
       @click="activate('right')">
     </ImageIcon>
   </NFlex>
@@ -13,7 +13,7 @@
           <ImageIcon
             v-for="item in icons"
             :key="item"
-            :src="'/static/images/' + item"
+            :src="'/resources/images/' + item"
             class="size-24 cursor-pointer"
             @click="selectIcon(item)"></ImageIcon>
         </NFlex>

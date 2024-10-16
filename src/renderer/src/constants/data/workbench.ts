@@ -64,7 +64,7 @@ export const WorkbenchRecords: Record<string, Dto.ShopEntity> = {
     ],
     name: '工坊',
     manager: 'sister',
-    managerAvatar: '/static/images/sister normal.png',
+    managerAvatar: '/resources/images/sister normal.png',
     money: 20000
   }
 }

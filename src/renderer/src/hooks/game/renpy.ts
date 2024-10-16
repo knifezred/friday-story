@@ -316,7 +316,7 @@ export function showImage(trimmedLine: string) {
     result.src = trimmedLine.substring(5).trim()
   }
   if (!result.src.includes('.')) {
-    result.src = 'static/images/' + result.src + '.png'
+    result.src = 'resources/images/' + result.src + '.png'
   }
   return result
 }

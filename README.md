@@ -67,4 +67,4 @@ $ pnpm build:linux
 
 All data is under `/src/renderer/src/constants/data/`, and the format refers to the corresponding definition. There is no detailed document description
 
-It is recommended that plot scripts be stored under `/static/scripts/`. The plot is written using Renpy scripts, and some syntax is customized. For details, please refer to `demo.rpy`
+It is recommended that plot scripts be stored under `/resources/scripts/`. The plot is written using Renpy scripts, and some syntax is customized. For details, please refer to `demo.rpy`

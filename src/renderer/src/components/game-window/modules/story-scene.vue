@@ -35,7 +35,7 @@
       :style="
         'height:20.5vw;background-image: url(' +
         appStore.projectSettings.localhost +
-        'static/gui/textbox.png);'
+        'resources/gui/textbox.png);'
       "
       style="border: 0; border-radius: 0; background-repeat: round">
       <n-h2 class="color-primary text-3xl">{{ $t(speaker) }}</n-h2>
@@ -253,7 +253,6 @@ async function executeOption(action: Dto.ActionOption) {
     gameStore.setSceneType(action.type)
     switch (action.type) {
       case 'story':
-        // await storyStore.setCurrentStory(action.next ?? 'demo')
         if (action.next != undefined) {
           await nextScene(action.next)
         } else {

@@ -40,7 +40,7 @@ export const useGameStore = defineStore(SetupStoreId.Game, () => {
   const currentScene = ref<Dto.GameScene>({
     name: 'test',
     title: '',
-    cover: '/static/stories/start',
+    cover: '/resources/stories/start',
     next: '',
     options: [],
     text: []

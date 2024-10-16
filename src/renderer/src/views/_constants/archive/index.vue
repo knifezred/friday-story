@@ -16,7 +16,7 @@
         class="relative w-80 rd-12px shadow-primary shadow-op-30">
         <n-thing>
           <template #avatar>
-            <image-icon :src="'/static/images/' + archive.cover" class="size-24" />
+            <image-icon :src="'/resources/images/' + archive.cover" class="size-24" />
           </template>
           <template #header>
             <n-p class="text-info"> {{ archive.name }}</n-p>

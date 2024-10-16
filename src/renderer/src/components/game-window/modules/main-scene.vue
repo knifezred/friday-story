@@ -24,7 +24,7 @@
       :style="
         'height:18vw;background-image: url(' +
         appStore.projectSettings.localhost +
-        'static/gui/textbox.png);'
+        'resources/gui/textbox.png);'
       "
       style="border: 0; border-radius: 0; background-repeat: round">
       <n-scrollbar class="h-20vh" :distance="10" @click="nextText">

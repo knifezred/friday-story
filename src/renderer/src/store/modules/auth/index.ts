@@ -136,18 +136,14 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
       gameStore.initGameData()
       await gameStore.initOptionExecuteRecords()
 
-      if (
-        !authStore.checkFlag(
-          SetupStoreId.GameStory + '.finished.' + appStore.projectSettings.startStory,
-          '1'
+      if (!authStore.checkStoryFinished(appStore.projectSettings.startStory)) {
+        console.log('story:' + appStore.projectSettings.startStory)
+        await storyStore.setCurrentStory(
+          appStore.projectSettings.startStory == '' ? 'demo' : appStore.projectSettings.startStory
         )
-      ) {
         gameStore.setSceneType('story')
-        await storyStore.setCurrentStory(appStore.projectSettings.startStory)
-        setTimeout(() => {
-          appStore.projectSettings.startStory = ''
-        }, 10)
       } else {
+        console.log('user default place:' + userInfo.archive.place)
         await mapStore.loadMap(userInfo.archive.place)
       }
       // end
@@ -277,6 +273,13 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     return true
   }
 
+  function checkStoryFinished(flag: string) {
+    return checkFlag(SetupStoreId.GameStory + '.finished.' + flag, '1')
+  }
+  function setStoryFinished(flag: string) {
+    return setFlag(SetupStoreId.GameStory + '.finished.' + flag, '1')
+  }
+
   return {
     token,
     userInfo,
@@ -294,6 +297,8 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     checkFlag,
     hasFlag,
     findStorageData,
-    saveStorageData
+    saveStorageData,
+    checkStoryFinished,
+    setStoryFinished
   }
 })
