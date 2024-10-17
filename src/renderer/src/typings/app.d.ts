@@ -194,6 +194,7 @@ declare namespace App {
           yes: string
         }
         notUnlocked: string
+        unlocked: string
       }
       dataTable: {
         itemCount: string
