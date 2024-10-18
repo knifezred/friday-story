@@ -30,10 +30,12 @@ label start:
             $ effect.setFlag("world.type,LianyaoFlask")
             "你选择了炼妖壶"
     anon "若想回去，就来天元山找我吧，哈哈哈..."
+    $ finish
 
 
 # 武罗山洞
 label wuluo_hole:
+    $ isEnd
     scene "/resources/demo/t0.webp"
     "一个寂静的山洞，传说中有妖兽"
     menu optional_explore:
@@ -42,6 +44,11 @@ label wuluo_hole:
             jump wuluo_hole_event
         "从长计议":
             "你决定先休整一番，再做打算"
+    "你退出了山洞"
+
+label wuluo_hole_end:
+    "武罗已经消失不见"
+    "此地仅存一处破败的洞穴"
     "你退出了山洞"
 
 label wuluo_hole_event:
@@ -58,6 +65,7 @@ label wuluo_hole_event:
             $ effect.unlockMap("root.world.yongNing.portal")
             "你将{color=#ff4757}牛奶{/color}交给武罗，她随机为你打开了通往外界的传送门"
             "传送门已开，请返回洞外查看"
+            $ finish
         "下次一定":
             "你决定先去附近城镇转转，再做打算"
     "这里一览无余，没有探查的必要，你决定退出山洞"

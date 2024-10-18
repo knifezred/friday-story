@@ -215,8 +215,6 @@ async function nextText(isAutoNext: boolean = false) {
           if (gameStore.renpyScene.next != '') {
             await nextScene(gameStore.renpyScene.next)
           } else {
-            await storyStore.storyFinished(storyStore.currentStory.name)
-            // end
             gameStore.setSceneType('map')
           }
         }
@@ -232,8 +230,6 @@ async function nextText(isAutoNext: boolean = false) {
           if (gameStore.renpyScene.next != '') {
             await nextScene(gameStore.renpyScene.next)
           } else {
-            await storyStore.storyFinished(storyStore.currentStory.name)
-            // end
             gameStore.setSceneType('map')
           }
         }
@@ -304,24 +300,11 @@ watch([() => isTyped.value], () => {
 })
 
 watch(
-  [() => storyStore.currentStory],
+  [() => storyStore.currentStoryScene],
   async () => {
-    if (gameStore.sceneType == 'story' && storyStore.currentStory != undefined) {
+    if (gameStore.sceneType == 'story' && storyStore.currentStoryScene.length > 0) {
       appStore.setSiderHidden(true)
-      if (storyStore.currentStory.nextScene) {
-        nextScene(storyStore.currentStory.nextScene)
-      } else {
-        gameStore.renpyScene = {
-          name: storyStore.currentStory.name,
-          text: storyStore.currentStory.text,
-          cover: storyStore.currentStory.cover,
-          next: storyStore.currentStory.nextScene ?? 'start',
-          menus: []
-        }
-        loadOptions(storyStore.currentStory.options ?? [], storyStore.currentStory.nextScene)
-        await dynamicCover()
-        bindText(storyStore.currentStory.text)
-      }
+      nextScene(storyStore.currentStoryScene)
     }
   },
   { immediate: true }

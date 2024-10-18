@@ -66,23 +66,7 @@ $ pnpm build:linux
 
 剧情脚本推荐存储在`/resources/scripts/`下，剧情使用Renpy脚本编写，自定义实现部分语法，详情可参照`demo.rpy`
 
-### 1. 添加Story
-
-> 添加目录：/src/renderer/src/constants/data/stories/yourStory.ts
-
-```ts
-export const DemoStories: Array<Dto.StoryPlot> = [
-  {
-    name: 'demo',
-    type: 'main-line',
-    script: '/resources/scripts/demo.rpy', // 对应后续添加的Renpy脚本
-    cover: '',
-    text: ['本故事纯属虚构，如有雷同纯属巧合']
-  }
-]
-```
-
-### 2. 添加Renpy脚本（仅应用Renpy的格式，自定义实现解析）
+### 1. 添加Renpy脚本（仅应用Renpy的格式，自定义实现解析）
 
 > 添加目录：/resources/scripts/yourStory.rpy
 

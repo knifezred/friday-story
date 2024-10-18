@@ -276,6 +276,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   function checkStoryFinished(flag: string) {
     return checkFlag(SetupStoreId.GameStory + '.finished.' + flag, '1')
   }
+
   function setStoryFinished(flag: string) {
     return setFlag(SetupStoreId.GameStory + '.finished.' + flag, '1')
   }
