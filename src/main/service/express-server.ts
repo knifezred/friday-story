@@ -23,7 +23,7 @@ export function createExpressServer() {
   // 跨域设置
   const corsOptions = {
     origin: 'http://localhost:5173', // 或者使用通配符 '*' 来允许所有来源
-    methods: ['GET', 'POST', 'DELETE', 'PUT'], // 允许的HTTP方法
+    methods: ['GET', 'POST', 'DELETE', 'PUT', 'OPTION'], // 允许的HTTP方法
     preflightContinue: false,
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Request-Id'] // 允许的HTTP头
   }

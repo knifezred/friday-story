@@ -7,7 +7,7 @@ export const projectSetting: App.Global.ProjectSetting = {
   voice: '',
   defaultPlace: 'root.world.baiYuan.xinDaTown',
   startStory: 'demo',
-  localhost: 'http://localhost:5175/',
+  localhost: 'http://localhost:5175',
   duration: 100,
   sceneTransition: 'fade-half',
   optionTransition: 'fade-bottom',

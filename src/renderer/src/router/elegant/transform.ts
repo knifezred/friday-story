@@ -167,6 +167,7 @@ const routeMap: RouteMap = {
   "achievement": "/achievement",
   "archive": "/archive",
   "backpack": "/backpack",
+  "character": "/character",
   "demo": "/demo",
   "gallery": "/gallery",
   "home": "/home",

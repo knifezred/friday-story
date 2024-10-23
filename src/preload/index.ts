@@ -32,6 +32,7 @@ const api = {
     const appPath = await ipcRenderer.invoke('app-path')
     const staticPath = join(appPath, filePath)
     try {
+      console.log(staticPath)
       const content = fs.readFileSync(staticPath, 'utf-8')
       return content
     } catch (error) {

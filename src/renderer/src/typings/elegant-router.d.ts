@@ -23,6 +23,7 @@ declare module "@elegant-router/types" {
     "achievement": "/achievement";
     "archive": "/archive";
     "backpack": "/backpack";
+    "character": "/character";
     "demo": "/demo";
     "gallery": "/gallery";
     "home": "/home";
@@ -68,6 +69,7 @@ declare module "@elegant-router/types" {
     | "achievement"
     | "archive"
     | "backpack"
+    | "character"
     | "demo"
     | "gallery"
     | "home"
@@ -102,6 +104,7 @@ declare module "@elegant-router/types" {
     | "500"
     | "achievement"
     | "backpack"
+    | "character"
     | "home"
     | "login"
     | "relationship"

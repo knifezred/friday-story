@@ -39,6 +39,10 @@
                     value: 'font-family-butter'
                   },
                   {
+                    label: $t('page.setting.general.fontFamilyOption.chillHuoSong'),
+                    value: 'font-family-cu-song'
+                  },
+                  {
                     label: $t('page.setting.general.fontFamilyOption.harmony'),
                     value: 'font-family-harmony'
                   }
